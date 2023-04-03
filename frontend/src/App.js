@@ -9,6 +9,8 @@ import ResetPassword from "./containers/ResetPassword";
 import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
 import FirstPage from "./containers/FirstPage";
 
+// import Footer from "./components/Footer";
+
 import { Provider } from "react-redux";
 import store from "./store";
 
