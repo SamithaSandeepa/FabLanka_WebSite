@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useStateContext } from "../context/ContextProvider";
 
 const FirstPage = ({ isAuthenticated }) => {
-  console.log(isAuthenticated);
-  if (isAuthenticated == false) {
-    // Redirect the user to the login page if they're not authenticated
-    return <Redirect to="/login" />;
-  }
+  console.log("isAuthenticated", isAuthenticated);
+  const { setLoading } = useStateContext();
+  const history = useHistory();
+  
+  useEffect(() => {
+    console.log(history);
+    if (!isAuthenticated) {
+      // Redirect the user to the login page if they're not authenticated
+      history.push("/login");
+    } else {
+      setLoading(true);
+      // Do something that takes time...
+      setLoading(false);
+    }
+  }, [history, isAuthenticated, setLoading]);
 
   // Show the content if the user is authenticated
   return (
