@@ -5,7 +5,11 @@ import { logout } from "../actions/auth";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const [redirect, setRedirect] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   const logout_user = () => {
     logout();
     setRedirect(true);
@@ -62,7 +66,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-xl font-medium"
                 to="/"
               >
-                Auth System
+                Fab Lanka
               </Link>
             </div>
             <div className="hidden md:block">
@@ -83,24 +87,22 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 type="button"
                 className="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 aria-controls="mobile-menu"
-                aria-expanded="false"
+                aria-expanded={showMenu}
+                onClick={toggleMenu}
               >
                 <span className="sr-only">Open main menu</span>
                 <svg
-                  className="block h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                  fill="currentColor"
+                  width="24"
+                  height="24"
+                >
+                  <path d="M2,19h20v-2H2v2Zm0-7H22v-2H2v2ZM2,5V7H22V5H2Z" />
+                </svg>
               </button>
             </div>
-            <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+            {/* <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
               <Link
                 to="/"
                 className="font-medium text-gray-500 hover:text-gray-900"
@@ -108,7 +110,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Home
               </Link>
               {isAuthenticated ? authLinks() : guestLinks()}
-            </div>
+            </div> */}
 
             {redirect ? <Redirect to="/" /> : null}
           </div>
