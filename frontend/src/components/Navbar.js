@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import { MDBIcon } from "mdb-react-ui-kit";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const [redirect, setRedirect] = useState(false);
@@ -16,28 +17,30 @@ const Navbar = ({ logout, isAuthenticated }) => {
   };
 
   const guestLinks = () => (
-    <Fragment>
-      <li className="nav-item">
-        <Link
-          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          to="/login"
-        >
-          Login
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          to="/signup"
-        >
-          Sign Up
-        </Link>
-      </li>
-    </Fragment>
+    <>
+      <Fragment>
+        <li className="nav-item inline-block">
+          <Link
+            className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            to="/login"
+          >
+            Login
+          </Link>
+        </li>
+        <li className="nav-item inline-block">
+          <Link
+            className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            to="/signup"
+          >
+            Sign Up
+          </Link>
+        </li>
+      </Fragment>
+    </>
   );
   const authLinks = () => (
     <Fragment>
-      <li className="nav-item">
+      <li className="nav-item inline-block">
         <a
           className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
           onClick={logout_user}
@@ -45,7 +48,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Logout
         </a>
       </li>
-      <li className="nav-item">
+      <li className="nav-item inline-block">
         <Link
           className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
           to="/firstpage"
@@ -57,7 +60,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
 
   return (
-    <Fragment>
+    <>
       <nav className="bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -77,7 +80,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 >
                   Home
                 </Link>
-                <ul className="flex space-x-4">
+                <ul className="flex justify-center space-x-4">
                   {isAuthenticated ? authLinks() : guestLinks()}
                 </ul>
               </div>
@@ -116,7 +119,40 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </nav>
-    </Fragment>
+      <nav
+        className={`py-3 navbar navbar-expand-lg navbar-dark bg-[#06283D] sticky-sm-top`}
+      >
+        <div className="container-fluid">
+          <img
+            src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/24x24.png"
+            width={32}
+            height={32}
+            className=""
+          />
+          <Link href="#">
+            <a className="navbar-brand pl-4">FabLanka</a>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon">
+              <MDBIcon fas icon="bars" />
+            </span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav mx-auto">
+              {isAuthenticated ? authLinks : guestLinks}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 
