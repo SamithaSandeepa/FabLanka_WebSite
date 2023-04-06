@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'accounts',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'corsheaders',
-    'projectMakandura',
+    'book'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fablab_web.wsgi.application'
 
+DEBUG = True
 
 
 # Database
@@ -146,21 +148,28 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    # 'AUTH_HEADER_TYPES': ('Bearer', ),
+#    'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_TOKEN_CLASSES': (
-        'rest_framework_simplejwt.tokens.AccessToken',
-    )
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer', ),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken', ),
 }
 
 DJOSER = {
+    'HIDE_USERS': False,
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE' : True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION' : True,
@@ -175,6 +184,8 @@ DJOSER = {
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
         'user': 'accounts.serializers.UserCreateSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+        'current_user': 'djoser.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }

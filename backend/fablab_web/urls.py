@@ -1,16 +1,12 @@
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
-from rest_framework.routers import DefaultRouter
-from projectMakandura import viewset
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-
-router = DefaultRouter()
-router.register("projectmakandura", viewset.ProjectMakanduraViewset, basename= 'projectmakandura')
+from book.views import BookList, BookCreate
 
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('', include(router.urls))
+    path('books/', BookList.as_view(), name='book_list'),
+    path('books/create/', BookCreate.as_view(), name='book_create'),
     # vcff
 ]
 
