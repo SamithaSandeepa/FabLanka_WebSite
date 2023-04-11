@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import { checkAuthenticated, load_user } from "../actions/auth";
 import Footer from "../components/Footer";
+import Nav1 from "../components/nav1";
 
 const Layout = ({ checkAuthenticated, load_user, children }) => {
   useEffect(() => {
@@ -14,7 +15,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
   return (
     <div>
       <Navbar />
-      {children}
+      <div style={{ paddingTop: "80px" }}>{children}</div>
       <Footer />
     </div>
   );

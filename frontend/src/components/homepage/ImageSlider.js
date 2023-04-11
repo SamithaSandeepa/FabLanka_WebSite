@@ -1,5 +1,6 @@
 const ImageSlider = () => {
-    return (
+  return (
+    <div className="container">
       <div
         id="carouselExampleCaptions"
         className="carousel slide"
@@ -81,8 +82,8 @@ const ImageSlider = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-    );
-  };
-  
-  export default ImageSlider;
-  
+    </div>
+  );
+};
+
+export default ImageSlider;

@@ -5,20 +5,20 @@ import { useStateContext } from "../context/ContextProvider";
 
 const FirstPage = ({ isAuthenticated }) => {
   console.log("isAuthenticated", isAuthenticated);
-  const { setLoading } = useStateContext();
+  // const { setLoading } = useStateContext();
   const history = useHistory();
-  
+
   useEffect(() => {
     console.log(history);
     if (!isAuthenticated) {
       // Redirect the user to the login page if they're not authenticated
       history.push("/login");
     } else {
-      setLoading(true);
-      // Do something that takes time...
-      setLoading(false);
+      // setLoading(true);
+      // // Do something that takes time...
+      // setLoading(false);
     }
-  }, [history, isAuthenticated, setLoading]);
+  }, [history, isAuthenticated]);
 
   // Show the content if the user is authenticated
   return (
