@@ -60,12 +60,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const authLinks = () => (
     <>
       <li className="nav-item text-sm">
-        <Link
-          onClick={logout_user}
+        <button
           className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+          onClick={logout_user}
         >
           Logout
-        </Link>
+        </button>
       </li>
       <li className="nav-item text-sm">
         <Link
@@ -103,7 +103,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
             <div
               onClick={() => setOpen(!open)}
-              className="text-3xl absolute right-4 top-1 cursor-pointer md:hidden"
+              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden"
             >
               <MDBIcon fas icon={open ? "close" : "bars"} />
             </div>
@@ -111,7 +111,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <ul
               className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
                 open ? "top-20" : "top-[-490px]"
-              } md:p-0 md:m-0 p-2 m-2
+              } md:p-0 md:m-0
               `}
             >
               {isAuthenticated ? authLinks() : guestLinks()}

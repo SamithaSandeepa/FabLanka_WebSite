@@ -42,10 +42,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container-fluid">
         <div className="relative">
           <div data-aos="fade-right" className="row">
-            <div className="col-lg-8 rounded-3">
+            <div className="">
               <ImageSlider />
             </div>
           </div>

@@ -8,6 +8,7 @@ import Activate from "./containers/Activate";
 import ResetPassword from "./containers/ResetPassword";
 import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
 import FirstPage from "./containers/FirstPage";
+import second from "./containers/second";
 
 // import Footer from "./components/Footer";
 
@@ -15,6 +16,10 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { ContextProvider } from "./context/ContextProvider";
 import Layout from "./hocs/Layout";
+
+if (localStorage.getItem('access')) {
+  store.dispatch({ type: 'AUTHENTICATED_SUCCESS' });
+}
 
 const App = () => (
   <Provider store={store}>
@@ -33,6 +38,7 @@ const App = () => (
             />
             <Route exact path="/activate/:uid/:token" component={Activate} />
             <Route exact path="/firstpage" component={FirstPage} />
+            <Route exact path="/second" component={second} />
           </Switch>
         </ContextProvider>
       </Layout>

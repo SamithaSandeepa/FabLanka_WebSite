@@ -1,0 +1,12 @@
+.parent-container {
+  overflow: hidden;
+}
+
+.slick-slider {
+  max-width: 100%;
+}
+
+.slick-slide img {
+  max-width: 100%;
+  height: auto;
+}

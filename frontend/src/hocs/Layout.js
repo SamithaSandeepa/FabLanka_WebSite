@@ -13,10 +13,14 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <div style={{ paddingTop: "80px" }}>{children}</div>
-      <Footer />
+    <div className="flex flex-col min-h-screen">
+      <div>
+        <Navbar />
+      </div>
+      <div className="flex-grow pt-16">{children}</div>
+      <div className="">
+        <Footer />
+      </div>
     </div>
   );
 };
