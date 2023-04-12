@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
-import ImageSlider from "../components/homepage/ImageSlider";
+import ImageSlider from "../components/homepage.component/ImageSlider";
 
 const Home = () => {
   const [readMore, setReadMore] = useState(false);
@@ -44,11 +44,10 @@ const Home = () => {
     <>
       <div className="container-fluid">
         <div className="relative">
-          <div data-aos="fade-right" className="row">
-            <div className="">
-              <ImageSlider />
-            </div>
+          <div className="">
+            <ImageSlider />
           </div>
+          <div data-aos="fade-right" className="row"></div>
           <div className="row">
             <p className="text-justify col-lg-12 mt-3">
               Fab Lanka is a group of highly motivated individuals coming

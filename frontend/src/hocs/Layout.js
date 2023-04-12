@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import { checkAuthenticated, load_user } from "../actions/auth";
 import Footer from "../components/Footer";
-import Nav1 from "../components/nav1";
 
 const Layout = ({ checkAuthenticated, load_user, children }) => {
   useEffect(() => {
@@ -14,7 +13,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div>
+      <div className="sticky-sm-top">
         <Navbar />
       </div>
       <div className="flex-grow pt-16">{children}</div>

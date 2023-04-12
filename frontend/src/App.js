@@ -9,6 +9,7 @@ import ResetPassword from "./containers/ResetPassword";
 import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
 import FirstPage from "./containers/FirstPage";
 import second from "./containers/second";
+import About from "./containers/About";
 
 // import Footer from "./components/Footer";
 
@@ -17,8 +18,8 @@ import store from "./store";
 import { ContextProvider } from "./context/ContextProvider";
 import Layout from "./hocs/Layout";
 
-if (localStorage.getItem('access')) {
-  store.dispatch({ type: 'AUTHENTICATED_SUCCESS' });
+if (localStorage.getItem("access")) {
+  store.dispatch({ type: "AUTHENTICATED_SUCCESS" });
 }
 
 const App = () => (
@@ -39,6 +40,7 @@ const App = () => (
             <Route exact path="/activate/:uid/:token" component={Activate} />
             <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
+            <Route exact path="/about" component={About} />
           </Switch>
         </ContextProvider>
       </Layout>

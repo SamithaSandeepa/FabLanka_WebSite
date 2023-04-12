@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
-import ImageSlider from "../components/homepage/ImageSlider";
+import ImageSlider from "../components/homepage.component/ImageSlider";
 
 const FirstPage = ({ isAuthenticated }) => {
   console.log("isAuthenticated", isAuthenticated);
