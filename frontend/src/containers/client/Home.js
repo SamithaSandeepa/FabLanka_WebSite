@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import ImageSlider from "../../components/homepage.component/ImageSlider";
+import NewAlert from "../../components/news.component/NewAlert";
 
 const Home = () => {
   const [readMore, setReadMore] = useState(false);
@@ -42,13 +43,17 @@ const Home = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="relative">
-          <div className="">
-            <ImageSlider />
+      <div className="container p-0">
+        <div className="grid-rows-3">
+          <div className="flex item-center col-md-12 bg-gray-200 py-0 px-0">
+            <div className="col-md-8">
+              <ImageSlider />
+            </div>
+            <div className="col-md-4 flex justify-center items-center">
+              <NewAlert />
+            </div>
           </div>
-          <div data-aos="fade-right" className="row"></div>
-          <div className="row">
+          <div className="col-md-12">
             <p className="text-justify col-lg-12 mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
@@ -81,16 +86,26 @@ const Home = () => {
                 </p>
               </a>
             </div>
-            <div
-              data-aos="fade-left"
-              className="col-lg-4 lg:absolute top-0 right-0 lg:top-0 right-0"
-            >
-              {/* <NewAlert /> */}
+          </div>
+          <div className="col-md-12 bg-gray-200 py-5">
+            <div className="flex justify-center items-center">
+              <div className="">
+                <h1 className="text-center text-2xl font-bold">Our Mission</h1>
+                <p className="text-justify col-lg-12 mt-3">
+                  FabLanka is a group of highly motivated individuals coming
+                  together to set up fabrication labs (fab labs) throughout Sri
+                  Lanka as a community outreach project. The abundance of an
+                  educated work force, high degree of IT usage, and existence of
+                  a large number of small and medium size manufactures (SMEs)
+                  makes Sri Lanka an ideal home for fab labs. The benefits of
+                  bringing in new technology is the ability to transform the
+                  manufacturing sector of local economies in environmentally
+                  friendly ways. In addition, it will also strengthen employment
+                  for youth in the 21st century manufacturing job sector.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-12">{/* <PastEvent /> */}</div>
         </div>
       </div>
     </>
