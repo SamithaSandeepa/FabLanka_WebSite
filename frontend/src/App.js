@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import Activate from "./containers/Activate";
-import ResetPassword from "./containers/ResetPassword";
-import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
-import FirstPage from "./containers/FirstPage";
-import second from "./containers/second";
-import About from "./containers/About";
+import Home from "./containers/client/Home";
+import Login from "./containers/loginpages/Login";
+import Signup from "./containers/loginpages/Signup";
+import Activate from "./containers/loginpages/Activate";
+import ResetPassword from "./containers/loginpages/ResetPassword";
+import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
+import FirstPage from "./containers/client/FirstPage";
+import second from "./containers/client/second";
+import About from "./containers/client/About";
 
 // import Footer from "./components/Footer";
 

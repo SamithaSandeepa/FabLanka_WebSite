@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../actions/auth";
+import { logout } from "../../actions/auth";
 import { useLocation } from "react-router-dom";
 import { MDBIcon } from "mdb-react-ui-kit";
 
