@@ -21,7 +21,7 @@ const NewAlert = () => {
   const getNews = async () => {
     try {
       console.log("access", token);
-      const response = await axios.get("http://localhost:8000/news/");
+      const response = await axios.get(`${API_URL}/news/`);
       //only status is true data will be shown
       setNews(response.data.filter((item) => item.status === true)); //only status is true data will be shown
       console.log(response.data);
@@ -34,10 +34,21 @@ const NewAlert = () => {
     getNews();
   }, []);
 
+  const numNews = news.length;
+  let slidesToShow = 4;
+  if (numNews === 0) {
+    slidesToShow = 0;
+  } else if (numNews < 5) {
+    slidesToShow = numNews;
+  } else if (numNews > 6) {
+    slidesToShow = 5;
+  }
+
   const settings = {
     dots: false,
-    infinite: false,
-    slidesToShow: 4,
+    infinite: true,
+    slidesToShow: slidesToShow, // show a maximum of 5 slides or the number of news items, whichever is smaller
+    // ...
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
@@ -111,16 +122,16 @@ const NewAlert = () => {
       <div className="container p-0 m-0">
         {/* <HomeWrapper> */}
         {/* <h2 className="text-center">News</h2> */}
-        <Slider {...settings} className="">
+        <Slider {...settings} className="p-0 m-0">
           {news.map((curElem) => {
             return (
               <div
-                className="card mb-3 border-0 shadow-none border-top my-2"
+                className="card mb-3 border-0 shadow-none border-top bg-gray-200"
                 style="width: 18rem;"
                 key={curElem.id}
               >
                 <div className="row no-gutters">
-                  <div className="col-3 m-0 pr-2 bg-gray-200">
+                  <div className="col-3 pl-3 m-0 pr-2 ">
                     <img
                       src={curElem.image}
                       className="card-img m-0"
