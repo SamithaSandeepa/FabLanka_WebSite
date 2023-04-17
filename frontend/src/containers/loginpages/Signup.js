@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup } from "../actions/auth";
-import { useStateContext } from "../context/ContextProvider";
+import { signup } from "../../actions/auth";
+import { useStateContext } from "../../context/ContextProvider";
 
 const Signup = ({ signup, isAuthenticated }) => {
   const { setLoading } = useStateContext();
