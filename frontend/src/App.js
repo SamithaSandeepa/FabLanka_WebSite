@@ -11,6 +11,9 @@ import FirstPage from "./containers/client/FirstPage";
 import second from "./containers/client/second";
 import About from "./containers/client/About";
 
+// news pages
+import SingleNews from "./containers/client/news/[id]";
+
 // import Footer from "./components/Footer";
 
 import { Provider } from "react-redux";
@@ -41,6 +44,7 @@ const App = () => (
             <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/news/:id" component={SingleNews} />
           </Switch>
         </ContextProvider>
       </Layout>
