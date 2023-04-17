@@ -1,6 +1,6 @@
 import React from "react";
 import { convertToRaw, convertFromRaw } from "draft-js";
-import draftToHtml from "draftjs-to-html";
+// import draftToHtml from "draftjs-to-html";
 import { useEffect } from "react";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -33,7 +33,6 @@ const SingleNews = (props) => {
     <div className="container mb-5">
       <h1 className="text-center text-3xl">{props.title}</h1>
       <p className="my-5 text-lg">{props.summery}</p>
-      {/* <Image width={100} height={100} src={props.image} /> */}
       <div className="row">
         <div className="col-md-12">
           <Editor
