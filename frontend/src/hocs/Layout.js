@@ -12,11 +12,11 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen p-0 m-0">
       <div className="sticky-sm-top">
         <Navbar />
       </div>
-      <div className="flex-grow pt-16">{children}</div>
+      <div className="flex-grow pt-16 px-0 mx-0">{children}</div>
       <div className="">
         <Footer />
       </div>

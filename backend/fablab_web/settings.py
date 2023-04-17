@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'book',
-    'projectMakandura'
+    'projectMakandura',
+    'news',
 ]
 
 MIDDLEWARE = [
