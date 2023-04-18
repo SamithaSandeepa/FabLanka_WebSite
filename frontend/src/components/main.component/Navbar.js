@@ -46,6 +46,30 @@ const Navbar = ({ logout, isAuthenticated }) => {
       <li className="nav-item text-sm">
         <Link
           className={
+            location.pathname === "/industry"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/industry"
+        >
+          industry 4.0 technologies
+        </Link>
+      </li>
+      <li className="nav-item text-sm">
+        <Link
+          className={
+            location.pathname === "/education"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/education"
+        >
+          Education
+        </Link>
+      </li>
+      <li className="nav-item text-sm">
+        <Link
+          className={
             location.pathname === "/about"
               ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
               : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
@@ -53,6 +77,18 @@ const Navbar = ({ logout, isAuthenticated }) => {
           to="/about"
         >
           About Us
+        </Link>
+      </li>
+      <li className="nav-item text-sm">
+        <Link
+          className={
+            location.pathname === "/contactus"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/contactus"
+        >
+          Contact Us
         </Link>
       </li>
       <li className="nav-item text-sm">

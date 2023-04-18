@@ -1,6 +1,6 @@
-import Layout from "../../hocs/Layout";
-import Styles from "../../styles/about.module.css";
-import OurTeam from "../../components/about.component/OurTeam";
+// import Styles from "../../styles/about.module.css";
+import Styles from "../../../styles/about.module.css";
+import OurTeam from "../../../components/about.component/OurTeam";
 import React, { useEffect, useState } from "react";
 // import Aos from "aos";
 // import "aos/dist/aos.css";

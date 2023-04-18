@@ -9,8 +9,11 @@ import ResetPassword from "./containers/loginpages/ResetPassword";
 import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
 import FirstPage from "./containers/client/FirstPage";
 import second from "./containers/client/second";
-import About from "./containers/client/About";
-import FablabMakandura from "./containers/client/FablabMakandura";
+import About from "./containers/client/static/About";
+import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
+import Industrytec from "./containers/client/static/Industrytec";
+import Education from "./containers/client/static/Education";
+import ContactUs from "./components/contactus.compoents/ContactUs";
 
 
 // news pages
@@ -49,6 +52,12 @@ const App = () => (
             <Route exact path="/news/:id" component={SingleNews} />
 
             <Route exact path="/fablabmakandura" component={FablabMakandura}/>
+
+            {/* Static pages Route */}
+            <Route exact path="/industry" component={Industrytec}/>
+            <Route exact path="/education" component={Education}/>
+            <Route exact path="/contactus" component={ContactUs}/>
+            
           </Switch>
         </ContextProvider>
       </Layout>
