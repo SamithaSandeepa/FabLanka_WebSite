@@ -10,6 +10,8 @@ import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
 import FirstPage from "./containers/client/FirstPage";
 import second from "./containers/client/second";
 import About from "./containers/client/About";
+import FablabMakandura from "./containers/client/FablabMakandura";
+
 
 // news pages
 import SingleNews from "./containers/client/news/[id]";
@@ -45,6 +47,8 @@ const App = () => (
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
             <Route exact path="/news/:id" component={SingleNews} />
+
+            <Route exact path="/fablabmakandura" component={FablabMakandura}/>
           </Switch>
         </ContextProvider>
       </Layout>
