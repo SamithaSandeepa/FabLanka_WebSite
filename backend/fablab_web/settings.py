@@ -199,7 +199,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
+# CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://*']
+
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     # ... other allowed domains ...

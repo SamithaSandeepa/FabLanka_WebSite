@@ -35,13 +35,53 @@ const NewAlert = () => {
   }, []);
 
   const numNews = news.length;
-  let slidesToShow = 4;
+  let slidesToShow = 5;
   if (numNews === 0) {
     slidesToShow = 0;
+  } else if (numNews === 4 || 3) {
+    slidesToShow = 3;
   } else if (numNews < 5) {
     slidesToShow = numNews;
   } else if (numNews > 6) {
     slidesToShow = 5;
+  }
+
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "none",
+          position: "absolute",
+          top: "50%",
+          right: "0px",
+          transform: "translateY(-50%)",
+          zIndex: 1,
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          position: "absolute",
+          top: "50%",
+          left: "-20px",
+          transform: "translateY(-50%)",
+          zIndex: 1,
+        }}
+        onClick={onClick}
+      />
+    );
   }
 
   const settings = {
@@ -56,13 +96,13 @@ const NewAlert = () => {
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
-    prevArrow: null,
-    nextArrow: null,
+    prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow />,
     responsive: [
       {
         breakpoint: 1290,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: slidesToShow,
           slidesToScroll: 2,
           infinite: false,
           speed: 1000,
@@ -75,7 +115,7 @@ const NewAlert = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: slidesToShow,
           slidesToScroll: 2,
           infinite: false,
           speed: 1000,
@@ -87,7 +127,7 @@ const NewAlert = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: slidesToShow,
           slidesToScroll: 1,
           speed: 1000,
           autoplaySpeed: 3000,
@@ -98,7 +138,7 @@ const NewAlert = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: slidesToShow,
           slidesToScroll: 1,
           speed: 1000,
           autoplaySpeed: 3000,
@@ -119,14 +159,14 @@ const NewAlert = () => {
   return (
     <>
       {/* <div className={`container ${style.container}`}> */}
-      <div className="container p-0 m-0">
+      <div className="container px-4 ml-0">
         {/* <HomeWrapper> */}
         {/* <h2 className="text-center">News</h2> */}
         <Slider {...settings} className="p-0 m-0">
           {news.map((curElem) => {
             return (
               <div
-                className="card mb-3 border-0 shadow-none border-top bg-gray-200"
+                className="card mb-3 border-0 shadow-none border-top bg-transparent"
                 style="width: 18rem;"
                 key={curElem.id}
               >
@@ -134,7 +174,7 @@ const NewAlert = () => {
                   <div className="col-3 pl-3 m-0 pr-2 ">
                     <img
                       src={curElem.image}
-                      className="card-img m-0"
+                      className="card-img m-0 w-18 h-14"
                       alt="..."
                     />
                   </div>
