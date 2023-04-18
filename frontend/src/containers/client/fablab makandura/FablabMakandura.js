@@ -1,6 +1,6 @@
 import React from 'react'
-import MakanduraTeam from '../../components/fablabmakandura.component/MakanduraTeam'
-import ProjectMakandura from '../../components/fablabmakandura.component/ProjectMakandura'
+import MakanduraTeam from '../../../components/fablabmakandura.component/MakanduraTeam'
+import ProjectMakandura from '../../../components/fablabmakandura.component/ProjectMakandura'
 
 const FablabMakandura=()=> {
   return (
