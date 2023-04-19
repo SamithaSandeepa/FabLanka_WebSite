@@ -34,18 +34,6 @@ const NewAlert = () => {
     getNews();
   }, []);
 
-  const numNews = news.length;
-  let slidesToShow = 5;
-  if (numNews === 0) {
-    slidesToShow = 0;
-  } else if (numNews === 4 || 3) {
-    slidesToShow = 3;
-  } else if (numNews < 5) {
-    slidesToShow = numNews;
-  } else if (numNews > 6) {
-    slidesToShow = 5;
-  }
-
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -55,9 +43,11 @@ const NewAlert = () => {
           ...style,
           display: "none",
           position: "absolute",
-          top: "50%",
-          right: "0px",
-          transform: "translateY(-50%)",
+          top: "10px", // Change the value of top to position at the top
+          bottom: "unset", // Set bottom to "unset" to remove the default bottom value
+          right: "unset", // Set right to "unset" to remove the default right value
+          left: "50%", // Center the arrow horizontally
+          transform: "translateX(50%) translateY(-50%) rotate(-90deg)", // Center the arrow vertically
           zIndex: 1,
         }}
         onClick={onClick}
@@ -74,9 +64,11 @@ const NewAlert = () => {
           ...style,
           display: "block",
           position: "absolute",
-          top: "50%",
-          left: "-20px",
-          transform: "translateY(-50%)",
+          top: "unset", // Set top to "unset" to remove the default top value
+          bottom: "-20px", // Change the value of bottom to position at the bottom
+          right: "unset", // Set right to "unset" to remove the default right value
+          left: "50%", // Center the arrow horizontally
+          transform: "translateX(-50%) translateY(50%) rotate(-90deg)", // Center the arrow vertically
           zIndex: 1,
         }}
         onClick={onClick}
@@ -84,119 +76,62 @@ const NewAlert = () => {
     );
   }
 
+  const numData = news.length;
+  const slidesToShow = numData < 4 ? numData - 1 : 3;
+  const minSlides = numData < 4 ? numData - 1 : 3;
+
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: slidesToShow, // show a maximum of 5 slides or the number of news items, whichever is smaller
-    // ...
+    slidesToShow,
+    minSlides,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 1000,
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
     prevArrow: <SamplePrevArrow />,
     nextArrow: <SampleNextArrow />,
-    responsive: [
-      {
-        breakpoint: 1290,
-        settings: {
-          slidesToShow: slidesToShow,
-          slidesToScroll: 2,
-          infinite: false,
-          speed: 1000,
-          autoplaySpeed: 3000,
-          vertical: true,
-          verticalSwiping: true,
-          swipeToSlide: true,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: slidesToShow,
-          slidesToScroll: 2,
-          infinite: false,
-          speed: 1000,
-          autoplaySpeed: 3000,
-          vertical: true,
-          verticalSwiping: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: slidesToShow,
-          slidesToScroll: 1,
-          speed: 1000,
-          autoplaySpeed: 3000,
-          vertical: true,
-          verticalSwiping: true,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: slidesToShow,
-          slidesToScroll: 1,
-          speed: 1000,
-          autoplaySpeed: 3000,
-          vertical: true,
-          verticalSwiping: true,
-        },
-      },
-    ],
-    // adaptiveHeight: false,
-    // variableHeight: true,
-    beforeChange: function (currentSlide, nextSlide) {
-      console.log("before change", currentSlide, nextSlide);
-    },
-    afterChange: function (currentSlide) {
-      console.log("after change", currentSlide);
-    },
   };
+
   return (
     <>
-      {/* <div className={`container ${style.container}`}> */}
-      <div className="container px-4 ml-0">
-        {/* <HomeWrapper> */}
-        {/* <h2 className="text-center">News</h2> */}
-        <Slider {...settings} className="p-0 m-0">
-          {news.map((curElem) => {
+      <div className="container mx-auto">
+        <h1>NEWS</h1>
+        <Slider {...settings}>
+          {news.map((curElem, index) => {
             return (
-              <div
-                className="card mb-3 border-0 shadow-none border-top bg-transparent"
-                style="width: 18rem;"
-                key={curElem.id}
-              >
-                <div className="row no-gutters">
-                  <div className="col-3 pl-3 m-0 pr-2 ">
-                    <img
-                      src={curElem.image}
-                      className="card-img m-0 w-18 h-14"
-                      alt="..."
-                    />
-                  </div>
+              <div className="col-span-4 md:col-span-1" key={curElem.id}>
+                <div className="card mb-3 border-0 shadow-none border-top bg-transparent">
+                  <div className="row no-gutters">
+                    <div className="col-3 pl-3 m-0 pr-2">
+                      <img
+                        src={curElem.image}
+                        className="card-img m-0 h-30"
+                        alt="..."
+                      />
+                    </div>
 
-                  <div className="col-9 p-0 m-0 ">
-                    <a href={"/news/" + curElem.id} className="no-underline">
-                      <div className="card-body py-0 pl-0 ">
-                        <p className="card-title text-sm font-semibold text-black hover:text-[#2c185a]">
-                          {curElem.title}
-                        </p>
-                        <p className="card-text lh-1 text-sm text-slate-500 hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
-                          {curElem.summery}
-                        </p>
-                      </div>
-                    </a>
+                    <div className="col-9 p-0 m-0">
+                      <a href={"/news/" + curElem.id} className="no-underline">
+                        <div className="card-body py-0 pl-0">
+                          <p className="card-title text-sm font-semibold text-black hover:text-[#2c185a]">
+                            {curElem.title}
+                          </p>
+                          <p className="card-text lh-1 text-sm text-slate-500 hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
+                            {curElem.summery}
+                          </p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             );
           })}
         </Slider>
-        {/* </HomeWrapper> */}
       </div>
     </>
   );
