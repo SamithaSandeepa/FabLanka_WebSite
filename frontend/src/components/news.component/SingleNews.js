@@ -1,38 +1,33 @@
-import React from "react";
-import { convertToRaw, convertFromRaw } from "draft-js";
-// import draftToHtml from "draftjs-to-html";
-import { useEffect } from "react";
-import { EditorState } from "draft-js";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { convertFromRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { API_URL } from "../../config/index";
 
-const SingleNews = (props) => {
-  console.log(props.content);
-
-  // const [editorState, setEditorState] = React.useState([]);
-
-  // const [contentState, setContentState] = React.useState([]);
-  const contentState = convertFromRaw(JSON.parse(props.content));
-  const editorState = EditorState.createWithContent(contentState);
-
-  const test = () => {
-    // const rawContentState = (
-    //   convertToRaw(editorState.getCurrentContent())
-    // );
-    // const markup = draftToHtml(props?.content);
-    // console.log(markup);
-    // setContentState(markup);
-  };
+const SingleNews = ({ id }) => {
+  const [news, setNews] = useState({});
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
-    // setEditorState(props?.content);
-    // test();
-  });
+    const getNews = async () => {
+      const response = await axios.get(`${API_URL}/news/${id}/`);
+      setNews(response.data);
+    };
+    getNews();
+  }, [id]);
+
+  useEffect(() => {
+    if (news.content) {
+      const contentState = convertFromRaw(JSON.parse(news.content));
+      setEditorState(EditorState.createWithContent(contentState));
+    }
+  }, [news]);
 
   return (
     <div className="container mb-5">
-      <h1 className="text-center text-3xl">{props.title}</h1>
-      <p className="my-5 text-lg">{props.summery}</p>
+      <h1 className="text-center text-3xl">{news.title}</h1>
+      <p className="my-5 text-lg">{news.summery}</p>
       <div className="row">
         <div className="col-md-12">
           <Editor
@@ -41,6 +36,9 @@ const SingleNews = (props) => {
             toolbar={{
               options: [],
             }}
+            toolbarHidden={true}
+            stripPastedStyles={true}
+            editorStyle={{ border: "1px solid #ddd", minHeight: "300px" }}
           />
         </div>
       </div>

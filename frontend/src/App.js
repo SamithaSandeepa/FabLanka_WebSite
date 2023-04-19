@@ -17,6 +17,8 @@ import ContactUs from "./components/contactus.compoents/ContactUs";
 
 
 // news pages
+import CreateNews from "./containers/admin/news/add";
+import Addnews from "./containers/admin/news/addnews";
 import SingleNews from "./containers/client/news/[id]";
 
 // import Footer from "./components/Footer";
@@ -49,6 +51,8 @@ const App = () => (
             <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/create-news" component={CreateNews} />
+            <Route exact path="/addnews" component={Addnews} />
             <Route exact path="/news/:id" component={SingleNews} />
 
             {/* Fablab Makandura Route */}

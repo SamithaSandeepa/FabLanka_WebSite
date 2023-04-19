@@ -44,17 +44,15 @@ const Home = () => {
   return (
     <>
       <div className="container p-0">
-        <div className="grid-rows-3">
-          <div className="flex item-center col-md-12 bg-gray-200 py-0 px-0">
-            <div className="col-md-8">
-              <ImageSlider />
-            </div>
-            <div className="col-md-4 flex justify-center items-center">
-              <NewAlert />
-            </div>
+        <div className="grid grid-cols-12 grid-rows-3">
+          <div className="col-span-8 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
+            <ImageSlider />
           </div>
-          <div className="col-md-12">
-            <p className="text-justify col-lg-12 mt-3">
+          <div className="col-span-4 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
+            <NewAlert />
+          </div>
+          <div className="col-span-12 row-span-1">
+            <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
               Lanka as a community outreach project. The abundance of an
@@ -66,7 +64,7 @@ const Home = () => {
               addition, it will also strengthen employment for youth in the 21st
               century manufacturing job sector.
             </p>
-            <div className="text-justify col-lg-12 mt-3 mb-3">
+            <div className="text-justify mt-3 mb-3">
               <p>
                 Inspired by the technologically based social movements such as
                 Open Source Ecology, FabLab, and RepRap who’s aim is to spread
@@ -81,17 +79,17 @@ const Home = () => {
                   setReadMore(!readMore);
                 }}
               >
-                <p className=" text-sm mt-3">
-                  <samll>{linkName}</samll>
+                <p className="text-sm mt-3">
+                  <small>{linkName}</small>
                 </p>
               </a>
             </div>
           </div>
-          <div className="col-md-12 bg-gray-200 py-5">
+          <div className="col-span-12 row-span-1 bg-gray-200 py-5">
             <div className="flex justify-center items-center">
               <div className="">
                 <h1 className="text-center text-2xl font-bold">Our Mission</h1>
-                <p className="text-justify col-lg-12 mt-3">
+                <p className="text-justify mt-3">
                   FabLanka is a group of highly motivated individuals coming
                   together to set up fabrication labs (fab labs) throughout Sri
                   Lanka as a community outreach project. The abundance of an
