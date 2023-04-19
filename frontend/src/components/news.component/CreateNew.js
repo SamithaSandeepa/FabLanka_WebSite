@@ -218,7 +218,6 @@ const CreatNews = ({ isAuthenticated }) => {
     </>
   );
   // }
-  
 };
 
 function getCookie(name) {
