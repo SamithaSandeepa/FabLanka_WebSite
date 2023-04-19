@@ -8,7 +8,6 @@ import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 
 const CreatNews = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
   const [loading, setLoadingState] = useState(true);
@@ -23,7 +22,6 @@ const CreatNews = ({ isAuthenticated }) => {
   const [status, setStatus] = useState(true);
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
       console.log("undefined");
       // Authentication status not yet determined, do nothing
@@ -90,14 +88,6 @@ const CreatNews = ({ isAuthenticated }) => {
     }
   };
 
-  // if (loading) {
-  //   // Show loading indicator
-  //   return <div>Loading...</div>;
-  // } else if (!isAuthenticated) {
-  //   // Authentication failed, should have been redirected to login page
-  //   return null;
-  // } else {
-  // Show the content if the user is authenticated
   return (
     <>
       <div className="container">

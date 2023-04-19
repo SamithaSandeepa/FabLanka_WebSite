@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider";
 import CreateNew from "../../../components/news.component/CreateNew";
 
-const FirstPage = ({ isAuthenticated }) => {
+const CreateNews = ({ isAuthenticated }) => {
   console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
@@ -51,4 +51,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(FirstPage);
+export default connect(mapStateToProps)(CreateNews);

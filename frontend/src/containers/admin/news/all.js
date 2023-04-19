@@ -1,35 +1,44 @@
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import Layout from "../../../hocs/Layout";
-import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useStateContext } from "../../../context/ContextProvider";
+import NewsTable from "../../../components/news.component/NewsTable";
 
-const NewsTable = dynamic(
-  () => import("../../../components/news.component/NewsTable"),
-  {
-    ssr: false,
-  }
-);
+const AllNews = ({ isAuthenticated }) => {
+  console.log("isAuthenticated", isAuthenticated);
+  const { setLoading } = useStateContext();
+  const history = useHistory();
+  const [loading, setLoadingState] = useState(true);
 
-const AllNews = () => {
-  const router = useRouter();
-  // console.log(router.pathname);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
-  const loading = useSelector((state) => state.auth.loading);
-
-  if (typeof window !== "undefined" && !loading && !isAuthenticated);
-
-  //if refresh page, redirect to router.pathname
+  useEffect(() => {
+    console.log("news table");
+    console.log(history);
+    if (typeof isAuthenticated === "undefined") {
+      console.log("undefined");
+      // Authentication status not yet determined, do nothing
+    } else if (!isAuthenticated) {
+      // User is not authenticated, redirect to login page
+      history.push("/login");
+    } else {
+      // User is authenticated, do something that takes time
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [history, isAuthenticated]);
 
   return (
     <>
-      <Layout title="FabLanka | News" content="Dashboard page">
-        <div className="container mb-10">
-          <NewsTable />
-        </div>
-      </Layout>
+      <div className="container">
+        <NewsTable />
+      </div>
     </>
   );
 };
 
-export default AllNews;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(AllNews);
