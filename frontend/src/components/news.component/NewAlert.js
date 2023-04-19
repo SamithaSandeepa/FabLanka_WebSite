@@ -65,7 +65,7 @@ const NewAlert = () => {
           display: "block",
           position: "absolute",
           top: "unset", // Set top to "unset" to remove the default top value
-          bottom: "-20px", // Change the value of bottom to position at the bottom
+          bottom: "12px", // Change the value of bottom to position at the bottom
           right: "unset", // Set right to "unset" to remove the default right value
           left: "50%", // Center the arrow horizontally
           transform: "translateX(-50%) translateY(50%) rotate(-90deg)", // Center the arrow vertically
@@ -77,8 +77,8 @@ const NewAlert = () => {
   }
 
   const numData = news.length;
-  const slidesToShow = numData < 4 ? numData - 1 : 3;
-  const minSlides = numData < 4 ? numData - 1 : 3;
+  const slidesToShow = numData === 1 ? 1 : numData < 4 ? numData - 1 : 3;
+  const minSlides = numData === 1 ? 1 : numData < 4 ? numData - 1 : 3;
 
   const settings = {
     dots: false,
@@ -88,7 +88,7 @@ const NewAlert = () => {
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3000,
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
@@ -99,33 +99,31 @@ const NewAlert = () => {
   return (
     <>
       <div className="container mx-auto">
-        <h1>NEWS</h1>
+        <h1 className="text-center text-2xl font-bold p-0 my-2">NEWS</h1>
         <Slider {...settings}>
           {news.map((curElem, index) => {
             return (
-              <div className="col-span-4 md:col-span-1" key={curElem.id}>
-                <div className="card mb-3 border-0 shadow-none border-top bg-transparent">
-                  <div className="row no-gutters">
-                    <div className="col-3 pl-3 m-0 pr-2">
-                      <img
-                        src={curElem.image}
-                        className="card-img m-0 h-30"
-                        alt="..."
-                      />
-                    </div>
+              <div className="card mb-3 border-0 shadow-none border-bottom bg-transparent py-6">
+                <div className="row no-gutters">
+                  <div className="col-4 pl-3 m-0 pr-2">
+                    <img
+                      src={curElem.image}
+                      className="card-img m-0 w-full"
+                      alt="..."
+                    />
+                  </div>
 
-                    <div className="col-9 p-0 m-0">
-                      <a href={"/news/" + curElem.id} className="no-underline">
-                        <div className="card-body py-0 pl-0">
-                          <p className="card-title text-sm font-semibold text-black hover:text-[#2c185a]">
-                            {curElem.title}
-                          </p>
-                          <p className="card-text lh-1 text-sm text-slate-500 hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
-                            {curElem.summery}
-                          </p>
-                        </div>
-                      </a>
-                    </div>
+                  <div className="col-8 p-0 m-0">
+                    <a href={"/news/" + curElem.id} className="no-underline">
+                      <div className="card-body py-0 pl-0">
+                        <p className="card-title text-lg font-normal text-black hover:text-[#2c185a] m-0 pb-3">
+                          {curElem.title}
+                        </p>
+                        <p className="card-text lh-1 text-lg text-slate-500 hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
+                          {curElem.summery}
+                        </p>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>

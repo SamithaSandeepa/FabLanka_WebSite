@@ -1,52 +1,47 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import Layout from "../../../hocs/Layout";
-import dynamic from "next/dynamic";
-import { API_URL } from "../../../config/index";
-// import EditNews from "../../../components/news.component/EditNews";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useStateContext } from "../../../context/ContextProvider";
+import EditNews from "../../../components/news.component/EditNews";
+import { useParams } from "react-router-dom";
 
-const EditNews = dynamic(
-  () => import("../../../components/news.component/EditNews"),
-  {
-    ssr: false,
-  }
-);
+const NewsUpdate = ({ isAuthenticated }) => {
+  console.log("isAuthenticated", isAuthenticated);
+  const { setLoading } = useStateContext();
+  const history = useHistory();
+  const [loading, setLoadingState] = useState(true);
 
-const editnews = (props) => {
-  // console.log(props.news);
-  // const router = useRouter();
+  useEffect(() => {
+    console.log(history);
+    if (typeof isAuthenticated === "undefined") {
+      console.log("undefined");
+      // Authentication status not yet determined, do nothing
+    } else if (!isAuthenticated) {
+      // User is not authenticated, redirect to login page
+      history.push("/login");
+    } else {
+      // User is authenticated, do something that takes time
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [history, isAuthenticated]);
 
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // const user = useSelector((state) => state.auth.user);
-  // const loading = useSelector((state) => state.auth.loading);
-
-  // if (typeof window !== "undefined" && !loading && !isAuthenticated)
-  //   router.push("/login");
+  const { id } = useParams();
 
   return (
-    <div>
-      <Layout title="FabLanka | News" content="Dashboard page">
-        <div className="container mb-10">
-          <EditNews
-            id={props.news.id}
-            title={props.news.title}
-            summery={props.news.summery}
-            content={props.news.content}
-            image={props.news.image}
-            status={props.news.status}
-          />
-        </div>
-      </Layout>
-    </div>
+    <>
+      <div className="container">
+        <EditNews id={id} />
+      </div>
+    </>
   );
+  // }
 };
 
-//return newsID from params
-editnews.getInitialProps = async (context) => {
-  const newsID = context.query.id;
-  const response = await axios.get(`${API_URL}/api/newspage/${newsID}/`);
-  return { news: response.data };
-};
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default editnews;
+export default connect(mapStateToProps)(NewsUpdate);

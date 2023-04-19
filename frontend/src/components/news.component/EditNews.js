@@ -1,185 +1,197 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config/index";
-import { EditorState } from "draft-js";
+import { connect } from "react-redux";
+import { useStateContext } from "../../context/ContextProvider";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const EditNews = (props) => {
-  console.log(props.content);
-
-  //validation state
+const EditNews = ({ isAuthenticated, id }) => {
+  const { setLoading } = useStateContext();
+  const history = useHistory();
+  const [loading, setLoadingState] = useState(true);
   const [validated, setValidated] = useState(false);
-  //set all data to the state
-  const [title, setTitle] = useState(props?.title);
-  const [summery, setSummery] = useState(props?.summery);
-  const [editorState, setEditorState] = useState(() => {
-    const contentState = convertFromRaw(JSON.parse(props.content));
-    return EditorState.createWithContent(contentState);
-  });
-  const [image, setImage] = useState(props?.image);
-  const [status, setStatus] = useState(props?.status);
 
-  // update news data to the database
-  const onSubmit = (e) => {
+  const [news, setNews] = useState({});
+  const [title, setTitle] = useState("");
+  const [summery, setSummery] = useState("");
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
+  const [image, setImage] = useState("");
+  const [status, setStatus] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${API_URL}/news/${id}/`)
+      .then((response) => {
+        setNews(response.data);
+        setTitle(response.data.title);
+        setSummery(response.data.summery);
+        if (response.data.content) {
+          const contentState = convertFromRaw(
+            JSON.parse(response.data.content)
+          );
+          setEditorState(EditorState.createWithContent(contentState));
+        }
+        setImage(response.data.image);
+        setStatus(response.data.status);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  const updateNews = (e) => {
     // the raw state, stringified
     const content = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
-    e.preventDefault();
     const form = e.currentTarget;
+
     if (form.checkValidity() === false) {
+      e.preventDefault();
+      setValidated(true);
       e.stopPropagation();
     } else {
-      const news = {
-        title: title,
-        summery: summery,
-        content: content,
-        image: image,
-        status: status,
+      e.preventDefault();
+
+      const csrftoken = getCookie("csrftoken");
+      axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
+
+      const updatedNews = {
+        title,
+        summery,
+        content,
+        image,
+        status,
       };
-      // console.log(content);
+
       axios
-        .put(`${API_URL}/api/newspage/${props.id}/`, news)
-        .then((res) => {
-          console.log(res);
-          window.location.href = "/admin/news/all";
+        .put(`${API_URL}/news/${id}/`, updatedNews, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then(() => {
+          alert("News Updated");
+          history.push(`/news/${id}`);
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     }
-    setValidated(true);
   };
 
   return (
     <>
-      <div className="body">
-        <div className="container1">
-          <div className="col-md-8 mt-4 mx-auto">
-            <h2 className="h3 mb-3 font-weight-normal text-center">
-              Edit News
-            </h2>
-            <Form noValidate validated={validated} onSubmit={onSubmit}>
+      <div className="container">
+        <div className="col-md-8 mt-4 mx-auto">
+          <h2 className="h3 mb-3 font-weight-normal text-center">Edit News</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <form noValidate validated={validated} onSubmit={updateNews}>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   News Title
                 </label>
                 <input
                   type="text"
-                  required
-                  minLength="2"
-                  value={title}
                   className="form-control"
-                  placeholder="Enter News Title"
-                  id="newsTitle"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
+                  placeholder="Enter news title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a Item Name
-                </Form.Control.Feedback>
+                <div className="invalid-feedback">Please provide a title.</div>
               </div>
+
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Summery{" "}
+                  News Summary
+                </label>
+                <textarea
+                  className="form-control"
+                  rows="3"
+                  placeholder="Enter news summary"
+                  value={summery}
+                  onChange={(e) => setSummery(e.target.value)}
+                  required
+                ></textarea>
+                <div className="invalid-feedback">
+                  Please provide a summary.
+                </div>
+              </div>
+
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                <label className="form-label" style={{ marginBottom: "5px" }}>
+                  News Content
+                </label>
+                <Editor
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                  required
+                />
+                <div className="invalid-feedback">Please provide content.</div>
+              </div>
+
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                <label className="form-label" style={{ marginBottom: "5px" }}>
+                  News Image
                 </label>
                 <input
                   type="text"
-                  required
                   className="form-control"
-                  placeholder="Summarize your news"
-                  id="summery"
-                  value={summery}
-                  onChange={(e) => {
-                    setSummery(e.target.value);
-                  }}
+                  placeholder="Enter image URL"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  required
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a Price
-                </Form.Control.Feedback>
-              </div>
-              <div className="row">
-                <div
-                  className="form-group col-md-8"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <label className="form-label" style={{ marginBottom: "5px" }}>
-                    {" "}
-                    Image{" "}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Enter Image Url"
-                    id="image"
-                    value={image}
-                    onChange={(e) => {
-                      setImage(e.target.value);
-                    }}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide a Image Url
-                  </Form.Control.Feedback>
-                </div>
-                <div
-                  className="form-group col-md-4 text-center m-auto"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <select
-                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
-                    value={status}
-                    onChange={(e) => {
-                      setStatus(e.target.value);
-                    }}
-                  >
-                    <option disabled hidden>
-                      Select your option
-                    </option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Inactive</option>
-                  </select>
+                <div className="invalid-feedback">
+                  Please provide an image URL.
                 </div>
               </div>
 
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Add News Content{" "}
+              <div className="form-group form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="status"
+                  checked={status}
+                  onChange={(e) => setStatus(e.target.checked)}
+                />
+                <label className="form-check-label" htmlFor="status">
+                  Published
                 </label>
-                <div className="editor">
-                  <Editor
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                    toolbar={{
-                      inline: { inDropdown: true },
-                      list: { inDropdown: true },
-                      textAlign: { inDropdown: true },
-                      link: { inDropdown: true },
-                      history: { inDropdown: true },
-                    }}
-                  />
-                </div>
               </div>
 
-              <Button
-                type="submit"
-                className="btn btn-success float-right"
-                style={{ marginTop: "15px", marginBottom: "15px" }}
-              >
-                <i className="far fa-check-square"></i>
-                &nbsp; Save
-              </Button>
-            </Form>
-          </div>
+              <button type="submit" className="btn btn-primary">
+                Update
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </>
   );
 };
-export default EditNews;
+
+function getCookie(name) {
+  const cookieValue = document.cookie.match(
+    "(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)"
+  );
+  return cookieValue ? cookieValue.pop() : "";
+}
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(EditNews);
