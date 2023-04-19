@@ -51,6 +51,7 @@ const App = () => (
             <Route exact path="/about" component={About} />
             <Route exact path="/news/:id" component={SingleNews} />
 
+            {/* Fablab Makandura Route */}
             <Route exact path="/fablabmakandura" component={FablabMakandura}/>
 
             {/* Static pages Route */}

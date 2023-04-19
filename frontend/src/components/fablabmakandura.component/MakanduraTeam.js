@@ -1,6 +1,6 @@
 import React from 'react'
 import { datamaknadurateam } from './fablabMakanduraTeam'
-import "../../styles/ourteamModule.css"
+import "./ourteamModule.css"
 
 const MakanduraTeam = () => {
   return (
