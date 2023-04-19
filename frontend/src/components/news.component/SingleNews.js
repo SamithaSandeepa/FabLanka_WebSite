@@ -27,6 +27,11 @@ const SingleNews = ({ id }) => {
   return (
     <div className="container mb-5">
       <h1 className="text-center text-3xl">{news.title}</h1>
+      <img
+        src={news.image}
+        className="card-img mt-3 w-1/2 mx-auto block"
+        alt="..."
+      />
       <p className="my-5 text-lg">{news.summery}</p>
       <div className="row">
         <div className="col-md-12">
