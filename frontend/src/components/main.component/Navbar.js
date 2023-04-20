@@ -11,8 +11,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const [redirect, setRedirect] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [open, setOpen] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  console.log(showDropdown);
+  const [showNewsDropdown, setShowNewsDropdown] = useState(false);
+  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
 
   const logout_user = () => {
     logout();
@@ -144,7 +144,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
       <div className="relative">
         <button
           className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
-          onClick={() => setShowDropdown(!showDropdown)}
+          onMouseEnter={() => setShowNewsDropdown(true)}
+          onMouseLeave={() => setShowNewsDropdown(false)}
         >
           News
           <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -157,9 +158,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </button>
         <div
           className={
-            "absolute right-0 mt-2 w-48 rounded-md shadow-lg " +
-            (showDropdown ? "block" : "hidden")
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (showNewsDropdown ? "block" : "hidden")
           }
+          onMouseEnter={() => setShowNewsDropdown(true)}
+          onMouseLeave={() => setShowNewsDropdown(false)}
         >
           <div className="bg-white rounded-md shadow-xs">
             <Link
@@ -186,11 +189,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </div>
       </div>
 
-
       <div className="relative">
         <button
           className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
-          onClick={() => setShowDropdown(!showDropdown)}
+          onMouseEnter={() => setShowProjectDropdown(true)}
+          onMouseLeave={() => setShowProjectDropdown(false)}
         >
           Project Makandura
           <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -203,14 +206,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </button>
         <div
           className={
-            "absolute right-0 mt-2 w-48 rounded-md shadow-lg " +
-            (showDropdown ? "block" : "hidden")
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (showProjectDropdown ? "block" : "hidden")
           }
+          onMouseEnter={() => setShowProjectDropdown(true)}
+          onMouseLeave={() => setShowProjectDropdown(false)}
         >
           <div className="bg-white rounded-md shadow-xs">
             <Link
               className={
-                location.pathname === "/create-news"
+                location.pathname === "/create-project"
                   ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900"
                   : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }
@@ -220,13 +225,14 @@ const Navbar = ({ logout, isAuthenticated }) => {
             </Link>
             <Link
               className={
-                location.pathname === "/show-all-projects"
+
+                location.pathname === "/show-all-project"
                   ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900"
                   : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }
               to="/show-all-projects"
             >
-              Show All Project
+              Show All News
             </Link>
           </div>
         </div>
