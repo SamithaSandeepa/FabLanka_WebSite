@@ -45,7 +45,7 @@ const Home = () => {
     <>
       <div className="container p-0">
         <div className="grid grid-cols-12 grid-rows-3">
-          <div className="col-span-8 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
+          <div className="col-span-8 row-span-1 bg-gray-200 py-0 pl-2 flex items-center">
             <ImageSlider />
           </div>
           <div className="col-span-4 row-span-1 bg-gray-200 py-0 px-0 flex items-center">

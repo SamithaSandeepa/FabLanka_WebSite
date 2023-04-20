@@ -98,7 +98,7 @@ const NewAlert = () => {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container">
         <h1 className="text-center text-2xl font-bold p-0 my-2">NEWS</h1>
         <Slider {...settings}>
           {news.map((curElem, index) => {
@@ -106,11 +106,13 @@ const NewAlert = () => {
               <div className="card mb-3 border-0 shadow-none border-bottom bg-transparent py-6">
                 <div className="row no-gutters">
                   <div className="col-4 pl-3 m-0 pr-2">
-                    <img
-                      src={curElem.image}
-                      className="card-img m-0 w-100 h-30"
-                      alt="..."
-                    />
+                    <div class="bg-gray-300 w-full h-24 overflow-hidden rounded">
+                      <img
+                        src={curElem.image}
+                        class="w-full h-full object-cover"
+                        alt="..."
+                      />
+                    </div>
                   </div>
 
                   <div className="col-8 p-0 m-0">
