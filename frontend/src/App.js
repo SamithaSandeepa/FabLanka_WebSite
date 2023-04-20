@@ -14,19 +14,22 @@ import Industrytec from "./containers/client/static/Industrytec";
 import Education from "./containers/client/static/Education";
 import ContactUs from "./components/contactus.compoents/ContactUs";
 
-
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
 import Project from "./containers/client/fablab makandura/[id]";
-import CreateProject from "./containers/admin/project makandura/add"
-
+import CreateProject from "./containers/admin/project makandura/add";
 
 // news pages
 import CreateNews from "./containers/admin/news/add";
-// import Addnews from "./containers/admin/news/addnews";
-import SingleNews from "./containers/client/news/[id]";
+import News from "./containers/client/news/[id]";
 import NewsTable from "./containers/admin/news/all";
 import NewsUpdate from "./containers/admin/news/[id]";
+
+//event pages
+import CreateEvent from "./containers/admin/event/add";
+import PastEventTable from "./components/event.component/PastEventTable";
+import EventUpdate from "./containers/admin/event/[id]";
+import Event from "./containers/client/event/[id]";
 
 // import Footer from "./components/Footer";
 
@@ -61,13 +64,18 @@ const App = () => (
 
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
-            {/* <Route exact path="/addnews" component={Addnews} /> */}
-            <Route exact path="/news/:id" component={SingleNews} />
+            <Route exact path="/news/:id" component={News} />
             <Route exact path="/show-all-news" component={NewsTable} />
             <Route exact path="/edit-news/:id" component={NewsUpdate} />
 
+            {/* Event Route */}
+            <Route exact path="/create-event" component={CreateEvent} />
+            <Route exact path="/event/:id" component={Event} />
+            <Route exact path="/show-all-event" component={PastEventTable} />
+            <Route exact path="/edit-event/:id" component={EventUpdate} />
+
             {/* Fablab Makandura Route */}
-            <Route exact path="/fablabmakandura" component={FablabMakandura}/>
+            <Route exact path="/fablabmakandura" component={FablabMakandura} />
             <Route exact path="/fablabmakandura/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />
 

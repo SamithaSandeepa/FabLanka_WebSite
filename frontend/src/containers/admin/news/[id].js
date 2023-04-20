@@ -6,10 +6,8 @@ import EditNews from "../../../components/news.component/EditNews";
 import { useParams } from "react-router-dom";
 
 const NewsUpdate = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
 
   useEffect(() => {
     console.log(history);
@@ -34,7 +32,6 @@ const NewsUpdate = ({ isAuthenticated }) => {
     <>
       <div className="container">
         <EditNews id={id} />
-        {/* <h1>fgfhjh</h1> */}
       </div>
     </>
   );
