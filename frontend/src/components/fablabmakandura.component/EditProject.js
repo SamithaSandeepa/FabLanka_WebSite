@@ -1,108 +1,92 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import { API_URL } from "../../config/index";
-import { useStateContext } from "../../context/ContextProvider";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { convertFromRaw, convertToRaw } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const CreatNews = ({ isAuthenticated }) => {
-  const { setLoading } = useStateContext();
-  const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
+const EditNews = ({ isAuthenticated, id }) => {
+  console.log(isAuthenticated, id);
   const [validated, setValidated] = useState(false);
-
   const [title_project_m, setTitle] = useState("");
   const [summery_project_m, setSummery] = useState("");
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
-  );
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image_project_m, setImage] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
-    if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
-      // Authentication status not yet determined, do nothing
-    } else if (!isAuthenticated) {
-      // User is not authenticated, redirect to login page
-      history.push("/login");
-    } else {
-      // User is authenticated, do something that takes time
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    }
-  }, [history, isAuthenticated]);
+    axios
+      .get(`${API_URL}/projectmakandura/${id}/`)
+      .then((response) => {
+        console.log(response);
+        // set state with news data
+        setTitle(response.data.title_project_m);
+        setSummery(response.data.summery_project_m);
+        // setEditorState(response.data.content);
+        const contentState = convertFromRaw(JSON.parse(response.data.content_project_m));
+        setEditorState(EditorState.createWithContent(contentState));
+        setImage(response.data.image_project_m);
+        setStatus(response.data.status);
+        //...
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
-  const addProject = (e) => {
+  // updateupdateNews news data to the database
+  const updateProject = (e) => {
     // the raw state, stringified
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
-    // convert the raw state back to a useable ContentState object
-    // const content = convertFromRaw(JSON.parse(rawDraftContentState));
-    console.log(content_project_m);
+    e.preventDefault();
     const form = e.currentTarget;
-
     if (form.checkValidity() === false) {
-      e.preventDefault();
-
-      setValidated(true);
       e.stopPropagation();
     } else {
-      e.preventDefault();
-
+      const project = {
+        title: title_project_m,
+        summery: summery_project_m,
+        content: content_project_m,
+        image: image_project_m,
+        status: status,
+      };
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
-      const newProject = {
-        title_project_m,
-        summery_project_m,
-        content_project_m,
-        image_project_m,
-        status,
-      };
-
-      console.log(newProject);
-
+      console.log(project)
       axios
-        .post(`${API_URL}/projectmakandura/create/`, newProject, {
+        .put(`${API_URL}/projectmakandura/${id}/update/`, project, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "application/json",
           },
         })
-        .then(() => {
-          alert("New Project Added");
-          setTitle("");
-          setSummery("");
-          setEditorState("");
-          setImage("");
-          setStatus(true);
-          setValidated(false);
+        .then((res) => {
+          console.log(res);
+          window.location.href = "/show-all-projects";
         })
         .catch((err) => {
-          alert(err);
+          console.log(err);
         });
     }
+    setValidated(true);
   };
 
   return (
     <>
-       <div className="body">
+      <div className="body">
         <div className="container1">
           <div className="col-md-8 mt-4 mx-auto">
             <h2 className="h3 mb-3 font-weight-normal text-center">
-              Add OurProject
+              Edit Project
             </h2>
-            <form noValidate validated={validated} onSubmit={addProject}>
+            <form noValidate validated={validated} onSubmit={updateProject}>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Project Title{" "}
+                Project Title
                 </label>
                 <input
                   type="text"
@@ -110,15 +94,12 @@ const CreatNews = ({ isAuthenticated }) => {
                   minLength="2"
                   value={title_project_m}
                   className="form-control"
-                  placeholder="Enter Event Title"
+                  placeholder="Enter News Project"
                   id="newsTitle"
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
                 />
-                {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Item Name
-                </Form.Control.Feedback> */}
               </div>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
@@ -129,16 +110,13 @@ const CreatNews = ({ isAuthenticated }) => {
                   type="text"
                   required
                   className="form-control"
-                  placeholder="Summarize your Event"
+                  placeholder="Summarize your news"
                   id="summery"
                   value={summery_project_m}
                   onChange={(e) => {
                     setSummery(e.target.value);
                   }}
                 />
-                {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Price
-                </Form.Control.Feedback> */}
               </div>
               <div className="row">
                 <div
@@ -160,9 +138,6 @@ const CreatNews = ({ isAuthenticated }) => {
                       setImage(e.target.value);
                     }}
                   />
-                  {/* <Form.Control.Feedback type="invalid">
-                    Please provide a Image Url
-                  </Form.Control.Feedback> */}
                 </div>
                 <div
                   className="form-group col-md-4 text-center m-auto"
@@ -187,31 +162,26 @@ const CreatNews = ({ isAuthenticated }) => {
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   {" "}
-                  Add Event Content{" "}
+                  Add News Content{" "}
                 </label>
-              </div>
-              <div className="editor">
-                <Editor
-                  editorState={editorState}
-                  onEditorStateChange={setEditorState}
-                  toolbar={{
-                    inline: { inDropdown: true },
-                    list: { inDropdown: true },
-                    textAlign: { inDropdown: true },
-                    link: { inDropdown: true },
-                    history: { inDropdown: true },
-                    //   image: {
-                    //     uploadCallback: uploadImageCallBack,
-                    //     alt: { present: true, mandatory: true },
-                    //   },
-                  }}
-                />
-                {/* show convert draft to html markup */}
+                <div className="editor">
+                  <Editor
+                    editorState={editorState}
+                    onEditorStateChange={setEditorState}
+                    toolbar={{
+                      inline: { inDropdown: true },
+                      list: { inDropdown: true },
+                      textAlign: { inDropdown: true },
+                      link: { inDropdown: true },
+                      history: { inDropdown: true },
+                    }}
+                  />
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="btn btn-blue btn-block"
+                className="btn btn-success float-right"
                 style={{ marginTop: "15px", marginBottom: "15px" }}
               >
                 <i className="far fa-check-square"></i>
@@ -223,19 +193,15 @@ const CreatNews = ({ isAuthenticated }) => {
       </div>
     </>
   );
-  // }
-  
 };
-
 function getCookie(name) {
   const cookieValue = document.cookie.match(
     "(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)"
   );
   return cookieValue ? cookieValue.pop() : "";
 }
-
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(CreatNews);
+export default connect(mapStateToProps)(EditNews);

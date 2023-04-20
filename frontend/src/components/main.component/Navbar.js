@@ -220,11 +220,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
             </Link>
             <Link
               className={
-                location.pathname === "/show-all-news"
+                location.pathname === "/show-all-projects"
                   ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900"
                   : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }
-              to="/show-all-project"
+              to="/show-all-projects"
             >
               Show All Project
             </Link>

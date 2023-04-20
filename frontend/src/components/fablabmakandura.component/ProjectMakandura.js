@@ -26,7 +26,8 @@ function ProjectMakandura({ projects }) {
     const getProject = async () => {
         try {
           const response = await axios.get(`http://localhost:8000/projectmakandura/`);
-          setProject(response.data);
+          setProject(response.data.filter((item) => item.status === true));
+
           console.log(response.data, "setProject");
         } catch (error) {
           console.log(error);
