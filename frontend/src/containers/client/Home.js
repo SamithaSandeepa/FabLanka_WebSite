@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import ImageSlider from "../../components/homepage.component/ImageSlider";
 import NewAlert from "../../components/news.component/NewAlert";
+import PastEvent from "../../components/event.component/PastEvent";
 
 const Home = () => {
   const [readMore, setReadMore] = useState(false);
@@ -45,7 +46,7 @@ const Home = () => {
     <>
       <div className="container p-0">
         <div className="grid grid-cols-12 grid-rows-3">
-          <div className="col-span-8 row-span-1 bg-gray-200 py-0 pl-2 flex items-center">
+          <div className="col-span-8 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
             <ImageSlider />
           </div>
           <div className="col-span-4 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
@@ -85,23 +86,9 @@ const Home = () => {
               </a>
             </div>
           </div>
-          <div className="col-span-12 row-span-1 bg-gray-200 py-5">
-            <div className="flex justify-center items-center">
-              <div className="">
-                <h1 className="text-center text-2xl font-bold">Our Mission</h1>
-                <p className="text-justify mt-3">
-                  FabLanka is a group of highly motivated individuals coming
-                  together to set up fabrication labs (fab labs) throughout Sri
-                  Lanka as a community outreach project. The abundance of an
-                  educated work force, high degree of IT usage, and existence of
-                  a large number of small and medium size manufactures (SMEs)
-                  makes Sri Lanka an ideal home for fab labs. The benefits of
-                  bringing in new technology is the ability to transform the
-                  manufacturing sector of local economies in environmentally
-                  friendly ways. In addition, it will also strengthen employment
-                  for youth in the 21st century manufacturing job sector.
-                </p>
-              </div>
+          <div className="col-span-12 row-span-1 bg-gray-200">
+            <div className="flex justify-center items-center mt-4">
+              <PastEvent />
             </div>
           </div>
         </div>

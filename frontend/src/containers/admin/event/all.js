@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider";
-import CreateNew from "../../../components/news.component/CreateNew";
+import PastEventTable from "../../../components/event.component/PastEventTable";
 
-const CreateNews = ({ isAuthenticated }) => {
+const AllEvents = ({ isAuthenticated }) => {
   const { setLoading } = useStateContext();
   const history = useHistory();
 
   useEffect(() => {
+    console.log("news table");
+    console.log(history);
     if (typeof isAuthenticated === "undefined") {
       console.log("undefined");
       // Authentication status not yet determined, do nothing
@@ -24,28 +26,17 @@ const CreateNews = ({ isAuthenticated }) => {
     }
   }, [history, isAuthenticated]);
 
-  // if (loading) {
-  //   // Show loading indicator
-  //   return <div>Loading...</div>;
-  // } else if (!isAuthenticated) {
-  //   // Authentication failed, should have been redirected to login page
-  //   return null;
-  // } else {
-  // Show the content if the user is authenticated
   return (
     <>
-      <div className="container">
-        <div className="top-0 left-0 width=100% z-1">
-          <CreateNew />
-        </div>
+      <div className="container mb-10">
+        <PastEventTable />
       </div>
     </>
   );
-  // }
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(CreateNews);
+export default connect(mapStateToProps)(AllEvents);

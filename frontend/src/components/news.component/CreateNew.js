@@ -10,7 +10,6 @@ import { Editor } from "react-draft-wysiwyg";
 const CreatNews = ({ isAuthenticated }) => {
   const { setLoading } = useStateContext();
   const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
   const [validated, setValidated] = useState(false);
 
   const [title, setTitle] = useState("");
@@ -92,7 +91,7 @@ const CreatNews = ({ isAuthenticated }) => {
     <>
       <div className="container">
         <div className="col-md-8 mt-4 mx-auto">
-          <h2 className="h3 mb-3 font-weight-normal text-center">Add News</h2>
+          <h2 className="h3 mb-3 font-weight-normal text-center">Add New News</h2>
           <form noValidate validated={validated} onSubmit={addNews}>
             <div className="form-group" style={{ marginBottom: "15px" }}>
               <label className="form-label" style={{ marginBottom: "5px" }}>

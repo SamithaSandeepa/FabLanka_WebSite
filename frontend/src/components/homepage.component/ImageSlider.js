@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-// import "./slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -11,7 +10,7 @@ function SampleNextArrow(props) {
       className={className}
       style={{
         ...style,
-        display: "block",
+        display: "none",
         position: "absolute",
         top: "50%",
         right: "10px",
@@ -30,7 +29,7 @@ function SamplePrevArrow(props) {
       className={className}
       style={{
         ...style,
-        display: "block",
+        display: "none",
         position: "absolute",
         top: "50%",
         left: "10px",
@@ -47,7 +46,9 @@ export default class SimpleSlider extends Component {
     const settings = {
       dots: false,
       infinite: true,
-      speed: 500,
+      autoplay: true,
+      speed: 1000,
+      autoplaySpeed: 3000,
       slidesToShow: 1,
       slidesToScroll: 1,
       prevArrow: <SamplePrevArrow />,
@@ -55,7 +56,7 @@ export default class SimpleSlider extends Component {
     };
 
     return (
-      <div className="container p-0 mt-2">
+      <div className="container pl-2 mt-2">
         <Slider {...settings}>
           <div className="bg-gray-200 ">
             <img

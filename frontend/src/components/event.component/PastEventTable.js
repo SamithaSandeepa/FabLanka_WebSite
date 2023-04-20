@@ -7,14 +7,14 @@ import { useStateContext } from "../../context/ContextProvider";
 import { useHistory } from "react-router-dom";
 import { API_URL } from "../../config/index";
 
-const NewsTable = ({ isAuthenticated }) => {
+const EventsTable = ({ isAuthenticated }) => {
+  const [event, setEvent] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { setLoading } = useStateContext();
-  const [news, setNews] = useState([]);
   const history = useHistory();
 
-  const filteredNews = news.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEvent = event.filter((item) =>
+    item.title_pastevent.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   useEffect(() => {
@@ -37,28 +37,27 @@ const NewsTable = ({ isAuthenticated }) => {
   const csrftoken = getCookie("csrftoken");
   axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
-  const getNews = async () => {
+  const getEvent = async () => {
     try {
       // console.log("access", token);
-      const response = await axios.get(`${API_URL}/news/`);
+      const response = await axios.get(`${API_URL}/event/`);
       //only status is true data will be shown
-      setNews(response.data); //only status is true data will be shown
+      setEvent(response.data); //only status is true data will be shown
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getNews();
+    getEvent();
   }, []);
 
-  // using isCheck function and update the status in database
   const onChange = (id, status) => {
     const csrftoken = getCookie("csrftoken");
     axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
     axios
       .patch(
-        `${API_URL}/news/${id}/update/`,
+        `${API_URL}/event/${id}/update/`,
         { status: status },
         {
           headers: {
@@ -80,7 +79,7 @@ const NewsTable = ({ isAuthenticated }) => {
   const handleDelete = async (id) => {
     const csrftoken = getCookie("csrftoken");
     try {
-      const response = await axios.delete(`${API_URL}/news/${id}/delete/`, {
+      const response = await axios.delete(`${API_URL}/event/${id}/delete/`, {
         headers: {
           "X-CSRFToken": csrftoken,
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -88,7 +87,7 @@ const NewsTable = ({ isAuthenticated }) => {
         },
       });
       console.log(response.data);
-      getNews();
+      getEvent();
     } catch (error) {
       console.log(error);
     }
@@ -97,12 +96,12 @@ const NewsTable = ({ isAuthenticated }) => {
   return (
     <div className="container mx-auto py-10">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-2xl mb-4">News</h1>
+        <h1 className="text-2xl mb-4">Event</h1>
         <div className="relative w-full mb-4">
           <input
             type="search"
             className="w-full rounded border-gray-300 shadow-sm pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-            placeholder="Search news by title"
+            placeholder="Search event by title"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <div className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -125,14 +124,14 @@ const NewsTable = ({ isAuthenticated }) => {
               <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th className="py-3 px-6 text-left">#</th>
                 <th className="py-3 px-6 text-left">Image</th>
-                <th className="py-3 px-6 text-left">News Title</th>
+                <th className="py-3 px-6 text-left">Event Title</th>
                 <th className="py-3 px-6 text-left">Summary</th>
                 <th className="py-3 px-6 text-left">Status</th>
                 <th className="py-3 px-6 text-center">Action</th>
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredNews.map((curElem) => {
+              {filteredEvent.map((curElem) => {
                 console.log(curElem.status);
 
                 return (
@@ -140,13 +139,13 @@ const NewsTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6">{curElem.id}</td>
                     <td className="py-3 px-6">
                       <img
-                        src={curElem.image}
-                        alt={curElem.title}
+                        src={curElem.image_project_m}
+                        alt={curElem.title_pastevent}
                         className="w-16 h-16 rounded-full border-2 border-gray-300"
                       />
                     </td>
-                    <td className="py-3 px-6">{curElem.title}</td>
-                    <td className="py-3 px-6">{curElem.summary}</td>
+                    <td className="py-3 px-6">{curElem.title_pastevent}</td>
+                    <td className="py-3 px-6">{curElem.summery_pastevent}</td>
                     <td className="py-3 px-6">
                       <div className="flex items-center">
                         <button
@@ -165,7 +164,7 @@ const NewsTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6 text-center">
                       <div className="flex item-center justify-center">
                         <Link
-                          to={`/edit-news/${curElem.id}`}
+                          to={`/edit-event/${curElem.id}`}
                           className="text-gray-400 hover:text-gray-600 mx-2"
                         >
                           <svg
@@ -226,4 +225,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(NewsTable);
+export default connect(mapStateToProps)(EventsTable);

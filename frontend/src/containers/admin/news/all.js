@@ -5,10 +5,8 @@ import { useStateContext } from "../../../context/ContextProvider";
 import NewsTable from "../../../components/news.component/NewsTable";
 
 const AllNews = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
 
   useEffect(() => {
     console.log("news table");

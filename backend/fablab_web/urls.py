@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from book.views import BookList, BookCreate
 from projectMakandura.views import projectMakanduraList, projectMakanduraCreate, projectMakanduraDelete, projectMakanduraUpdate, projectMakanduraDetail
 from news.views import NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete
+from event.views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete
 
 urlpatterns = [
     path('auth/', include('djoser.urls')),
@@ -23,7 +24,15 @@ urlpatterns = [
     path('news/<int:pk>/', NewsDetail.as_view(), name='news_detail'),
     path('news/create/', NewsCreate.as_view(), name='news_create'),
     path('news/<int:pk>/update/', NewsUpdate.as_view(), name='news_update'),
-    path('news/<int:pk>/delete/', NewsDelete.as_view(), name='news_delete')
+    path('news/<int:pk>/delete/', NewsDelete.as_view(), name='news_delete'),
+
+    #event API
+    path('event/', EventList.as_view(), name='event_list'),
+    path('event/<int:pk>/', EventDetail.as_view(), name='event_detail'),
+    path('event/create/', EventCreate.as_view(), name='event_create'),
+    path('event/<int:pk>/update/', EventUpdate.as_view(), name='event_update'),
+    path('event/<int:pk>/delete/', EventDelete.as_view(), name='event_delete')
+
 ]
 
 

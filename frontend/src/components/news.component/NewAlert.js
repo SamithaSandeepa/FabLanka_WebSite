@@ -2,8 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { HomeWrapper } from "./style";
-// import style from "./newalert.css";
 import { API_URL } from "../../config/index";
 
 const NewAlert = () => {
@@ -12,11 +10,6 @@ const NewAlert = () => {
 
   //get access token Bearer
   const token = localStorage.getItem("access");
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
 
   const getNews = async () => {
     try {
