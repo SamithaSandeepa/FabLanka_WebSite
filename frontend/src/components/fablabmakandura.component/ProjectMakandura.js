@@ -104,7 +104,7 @@ function ProjectMakandura({ projects }) {
                         <div className="font-bold text-lg mb-2">{curElem.title_project_m}</div>
                             <p className="text-gray-700 text-base">{curElem.summery_project_m.slice(0,20)}</p>
                             <div className="mt-4">
-                            <a href="#" className="text-blue-500 hover:text-blue-700 font-bold">
+                            <a href={"/fablabmakandura/" + curElem.id} className="text-blue-500 hover:text-blue-700 font-bold">
                                 See more
                             </a>
                         </div>
