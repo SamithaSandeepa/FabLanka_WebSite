@@ -108,7 +108,7 @@ const NewAlert = () => {
                   <div className="col-4 pl-3 m-0 pr-2">
                     <img
                       src={curElem.image}
-                      className="card-img m-0 w-full"
+                      className="card-img m-0 w-100"
                       alt="..."
                     />
                   </div>
