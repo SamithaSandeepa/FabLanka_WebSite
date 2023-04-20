@@ -15,8 +15,8 @@ const ProjectTable = ({ isAuthenticated }) => {
   const [project, setProject] = useState([]);
   const history = useHistory();
 
-  const filteredNews = project.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProject = project.filter((item) =>
+    item.title_project_m.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   useEffect(() => {
@@ -80,6 +80,7 @@ const ProjectTable = ({ isAuthenticated }) => {
   };
 
   const handleDelete = async (id) => {
+    console.log(id)
     const csrftoken = getCookie("csrftoken");
     try {
       const response = await axios.delete(`${API_URL}/projectmakandura/${id}/delete/`, {
@@ -99,7 +100,7 @@ const ProjectTable = ({ isAuthenticated }) => {
   return (
     <div className="container mx-auto py-10">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-2xl mb-4">News</h1>
+        <h1 className="text-2xl mb-4">Project</h1>
         <div className="relative w-full mb-4">
           <input
             type="search"
@@ -127,14 +128,14 @@ const ProjectTable = ({ isAuthenticated }) => {
               <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th className="py-3 px-6 text-left">#</th>
                 <th className="py-3 px-6 text-left">Image</th>
-                <th className="py-3 px-6 text-left">News Title</th>
+                <th className="py-3 px-6 text-left">Project Title</th>
                 <th className="py-3 px-6 text-left">Summary</th>
                 <th className="py-3 px-6 text-left">Status</th>
                 <th className="py-3 px-6 text-center">Action</th>
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredNews.map((curElem) => {
+              {filteredProject.map((curElem) => {
                 console.log(curElem.status);
 
                 return (
@@ -142,13 +143,13 @@ const ProjectTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6">{curElem.id}</td>
                     <td className="py-3 px-6">
                       <img
-                        src={curElem.image}
-                        alt={curElem.title}
+                        src={curElem.image_project_m}
+                        alt={curElem.title_project_m}
                         className="w-16 h-16 rounded-full border-2 border-gray-300"
                       />
                     </td>
-                    <td className="py-3 px-6">{curElem.title}</td>
-                    <td className="py-3 px-6">{curElem.summary}</td>
+                    <td className="py-3 px-6">{curElem.title_project_m}</td>
+                    <td className="py-3 px-6">{curElem.summery_project_m}</td>
                     <td className="py-3 px-6">
                       <div className="flex items-center">
                         {/* <span
@@ -176,7 +177,7 @@ const ProjectTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6 text-center">
                       <div className="flex item-center justify-center">
                         <Link
-                          to={`/edit-news/${curElem.id}`}
+                          to={`/edit-project/${curElem.id}`}
                           className="text-gray-400 hover:text-gray-600 mx-2"
                         >
                           <svg
@@ -237,4 +238,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(NewsTable);
+export default connect(mapStateToProps)(ProjectTable);

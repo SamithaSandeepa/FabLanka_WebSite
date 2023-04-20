@@ -18,7 +18,9 @@ import ContactUs from "./components/contactus.compoents/ContactUs";
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
 import Project from "./containers/client/fablab makandura/[id]";
-import CreateProject from "./containers/admin/project makandura/add"
+import CreateProject from "./containers/admin/project makandura/add";
+import ProjectTable from "./components/fablabmakandura.component/ProjectTable";
+import EditProject from "./containers/admin/project makandura/[id]";
 
 
 // news pages
@@ -66,10 +68,14 @@ const App = () => (
             <Route exact path="/show-all-news" component={NewsTable} />
             <Route exact path="/edit-news/:id" component={NewsUpdate} />
 
+
             {/* Fablab Makandura Route */}
             <Route exact path="/fablabmakandura" component={FablabMakandura}/>
             <Route exact path="/fablabmakandura/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />
+            <Route exact path="/show-all-projects" component={ProjectTable} />
+            <Route exact path="/edit-project/:id" component={EditProject} />
+
 
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />
