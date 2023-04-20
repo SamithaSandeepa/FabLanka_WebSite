@@ -10,10 +10,16 @@ import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
 import FirstPage from "./containers/client/FirstPage";
 import second from "./containers/client/second";
 import About from "./containers/client/static/About";
-import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
 import Industrytec from "./containers/client/static/Industrytec";
 import Education from "./containers/client/static/Education";
 import ContactUs from "./components/contactus.compoents/ContactUs";
+
+
+//fablab makandura
+import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
+import Project from "./containers/client/fablab makandura/[id]";
+import CreateProject from "./containers/admin/project makandura/add"
+
 
 // news pages
 import CreateNews from "./containers/admin/news/add";
@@ -53,7 +59,7 @@ const App = () => (
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
 
-            {/* Fablab News Route */}
+            {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
             {/* <Route exact path="/addnews" component={Addnews} /> */}
             <Route exact path="/news/:id" component={SingleNews} />
@@ -61,7 +67,9 @@ const App = () => (
             <Route exact path="/edit-news/:id" component={NewsUpdate} />
 
             {/* Fablab Makandura Route */}
-            <Route exact path="/fablabmakandura" component={FablabMakandura} />
+            <Route exact path="/fablabmakandura" component={FablabMakandura}/>
+            <Route exact path="/fablabmakandura/:id" component={Project} />
+            <Route exact path="/create-project" component={CreateProject} />
 
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />
