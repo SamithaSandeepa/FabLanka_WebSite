@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'book',
     'projectMakandura',
     'news',
+    'event',
 ]
 
 MIDDLEWARE = [
