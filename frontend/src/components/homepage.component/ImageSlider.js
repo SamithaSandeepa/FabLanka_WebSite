@@ -59,21 +59,21 @@ export default class SimpleSlider extends Component {
         <Slider {...settings}>
           <div className="bg-gray-200 ">
             <img
-              className="m-0"
+              className="m-0 rounded"
               src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg"
               alt="slide1"
             />
           </div>
           <div>
             <img
-              className="m-0"
+              className="m-0 rounded"
               src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9720-1.jpg"
               alt="slide2"
             />
           </div>
           <div>
             <img
-              className="m-0"
+              className="m-0 rounded"
               src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9615-1.jpg"
               alt="slide3"
             />
