@@ -1,102 +1,93 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../../config/index";
 import { connect } from "react-redux";
-import { useStateContext } from "../../context/ContextProvider";
-import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
+import { API_URL } from "../../config/index";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const EditNews = ({ isAuthenticated, id }) => {
-  const { setLoading } = useStateContext();
-  const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
+  console.log(isAuthenticated, id);
+  //validation state
   const [validated, setValidated] = useState(false);
-
-  const [news, setNews] = useState({});
+  //set all data to the state
   const [title, setTitle] = useState("");
   const [summery, setSummery] = useState("");
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
-  );
+  // const [editorState, setEditorState] = useState(() => {
+  //   const contentState = convertFromRaw(JSON.parse(""));
+  //   return EditorState.createWithContent(contentState);
+  // });
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(`${API_URL}/news/${id}/`)
       .then((response) => {
-        setNews(response.data);
+        console.log(response);
+        // set state with news data
         setTitle(response.data.title);
         setSummery(response.data.summery);
-        if (response.data.content) {
-          const contentState = convertFromRaw(
-            JSON.parse(response.data.content)
-          );
-          setEditorState(EditorState.createWithContent(contentState));
-        }
+        // setEditorState(response.data.content);
+        const contentState = convertFromRaw(JSON.parse(response.data.content));
+        setEditorState(EditorState.createWithContent(contentState));
         setImage(response.data.image);
         setStatus(response.data.status);
-        setLoading(false);
+        //...
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
       });
   }, [id]);
 
+  // updateupdateNews news data to the database
   const updateNews = (e) => {
     // the raw state, stringified
     const content = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
+    e.preventDefault();
     const form = e.currentTarget;
-
     if (form.checkValidity() === false) {
-      e.preventDefault();
-      setValidated(true);
       e.stopPropagation();
     } else {
-      e.preventDefault();
-
+      const news = {
+        title: title,
+        summery: summery,
+        content: content,
+        image: image,
+        status: status,
+      };
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
-      const updatedNews = {
-        title,
-        summery,
-        content,
-        image,
-        status,
-      };
-
       axios
-        .put(`${API_URL}/news/${id}/`, updatedNews, {
+        .put(`${API_URL}/news/${id}/update/`, news, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "application/json",
           },
         })
-        .then(() => {
-          alert("News Updated");
-          history.push(`/news/${id}`);
+        .then((res) => {
+          console.log(res);
+          window.location.href = "/show-all-news";
         })
         .catch((err) => {
-          alert(err);
+          console.log(err);
         });
     }
+    setValidated(true);
   };
 
   return (
     <>
-      <div className="container">
-        <div className="col-md-8 mt-4 mx-auto">
-          <h2 className="h3 mb-3 font-weight-normal text-center">Edit News</h2>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
+      <div className="body">
+        <div className="container1">
+          <div className="col-md-8 mt-4 mx-auto">
+            <h2 className="h3 mb-3 font-weight-normal text-center">
+              Edit News
+            </h2>
             <form noValidate validated={validated} onSubmit={updateNews}>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
@@ -104,92 +95,116 @@ const EditNews = ({ isAuthenticated, id }) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
-                  placeholder="Enter news title"
+                  required
+                  minLength="2"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  required
-                />
-                <div className="invalid-feedback">Please provide a title.</div>
-              </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  News Summary
-                </label>
-                <textarea
                   className="form-control"
-                  rows="3"
-                  placeholder="Enter news summary"
-                  value={summery}
-                  onChange={(e) => setSummery(e.target.value)}
-                  required
-                ></textarea>
-                <div className="invalid-feedback">
-                  Please provide a summary.
-                </div>
-              </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  News Content
-                </label>
-                <Editor
-                  editorState={editorState}
-                  onEditorStateChange={setEditorState}
-                  required
+                  placeholder="Enter News Title"
+                  id="newsTitle"
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
                 />
-                <div className="invalid-feedback">Please provide content.</div>
               </div>
-
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                  News Image
+                  {" "}
+                  Summery{" "}
                 </label>
                 <input
                   type="text"
-                  className="form-control"
-                  placeholder="Enter image URL"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
                   required
+                  className="form-control"
+                  placeholder="Summarize your news"
+                  id="summery"
+                  value={summery}
+                  onChange={(e) => {
+                    setSummery(e.target.value);
+                  }}
                 />
-                <div className="invalid-feedback">
-                  Please provide an image URL.
+              </div>
+              <div className="row">
+                <div
+                  className="form-group col-md-8"
+                  style={{ marginBottom: "15px" }}
+                >
+                  <label className="form-label" style={{ marginBottom: "5px" }}>
+                    {" "}
+                    Image{" "}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    placeholder="Enter Image Url"
+                    id="image"
+                    value={image}
+                    onChange={(e) => {
+                      setImage(e.target.value);
+                    }}
+                  />
+                </div>
+                <div
+                  className="form-group col-md-4 text-center m-auto"
+                  style={{ marginBottom: "15px" }}
+                >
+                  <select
+                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
+                    value={status}
+                    onChange={(e) => {
+                      setStatus(e.target.value);
+                    }}
+                  >
+                    <option disabled hidden>
+                      Select your option
+                    </option>
+                    <option value={true}>Active</option>
+                    <option value={false}>Inactive</option>
+                  </select>
                 </div>
               </div>
 
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="status"
-                  checked={status}
-                  onChange={(e) => setStatus(e.target.checked)}
-                />
-                <label className="form-check-label" htmlFor="status">
-                  Published
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                <label className="form-label" style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Add News Content{" "}
                 </label>
+                <div className="editor">
+                  <Editor
+                    editorState={editorState}
+                    onEditorStateChange={setEditorState}
+                    toolbar={{
+                      inline: { inDropdown: true },
+                      list: { inDropdown: true },
+                      textAlign: { inDropdown: true },
+                      link: { inDropdown: true },
+                      history: { inDropdown: true },
+                    }}
+                  />
+                </div>
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                Update
+              <button
+                type="submit"
+                className="btn btn-success float-right"
+                style={{ marginTop: "15px", marginBottom: "15px" }}
+              >
+                <i className="far fa-check-square"></i>
+                &nbsp; Save
               </button>
             </form>
-          )}
+          </div>
         </div>
       </div>
     </>
   );
 };
-
 function getCookie(name) {
   const cookieValue = document.cookie.match(
     "(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)"
   );
   return cookieValue ? cookieValue.pop() : "";
 }
-
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });

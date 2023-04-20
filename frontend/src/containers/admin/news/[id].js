@@ -34,6 +34,7 @@ const NewsUpdate = ({ isAuthenticated }) => {
     <>
       <div className="container">
         <EditNews id={id} />
+        {/* <h1>fgfhjh</h1> */}
       </div>
     </>
   );
