@@ -9,13 +9,13 @@ import { useHistory } from "react-router-dom";
 // import { data } from "../data";
 import { API_URL } from "../../config/index";
 
-const NewsTable = ({ isAuthenticated }) => {
+const ProjectTable = ({ isAuthenticated }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { setLoading } = useStateContext();
-  const [news, setNews] = useState([]);
+  const [project, setProject] = useState([]);
   const history = useHistory();
 
-  const filteredNews = news.filter((item) =>
+  const filteredNews = project.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -39,19 +39,19 @@ const NewsTable = ({ isAuthenticated }) => {
   const csrftoken = getCookie("csrftoken");
   axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
-  const getNews = async () => {
+  const getProject = async () => {
     try {
       // console.log("access", token);
       const response = await axios.get(`${API_URL}/projectmakandura/`);
       //only status is true data will be shown
-      setNews(response.data); //only status is true data will be shown
+      setProject(response.data); //only status is true data will be shown
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getNews();
+    getProject();
   }, []);
 
   // using isCheck function and update the status in database
@@ -90,7 +90,7 @@ const NewsTable = ({ isAuthenticated }) => {
         },
       });
       console.log(response.data);
-      getNews();
+      getProject();
     } catch (error) {
       console.log(error);
     }
