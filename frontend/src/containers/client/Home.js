@@ -46,13 +46,15 @@ const Home = () => {
     <>
       <div className="container p-0">
         <div className="grid grid-cols-12 grid-rows-3">
-          <div className="col-span-8 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
+          <div className="col-span-8 row-span-1 bg-blue-300 py-0 px-0 flex items-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-white opacity-0 transform rotate-45"></div>
             <ImageSlider />
           </div>
-          <div className="col-span-4 row-span-1 bg-gray-200 py-0 px-0 flex items-center">
+          <div className="col-span-4 row-span-1 bg-blue-300 py-0 px-0 flex items-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-white opacity-0 transform rotate-45"></div>
             <NewAlert />
           </div>
-          <div className="col-span-12 row-span-1">
+          <div className="col-span-12 row-span-1 px-2">
             <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
@@ -86,7 +88,7 @@ const Home = () => {
               </a>
             </div>
           </div>
-          <div className="col-span-12 row-span-1 bg-gray-200">
+          <div className="col-span-12 row-span-1 bg-sky-200">
             <div className="flex justify-center items-center mt-4">
               <PastEvent />
             </div>

@@ -16,7 +16,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
       <div className="sticky-sm-top">
         <Navbar />
       </div>
-      <div className="flex-grow pt-16 px-0 mx-0" style={{ marginTop: "-10px" }}>
+      <div className="flex-grow pt-16 px-0 mx-0" style={{ marginTop: "-6px" }}>
         {children}
       </div>
       <div className="">

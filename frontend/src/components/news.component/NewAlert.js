@@ -92,11 +92,13 @@ const NewAlert = () => {
   return (
     <>
       <div className="container">
-        <h1 className="text-center text-2xl font-bold p-0 my-2">NEWS</h1>
+        <h1 className="text-center text-2xl font-semibold p-0 my-2 text-black">
+          NEWS
+        </h1>
         <Slider {...settings}>
           {news.map((curElem, index) => {
             return (
-              <div className="card mb-3 border-0 shadow-none border-bottom bg-transparent py-6">
+              <div className="card mb-3 border-0 shadow-none border-none bg-transparent py-6">
                 <div className="row no-gutters">
                   <div className="col-4 pl-3 m-0 pr-2">
                     <div class="bg-gray-300 w-full h-24 overflow-hidden rounded">
