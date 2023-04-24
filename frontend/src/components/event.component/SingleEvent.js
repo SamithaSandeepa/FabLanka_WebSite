@@ -31,7 +31,7 @@ const SingleEvent = ({ id }) => {
       <h1 className="text-center text-3xl">{event.title_pastevent}</h1>
       <img
         src={event.image_project_m}
-        className="card-img mt-3 h-100 w-auto mx-auto block"
+        className="card-img mt-3 h-86 w-auto mx-auto block"
         alt="..."
       />
       <p className="my-5 text-lg">{event.summery_pastevent}</p>

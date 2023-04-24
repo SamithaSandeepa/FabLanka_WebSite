@@ -34,6 +34,18 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Home
         </Link>
       </li>
+      <li className="nav-item text-sm">
+        <Link
+          className={
+            location.pathname === "/about"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/about"
+        >
+          About Us
+        </Link>
+      </li>
       {/* <li className="nav-item text-sm">
         <Link
           to="/login"
@@ -70,18 +82,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Education
         </Link>
       </li>
-      <li className="nav-item text-sm">
-        <Link
-          className={
-            location.pathname === "/about"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
-          }
-          to="/about"
-        >
-          About Us
-        </Link>
-      </li>
+      
       <li className="nav-item text-sm">
         <Link
           className={

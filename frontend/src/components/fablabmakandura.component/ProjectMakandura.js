@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function ProjectMakandura({ projects }) {
+function ProjectMakandura() {
 
     const text = "This is a long text string.";
     const maxLength = 10;
