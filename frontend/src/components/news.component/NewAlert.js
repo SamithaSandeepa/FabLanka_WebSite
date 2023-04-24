@@ -116,7 +116,7 @@ const NewAlert = () => {
                         <p className="card-title text-lg font-normal text-black hover:text-[#2c185a] m-0 pb-3">
                           {curElem.title}
                         </p>
-                        <p className="card-text lh-1 text-lg text-slate-500 hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
+                        <p className="card-text lh-1 text-lg text-black hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
                           {curElem.summery}
                         </p>
                       </div>

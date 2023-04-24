@@ -124,7 +124,7 @@ const PastEvent = () => {
                     alt="blog"
                   />
                   <a href={"/event/" + curElem.id} className="no-underline">
-                    <div className="p-6 hover:bg-indigo-700 hover:text-white transition duration-300 ease-in">
+                    <div className="p-6 hover:bg-blue-700 hover:text-white transition duration-300 ease-in ">
                       <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3">
                         {curElem.title_pastevent}
                       </h1>

@@ -13,6 +13,7 @@ import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
 import Education from "./containers/client/static/Education";
 import ContactUs from "./components/contactus.compoents/ContactUs";
+import Admin from "./containers/admin/admin";
 
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
@@ -20,7 +21,6 @@ import Project from "./containers/client/fablab makandura/[id]";
 import CreateProject from "./containers/admin/project makandura/add";
 import ProjectTable from "./components/fablabmakandura.component/ProjectTable";
 import EditProject from "./containers/admin/project makandura/[id]";
-
 
 // news pages
 import CreateNews from "./containers/admin/news/add";
@@ -52,6 +52,7 @@ const App = () => (
         <ContextProvider>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/reset-password" component={ResetPassword} />
@@ -71,13 +72,11 @@ const App = () => (
             <Route exact path="/show-all-news" component={NewsTable} />
             <Route exact path="/edit-news/:id" component={NewsUpdate} />
 
-
             {/* Event Route */}
             <Route exact path="/create-event" component={CreateEvent} />
             <Route exact path="/event/:id" component={Event} />
             <Route exact path="/show-all-event" component={PastEventTable} />
             <Route exact path="/edit-event/:id" component={EventUpdate} />
-
 
             {/* Fablab Makandura Route */}
             <Route exact path="/fablabmakandura" component={FablabMakandura} />
@@ -85,7 +84,6 @@ const App = () => (
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/show-all-projects" component={ProjectTable} />
             <Route exact path="/edit-project/:id" component={EditProject} />
-
 
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />

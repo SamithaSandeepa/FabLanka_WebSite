@@ -1,134 +1,148 @@
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import {API_URL} from "../../config/index";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Slider from "react-slick";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { API_URL } from "../../config/index";
 
+const ProjectMakandura = () => {
+  const [project, setProject] = useState([]);
 
+  const getProjects = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/projectmakandura/`);
+      //only status is true data will be shown
+      setProject(response.data.filter((item) => item.status === true)); //only status is true data will be shown
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    getProjects();
+  }, []);
 
-function ProjectMakandura() {
-
-    const text = "This is a long text string.";
-    const maxLength = 10;
-    const truncatedText = text.slice(0, maxLength) + (text.length > maxLength ? "1" : "2");
-
-    console.log(truncatedText); // Output: "This is a ..."
-
-
-    const [project, setProject] = useState([]);
-    // console.log(events);
-    console.log(project);
-    // const [status, setStatus] = useState(isChacked);
-
-    const getProject = async () => {
-        try {
-          const response = await axios.get(`http://localhost:8000/projectmakandura/`);
-          setProject(response.data.filter((item) => item.status === true));
-
-          console.log(response.data, "setProject");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      useEffect(() => {
-        getProject();
-      }, []);
-
-
-      const numNews = project.length;
-        let slidesToShow = 4;
-        if (numNews === 0) {
-            slidesToShow = 0;
-        } else if (numNews < 5) {
-            slidesToShow = numNews;
-        } else if (numNews > 6) {
-            slidesToShow = 5;
-        }
-    
-
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 5,
-      slidesToScroll: 1,
-    //   responsive: [
-    //     {
-    //       breakpoint: 1024,
-    //       settings: {
-    //         slidesToShow: 3,
-    //         slidesToScroll: 1,
-    //         infinite: true,
-    //         dots: true,
-    //       },
-    //     },
-    //     {
-    //       breakpoint: 600,
-    //       settings: {
-    //         slidesToShow: 1,
-    //         slidesToScroll: 1,
-    //       },
-    //     },
-    //     {
-    //       breakpoint: 480,
-    //       settings: {
-    //         slidesToShow: 1,
-    //         slidesToScroll: 1,
-    //       },
-    //     },
-    //   ],
-    };
-  
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
     return (
-        <>
-        {/* <div className="container-fluid px-5 pb-5 pt-3 rounded-3 shadow bg-white mb-5"> */}
-      <h1 className="text-center  text-3xl pt-5 ">Makadura Project</h1>
-      {/* <HomeWrapper> */}
-        <Slider {...settings} className={styles.card_container}>
-          
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          position: "absolute",
+          top: "50%",
+          bottom: "unset",
+          right: "10px",
+          left: "unset",
+          transform: "translateY(-50%)",
+          zIndex: 1,
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          position: "absolute",
+          top: "50%",
+          bottom: "unset",
+          right: "unset",
+          left: "10px",
+          transform: "translateY(-50%)",
+          zIndex: 1,
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  // const numData = news.length;
+  // const slidesToShow = numData === 1 ? 1 : numData < 4 ? numData - 1 : 3;
+  // const minSlides = numData === 1 ? 1 : numData < 4 ? numData - 1 : 3;
+
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 2,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+    ],
+  };
+  return (
+    <>
+      <div className="container m-0 p-0 bg-trasparent">
+        <h1 className="text-center font-bold pb-3 text-3xl">
+          Project Makandura
+        </h1>
+        <Slider
+          {...settings}
+          className="sm:card_container md:pl-0 lg:pl-0 xl:pl-0"
+        >
           {project.map((curElem) => {
             console.log(curElem, "test");
             return (
-                <div className='mt-10 h-80 pt-1 flex justify-center container w-auto'>
-                    <div className="bg-white rounded-md shadow-md p-4 w-64 ">
-                        <div className="mb-4 ">
-                            <img
-                                src="https://via.placeholder.com/150"
-                                alt="Placeholder"
-                                className="rounded-full w-20 h-20 mx-auto"
-                            />
-                        </div>
-                        <div className="font-bold text-lg mb-2">{curElem.title_project_m}</div>
-                            <p className="text-gray-700 text-base">{curElem.summery_project_m.slice(0,20)}</p>
-                            <div className="mt-4">
-                            <a href={"/fablabmakandura/" + curElem.id} className="text-blue-500 hover:text-blue-700 font-bold">
-                                See more
-                            </a>
-                        </div>
+              <div className="px-10 py-6 sm:w-1/2 lg:w-1/3" key={curElem.id}>
+                <div className="h-full rounded-lg overflow-hidden px-4">
+                  <img
+                    className="lg:auto md:h-48 w-full object-cover object-center rounded hover:scale-125 duration-300 ease-in-out"
+                    src={curElem.image_project_m}
+                    alt="blog"
+                  />
+                  <a href={"/event/" + curElem.id} className="no-underline">
+                    <div className="p-6 hover:bg-blue-700 hover:text-white transition duration-300 ease-in ">
+                      <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3">
+                        {curElem.title_project_m}
+                      </h1>
+                      <p className="leading-relaxed mb-3 line-clamp-3 hover:line-clamp-none duration-100 ease-in-out">
+                        {curElem.summery_project_m}
+                      </p>
+                      <div className="flex items-center flex-wrap "></div>
                     </div>
+                  </a>
                 </div>
-
+              </div>
             );
           })}
         </Slider>
-      {/* </HomeWrapper> */}
-    {/* </div> */}
+      </div>
     </>
-    );
-  }
-  
-  export default ProjectMakandura;
+  );
+};
 
-  const styles = {
-    card_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-    },
-}
-  
+export default ProjectMakandura;
