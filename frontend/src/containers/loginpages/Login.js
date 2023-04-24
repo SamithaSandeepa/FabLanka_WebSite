@@ -5,7 +5,7 @@ import { login } from "../../actions/auth";
 import axios from "axios";
 
 const Login = ({ login, isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
+  console.log("aaa");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,28 +22,28 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
-  const continueWithGoogle = async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google`
-      );
+  // const continueWithGoogle = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google`
+  //     );
 
-      window.location.replace(res.data.authorization_url);
-    } catch (err) {}
-  };
+  //     window.location.replace(res.data.authorization_url);
+  //   } catch (err) {}
+  // };
 
-  const continueWithFacebook = async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/auth/o/facebook/?redirect_uri=${process.env.REACT_APP_API_URL}/facebook`
-      );
+  // const continueWithFacebook = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `${process.env.REACT_APP_API_URL}/auth/o/facebook/?redirect_uri=${process.env.REACT_APP_API_URL}/facebook`
+  //     );
 
-      window.location.replace(res.data.authorization_url);
-    } catch (err) {}
-  };
+  //     window.location.replace(res.data.authorization_url);
+  //   } catch (err) {}
+  // };
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/admin" />;
   }
 
   return (

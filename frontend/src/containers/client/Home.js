@@ -46,12 +46,10 @@ const Home = () => {
     <>
       <div className="container p-0">
         <div className="grid grid-cols-12 grid-rows-3">
-          <div className="col-span-8 row-span-1 bg-blue-300 py-0 px-0 flex items-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-white opacity-0 transform rotate-45"></div>
+          <div className="col-span-12 sm:col-span-8 row-span-1 bg-gradient-to-b from-green-600 to-blue py-0 px-0 flex items-center relative overflow-hidden">
             <ImageSlider />
           </div>
-          <div className="col-span-4 row-span-1 bg-blue-300 py-0 px-0 flex items-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-white opacity-0 transform rotate-45"></div>
+          <div className="col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden hidden sm:block">
             <NewAlert />
           </div>
           <div className="col-span-12 row-span-1 px-2">
@@ -88,7 +86,10 @@ const Home = () => {
               </a>
             </div>
           </div>
-          <div className="col-span-12 row-span-1 bg-sky-200">
+          <div className="col-span-12 sm:col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
+            <NewAlert />
+          </div>
+          <div className="col-span-12 row-span-1 bg-gradient-to-t from-white to-blue-500">
             <div className="flex justify-center items-center mt-4">
               <PastEvent />
             </div>
