@@ -1,11 +1,14 @@
 import React from "react";
-import ContactUs from "../../../components/contactus.compoents/ContactUs"
+import ContactUs from "../../../components/contactus.compoents/ContactUs";
+import Fb from "../../../components/contactus.compoents/fb";
 
 const contact = () => {
   return (
-      <div className="container-fluid">
-        <ContactUs />
-      </div>
+    <div className="container">
+      <ContactUs />
+
+     
+    </div>
   );
 };
 

@@ -52,7 +52,7 @@ const Home = () => {
           <div className="col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden hidden sm:block">
             <NewAlert />
           </div>
-          <div className="col-span-12 row-span-1 px-2">
+          <div className="col-span-12 sm:col-span-8 row-span-1 px-5 sm:px-2 pt-2">
             <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
@@ -86,6 +86,24 @@ const Home = () => {
               </a>
             </div>
           </div>
+          {/* <div className="col-span-4 item-center hidden sm:block">
+            <iframe
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNipunaPerera99%2F&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=797828301687659"
+              width="400"
+              height="500"
+              style={{ border: "none", overflow: "hidden" }}
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe>
+          </div> */}
+
+          {/* style={{ border: "none", overflow: "hidden" }} */}
+
+          {/* <div className="float-right col-span-4 py-5">
+                
+              </div> */}
           <div className="col-span-12 sm:col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
             <NewAlert />
           </div>

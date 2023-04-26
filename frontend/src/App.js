@@ -12,8 +12,9 @@ import second from "./containers/client/second";
 import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
 import Education from "./containers/client/static/Education";
-import ContactUs from "./components/contactus.compoents/ContactUs";
+import ContactUs from "./containers/client/static/Contact";
 import Admin from "./containers/admin/admin";
+import Facebook from "./containers/client/Facebook";
 
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
@@ -65,6 +66,7 @@ const App = () => (
             <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/facebook" component={Facebook} />
 
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
