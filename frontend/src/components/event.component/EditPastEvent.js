@@ -58,7 +58,7 @@ const EditNews = ({ isAuthenticated, id }) => {
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
       axios
-        .put(`${API_URL}/event/${id}/update`, pastevent, {
+        .put(`${API_URL}/event/${id}/update/`, pastevent, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const EditNews = ({ isAuthenticated, id }) => {
         })
         .then((res) => {
           console.log(res);
-          window.location.href = "/show-event";
+          window.location.href = "/show-all-event";
         })
         .catch((err) => {
           console.log(err);
@@ -77,8 +77,7 @@ const EditNews = ({ isAuthenticated, id }) => {
 
   return (
     <>
-      <div className="body">
-        <div className="container1">
+        <div className="container">
           <div className="col-md-8 mt-4 mx-auto">
             <h2 className="h3 mb-3 font-weight-normal text-center">
               Edit Event
@@ -190,7 +189,6 @@ const EditNews = ({ isAuthenticated, id }) => {
             </form>
           </div>
         </div>
-      </div>
     </>
   );
 };

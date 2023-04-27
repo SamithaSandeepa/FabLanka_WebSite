@@ -90,107 +90,110 @@ const CreatNews = ({ isAuthenticated }) => {
     }
   };
 
+  const clearForm = () => {
+    setTitle("");
+    setSummery("");
+    setEditorState("");
+    setImage("");
+    setStatus(true);
+    setValidated(false);
+  };
+
   return (
     <>
-       <div className="body">
-        <div className="container1">
-          <div className="col-md-8 mt-4 mx-auto">
-            <h2 className="h3 mb-3 font-weight-normal text-center">
-              Add OurProject
-            </h2>
-            <form noValidate validated={validated} onSubmit={addProject}>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Project Title{" "}
+      <div className="container">
+        <div className="mx-auto max-w-3xl my-5">
+          <h2 className="text-3xl font-bold mb-8 text-center">Add Project</h2>
+          <form noValidate validated={validated} onSubmit={addProject}>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="newsTitle"
+              >
+                Event Project
+              </label>
+              <input
+                type="text"
+                required
+                minLength="2"
+                value={title_project_m}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter Event Title"
+                id="newsTitle"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="summery"
+              >
+                Summary of Project
+              </label>
+              <input
+                type="text"
+                required
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Summarize your Event"
+                id="summery"
+                value={summery_project_m}
+                onChange={(e) => {
+                  setSummery(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-4 flex flex-col md:flex-row">
+              <div className="w-full md:w-3/4 md:mr-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="image"
+                >
+                  Image URL
                 </label>
                 <input
                   type="text"
                   required
-                  minLength="2"
-                  value={title_project_m}
-                  className="form-control"
-                  placeholder="Enter Event Title"
-                  id="newsTitle"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter Image Url"
+                  id="image"
+                  value={image_project_m}
                   onChange={(e) => {
-                    setTitle(e.target.value);
+                    setImage(e.target.value);
                   }}
                 />
-                {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Item Name
-                </Form.Control.Feedback> */}
               </div>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Summery{" "}
+              <div className="w-full md:w-1/3 md:mt-0">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="status"
+                >
+                  Status
                 </label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  placeholder="Summarize your Event"
-                  id="summery"
-                  value={summery_project_m}
+                <select
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  value={status}
                   onChange={(e) => {
-                    setSummery(e.target.value);
+                    setStatus(e.target.value);
                   }}
-                />
-                {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Price
-                </Form.Control.Feedback> */}
-              </div>
-              <div className="row">
-                <div
-                  className="form-group col-md-8"
-                  style={{ marginBottom: "15px" }}
                 >
-                  <label className="form-label" style={{ marginBottom: "5px" }}>
-                    {" "}
-                    Image{" "}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Enter Image Url"
-                    id="image"
-                    value={image_project_m}
-                    onChange={(e) => {
-                      setImage(e.target.value);
-                    }}
-                  />
-                  {/* <Form.Control.Feedback type="invalid">
-                    Please provide a Image Url
-                  </Form.Control.Feedback> */}
-                </div>
-                <div
-                  className="form-group col-md-4 text-center m-auto"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <select
-                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
-                    value={status}
-                    onChange={(e) => {
-                      setStatus(e.target.value);
-                    }}
-                  >
-                    <option disabled hidden>
-                      Select your option
-                    </option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Inactive</option>
-                  </select>
-                </div>
+                  <option disabled hidden>
+                    Select your option
+                  </option>
+                  <option value={true}>Active</option>
+                  <option value={false}>Inactive</option>
+                </select>
               </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Add Event Content{" "}
-                </label>
-              </div>
-              <div className="editor">
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="eventContent"
+              >
+                Add Project Content
+              </label>
+              <div className="border rounded-md p-2">
                 <Editor
                   editorState={editorState}
                   onEditorStateChange={setEditorState}
@@ -200,31 +203,34 @@ const CreatNews = ({ isAuthenticated }) => {
                     textAlign: { inDropdown: true },
                     link: { inDropdown: true },
                     history: { inDropdown: true },
-                    //   image: {
-                    //     uploadCallback: uploadImageCallBack,
-                    //     alt: { present: true, mandatory: true },
-                    //   },
+                    image: {
+                      previewImage: true,
+                      alt: { present: true, mandatory: false },
+                    },
                   }}
                 />
-                {/* show convert draft to html markup */}
               </div>
-
+            </div>
+            <div className="flex items-center justify-between">
               <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
-                className="btn btn-blue btn-block"
-                style={{ marginTop: "15px", marginBottom: "15px" }}
               >
-                <i className="far fa-check-square"></i>
-                &nbsp; Save
+                Submit
               </button>
-            </form>
-          </div>
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={clearForm}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>
   );
   // }
-  
 };
 
 function getCookie(name) {

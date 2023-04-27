@@ -28,6 +28,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
     { path: "/fablabmakandura", label: "Fablab Makandura" },
     { path: "/contactus", label: "Contact Us" },
   ];
+  const classNames = guestLinksforAdmin.map((link) => {
+    return location.pathname === link.path
+      ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+      : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out";
+  });
 
   const guestLinks = () => (
     <>
@@ -116,30 +121,23 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Contact Us
         </Link>
       </li>
-      {/* <li className="nav-item text-sm">
-        <Link
-          className={
-            location.pathname === "/signup"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
-          }
-          to="/signup"
-        >
-          Sign Up
-        </Link>
-      </li> */}
     </>
   );
   const authLinks = () => (
     <>
       <li className="nav-item text-sm">
-        <button
-          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          onClick={logout_user}
+        <Link
+          className={
+            location.pathname === "/admin"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/admin"
         >
-          Logout
-        </button>
+          Admin
+        </Link>
       </li>
+
       {/* <li className="nav-item text-sm">
         <Link
           className={
@@ -154,7 +152,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
       </li> */}
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          className={
+            location.pathname === "/create-event" ||
+            location.pathname === "/show-all-event"
+              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
           onMouseEnter={() => setShowEvent(true)}
           onMouseLeave={() => setShowEvent(false)}
         >
@@ -201,7 +204,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
       </div>
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          className={
+            location.pathname === "/create-news" ||
+            location.pathname === "/show-all-news"
+              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
           onMouseEnter={() => setShowNewsDropdown(true)}
           onMouseLeave={() => setShowNewsDropdown(false)}
         >
@@ -248,7 +256,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
       </div>
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          className={
+            location.pathname === "/create-project" ||
+            location.pathname === "/show-all-project"
+              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
           onMouseEnter={() => setShowProjectDropdown(true)}
           onMouseLeave={() => setShowProjectDropdown(false)}
         >
@@ -296,7 +309,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          className={classNames}
           onMouseEnter={() => setAllPages(true)}
           onMouseLeave={() => setAllPages(false)}
         >
@@ -334,12 +347,32 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </div>
+      <li className="nav-item text-sm">
+        <Link
+          className={
+            location.pathname === "/signup"
+              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/signup"
+        >
+          Sign Up
+        </Link>
+      </li>
+      <li className="nav-item text-sm">
+        <button
+          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          onClick={logout_user}
+        >
+          Logout
+        </button>
+      </li>
     </>
   );
 
   return (
     <>
-      <div className="container mx-auto block">
+      <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
           <div className="flex flex-wrap items-center justify-between px-2 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-lg transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
@@ -362,12 +395,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
             >
               <MDBIcon fas icon={open ? "close" : "bars"} />
             </div>
-
             <ul
               className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
                 open ? "top-20" : "top-[-490px]"
               } md:p-0 md:m-0
-              `}
+  `}
+              style={{ zIndex: 9999 }} // add this line to set the z-index value
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>

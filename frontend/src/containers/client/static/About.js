@@ -65,7 +65,7 @@ const About = () => {
                 <p className={`card-justify ${Styles.qcont}`}>
                   build almost anything that could improve the quality of life.
                   Provide a platform of highest standard to exchange knowledge,
-                  ideas and expertise on existing and emerging Technologies.
+                  ideas and expertise on existing and emerging technologies.
                 </p>
               </div>
             </div>

@@ -25,7 +25,9 @@ const EditNews = ({ isAuthenticated, id }) => {
         setTitle(response.data.title_project_m);
         setSummery(response.data.summery_project_m);
         // setEditorState(response.data.content);
-        const contentState = convertFromRaw(JSON.parse(response.data.content_project_m));
+        const contentState = convertFromRaw(
+          JSON.parse(response.data.content_project_m)
+        );
         setEditorState(EditorState.createWithContent(contentState));
         setImage(response.data.image_project_m);
         setStatus(response.data.status);
@@ -56,7 +58,7 @@ const EditNews = ({ isAuthenticated, id }) => {
       };
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-      console.log(project)
+      console.log(project);
       axios
         .put(`${API_URL}/projectmakandura/${id}/update/`, project, {
           headers: {
@@ -86,7 +88,7 @@ const EditNews = ({ isAuthenticated, id }) => {
             <form noValidate validated={validated} onSubmit={updateProject}>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                Project Title
+                  Project Title
                 </label>
                 <input
                   type="text"

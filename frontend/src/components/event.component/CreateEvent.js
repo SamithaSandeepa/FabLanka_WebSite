@@ -82,108 +82,110 @@ const CreateEvent = ({ isAuthenticated }) => {
         });
     }
   }
-
-  // const router = useRouter();
-
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // const user = useSelector((state) => state.auth.user);
-  // const loading = useSelector((state) => state.auth.loading);
-
-  // if (typeof window !== "undefined" && !loading && !isAuthenticated)
-  //   router.push("/login");
+  const clearForm = () => {
+    setTitle("");
+    setSummery("");
+    setEditorState("");
+    setImage("");
+    setStatus(true);
+    setValidated(false);
+  };
 
   return (
     <>
-      <div className="body">
-        <div className="container1">
-          <div className="col-md-8 mt-4 mx-auto">
-            <h2 className="h3 mb-3 font-weight-normal text-center">
-              Add Event
-            </h2>
-            <form noValidate validated={validated} onSubmit={addEvents}>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Event Title{" "}
+      <div className="container">
+        <div className="mx-auto max-w-3xl my-5">
+          <h2 className="text-3xl font-bold mb-8 text-center">Add Event</h2>
+          <form noValidate validated={validated} onSubmit={addEvents}>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="newsTitle"
+              >
+                Event Title
+              </label>
+              <input
+                type="text"
+                required
+                minLength="2"
+                value={title_pastevent}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter Event Title"
+                id="newsTitle"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="summery"
+              >
+                Summery
+              </label>
+              <input
+                type="text"
+                required
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Summarize your Event"
+                id="summery"
+                value={summery_pastevent}
+                onChange={(e) => {
+                  setSummery(e.target.value);
+                }}
+              />
+            </div>
+            <div className="flex flex-wrap mb-4">
+              <div className="w-full md:w-2/3 mb-4 md:mb-0 pr-0 md:pr-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="image"
+                >
+                  Image URL
                 </label>
                 <input
                   type="text"
                   required
-                  minLength="2"
-                  value={title_pastevent}
-                  className="form-control"
-                  placeholder="Enter Event Title"
-                  id="newsTitle"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter Image Url"
+                  id="image"
+                  value={image_project_m}
                   onChange={(e) => {
-                    setTitle(e.target.value);
+                    setImage(e.target.value);
                   }}
                 />
               </div>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Summery{" "}
+              <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="status"
+                >
+                  Status
                 </label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  placeholder="Summarize your Event"
-                  id="summery"
-                  value={summery_pastevent}
+                <select
+                  className="appearance-none bg-white border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  value={status}
                   onChange={(e) => {
-                    setSummery(e.target.value);
+                    setStatus(e.target.value);
                   }}
-                />
-              </div>
-              <div className="row">
-                <div
-                  className="form-group col-md-8"
-                  style={{ marginBottom: "15px" }}
                 >
-                  <label className="form-label" style={{ marginBottom: "5px" }}>
-                    {" "}
-                    Image{" "}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Enter Image Url"
-                    id="image"
-                    value={image_project_m}
-                    onChange={(e) => {
-                      setImage(e.target.value);
-                    }}
-                  />
-                </div>
-                <div
-                  className="form-group col-md-4 text-center m-auto"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <select
-                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
-                    value={status}
-                    onChange={(e) => {
-                      setStatus(e.target.value);
-                    }}
-                  >
-                    <option disabled hidden>
-                      Select your option
-                    </option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Inactive</option>
-                  </select>
-                </div>
+                  <option disabled hidden>
+                    Select your option
+                  </option>
+                  <option value={true}>Active</option>
+                  <option value={false}>Inactive</option>
+                </select>
               </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Add Event Content{" "}
-                </label>
-              </div>
-              <div className="editor">
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="newsContent"
+              >
+                Add Event Content
+              </label>
+              <div className="border rounded">
                 <Editor
                   editorState={editorState}
                   onEditorStateChange={setEditorState}
@@ -193,25 +195,29 @@ const CreateEvent = ({ isAuthenticated }) => {
                     textAlign: { inDropdown: true },
                     link: { inDropdown: true },
                     history: { inDropdown: true },
-                    //   image: {
-                    //     uploadCallback: uploadImageCallBack,
-                    //     alt: { present: true, mandatory: true },
-                    //   },
+                    image: {
+                      previewImage: true,
+                      alt: { present: true, mandatory: false },
+                    },
                   }}
                 />
-                {/* show convert draft to html markup */}
               </div>
-
+            </div>
+            <div className="flex items-center justify-between">
               <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
-                className="btn btn-blue btn-block"
-                style={{ marginTop: "15px", marginBottom: "15px" }}
               >
-                <i className="far fa-check-square"></i>
-                &nbsp; Save
+                Submit
               </button>
-            </form>
-          </div>
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={clearForm}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>
