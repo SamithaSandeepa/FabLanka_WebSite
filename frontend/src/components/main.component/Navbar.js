@@ -385,7 +385,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 />
               </span>
               <Link to="/">
-                <a className="navbar-brand pl-2">FabLanka</a>
+                <a className="navbar-brand pl-2 font-sans">FabLanka</a>
               </Link>
             </div>
 

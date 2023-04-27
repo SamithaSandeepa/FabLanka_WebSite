@@ -52,7 +52,7 @@ const Home = () => {
           <div className="col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden hidden sm:block">
             <NewAlert />
           </div>
-          <div className="col-span-12 sm:col-span-8 row-span-1 px-5 sm:px-2 pt-2">
+          <div className="col-span-12 sm:col-span-12 row-span-1 px-5 sm:px-2 pt-2">
             <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
@@ -86,13 +86,13 @@ const Home = () => {
               </a>
             </div>
           </div>
-          <div className="col-span-4 px-5 sm:px-2 pt-2">
+          {/* <div className="col-span-4 px-5 sm:px-2 py-20">
             <img
               className="h-auto"
               src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg"
               alt="slide1"
             />
-          </div>
+          </div> */}
           <div className="col-span-12 sm:col-span-4 row-span-1 bg-gradient-to-t from-white to-green-600 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
             <NewAlert />
           </div>
