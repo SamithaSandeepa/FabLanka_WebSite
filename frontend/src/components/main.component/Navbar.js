@@ -374,7 +374,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     <>
       <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
-          <div className="flex flex-wrap items-center justify-between px-2 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-lg transition duration-300 ease-in-out">
+          <div className="flex flex-wrap items-center justify-between px-2 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-sm transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img
