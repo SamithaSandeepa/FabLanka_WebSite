@@ -27,10 +27,10 @@ const Home = () => {
       <div className="container p-0">
         <div className="grid grid-cols-12 grid-rows-3">
           {/* bg-gradient-to-b from-green-600 to-blue */}
-          <div className="col-span-12 sm:col-span-8 row-span-1 bg-blue-100 py-0 px-0 flex items-center relative overflow-hidden">
+          <div className="col-span-12 sm:col-span-8 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center relative overflow-hidden">
             <ImageSlider />
           </div>
-          <div className="col-span-4 row-span-1 bg-blue-100 py-0 px-0 flex items-center relative overflow-hidden hidden sm:block">
+          <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center relative overflow-hidden hidden sm:block">
             <NewAlert />
           </div>
           <div className="col-span-12 sm:col-span-12 row-span-1 px-5 sm:px-2 pt-2">
@@ -77,7 +77,7 @@ const Home = () => {
           <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
             <NewAlert />
           </div>
-          <div className="col-span-12 row-span-1 bg-blue-100">
+          <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
             <div className="flex justify-center items-center mt-4">
               <PastEvent />
             </div>

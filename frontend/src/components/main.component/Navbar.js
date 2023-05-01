@@ -30,30 +30,30 @@ const Navbar = ({ logout, isAuthenticated }) => {
   ];
   const classNames = guestLinksforAdmin.map((link) => {
     return location.pathname === link.path
-      ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+      ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
       : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out";
   });
 
   const guestLinks = () => (
     <>
-      <li className="nav-item text-sm ">
+      <li className="nav-item text-sm px-1">
         <Link
           to="/"
           className={
             location.pathname === "/"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium "
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
           }
         >
           Home
         </Link>
       </li>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/about"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/about"
         >
@@ -65,31 +65,31 @@ const Navbar = ({ logout, isAuthenticated }) => {
           to="/login"
           className={
             location.pathname === "/login"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
               : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
           }
         >
           Login
         </Link>
       </li> */}
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/industry"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/industry"
         >
           industry 4.0 technologies
         </Link>
       </li>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/education"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/education"
         >
@@ -97,24 +97,24 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </Link>
       </li>
 
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/fablabmakandura"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/fablabmakandura"
         >
           Fablab Makandura
         </Link>
       </li>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/contactus"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/contactus"
         >
@@ -125,12 +125,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
   const authLinks = () => (
     <>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/admin"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/admin"
         >
@@ -142,8 +142,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <Link
           className={
             location.pathname === "/firstpage"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/firstpage"
         >
@@ -155,7 +155,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           className={
             location.pathname === "/create-event" ||
             location.pathname === "/show-all-event"
-              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
               : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
           }
           onMouseEnter={() => setShowEvent(true)}
@@ -207,7 +207,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           className={
             location.pathname === "/create-news" ||
             location.pathname === "/show-all-news"
-              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
               : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
           }
           onMouseEnter={() => setShowNewsDropdown(true)}
@@ -259,7 +259,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           className={
             location.pathname === "/create-project" ||
             location.pathname === "/show-all-project"
-              ? "flex bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
               : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
           }
           onMouseEnter={() => setShowProjectDropdown(true)}
@@ -351,8 +351,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <Link
           className={
             location.pathname === "/signup"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/signup"
         >
@@ -374,7 +374,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     <>
       <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
-          <div className="flex flex-wrap items-center justify-between px-2 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-sm transition duration-300 ease-in-out">
+          <div className="flex flex-wrap items-center justify-between px-1 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-sm transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img
