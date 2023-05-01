@@ -23,7 +23,7 @@ const About = () => {
             </p>
 
             <p className={`text-justify ${Styles.qcont}`}>
-              FabLanka was publically launched in May 2015 to facilitate and
+              FabLanka was publicy launched in May 2015 to facilitate and
               nurture the growth of innovative fabrication methods in Sri Lanka.
               FabLanka Foundation (GTE) LTD was incorporated as a not-for-profit
               social enterprise in April 2016 under Companies Act , No 7 of 2007
@@ -42,7 +42,7 @@ const About = () => {
               fabrication networks and organizations (fabfoundation.org)
               allowing local communities to innovate and invent new technologies
               and share knowledge that will positively transform the lives of
-              peopl
+              people.
             </p>
           </div>
           <div className="col-md-4">
@@ -112,7 +112,7 @@ const About = () => {
               The environmental degradation caused by modern economies is
               severe. Much of the raw materials and energy used for production
               is wasted in the manufacturing and transportation processes. Local
-              manufacturing methods are needed to pave way for a greener
+              manufacturing methods are needed to pave the way for a greener
               economy. Developing countries have the advantage of not having to
               change the foundations of their economic structure to exploit the
               changes necessary for a sustainable economy. The needs of a

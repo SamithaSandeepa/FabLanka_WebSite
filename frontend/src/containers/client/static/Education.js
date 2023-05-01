@@ -5,11 +5,11 @@ const Education = () => {
     <div className="container-fluid" >
         <div> 
           <p className="mt-2 text-lg leading-relaxed ml-2">
-          FabLanka aims to deliver free and structured courses for community education and commercial purposes. The courses will include training on CAD software, use and troubleshooting of fabrication machinery, and business development. An internationally recognized certificate program will be offered for motivated individuals to learn new skills that will help them in the job market. In addition, there will be unstructured programs such as tutorials, trainings, and workshops on a need basis. With partnerships between local colleges and businesses, FabLanka can initiate local economic development projects. FabLanka will serve as a resource hub for local communities, schools, and universities to access knowledge and development of technology.
+          FabLanka aims to deliver free and structured courses for community education and commercial purposes. The courses will include training on CAD software, use and troubleshooting of fabrication machinery, and business development. An internationally recognized certificate program will be offered for motivated individuals to learn new skills that will help them in the job market. In addition, there will be unstructured programs such as tutorials, training, and workshops on a need basis. With partnerships between local colleges,  microcontroller-based systems and businesses, FabLanka can initiate local economic development projects. FabLanka will serve as a resource hub for local communities, schools, and universities to access knowledge and development of technology.
           </p>
 
           <h5 className="mt-10 font-bold">
-          Currently, FabLanka is offering a 6 months long Education program. The objectives of this Fab Education program are:
+          Currently, FabLanka offers a 6 months long Education program. The objectives of this Fab Education program are:
           </h5>
 
           <ul className="list ml-3">
