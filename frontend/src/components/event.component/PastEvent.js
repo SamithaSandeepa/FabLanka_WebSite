@@ -116,13 +116,16 @@ const PastEvent = () => {
           {events.map((curElem) => {
             console.log(curElem, "test");
             return (
-              <div className="p-4 sm:w-1/2 lg:w-1/3 border border-gray-300 !important" key={curElem.id}  >
+              <div
+                className="p-4 sm:w-1/2 lg:w-1/3 border border-gray-300 !important"
+                key={curElem.id}
+              >
                 <div className="h-full rounded-lg overflow-hidden px-4 ">
                   <img
                     className="lg:auto md:h-48 w-full object-cover object-center rounded hover:scale-125 duration-300 ease-in-out"
                     src={curElem.image_project_m}
                     alt="blog"
-                  />  
+                  />
                   <a href={"/event/" + curElem.id} className="no-underline">
                     <div className="p-6 hover:bg-gray-500 hover:text-white transition duration-300 ease-in rounded">
                       <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3">

@@ -4,10 +4,8 @@ import Fb from "../../../components/contactus.compoents/fb";
 
 const contact = () => {
   return (
-    <div className="container">
+    <div className="container mt-10">
       <ContactUs />
-
-     
     </div>
   );
 };
