@@ -19,6 +19,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const logout_user = () => {
     logout();
     setRedirect(true);
+    setAllPages(false);
   };
   const guestLinksforAdmin = [
     { path: "/", label: "Home" },
