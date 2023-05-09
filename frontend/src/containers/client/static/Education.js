@@ -76,7 +76,7 @@ const Education = () => {
         These workshops will be conducted with the help of professionals locally
         and internationally.
       </p>
-      <div
+      {/* <div
         class="fb-page"
         data-href="https://www.facebook.com/MakanduraFabLab"
         data-tabs="timeline,events"
@@ -95,7 +95,7 @@ const Education = () => {
             FabLab Makandura
           </a>
         </blockquote>
-      </div>
+      </div> */}
     </div>
   );
 };
