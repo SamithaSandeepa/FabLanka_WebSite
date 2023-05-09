@@ -29,15 +29,13 @@ const FablabMakandura = () => {
               Makandura Public Library complex,<br></br>
               in Makandura township of Kurunegala district.
             </p>
-            <div className="flex justify-center mb-10">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.2716748138037!2d79.97793141525179!3d7.323351115378345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e7622d600a83%3A0xaa493fc1c1d13b3e!2sFabLab%20Makandura!5e0!3m2!1sen!2slk!4v1661173585215!5m2!1sen!2slk"
-                width="1200"
-                height="600"
-                allowFullScreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+            <div class="flex justify-center mt-4 mb-4">
+              <div class="w-1/2 mr-5">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.2716748138037!2d79.97793141525179!3d7.323351115378345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e7622d600a83%3A0xaa493fc1c1d13b3e!2sFabLab%20Makandura!5e0!3m2!1sen!2slk!4v1661173585215!5m2!1sen!2slk" width="100%" height="700" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <div class="w-1/2 ml-5">
+                <div class="fb-page" data-href="https://www.facebook.com/MakanduraFabLab" data-tabs="timeline,events" data-width="500" data-height="700" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/MakanduraFabLab" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/MakanduraFabLab">FabLab Makandura</a></blockquote></div>
+              </div>
             </div>
           </div>
         </div>
