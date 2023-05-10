@@ -7,6 +7,7 @@ import { useStateContext } from "../../context/ContextProvider";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactPlayer from "react-player";
 
 const CreateEvent = ({ isAuthenticated }) => {
   const [validated, setValidated] = useState(false);
@@ -36,6 +37,10 @@ const CreateEvent = ({ isAuthenticated }) => {
       }, 2000);
     }
   }, [history, isAuthenticated]);
+
+  useEffect(() => {
+    renderVideos();
+  }, [videos]);
 
   function addEvents(e) {
     // the raw state, stringified
@@ -90,12 +95,36 @@ const CreateEvent = ({ isAuthenticated }) => {
     }
   }
   const clearForm = () => {
+    setVideos([{ url: "" }]);
     setTitle("");
     setSummery("");
     setEditorState("");
     setImage("");
     setStatus(true);
     setValidated(false);
+  };
+  const renderVideos = () => {
+    if (videos && videos.length > 0) {
+      return (
+        <div className="d-flex justify-content-center">
+          <div className="row">
+            {videos.map((video, index) => (
+              <div key={index} className="col-3">
+                <div className="player-wrapper mb-4">
+                  <ReactPlayer
+                    url={video.url}
+                    className="react-player pl-5 pt-5"
+                    width="100%"
+                    height="150px"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -219,7 +248,7 @@ const CreateEvent = ({ isAuthenticated }) => {
                 )}
               </div>
             ))}
-
+            <div className="row">{renderVideos()}</div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
