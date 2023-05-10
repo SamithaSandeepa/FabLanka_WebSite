@@ -29,7 +29,7 @@ const SingleNews = ({ id }) => {
       <h1 className="text-center text-3xl">{news.title}</h1>
       <img
         src={news.image}
-        className="card-img mt-3 w-1/2 mx-auto block"
+        className="card-img mt-3 h-86 w-auto mx-auto block"
         alt="..."
       />
       <p className="my-5 text-lg">{news.summery}</p>

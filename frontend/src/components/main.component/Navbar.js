@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -11,140 +11,208 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const [redirect, setRedirect] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [open, setOpen] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  console.log(showDropdown);
+  const [showNewsDropdown, setShowNewsDropdown] = useState(false);
+  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
+  const [allpages, setAllPages] = useState([]);
+  const [ShowEvent, setShowEvent] = useState(false);
 
   const logout_user = () => {
     logout();
     setRedirect(true);
+    setAllPages(false);
   };
+  const guestLinksforAdmin = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/industry", label: "industry 4.0 technologies" },
+    { path: "/education", label: "Education" },
+    { path: "/fablabmakandura", label: "Fablab Makandura" },
+    { path: "/contactus", label: "Contact Us" },
+  ];
+  const classNames = guestLinksforAdmin.map((link) => {
+    return location.pathname === link.path
+      ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+      : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out";
+  });
 
   const guestLinks = () => (
     <>
-      <li className="nav-item text-sm ">
+      <li className="nav-item text-sm px-1">
         <Link
           to="/"
           className={
             location.pathname === "/"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium "
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
           }
         >
           Home
         </Link>
       </li>
-      <li className="nav-item text-sm">
-        <Link
-          to="/login"
-          className={
-            location.pathname === "/login"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          }
-        >
-          Login
-        </Link>
-      </li>
-      <li className="nav-item text-sm">
-        <Link
-          className={
-            location.pathname === "/industry"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
-          }
-          to="/industry"
-        >
-          industry 4.0 technologies
-        </Link>
-      </li>
-      <li className="nav-item text-sm">
-        <Link
-          className={
-            location.pathname === "/education"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
-          }
-          to="/education"
-        >
-          Education
-        </Link>
-      </li>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/about"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/about"
         >
           About Us
         </Link>
       </li>
-      <li className="nav-item text-sm">
+      {/* <li className="nav-item text-sm">
+        <Link
+          to="/login"
+          className={
+            location.pathname === "/login"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+          }
+        >
+          Login
+        </Link>
+      </li> */}
+      <li className="nav-item text-sm px-1">
+        <Link
+          className={
+            location.pathname === "/industry"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/industry"
+        >
+          industry 4.0 technologies
+        </Link>
+      </li>
+      <li className="nav-item text-sm px-1">
+        <Link
+          className={
+            location.pathname === "/education"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/education"
+        >
+          Education
+        </Link>
+      </li>
+
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/fablabmakandura"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/fablabmakandura"
         >
           Fablab Makandura
         </Link>
       </li>
-      <li className="nav-item text-sm">
+      <li className="nav-item text-sm px-1">
         <Link
           className={
             location.pathname === "/contactus"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/contactus"
         >
           Contact Us
         </Link>
       </li>
-      <li className="nav-item text-sm">
-        <Link
-          className={
-            location.pathname === "/signup"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
-          }
-          to="/signup"
-        >
-          Sign Up
-        </Link>
-      </li>
     </>
   );
   const authLinks = () => (
     <>
-      <li className="nav-item text-sm">
-        <button
-          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          onClick={logout_user}
+      <li className="nav-item text-sm px-1">
+        <Link
+          className={
+            location.pathname === "/admin"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/admin"
         >
-          Logout
-        </button>
+          Admin
+        </Link>
       </li>
-      <li className="nav-item text-sm">
+
+      {/* <li className="nav-item text-sm">
         <Link
           className={
             location.pathname === "/firstpage"
-              ? "bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
-              : "text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
           }
           to="/firstpage"
         >
           FirstPage
         </Link>
-      </li>
+      </li> */}
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
-          onClick={() => setShowDropdown(!showDropdown)}
+          className={
+            location.pathname === "/create-event" ||
+            location.pathname === "/show-all-event"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
+          onMouseEnter={() => setShowEvent(true)}
+          onMouseLeave={() => setShowEvent(false)}
+        >
+          Events
+          <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+        <div
+          className={
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (ShowEvent ? "block" : "hidden")
+          }
+          onMouseEnter={() => setShowEvent(true)}
+          onMouseLeave={() => setShowEvent(false)}
+        >
+          <div className="bg-white rounded-md shadow-xs">
+            <Link
+              className={
+                location.pathname === "/create-event"
+                  ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900"
+                  : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              }
+              to="/create-event"
+            >
+              Create Event
+            </Link>
+            <Link
+              className={
+                location.pathname === "/show-all-event"
+                  ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900"
+                  : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              }
+              to="/show-all-event"
+            >
+              Show All Event
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="relative">
+        <button
+          className={
+            location.pathname === "/create-news" ||
+            location.pathname === "/show-all-news"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
+          onMouseEnter={() => setShowNewsDropdown(true)}
+          onMouseLeave={() => setShowNewsDropdown(false)}
         >
           News
           <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -157,9 +225,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </button>
         <div
           className={
-            "absolute right-0 mt-2 w-48 rounded-md shadow-lg " +
-            (showDropdown ? "block" : "hidden")
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (showNewsDropdown ? "block" : "hidden")
           }
+          onMouseEnter={() => setShowNewsDropdown(true)}
+          onMouseLeave={() => setShowNewsDropdown(false)}
         >
           <div className="bg-white rounded-md shadow-xs">
             <Link
@@ -185,12 +255,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </div>
-
-
       <div className="relative">
         <button
-          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
-          onClick={() => setShowDropdown(!showDropdown)}
+          className={
+            location.pathname === "/create-project" ||
+            location.pathname === "/show-all-project"
+              ? "flex bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "flex items-center text-sm px-4 py-2 font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:underline transition duration-150 ease-in-out"
+          }
+          onMouseEnter={() => setShowProjectDropdown(true)}
+          onMouseLeave={() => setShowProjectDropdown(false)}
         >
           Project Makandura
           <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -203,14 +277,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </button>
         <div
           className={
-            "absolute right-0 mt-2 w-48 rounded-md shadow-lg " +
-            (showDropdown ? "block" : "hidden")
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (showProjectDropdown ? "block" : "hidden")
           }
+          onMouseEnter={() => setShowProjectDropdown(true)}
+          onMouseLeave={() => setShowProjectDropdown(false)}
         >
           <div className="bg-white rounded-md shadow-xs">
             <Link
               className={
-                location.pathname === "/create-news"
+                location.pathname === "/create-project"
                   ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900"
                   : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }
@@ -220,25 +296,86 @@ const Navbar = ({ logout, isAuthenticated }) => {
             </Link>
             <Link
               className={
-                location.pathname === "/show-all-news"
+                location.pathname === "/show-all-project"
                   ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900"
                   : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }
-              to="/show-all-project"
+              to="/show-all-projects"
             >
-              Show All Project
+              Show All News
             </Link>
           </div>
         </div>
       </div>
+
+      <div className="relative">
+        <button
+          className={classNames}
+          onMouseEnter={() => setAllPages(true)}
+          onMouseLeave={() => setAllPages(false)}
+        >
+          All Pages
+          <svg className="ml-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+        <div
+          className={
+            "absolute right-0 w-48 rounded-md shadow-lg " +
+            (allpages ? "block" : "hidden")
+          }
+          onMouseEnter={() => setAllPages(true)}
+          onMouseLeave={() => setAllPages(false)}
+        >
+          <div className="bg-white rounded-md shadow-xs">
+            {guestLinksforAdmin.map((link, index) => (
+              <Link
+                key={index}
+                className={
+                  location.pathname === link.path
+                    ? "block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900"
+                    : "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                }
+                to={link.path}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+      <li className="nav-item text-sm">
+        <Link
+          className={
+            location.pathname === "/signup"
+              ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+              : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/signup"
+        >
+          Sign Up
+        </Link>
+      </li>
+      <li className="nav-item text-sm">
+        <button
+          className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
+          onClick={logout_user}
+        >
+          Logout
+        </button>
+      </li>
     </>
   );
 
   return (
     <>
-      <div className="container mx-auto block">
+      <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
-          <div className="flex flex-wrap items-center justify-between bg-white px-2 md:px-10 py-2 md:py-0">
+          <div className="flex flex-wrap items-center justify-between px-1 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-sm transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img
@@ -249,7 +386,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 />
               </span>
               <Link to="/">
-                <a className="navbar-brand pl-2">FabLanka</a>
+                <a className="navbar-brand pl-2 font-sans">FabLanka</a>
               </Link>
             </div>
 
@@ -259,12 +396,12 @@ const Navbar = ({ logout, isAuthenticated }) => {
             >
               <MDBIcon fas icon={open ? "close" : "bars"} />
             </div>
-
             <ul
-              className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+              className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
                 open ? "top-20" : "top-[-490px]"
               } md:p-0 md:m-0
-              `}
+  `}
+              style={{ zIndex: 9999 }} // add this line to set the z-index value
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>

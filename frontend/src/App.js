@@ -12,12 +12,16 @@ import second from "./containers/client/second";
 import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
 import Education from "./containers/client/static/Education";
-import ContactUs from "./components/contactus.compoents/ContactUs";
+import ContactUs from "./containers/client/static/Contact";
+import Admin from "./containers/admin/admin";
+import Facebook from "./containers/client/Facebook";
 
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
 import Project from "./containers/client/fablab makandura/[id]";
 import CreateProject from "./containers/admin/project makandura/add";
+import ProjectTable from "./components/fablabmakandura.component/ProjectTable";
+import EditProject from "./containers/admin/project makandura/[id]";
 
 // news pages
 import CreateNews from "./containers/admin/news/add";
@@ -49,6 +53,7 @@ const App = () => (
         <ContextProvider>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/reset-password" component={ResetPassword} />
@@ -61,6 +66,7 @@ const App = () => (
             <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/facebook" component={Facebook} />
 
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
@@ -78,6 +84,8 @@ const App = () => (
             <Route exact path="/fablabmakandura" component={FablabMakandura} />
             <Route exact path="/fablabmakandura/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />
+            <Route exact path="/show-all-projects" component={ProjectTable} />
+            <Route exact path="/edit-project/:id" component={EditProject} />
 
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />

@@ -13,12 +13,12 @@ const CreatNews = ({ isAuthenticated }) => {
   const [loading, setLoadingState] = useState(true);
   const [validated, setValidated] = useState(false);
 
-  const [title_project_m, settitle_project_m] = useState("");
-  const [summery_project_m, setsummery_project_m] = useState("");
+  const [title_project_m, setTitle] = useState("");
+  const [summery_project_m, setSummery] = useState("");
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
-  const [image_project_m, setImage_project_m] = useState("");
+  const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState(true);
 
   useEffect(() => {
@@ -37,14 +37,14 @@ const CreatNews = ({ isAuthenticated }) => {
     }
   }, [history, isAuthenticated]);
 
-  const addNews = (e) => {
+  const addProject = (e) => {
     // the raw state, stringified
-    const content = JSON.stringify(
+    const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
     // convert the raw state back to a useable ContentState object
     // const content = convertFromRaw(JSON.parse(rawDraftContentState));
-    console.log(content);
+    console.log(content_project_m);
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -61,10 +61,12 @@ const CreatNews = ({ isAuthenticated }) => {
       const newProject = {
         title_project_m,
         summery_project_m,
-        // content_project_m,
+        content_project_m,
         image_project_m,
         status,
       };
+
+      console.log(newProject);
 
       axios
         .post(`${API_URL}/projectmakandura/create/`, newProject, {
@@ -75,10 +77,10 @@ const CreatNews = ({ isAuthenticated }) => {
         })
         .then(() => {
           alert("New Project Added");
-          settitle_project_m("");
-          setsummery_project_m("");
+          setTitle("");
+          setSummery("");
           setEditorState("");
-          setImage_project_m("");
+          setImage("");
           setStatus(true);
           setValidated(false);
         })
@@ -88,83 +90,89 @@ const CreatNews = ({ isAuthenticated }) => {
     }
   };
 
+  const clearForm = () => {
+    setTitle("");
+    setSummery("");
+    setEditorState("");
+    setImage("");
+    setStatus(true);
+    setValidated(false);
+  };
+
   return (
     <>
       <div className="container">
-        <div className="col-md-8 mt-4 mx-auto">
-          <h2 className="h3 mb-3 font-weight-normal text-center">Add Project</h2>
-          <form noValidate validated={validated} onSubmit={addNews}>
-            <div className="form-group" style={{ marginBottom: "15px" }}>
-              <label className="form-label" style={{ marginBottom: "5px" }}>
-                {" "}
-                News Title{" "}
+        <div className="mx-auto max-w-3xl my-5">
+          <h2 className="text-3xl font-bold mb-8 text-center">Add Project</h2>
+          <form noValidate validated={validated} onSubmit={addProject}>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="newsTitle"
+              >
+                Event Project
               </label>
               <input
                 type="text"
                 required
                 minLength="2"
                 value={title_project_m}
-                className="form-control"
-                placeholder="Enter News Title"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter Event Title"
                 id="newsTitle"
                 onChange={(e) => {
-                  settitle_project_m(e.target.value);
+                  setTitle(e.target.value);
                 }}
               />
-              {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Item Name
-                </Form.Control.Feedback> */}
             </div>
-            <div className="form-group" style={{ marginBottom: "15px" }}>
-              <label className="form-label" style={{ marginBottom: "5px" }}>
-                {" "}
-                Summery{" "}
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="summery"
+              >
+                Summary of Project
               </label>
               <input
                 type="text"
                 required
-                className="form-control"
-                placeholder="Summarize your news"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Summarize your Event"
                 id="summery"
                 value={summery_project_m}
                 onChange={(e) => {
-                  setsummery_project_m(e.target.value);
+                  setSummery(e.target.value);
                 }}
               />
-              {/* <Form.Control.Feedback type="invalid">
-                  Please provide a Price
-                </Form.Control.Feedback> */}
             </div>
-            <div className="row">
-              <div
-                className="form-group col-md-8"
-                style={{ marginBottom: "15px" }}
-              >
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Image{" "}
+            <div className="mb-4 flex flex-col md:flex-row">
+              <div className="w-full md:w-3/4 md:mr-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="image"
+                >
+                  Image URL
                 </label>
                 <input
                   type="text"
                   required
-                  className="form-control"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
                   value={image_project_m}
                   onChange={(e) => {
-                    setImage_project_m(e.target.value);
+                    setImage(e.target.value);
                   }}
                 />
-                {/* <Form.Control.Feedback type="invalid">
-                    Please provide a Image Url
-                  </Form.Control.Feedback> */}
               </div>
-              <div
-                className="form-group col-md-4 text-center m-auto"
-                style={{ marginBottom: "15px" }}
-              >
+              <div className="w-full md:w-1/3 md:mt-0">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="status"
+                >
+                  Status
+                </label>
                 <select
-                  className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   value={status}
                   onChange={(e) => {
                     setStatus(e.target.value);
@@ -178,47 +186,51 @@ const CreatNews = ({ isAuthenticated }) => {
                 </select>
               </div>
             </div>
-
-            <div className="form-group" style={{ marginBottom: "15px" }}>
-              <label className="form-label" style={{ marginBottom: "5px" }}>
-                {" "}
-                Add News Content{" "}
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="eventContent"
+              >
+                Add Project Content
               </label>
+              <div className="border rounded-md p-2">
+                <Editor
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                  toolbar={{
+                    inline: { inDropdown: true },
+                    list: { inDropdown: true },
+                    textAlign: { inDropdown: true },
+                    link: { inDropdown: true },
+                    history: { inDropdown: true },
+                    image: {
+                      previewImage: true,
+                      alt: { present: true, mandatory: false },
+                    },
+                  }}
+                />
+              </div>
             </div>
-            <div className="editor">
-              <Editor
-                editorState={editorState}
-                onEditorStateChange={setEditorState}
-                toolbar={{
-                  inline: { inDropdown: true },
-                  list: { inDropdown: true },
-                  textAlign: { inDropdown: true },
-                  link: { inDropdown: true },
-                  history: { inDropdown: true },
-                  //   image: {
-                  //     uploadCallback: uploadImageCallBack,
-                  //     alt: { present: true, mandatory: true },
-                  //   },
-                }}
-              />
-              {/* show convert draft to html markup */}
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Submit
+              </button>
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={clearForm}
+              >
+                Cancel
+              </button>
             </div>
-
-            <button
-              type="submit"
-              className="btn btn-blue btn-block"
-              style={{ marginTop: "15px", marginBottom: "15px" }}
-            >
-              <i className="far fa-check-square"></i>
-              &nbsp; Save
-            </button>
           </form>
         </div>
       </div>
     </>
   );
   // }
-  
 };
 
 function getCookie(name) {

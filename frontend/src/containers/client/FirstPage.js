@@ -4,56 +4,22 @@ import { useHistory } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import ImageSlider from "../../components/homepage.component/ImageSlider";
 
-const FirstPage = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
-  const { setLoading } = useStateContext();
-  const history = useHistory();
-  const [loading, setLoadingState] = useState(true);
-
-  useEffect(() => {
-    console.log(history);
-    if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
-      // Authentication status not yet determined, do nothing
-    } else if (!isAuthenticated) {
-      // User is not authenticated, redirect to login page
-      history.push("/login");
-    } else {
-      // User is authenticated, do something that takes time
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    }
-  }, [history, isAuthenticated]);
-
-  // if (loading) {
-  //   // Show loading indicator
-  //   return <div>Loading...</div>;
-  // } else if (!isAuthenticated) {
-  //   // Authentication failed, should have been redirected to login page
-  //   return null;
-  // } else {
-  // Show the content if the user is authenticated
+const FirstPage = () => {
   return (
     <>
-      <div className="container flex flex-col">
-        <div className="top-0 left-0 width=100% z-1">
-          <ImageSlider />
-        </div>
-        <div className="justify-center items-center">
-          <p>fdghdhdhdfghdfghdfghdghdfghdfghdfghdghdfghdfgh</p>
-          <p>fdghdhdhdfghdfghdfghdghdfghdfghdfghdghdfghdfgh</p>
-          <p>fdghdhdhdfghdfghdfghdghdfghdfghdfghdghdfghdfgh</p>
-        </div>
-      </div>
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNipunaPerera99%2F&tabs=timeline&width=1000&height=499&small_header=true&adapt_container_width=false&hide_cover=true&show_facepile=true&appId=797828301687659"
+        width="1000"
+        height="499"
+        // style="border:none;overflow:hidden"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+      ></iframe>
     </>
   );
   // }
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps)(FirstPage);
+export default FirstPage;

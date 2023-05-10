@@ -1,56 +1,47 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import Layout from "../../../hocs/Layout";
-import axios from "axios";
-import dynamic from "next/dynamic";
-import { API_URL } from "../../../config/index";
-// import EditNews from "../../../components/news.component/EditNews";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useStateContext } from "../../../context/ContextProvider";
+import { useParams } from "react-router-dom";
+import EditProject from "../../../components/fablabmakandura.component/EditProject";
 
-const EditProjectMakandura = dynamic(
-  () => import("../../../components/makandura.component/EditProjectMakandura"),
-  {
-    ssr: false,
-  }
-);
+const ProjectUpdate = ({ isAuthenticated }) => {
+  console.log("isAuthenticated", isAuthenticated);
+  const { setLoading } = useStateContext();
+  const history = useHistory();
+  const [loading, setLoadingState] = useState(true);
 
-const editprojectmakandura = (props) => {
-  console.log(props);
-  // const router = useRouter();
+  useEffect(() => {
+    console.log(history);
+    if (typeof isAuthenticated === "undefined") {
+      console.log("undefined");
+      // Authentication status not yet determined, do nothing
+    } else if (!isAuthenticated) {
+      // User is not authenticated, redirect to login page
+      history.push("/login");
+    } else {
+      // User is authenticated, do something that takes time
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [history, isAuthenticated]);
 
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // const user = useSelector((state) => state.auth.user);
-  // const loading = useSelector((state) => state.auth.loading);
-
-  // if (typeof window !== "undefined" && !loading && !isAuthenticated)
-  //   router.push("/login");
+  const { id } = useParams();
 
   return (
-    <div>
-      <Layout title="FabLanka | ProjectMakandura" content="Dashboard page">
-        <div className="container mb-10">
-          {/* <EditProjectMakandura /> */}
-          <EditProjectMakandura
-            id={props.project.id}
-            title={props.project.title__project_m}
-            summery={props.project.summery_project_m}
-            content={props.project.content_project_m}
-            image={props.project.image_project_m}
-          />
-        </div>
-      </Layout>
-    </div>
+    <>
+      <div className="container">
+        <EditProject id={id} />
+      </div>
+    </>
   );
+  // }
 };
 
-//return newsID from params
-editprojectmakandura.getInitialProps = async (context) => {
-  const projectID = context.query.id;
-  const response = await axios.get(
-    `${API_URL}/api/projectmakandura/${projectID}/`
-  );
-  console.log(response);
-  return { project: response.data };
-};
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default editprojectmakandura;
+export default connect(mapStateToProps)(ProjectUpdate);

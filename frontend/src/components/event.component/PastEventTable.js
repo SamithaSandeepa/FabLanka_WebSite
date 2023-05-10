@@ -50,6 +50,7 @@ const EventsTable = ({ isAuthenticated }) => {
   };
   useEffect(() => {
     getEvent();
+    onChange();
   }, []);
 
   const onChange = (id, status) => {

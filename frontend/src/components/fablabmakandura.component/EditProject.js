@@ -8,23 +8,25 @@ import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const EditNews = ({ isAuthenticated, id }) => {
+  console.log(isAuthenticated, id);
   const [validated, setValidated] = useState(false);
-  const [title_pastevent, setTitle] = useState("");
-  const [summery_pastevent, setSummery] = useState("");
+  const [title_project_m, setTitle] = useState("");
+  const [summery_project_m, setSummery] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/event/${id}/`)
+      .get(`${API_URL}/projectmakandura/${id}/`)
       .then((response) => {
-        console.log(response, "ghd");
+        console.log(response);
         // set state with news data
-        setTitle(response.data.title_pastevent);
-        setSummery(response.data.summery_pastevent);
+        setTitle(response.data.title_project_m);
+        setSummery(response.data.summery_project_m);
+        // setEditorState(response.data.content);
         const contentState = convertFromRaw(
-          JSON.parse(response.data.content_pastevent)
+          JSON.parse(response.data.content_project_m)
         );
         setEditorState(EditorState.createWithContent(contentState));
         setImage(response.data.image_project_m);
@@ -36,10 +38,10 @@ const EditNews = ({ isAuthenticated, id }) => {
       });
   }, [id]);
 
-  // update news data to the database
-  const updateEvent = (e) => {
+  // updateupdateNews news data to the database
+  const updateProject = (e) => {
     // the raw state, stringified
-    const content_pastevent = JSON.stringify(
+    const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
     e.preventDefault();
@@ -47,18 +49,18 @@ const EditNews = ({ isAuthenticated, id }) => {
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      const pastevent = {
-        title_pastevent: title_pastevent,
-        summery_pastevent: summery_pastevent,
-        content_pastevent: content_pastevent,
-        image_project_m: image_project_m,
+      const project = {
+        title: title_project_m,
+        summery: summery_project_m,
+        content: content_project_m,
+        image: image_project_m,
         status: status,
       };
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
+      console.log(project);
       axios
-        .put(`${API_URL}/event/${id}/update/`, pastevent, {
+        .put(`${API_URL}/projectmakandura/${id}/update/`, project, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "application/json",
@@ -66,7 +68,7 @@ const EditNews = ({ isAuthenticated, id }) => {
         })
         .then((res) => {
           console.log(res);
-          window.location.href = "/show-all-event";
+          window.location.href = "/show-all-projects";
         })
         .catch((err) => {
           console.log(err);
@@ -77,23 +79,24 @@ const EditNews = ({ isAuthenticated, id }) => {
 
   return (
     <>
-        <div className="container">
+      <div className="body">
+        <div className="container1">
           <div className="col-md-8 mt-4 mx-auto">
             <h2 className="h3 mb-3 font-weight-normal text-center">
-              Edit Event
+              Edit Project
             </h2>
-            <form noValidate validated={validated} onSubmit={updateEvent}>
+            <form noValidate validated={validated} onSubmit={updateProject}>
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                  Event Title
+                  Project Title
                 </label>
                 <input
                   type="text"
                   required
                   minLength="2"
-                  value={title_pastevent}
+                  value={title_project_m}
                   className="form-control"
-                  placeholder="Enter News Title"
+                  placeholder="Enter News Project"
                   id="newsTitle"
                   onChange={(e) => {
                     setTitle(e.target.value);
@@ -111,7 +114,7 @@ const EditNews = ({ isAuthenticated, id }) => {
                   className="form-control"
                   placeholder="Summarize your news"
                   id="summery"
-                  value={summery_pastevent}
+                  value={summery_project_m}
                   onChange={(e) => {
                     setSummery(e.target.value);
                   }}
@@ -189,10 +192,10 @@ const EditNews = ({ isAuthenticated, id }) => {
             </form>
           </div>
         </div>
+      </div>
     </>
   );
 };
-
 function getCookie(name) {
   const cookieValue = document.cookie.match(
     "(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)"

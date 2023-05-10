@@ -1,6 +1,13 @@
 module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+  // ...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        loader: "source-map-loader",
+      },
+    ],
   },
-}
+};

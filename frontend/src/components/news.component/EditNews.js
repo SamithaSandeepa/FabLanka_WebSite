@@ -8,12 +8,11 @@ import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const EditNews = ({ isAuthenticated, id }) => {
-
   const [validated, setValidated] = useState(false);
- 
+
   const [title, setTitle] = useState("");
   const [summery, setSummery] = useState("");
-  
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState("");
   const [status, setStatus] = useState("");
@@ -78,118 +77,114 @@ const EditNews = ({ isAuthenticated, id }) => {
 
   return (
     <>
-      <div className="body">
-        <div className="container1">
-          <div className="col-md-8 mt-4 mx-auto">
-            <h2 className="h3 mb-3 font-weight-normal text-center">
-              Edit News
-            </h2>
-            <form noValidate validated={validated} onSubmit={updateNews}>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  News Title
-                </label>
-                <input
-                  type="text"
-                  required
-                  minLength="2"
-                  value={title}
-                  className="form-control"
-                  placeholder="Enter News Title"
-                  id="newsTitle"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Summery{" "}
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  placeholder="Summarize your news"
-                  id="summery"
-                  value={summery}
-                  onChange={(e) => {
-                    setSummery(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="row">
-                <div
-                  className="form-group col-md-8"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <label className="form-label" style={{ marginBottom: "5px" }}>
-                    {" "}
-                    Image{" "}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Enter Image Url"
-                    id="image"
-                    value={image}
-                    onChange={(e) => {
-                      setImage(e.target.value);
-                    }}
-                  />
-                </div>
-                <div
-                  className="form-group col-md-4 text-center m-auto"
-                  style={{ marginBottom: "15px" }}
-                >
-                  <select
-                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
-                    value={status}
-                    onChange={(e) => {
-                      setStatus(e.target.value);
-                    }}
-                  >
-                    <option disabled hidden>
-                      Select your option
-                    </option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Inactive</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Add News Content{" "}
-                </label>
-                <div className="editor">
-                  <Editor
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                    toolbar={{
-                      inline: { inDropdown: true },
-                      list: { inDropdown: true },
-                      textAlign: { inDropdown: true },
-                      link: { inDropdown: true },
-                      history: { inDropdown: true },
-                    }}
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-success float-right"
-                style={{ marginTop: "15px", marginBottom: "15px" }}
+      <div className="container">
+        <div className="col-md-8 mt-4 mx-auto">
+          <h2 className="h3 mb-3 font-weight-normal text-center">Edit News</h2>
+          <form noValidate validated={validated} onSubmit={updateNews}>
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                News Title
+              </label>
+              <input
+                type="text"
+                required
+                minLength="2"
+                value={title}
+                className="form-control"
+                placeholder="Enter News Title"
+                id="newsTitle"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                {" "}
+                Summery{" "}
+              </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                placeholder="Summarize your news"
+                id="summery"
+                value={summery}
+                onChange={(e) => {
+                  setSummery(e.target.value);
+                }}
+              />
+            </div>
+            <div className="row">
+              <div
+                className="form-group col-md-8"
+                style={{ marginBottom: "15px" }}
               >
-                <i className="far fa-check-square"></i>
-                &nbsp; Save
-              </button>
-            </form>
-          </div>
+                <label className="form-label" style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Image{" "}
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="form-control"
+                  placeholder="Enter Image Url"
+                  id="image"
+                  value={image}
+                  onChange={(e) => {
+                    setImage(e.target.value);
+                  }}
+                />
+              </div>
+              <div
+                className="form-group col-md-4 text-center m-auto"
+                style={{ marginBottom: "15px" }}
+              >
+                <select
+                  className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
+                  value={status}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                  }}
+                >
+                  <option disabled hidden>
+                    Select your option
+                  </option>
+                  <option value={true}>Active</option>
+                  <option value={false}>Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                {" "}
+                Add News Content{" "}
+              </label>
+              <div className="editor">
+                <Editor
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                  toolbar={{
+                    inline: { inDropdown: true },
+                    list: { inDropdown: true },
+                    textAlign: { inDropdown: true },
+                    link: { inDropdown: true },
+                    history: { inDropdown: true },
+                  }}
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-success float-right"
+              style={{ marginTop: "15px", marginBottom: "15px" }}
+            >
+              <i className="far fa-check-square"></i>
+              &nbsp; Save
+            </button>
+          </form>
         </div>
       </div>
     </>

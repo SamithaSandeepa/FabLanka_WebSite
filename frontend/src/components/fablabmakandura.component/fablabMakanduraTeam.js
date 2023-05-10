@@ -24,29 +24,4 @@ export const datamaknadurateam = [
         name: "Rashin Manoj",
         image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
     },
-    {
-        id: 4,
-        name: "Rashin Manoj",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
-    },
-    {
-        id: 4,
-        name: "Rashin Manoj",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
-    },
-    {
-        id: 4,
-        name: "Rashin Manoj",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
-    },
-    {
-        id: 4,
-        name: "Rashin Manoj",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
-    },
-    {
-        id: 4,
-        name: "Rashin Manoj",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/manoj.jpg",
-    },
 ];
