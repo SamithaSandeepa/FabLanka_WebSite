@@ -7,6 +7,7 @@ class News(models.Model):
     content = models.JSONField()
     image = models.TextField()
     status = models.BooleanField(default=True)
+    videos = models.JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.title

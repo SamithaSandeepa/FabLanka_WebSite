@@ -6,6 +6,7 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactPlayer from "react-player";
 
 const EditNews = ({ isAuthenticated, id }) => {
   const [validated, setValidated] = useState(false);
@@ -14,12 +15,15 @@ const EditNews = ({ isAuthenticated, id }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState("");
+  const [videos, setVideos] = useState([{ url: "" }]);
+  const [event, setEvent] = useState({});
 
   useEffect(() => {
     axios
       .get(`${API_URL}/event/${id}/`)
       .then((response) => {
         console.log(response, "ghd");
+        setEvent(response.data);
         // set state with news data
         setTitle(response.data.title_pastevent);
         setSummery(response.data.summery_pastevent);
@@ -29,12 +33,21 @@ const EditNews = ({ isAuthenticated, id }) => {
         setEditorState(EditorState.createWithContent(contentState));
         setImage(response.data.image_project_m);
         setStatus(response.data.status);
+        // setVideos([{ url: response.data.videos[0] }]);
+
+        /// set all urls to the state
+        setVideos(response.data.videos.map((video) => ({ url: video })));
         //...
       })
       .catch((err) => {
         console.log(err);
+        setEvent({});
       });
   }, [id]);
+
+  useEffect(() => {
+    renderVideos();
+  }, [videos]);
 
   // update news data to the database
   const updateEvent = (e) => {
@@ -48,6 +61,7 @@ const EditNews = ({ isAuthenticated, id }) => {
       e.stopPropagation();
     } else {
       const pastevent = {
+        videos: videos.map((video) => video.url),
         title_pastevent: title_pastevent,
         summery_pastevent: summery_pastevent,
         content_pastevent: content_pastevent,
@@ -74,121 +88,176 @@ const EditNews = ({ isAuthenticated, id }) => {
     }
     setValidated(true);
   };
+  const renderVideos = () => {
+    if (videos && videos.length > 0) {
+      return (
+        <div className="d-flex justify-content-center">
+          <div className="row">
+            {videos.map((video, index) => (
+              <div key={index} className="col-6">
+                <div className="player-wrapper">
+                  <ReactPlayer
+                    url={video.url}
+                    className="react-player pl-10 pt-10"
+                    width="100%"
+                    height="200px"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <>
-        <div className="container">
-          <div className="col-md-8 mt-4 mx-auto">
-            <h2 className="h3 mb-3 font-weight-normal text-center">
-              Edit Event
-            </h2>
-            <form noValidate validated={validated} onSubmit={updateEvent}>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  Event Title
-                </label>
-                <input
-                  type="text"
-                  required
-                  minLength="2"
-                  value={title_pastevent}
-                  className="form-control"
-                  placeholder="Enter News Title"
-                  id="newsTitle"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="form-group" style={{ marginBottom: "15px" }}>
+      <div className="container">
+        <div className="col-md-8 mt-4 mx-auto">
+          <h2 className="h3 mb-3 font-weight-normal text-center">Edit Event</h2>
+          <form noValidate validated={validated} onSubmit={updateEvent}>
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                Event Title
+              </label>
+              <input
+                type="text"
+                required
+                minLength="2"
+                value={title_pastevent}
+                className="form-control"
+                placeholder="Enter News Title"
+                id="newsTitle"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                {" "}
+                Summery{" "}
+              </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                placeholder="Summarize your news"
+                id="summery"
+                value={summery_pastevent}
+                onChange={(e) => {
+                  setSummery(e.target.value);
+                }}
+              />
+            </div>
+            <div className="row">
+              <div
+                className="form-group col-md-8"
+                style={{ marginBottom: "15px" }}
+              >
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   {" "}
-                  Summery{" "}
+                  Image{" "}
                 </label>
                 <input
                   type="text"
                   required
                   className="form-control"
-                  placeholder="Summarize your news"
-                  id="summery"
-                  value={summery_pastevent}
+                  placeholder="Enter Image Url"
+                  id="image"
+                  value={image_project_m}
                   onChange={(e) => {
-                    setSummery(e.target.value);
+                    setImage(e.target.value);
                   }}
                 />
               </div>
-              <div className="row">
-                <div
-                  className="form-group col-md-8"
-                  style={{ marginBottom: "15px" }}
+              <div
+                className="form-group col-md-4 text-center m-auto"
+                style={{ marginBottom: "15px" }}
+              >
+                <select
+                  className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
+                  value={status}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                  }}
                 >
-                  <label className="form-label" style={{ marginBottom: "5px" }}>
-                    {" "}
-                    Image{" "}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Enter Image Url"
-                    id="image"
-                    value={image_project_m}
-                    onChange={(e) => {
-                      setImage(e.target.value);
-                    }}
-                  />
-                </div>
-                <div
-                  className="form-group col-md-4 text-center m-auto"
-                  style={{ marginBottom: "15px" }}
+                  <option disabled hidden>
+                    Select your option
+                  </option>
+                  <option value={true}>Active</option>
+                  <option value={false}>Inactive</option>
+                </select>
+              </div>
+            </div>
+            {videos.map((video, index) => (
+              <div className="mb-4" key={index}>
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor={`video-${index}`}
                 >
-                  <select
-                    className=" btn btn-secondary btn-sm dropdown-toggle rounded-3 bg-color-white"
-                    value={status}
-                    onChange={(e) => {
-                      setStatus(e.target.value);
+                  Video {index + 1}
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter Video Url"
+                  id={`video-${index}`}
+                  value={video.url}
+                  onChange={(e) => {
+                    const newVideos = [...videos];
+                    newVideos[index].url = e.target.value;
+                    setVideos(newVideos);
+                  }}
+                />
+                {index === videos.length - 1 && (
+                  <button
+                    className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVideos([...videos, { url: "" }]);
                     }}
                   >
-                    <option disabled hidden>
-                      Select your option
-                    </option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Inactive</option>
-                  </select>
-                </div>
+                    Add another video
+                  </button>
+                )}
               </div>
-
-              <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Add News Content{" "}
-                </label>
-                <div className="editor">
-                  <Editor
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                    toolbar={{
-                      inline: { inDropdown: true },
-                      list: { inDropdown: true },
-                      textAlign: { inDropdown: true },
-                      link: { inDropdown: true },
-                      history: { inDropdown: true },
-                    }}
-                  />
-                </div>
+            ))}
+            <div className="row">{renderVideos()}</div>
+            <div className="form-group" style={{ marginBottom: "15px" }}>
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                {" "}
+                Add News Content{" "}
+              </label>
+              <div className="editor">
+                <Editor
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                  toolbar={{
+                    inline: { inDropdown: true },
+                    list: { inDropdown: true },
+                    textAlign: { inDropdown: true },
+                    link: { inDropdown: true },
+                    history: { inDropdown: true },
+                  }}
+                />
               </div>
+            </div>
 
-              <button
-                type="submit"
-                className="btn btn-success float-right"
-                style={{ marginTop: "15px", marginBottom: "15px" }}
-              >
-                <i className="far fa-check-square"></i>
-                &nbsp; Save
-              </button>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="btn btn-success float-right"
+              style={{ marginTop: "15px", marginBottom: "15px" }}
+            >
+              <i className="far fa-check-square"></i>
+              &nbsp; Save
+            </button>
+          </form>
         </div>
+      </div>
     </>
   );
 };
