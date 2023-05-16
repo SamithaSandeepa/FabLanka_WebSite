@@ -106,16 +106,16 @@ const CreateEvent = ({ isAuthenticated }) => {
   const renderVideos = () => {
     if (videos && videos.length > 0) {
       return (
-        <div className="d-flex justify-content-center">
+        <div className="flex justify-content-center">
           <div className="row">
             {videos.map((video, index) => (
-              <div key={index} className="col-3">
+              <div key={index} className="col-4">
                 <div className="player-wrapper mb-4">
                   <ReactPlayer
                     url={video.url}
                     className="react-player pl-5 pt-5"
                     width="100%"
-                    height="150px"
+                    height="100%"
                   />
                 </div>
               </div>
@@ -235,6 +235,7 @@ const CreateEvent = ({ isAuthenticated }) => {
                     setVideos(newVideos);
                   }}
                 />
+
                 {index === videos.length - 1 && (
                   <button
                     className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -246,9 +247,21 @@ const CreateEvent = ({ isAuthenticated }) => {
                     Add another video
                   </button>
                 )}
+                {index !== 0 && (
+                  <button
+                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      const newVideos = [...videos];
+                      newVideos.splice(index, 1);
+                      setVideos(newVideos);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             ))}
-            <div className="row">{renderVideos()}</div>
+            <div>{renderVideos()}</div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
