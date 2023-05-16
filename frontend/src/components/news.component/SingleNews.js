@@ -4,6 +4,8 @@ import { convertFromRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { API_URL } from "../../config/index";
+import ReactPlayer from "react-player";
+
 
 const SingleNews = ({ id }) => {
   const [news, setNews] = useState({});
@@ -23,6 +25,30 @@ const SingleNews = ({ id }) => {
       setEditorState(EditorState.createWithContent(contentState));
     }
   }, [news]);
+
+  const renderVideos = () => {
+    const videos = news.videos;
+    if (videos && videos.length > 0) {
+      return (
+        <div className="row">
+          {videos.map((video, index) => (
+            <div key={index} className="col-6">
+              <div className="player-wrapper">
+                <ReactPlayer
+                  url={video}
+                  className="react-player pl-10 pt-10"
+                  width="100%"
+                  height="400px"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
 
   return (
     <div className="container mb-5">
@@ -47,6 +73,7 @@ const SingleNews = ({ id }) => {
           />
         </div>
       </div>
+      <div className="row">{renderVideos()}</div>
     </div>
   );
 };

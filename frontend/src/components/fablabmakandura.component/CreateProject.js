@@ -6,6 +6,7 @@ import { API_URL } from "../../config/index";
 import { useStateContext } from "../../context/ContextProvider";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import ReactPlayer from "react-player";
 
 const CreatNews = ({ isAuthenticated }) => {
   const { setLoading } = useStateContext();
@@ -20,6 +21,7 @@ const CreatNews = ({ isAuthenticated }) => {
   );
   const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState(true);
+  const [videos, setVideos] = useState([{ url: "" }]);
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
@@ -36,6 +38,11 @@ const CreatNews = ({ isAuthenticated }) => {
       }, 2000);
     }
   }, [history, isAuthenticated]);
+
+  useEffect(() => {
+    renderVideos();
+  }, [videos]);
+
 
   const addProject = (e) => {
     // the raw state, stringified
@@ -59,6 +66,7 @@ const CreatNews = ({ isAuthenticated }) => {
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
       const newProject = {
+        videos: videos.map((video) => video.url),
         title_project_m,
         summery_project_m,
         content_project_m,
@@ -91,6 +99,7 @@ const CreatNews = ({ isAuthenticated }) => {
   };
 
   const clearForm = () => {
+    setVideos([{ url: "" }]);
     setTitle("");
     setSummery("");
     setEditorState("");
@@ -98,6 +107,32 @@ const CreatNews = ({ isAuthenticated }) => {
     setStatus(true);
     setValidated(false);
   };
+
+  const renderVideos = () => {
+    if (videos && videos.length > 0) {
+      return (
+        <div className="d-flex justify-content-center">
+          <div className="row">
+            {videos.map((video, index) => (
+              <div key={index} className="col-4">
+                <div className="player-wrapper mb-4">
+                  <ReactPlayer
+                    url={video.url}
+                    className="react-player pl-5 pt-5"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
+
 
   return (
     <>
@@ -186,6 +221,57 @@ const CreatNews = ({ isAuthenticated }) => {
                 </select>
               </div>
             </div>
+            {videos.map(
+              (video, index) => (
+                console.log(video, "videos"),
+                (
+                  <div className="mb-4" key={index}>
+                    <label
+                      className="block text-gray-700 font-bold mb-2"
+                      htmlFor={`video-${index}`}
+                    >
+                      Video {index + 1}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="Enter Video Url"
+                      id={`video-${index}`}
+                      value={video.url}
+                      onChange={(e) => {
+                        const newVideos = [...videos];
+                        newVideos[index].url = e.target.value;
+                        setVideos(newVideos);
+                      }}
+                    />
+                    {index === videos.length - 1 && (
+                      <button
+                        className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setVideos([...videos, { url: "" }]);
+                        }}
+                      >
+                        Add another video
+                      </button>
+                    )}
+                    {index !== 0 && (
+                      <button
+                        className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => {
+                          const newVideos = [...videos];
+                          newVideos.splice(index, 1);
+                          setVideos(newVideos);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                )
+              )
+            )}
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
