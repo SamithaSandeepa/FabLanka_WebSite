@@ -224,6 +224,18 @@ const EditNews = ({ isAuthenticated, id }) => {
                     Add another video
                   </button>
                 )}
+                {index !== 0 && (
+                  <button
+                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      const newVideos = [...videos];
+                      newVideos.splice(index, 1);
+                      setVideos(newVideos);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             ))}
             <div className="row">{renderVideos()}</div>

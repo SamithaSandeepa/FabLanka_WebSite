@@ -6,8 +6,9 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactPlayer from "react-player";
 
-const EditNews = ({ isAuthenticated, id }) => {
+const EditProject = ({ isAuthenticated, id }) => {
   console.log(isAuthenticated, id);
   const [validated, setValidated] = useState(false);
   const [title_project_m, setTitle] = useState("");
@@ -15,6 +16,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState("");
+  const [videos, setVideos] = useState([{ url: "" }]);
+console.log(localStorage.getItem("access"))
+
 
   useEffect(() => {
     axios
@@ -31,6 +35,8 @@ const EditNews = ({ isAuthenticated, id }) => {
         setEditorState(EditorState.createWithContent(contentState));
         setImage(response.data.image_project_m);
         setStatus(response.data.status);
+
+        setVideos(response.data.videos.map((video) => ({ url: video })));
         //...
       })
       .catch((err) => {
@@ -38,18 +44,30 @@ const EditNews = ({ isAuthenticated, id }) => {
       });
   }, [id]);
 
+  useEffect(() => {
+    renderVideos();
+  }, [videos]);
+
   // updateupdateNews news data to the database
   const updateProject = (e) => {
+    console.log("test")
+
     // the raw state, stringified
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
     e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    } else {
+    // const form = e.currentTarget;
+    // console.log(form)
+    // if (form.checkValidity() === false) {
+    //   e.stopPropagation();
+    //   console.log("test if")
+
+    // } else {
+    //   console.log("test else")
+
       const project = {
+        videos: videos.map((video) => video.url),
         title: title_project_m,
         summery: summery_project_m,
         content: content_project_m,
@@ -73,9 +91,35 @@ const EditNews = ({ isAuthenticated, id }) => {
         .catch((err) => {
           console.log(err);
         });
-    }
+    // }
     setValidated(true);
   };
+
+
+  const renderVideos = () => {
+    if (videos && videos.length > 0) {
+      return (
+        <div className="d-flex justify-content-center">
+          <div className="row">
+            {videos.map((video, index) => (
+              <div key={index} className="col-6">
+                <div className="player-wrapper">
+                  <ReactPlayer
+                    url={video.url}
+                    className="react-player pl-10 pt-10"
+                    width="100%"
+                    height="200px"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
 
   return (
     <>
@@ -161,6 +205,54 @@ const EditNews = ({ isAuthenticated, id }) => {
                 </div>
               </div>
 
+              {videos.map((video, index) => (
+              <div className="mb-4" key={index}>
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor={`video-${index}`}
+                >
+                  Video {index + 1}
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter Video Url"
+                  id={`video-${index}`}
+                  value={video.url}
+                  onChange={(e) => {
+                    const newVideos = [...videos];
+                    newVideos[index].url = e.target.value;
+                    setVideos(newVideos);
+                  }}
+                />
+                {index === videos.length - 1 && (
+                  <button
+                    className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVideos([...videos, { url: "" }]);
+                    }}
+                  >
+                    Add another video
+                  </button>
+                )}
+                {index !== 0 && (
+                  <button
+                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                      const newVideos = [...videos];
+                      newVideos.splice(index, 1);
+                      setVideos(newVideos);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+            <div className="row">{renderVideos()}</div>
+
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   {" "}
@@ -206,4 +298,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(EditNews);
+export default connect(mapStateToProps)(EditProject);

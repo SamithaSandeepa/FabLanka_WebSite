@@ -13,7 +13,7 @@ const FablabMakandura = () => {
         <h2 className="text-[30px] text-center font-normal pt-3">
           Fablabmakandura Team
         </h2>
-        <div className="grid grid-col-12 grid-row-3">
+        <div className="grid grid-col-12 grid-row-3 bg-gradient-to-b from-white to-[#D4FAFC]">
           <div className="justify-center col-span-12">
             <MakanduraTeam />
           </div>
@@ -21,7 +21,7 @@ const FablabMakandura = () => {
             <ProjectMakandura />
           </div>
           <div className="justify-center pt-10 col-span-12 mx-5">
-            <h1 className="text-[50px] text-center text-[#163B64]">Location</h1>
+            {/* <h1 className="text-[50px] text-center text-[#163B64]">Location</h1> */}
             <p className="text-center pt-5">
               FabLab Maknadura was started on May 27 th , 2017 and is the first
               Fabrication Laboratory established by FabLanka and also the first
@@ -40,7 +40,7 @@ const FablabMakandura = () => {
                   referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-              <div class="w-1/2 flex justify-center ">
+              <div class="w-1/2  justify-center ">
                 <div
                   class="fb-page"
                   data-href="https://www.facebook.com/MakanduraFabLab"
