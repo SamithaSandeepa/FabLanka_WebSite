@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       <div className="container p-0">
-        <div className="grid grid-cols-12 grid-rows-3">
+        <div className="grid grid-cols-12 grid-rows-3 rounded-md">
           {/* bg-gradient-to-b from-green-600 to-blue */}
           <div className="col-span-12 sm:col-span-8 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden">
             <ImageSlider />

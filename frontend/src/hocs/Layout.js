@@ -29,10 +29,11 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
 
   return (
     <div className="flex flex-col min-h-screen p-0 m-0">
+      <div className=""></div>
       <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
         <Navbar />
       </div>
-      <div className="flex-grow pt-16 px-0 mx-0">{children}</div>
+      <div className="flex-grow mt-12 px-0">{children}</div>
       <div className="">
         <Footer />
       </div>
