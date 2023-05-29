@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/main.component/Navbar";
 import { connect } from "react-redux";
 import { checkAuthenticated, load_user } from "../actions/auth";
@@ -10,13 +10,29 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
     checkAuthenticated();
     load_user();
   }, []);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollPos > currentScrollPos);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
   return (
     <div className="flex flex-col min-h-screen p-0 m-0">
-      <div className="sticky-sm-top"><Navbar /></div>
-      <div className="flex-grow pt-16 px-0 mx-0" style={{ marginTop: "-6px" }}>
-        {children}
+      <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
+        <Navbar />
       </div>
+      <div className="flex-grow pt-16 px-0 mx-0">{children}</div>
       <div className="">
         <Footer />
       </div>

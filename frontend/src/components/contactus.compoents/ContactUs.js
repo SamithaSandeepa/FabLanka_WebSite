@@ -74,7 +74,7 @@ function ContactUs() {
               <strong>Phone:</strong> +94 31 229 7029
             </p>
           </div>
-          <div className="col-span-4 item-center py-5 pl-48">
+          {/* <div className="col-span-4 item-center py-5 pl-48">
             <iframe
               src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNipunaPerera99%2F&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=797828301687659"
               width="400"
@@ -85,7 +85,7 @@ function ContactUs() {
               allowfullscreen="true"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
