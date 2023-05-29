@@ -111,14 +111,15 @@ const NewAlert = () => {
                   </div>
 
                   <div className="col-8 p-0 m-0">
-                    <a href={"/news/" + curElem.id} className="no-underline">
+                    <a href={"/news/" + curElem.id} style={{textDecoration: 'none'}}>
                       <div className="card-body py-0 pl-0">
                         <p className="card-title text-lg font-normal text-black hover:text-[#2c185a] m-0 pb-3">
                           {curElem.title}
                         </p>
-                        <p className="card-text lh-1 text-lg text-black hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
+                        <p className="text-[10] card-text lh-1  text-black hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
                           {curElem.summery}
                         </p>
+
                       </div>
                     </a>
                   </div>
