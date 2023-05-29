@@ -50,14 +50,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </Link>
       </li>
       <li className="nav-item text-sm px-1 relative group">
-        <Link
-          className="text-gray-700 hover:text-gray-900 px-4 py-4 rounded-md text-sm font-medium"
-          to="/about"
-        >
+        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium">
           WHAT WE DO
-        </Link>
+        </a>
         <div
-          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
+          className="hidden absolute top-full mt-3 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
           style={{ width: "max-content" }}
         >
           <div class="grid grid-row-3 divide-y ">
@@ -149,14 +146,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </Link>
       </li>
       <li className="nav-item text-sm px-1 relative group">
-        <Link
-          className="text-gray-700 hover:text-gray-900 px-4 py-4 rounded-md text-sm font-medium"
-          to="/about"
-        >
-          OUR VENTURES
-        </Link>
+        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium">
+          OUR VENTURES 
+        </a>
         <div
-          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
+          className="hidden absolute top-full mt-3 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
           style={{ width: "max-content" }}
         >
           <div class="grid grid-row-3 divide-y ">
@@ -476,7 +470,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     <>
       <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
-          <div className="flex flex-wrap items-center justify-center px-1 md:px-10 py-1 md:py-0 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg transition duration-300 ease-in-out">
+          <div className="flex flex-wrap items-center justify-center px-1 md:px-10 py-2 md:py-0 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img

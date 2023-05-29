@@ -33,7 +33,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
       <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
         <Navbar />
       </div>
-      <div className="flex-grow mt-12 px-0">{children}</div>
+      <div className="flex-grow mt-14 px-0">{children}</div>
       <div className="">
         <Footer />
       </div>
