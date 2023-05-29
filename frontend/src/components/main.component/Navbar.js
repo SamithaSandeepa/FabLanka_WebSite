@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { useLocation } from "react-router-dom";
+import { TbArrowBigUpLines } from "react-icons/tb";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const location = useLocation();
@@ -56,15 +57,15 @@ const Navbar = ({ logout, isAuthenticated }) => {
           WHAT WE DO
         </Link>
         <div
-          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg p-4 group-hover:block"
+          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
           style={{ width: "max-content" }}
         >
-          <div class="grid grid-row-3 gap-4">
-            <div className="py-2">
+          <div class="grid grid-row-3 divide-y ">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/education"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/education"
@@ -72,11 +73,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Education & Training
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -84,11 +85,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 FabLabs for Innovation and Social Development
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -96,11 +97,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Product Development
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -108,11 +109,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Project and Program Management
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -120,11 +121,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Consultancy and Advisory
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -155,15 +156,15 @@ const Navbar = ({ logout, isAuthenticated }) => {
           OUR VENTURES
         </Link>
         <div
-          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg p-4 group-hover:block"
+          className="hidden absolute top-full mt-4 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
           style={{ width: "max-content" }}
         >
-          <div class="grid grid-row-3 gap-4">
-            <div className="py-2">
+          <div class="grid grid-row-3 divide-y ">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablabmakandura"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablabmakandura"
@@ -171,11 +172,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 FabLab Makandura
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -183,11 +184,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Universal Energy
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -195,11 +196,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Makandura Model Farm
               </Link>
             </div>
-            <div className="py-2">
+            <div className="py-4">
               <Link
                 className={
                   location.pathname === "/fablab"
-                    ? "bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium"
+                    ? "text-[#0A4D68] px-4 py-2 rounded-md text-sm font-medium"
                     : "text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-4 py-2 rounded-md text-sm font-medium"
                 }
                 to="/fablab"
@@ -475,7 +476,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     <>
       <div className="container mx-auto block relative">
         <div className="w-full fixed top-0 left-0">
-          <div className="flex flex-wrap items-center justify-center px-1 md:px-10 py-2 md:py-0 bg-gray-100 bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-sm transition duration-300 ease-in-out">
+          <div className="flex flex-wrap items-center justify-center px-1 md:px-10 py-1 md:py-0 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img

@@ -2,7 +2,7 @@ import React from "react";
 
 const Education = () => {
   return (
-    <div className="container-fluid text-lg mt-10">
+    <div className="container-sm text-lg mt-10">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-center text-2xl font-semibold font-serif p-0 mb-4 text-[#394867]">
           Education
