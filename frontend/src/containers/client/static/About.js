@@ -8,7 +8,8 @@ import React, { useEffect, useState } from "react";
 const About = () => {
   return (
     <>
-      <div className="container shadow bg-white rounded p-10">
+      <div className="container-sm shadow-sm bg-white rounded p-10">
+        <h1 className="text-center text-3xl font-serif pb-20">About Us</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="col-span-2 sm:col-span-1">
             <p className="capitalize text-left font-bold mb-3">

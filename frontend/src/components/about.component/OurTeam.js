@@ -5,7 +5,7 @@ import { dataourteam } from "../data/data_ourteam";
 const OurTeam = () => {
   return (
     <div>
-      <h1 className="text-center text-3xl mt-10">Our Team</h1>
+      <h1 className="text-center text-3xl mt-10 font-serif">Our Team</h1>
       <div className={Styles.container}>
         {dataourteam.map((curElem) => {
           return (
