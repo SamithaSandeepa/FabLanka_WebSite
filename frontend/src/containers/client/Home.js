@@ -24,16 +24,16 @@ const Home = () => {
 
   return (
     <>
-      <div className="container p-0">
-        <div className="grid grid-cols-12 grid-rows-3 rounded-md">
+      <div className="container px-0">
+        <div className="grid grid-cols-12 grid-rows-2 rounded-md md:px-10">
           {/* bg-gradient-to-b from-green-600 to-blue */}
-          <div className="col-span-12 sm:col-span-8 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden">
+          <div className="col-span-12 row-span-3 sm:col-span-8 sm:row-span-1 sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden">
             <ImageSlider />
           </div>
           <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden hidden sm:block">
             <NewAlert />
           </div>
-          <div className="col-span-12 sm:col-span-12 row-span-1 px-5 sm:px-2 pt-2">
+          <div className="col-span-12 sm:col-span-12 row-span-5 px-5 sm:px-2 pt-2">
             <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri
@@ -67,18 +67,20 @@ const Home = () => {
               </a>
             </div>
           </div>
-          {/* <div className="col-span-4 px-5 sm:px-2 py-20">
-            <img
-              className="h-auto"
-              src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg"
-              alt="slide1"
-            />
-          </div> */}
-          <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
+          <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
             <NewAlert />
           </div>
-          <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
+          {/* <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
             <div className="flex justify-center items-center mt-4">
+              <PastEvent />
+            </div>
+          </div> */}
+        </div>
+      </div>
+      <div className="container p-0 mb-0 sm:mb-4">
+        <div className="grid grid-cols-12 grid-rows-1 rounded-md">
+          <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
+            <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
               <PastEvent />
             </div>
           </div>

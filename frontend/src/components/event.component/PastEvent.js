@@ -108,7 +108,9 @@ const PastEvent = () => {
   return (
     <>
       <div className="container m-0 p-0 bg-trasparent">
-        <h1 className="text-center font-bold pb-3 text-3xl">Past Event</h1>
+        <h1 className="text-center font-bold font-serif py-3 text-3xl">
+          Past Event
+        </h1>
         <Slider
           {...settings}
           className="sm:card_container md:pl-0 lg:pl-0 xl:pl-0"
@@ -121,27 +123,42 @@ const PastEvent = () => {
                 key={curElem.id}
               >
                 <div className="h-full rounded-lg overflow-hidden px-4 ">
-                <a href={"/event/" + curElem.id} >
-                <div className="relative w-full h-48 overflow-hidden">
-                  <img
-                    className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
-                    src={curElem.image_project_m}
-                    alt="blog"
-                  />
-                </div>
-                </a>
+                  <a href={"/event/" + curElem.id}>
+                    <div className="relative w-xs h-72 overflow-hidden">
+                      <img
+                        className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
+                        src={curElem.image_project_m}
+                        alt="blog"
+                      />
+                    </div>
+                  </a>
                   {/* <a href={"/event/" + curElem.id} > */}
-                    <div className="p-6 bg-gray-200 hover:text-black transition duration-300 ease-in">
-                    <a href={"/event/" + curElem.id} className="hover:underline hover:text-black">
-                      <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3" style={{ textDecoration: 'none' }}>
+                  <div className="p-6 bg-gray-200 hover:text-black transition duration-300 ease-in">
+                    <a
+                      href={"/event/" + curElem.id}
+                      className="hover:underline hover:text-black"
+                    >
+                      <h1
+                        className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3"
+                        style={{ textDecoration: "none" }}
+                      >
                         {curElem.title_pastevent}
                       </h1>
                     </a>
-                      <p className=" mb-3 line-clamp-6 duration-100 ease-in-out" style={{textDecoration: 'none'}}>
-                        {curElem.summery_pastevent}
-                      </p>
+                    <p
+                      className=" mb-3 duration-100 ease-in-out "
+                      style={{
+                        textDecoration: "none",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 15,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {curElem.summery_pastevent}
+                    </p>
                     <div className="flex items-center flex-wrap"></div>
-                    </div>
+                  </div>
                   {/* </a> */}
                 </div>
               </div>
