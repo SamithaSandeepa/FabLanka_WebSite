@@ -121,22 +121,28 @@ const PastEvent = () => {
                 key={curElem.id}
               >
                 <div className="h-full rounded-lg overflow-hidden px-4 ">
+                <a href={"/event/" + curElem.id} >
+                <div className="relative w-full h-48 overflow-hidden">
                   <img
-                    className="lg:auto md:h-48 w-full object-cover object-center rounded hover:scale-125 duration-300 ease-in-out"
+                    className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
                     src={curElem.image_project_m}
                     alt="blog"
                   />
-                  <a href={"/event/" + curElem.id} className="no-underline">
-                    <div className="p-6 hover:bg-gray-500 hover:text-white transition duration-300 ease-in rounded">
-                      <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3">
+                </div>
+                </a>
+                  {/* <a href={"/event/" + curElem.id} > */}
+                    <div className="p-6 bg-gray-200 hover:text-black transition duration-300 ease-in">
+                    <a href={"/event/" + curElem.id} className="hover:underline hover:text-black">
+                      <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3" style={{ textDecoration: 'none' }}>
                         {curElem.title_pastevent}
                       </h1>
-                      <p className="leading-relaxed mb-3 line-clamp-3 hover:line-clamp-none duration-100 ease-in-out">
+                    </a>
+                      <p className=" mb-3 line-clamp-6 duration-100 ease-in-out" style={{textDecoration: 'none'}}>
                         {curElem.summery_pastevent}
                       </p>
-                      <div className="flex items-center flex-wrap "></div>
+                    <div className="flex items-center flex-wrap"></div>
                     </div>
-                  </a>
+                  {/* </a> */}
                 </div>
               </div>
             );
