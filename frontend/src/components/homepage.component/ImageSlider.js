@@ -58,7 +58,7 @@ export default class SimpleSlider extends Component {
     return (
       <div className="container pl-2 mt-2">
         <Slider {...settings}>
-          <div className="bg-gray-200 ">
+          <div className="bg-gray-200">
             <img
               className="m-0 rounded"
               src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg"

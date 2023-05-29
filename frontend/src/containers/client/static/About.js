@@ -1,41 +1,34 @@
 // import Styles from "../../styles/about.module.css";
-import Styles from "../../../styles/about.module.css";
+// import Styles from "../../../styles/about.module.css";
 import OurTeam from "../../../components/about.component/OurTeam";
 import React, { useEffect, useState } from "react";
 // import Aos from "aos";
 // import "aos/dist/aos.css";
 
 const About = () => {
-  //   useEffect(() => {
-  //     Aos.init({ duration: 1000 });
-  //   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
-      <div
-        breakpoint="sm"
-        className="container- shadow bg-white rounded p-5 mb-5 position-relative"
-      >
-        <div className="row">
-          <div className="col-md-8">
-            {/* <h1 className="text-center-top-0 mb-4">About</h1> */}
-            <p className="h4 mb-3">
+      <div className="container shadow bg-white rounded p-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="col-span-2 sm:col-span-1">
+            <p className="capitalize text-left font-bold mb-3">
               A Globally Connected Sri Lankan Social Enterprise
             </p>
 
-            <p className={`text-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               FabLanka was publicy launched in May 2015 to facilitate and
               nurture the growth of innovative fabrication methods in Sri Lanka.
               FabLanka Foundation (GTE) LTD was incorporated as a not-for-profit
-              social enterprise in April 2016 under Companies Act , No 7 of 2007
+              social enterprise in April 2016 under Companies Act, No 7 of 2007
               of Sri Lanka.
             </p>
-            <p className={`text-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               A cooperative between professionals in Sri Lanka and around the
               world, FabLanka aims to bring about educational and economic
               changes while minimizing environmental impact to Sri Lanka through
               the digital fabrication revolution.
             </p>
-            <p className={`text-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               The goal of this cooperative is to develop fabrication labs at
               strategic locations throughout the island. Over time, these
               fabrication labs will connect to the larger global digital
@@ -45,24 +38,24 @@ const About = () => {
               people.
             </p>
           </div>
-          <div className="col-md-4">
+          <div className="col-span-2 sm:col-span-1">
             <div className="card mb-3">
-              <h5 className={`card-header bg-primary ${Styles.card_title}`}>
+              <h5 className="card-header bg-primary text-white font-bold">
                 Our Vision
               </h5>
               <div className="card-body">
-                <p className={`card-justify ${Styles.qcont}`}>
+                <p className="text-justify">
                   Establish a technologically advanced and globally connected
                   makers' society in Sri Lanka.
                 </p>
               </div>
             </div>
-            <div className="card ">
-              <h5 className={`card-header bg-primary ${Styles.card_title}`}>
+            <div className="card">
+              <h5 className="card-header bg-primary text-white font-bold">
                 Our Mission
               </h5>
               <div className="card-body">
-                <p className={`card-justify ${Styles.qcont}`}>
+                <p className="text-justify">
                   build almost anything that could improve the quality of life.
                   Provide a platform of highest standard to exchange knowledge,
                   ideas and expertise on existing and emerging technologies.
@@ -71,12 +64,12 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12">
-            <p className="text-left h4 mb-3">
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <p className="text-left font-bold mt-5 mb-3">
               Towards a Makers’ society through Community Outreach
             </p>
-            <p className={`card-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               Developed as a community outreach project, FabLanka allows local
               communities at any socio-economic background to channel their
               creative energy towards technological innovation. Fabrication labs
@@ -85,7 +78,7 @@ const About = () => {
               their needs. This will empower the youth and intern the community
               towards local economic development.
             </p>
-            <p className={`card-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               Communities have unique identities and needs. For digital
               fabrication methods such as additive manufacturing, unique
               necessities of each community become an advantage as opposed to
@@ -103,12 +96,12 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 mb-5">
-            <p className="text-left h4 mt-5 mb-3">
+        <div className="grid grid-cols-1">
+          <div className="col-span-1">
+            <p className="text-left font-bold mt-5 mb-3">
               Towards a Greener Economy that protects the environment
             </p>
-            <p className={`card-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               The environmental degradation caused by modern economies is
               severe. Much of the raw materials and energy used for production
               is wasted in the manufacturing and transportation processes. Local
@@ -121,7 +114,7 @@ const About = () => {
               identifying sustainable manufacturing practices for local
               economies to prosper.
             </p>
-            <p className={`card-justify ${Styles.qcont}`}>
+            <p className="text-justify">
               FabLanka aims to bridge the gap between advancements in
               information technology and lack of advancement in manufacturing
               techniques in Sri Lanka. In doing so, the goal is to solve
@@ -132,7 +125,6 @@ const About = () => {
         </div>
       </div>
       <div className="row">
-        <h1 className="text-center text-3xl">Our Team</h1>
         <OurTeam />
       </div>
     </>

@@ -92,7 +92,7 @@ const NewAlert = () => {
   return (
     <>
       <div className="container">
-        <h1 className="text-center text-2xl font-semibold p-0 my-2 text-[#394867]">
+        <h1 className="text-center text-2xl font-semibold font-serif p-0 my-2 text-[#394867]">
           NEWS
         </h1>
         <Slider {...settings}>
