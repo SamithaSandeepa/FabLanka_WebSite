@@ -6,7 +6,6 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { API_URL } from "../../config/index";
 import ReactPlayer from "react-player";
 
-
 const SingleNews = ({ id }) => {
   const [news, setNews] = useState({});
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -21,8 +20,23 @@ const SingleNews = ({ id }) => {
 
   useEffect(() => {
     if (news.content) {
-      const contentState = convertFromRaw(JSON.parse(news.content));
-      setEditorState(EditorState.createWithContent(contentState));
+      let contentState;
+      try {
+        contentState = JSON.parse(news.content);
+        if (!contentState.blocks || !contentState.entityMap) {
+          throw new Error("Invalid content structure");
+        }
+      } catch (error) {
+        console.error("Error parsing news content:", error);
+        // Handle the case when news.content has an invalid structure
+        // For example, you can set contentState to an empty object or handle it in any other appropriate way
+        contentState = {
+          blocks: [],
+          entityMap: {},
+        };
+      }
+      const editorContentState = convertFromRaw(contentState);
+      setEditorState(EditorState.createWithContent(editorContentState));
     }
   }, [news]);
 
@@ -46,19 +60,18 @@ const SingleNews = ({ id }) => {
         </div>
       );
     }
-    return null;
+    return null; // Return null when videos is null or empty
   };
-
 
   return (
     <div className="container mb-5">
       <h1 className="text-center text-3xl">{news.title}</h1>
       <img
         src={news.image}
-        className="card-img mt-3 h-86 w-auto mx-auto block"
+        className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       />
-      <p className="my-5 text-lg">{news.summery}</p>
+      <p className="my-5 text-lg">{news.summary}</p>
       <div className="row">
         <div className="col-md-12">
           <Editor

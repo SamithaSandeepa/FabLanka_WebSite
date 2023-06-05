@@ -14,13 +14,13 @@ const CreatNews = ({ isAuthenticated }) => {
   const [validated, setValidated] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [summery, setSummery] = useState("");
+  const [summary, setSummary] = useState("");
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [status, setStatus] = useState(true);
-  const [videos, setVideos] = useState([{ url: "" }]);
+  const [videos, setVideos] = useState([{ url: null }]);
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
@@ -41,6 +41,11 @@ const CreatNews = ({ isAuthenticated }) => {
   useEffect(() => {
     renderVideos();
   }, [videos]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
 
   const addNews = (e) => {
     // the raw state, stringified
@@ -63,41 +68,53 @@ const CreatNews = ({ isAuthenticated }) => {
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
-      const newNews = {
-        videos: videos.map((video) => video.url),
-        title,
-        summery,
-        content,
-        image,
-        status,
-      };
+      const newNews = new FormData();
+      newNews.append("title", title);
+      newNews.append("summary", summary);
+      newNews.append("content", content);
+      newNews.append("image", image);
+      newNews.append("status", status);
+      videos.forEach((video, index) => {
+        newNews.append(`videos[${index}]`, video.url);
+      });
+      setLoading(true);
+      //  {
+      //   videos: videos.map((video) => video.url),
+      //   title,
+      //   summary,
+      //   content,
+      //   image,
+      //   status,
+      // };
 
       axios
         .post(`${API_URL}/news/create/`, newNews, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         })
         .then(() => {
           alert("New News Added");
           setTitle("");
-          setSummery("");
-          setEditorState("");
-          setImage("");
+          setSummary("");
+          setEditorState(EditorState.createEmpty()); // Set the editor state to empty
+          setImage(null); // Reset the image field to null
+          setVideos([{ url: "" }]);
           setStatus(true);
           setValidated(false);
         })
         .catch((err) => {
           alert(err);
         });
+      setLoading(false);
     }
   };
 
   const clearForm = () => {
     setVideos([{ url: "" }]);
     setTitle("");
-    setSummery("");
+    setSummary("");
     setEditorState("");
     setImage("");
     setStatus(true);
@@ -157,19 +174,19 @@ const CreatNews = ({ isAuthenticated }) => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
-                htmlFor="summery"
+                htmlFor="summary"
               >
-                Summery
+                Summary
               </label>
               <input
                 type="text"
                 required
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Summarize your news"
-                id="summery"
-                value={summery}
+                id="summary"
+                value={summary}
                 onChange={(e) => {
-                  setSummery(e.target.value);
+                  setSummary(e.target.value);
                 }}
               />
             </div>
@@ -179,17 +196,16 @@ const CreatNews = ({ isAuthenticated }) => {
                   className="block text-gray-700 font-bold mb-2"
                   htmlFor="image"
                 >
-                  Image URL
+                  Image
                 </label>
                 <input
                   type="file"
                   required
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
-                  value={image}
                   onChange={(e) => {
-                    setImage(e.target.value);
+                    setImage(e.target.files[0]);
                   }}
                 />
               </div>
