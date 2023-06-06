@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="text-center text-lg-start bg-dark">
+    <footer className="text-center text-lg-start bg-dark text-">
       <section className="d-flex justify-center justify-between p-4 border-b">
         <div className="me-5 hidden lg:block">
           <span>Get connected with us on social networks:</span>

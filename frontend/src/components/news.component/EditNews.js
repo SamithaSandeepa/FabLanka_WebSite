@@ -256,7 +256,7 @@ const EditNews = ({ isAuthenticated, id }) => {
 
             <button
               type="submit"
-              className="btn btn-success float-right"
+              className="btn btn-success float-right bg-green-500 text-white"
               style={{ marginTop: "15px", marginBottom: "15px" }}
             >
               <i className="far fa-check-square"></i>
