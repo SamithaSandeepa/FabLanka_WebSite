@@ -78,7 +78,7 @@ const Login = ({ login, isAuthenticated }) => {
                     required
                   />
                 </div>
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary bg-blue-500 text-white" type="submit">
                   Login
                 </button>
               </form>
