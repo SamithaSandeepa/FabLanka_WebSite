@@ -5,6 +5,7 @@ import "./ourteamModule.css";
 const MakanduraTeam = () => {
   return (
     <>
+      
       <div
         style={{
           padding: "40px 10px 10px 10px",
@@ -19,23 +20,23 @@ const MakanduraTeam = () => {
         {datamaknadurateam.map((user) => {
           return (
             <div
-              style={{
-                padding: "15px 50px",
-                width: "20%",
-                textAlign: "center",
-                marginBottom: "8px",
-              }}
+            style={{
+              padding: "10px 30px",
+              width: "14.28%", // Modified width from "18%" to "14.28%"
+              textAlign: "center",
+              marginBottom: "8px",
+            }}
               key={user.id}
             >
               <a href="#" style={{ textDecoration: "none" }}>
                 <div
                   style={{
                     background: "rgb(255, 255, 255)",
-                    borderRadius: "10px",
-                    padding: "35px 20px",
-                    minWidth: "225px",
-                    minHeight: "315px",
-                    maxHeight: "370px",
+                    borderRadius: "20px",
+                    padding: "15px", // Adjusted padding from "35px 20px" to "20px"
+                    minWidth: "150px", // Modified minimum width from "225px" to "150px"
+                    minHeight: "200px", // Modified minimum height from "315px" to "250px"
+                    maxHeight: "300px", // Modified maximum height from "370px" to "300px"
                     width: "100%",
                     boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
                   }}
@@ -64,7 +65,7 @@ const MakanduraTeam = () => {
                       color: "#12203a",
                       marginTop: "10px",
                       fontWeight: 600,
-                      fontSize: "15px",
+                      fontSize: "13px",
                       textAlign: "center",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
@@ -89,7 +90,7 @@ const MakanduraTeam = () => {
           );
         })}
       </div>
-    </>
+      </>
   );
 };
 
