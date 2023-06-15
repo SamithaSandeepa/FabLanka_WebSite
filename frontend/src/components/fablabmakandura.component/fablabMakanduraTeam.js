@@ -57,7 +57,7 @@ export const datamaknadurateam = [
     {
         id: 12,
         name: "Thimira Thilikarathne",
-        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/thimira.jpg",
+        image:"https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/makandura-team/thimira.png",
     },
     {
         id: 13,
