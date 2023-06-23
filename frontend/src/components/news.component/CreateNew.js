@@ -78,14 +78,6 @@ const CreatNews = ({ isAuthenticated }) => {
         newNews.append(`videos[${index}]`, video.url);
       });
       setLoading(true);
-      //  {
-      //   videos: videos.map((video) => video.url),
-      //   title,
-      //   summary,
-      //   content,
-      //   image,
-      //   status,
-      // };
 
       axios
         .post(`${API_URL}/news/create/`, newNews, {

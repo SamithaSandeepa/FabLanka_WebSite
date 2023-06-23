@@ -28,7 +28,7 @@ class NewsCreate(generics.CreateAPIView):
 # class NewsCreate(generics.CreateAPIView):
 #     queryset = News.objects.all()
 #     serializer_class = NewsSerializer
-#     permission_classes = [AllowAny]
+#     permission_classes = [    ]
 #     print('NewsCreate')
 
     

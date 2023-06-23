@@ -27,10 +27,10 @@ const Home = () => {
       <div className="container px-0">
         <div className="grid grid-cols-12 grid-rows-2 rounded-md md:px-10">
           {/* bg-gradient-to-b from-green-600 to-blue */}
-          <div className="col-span-12 row-span-3 sm:col-span-8 sm:row-span-1 sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden">
+          <div className="col-span-12 row-span-3 sm:col-span-8 sm:row-span-1 sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden rounded">
             <ImageSlider />
           </div>
-          <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden hidden sm:block">
+          <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden hidden sm:block rounded">
             <NewAlert />
           </div>
           <div className="col-span-12 sm:col-span-12 row-span-5 px-5 sm:px-2 pt-2">

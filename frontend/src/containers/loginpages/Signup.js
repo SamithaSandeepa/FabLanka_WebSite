@@ -92,7 +92,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                     required
                   />
                 </div>
-                <button className="btn btn-primary btn-block" type="submit">
+                <button className="btn btn-primary bg-blue-500 text-white w-full" type="submit">
                   Register
                 </button>
               </form>

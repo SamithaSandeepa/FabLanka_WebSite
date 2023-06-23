@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'book',
     'projectMakandura',
