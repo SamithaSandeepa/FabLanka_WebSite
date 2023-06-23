@@ -18,7 +18,7 @@ const CreateEvent = ({ isAuthenticated }) => {
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
-  const [image_project_m, setImage] = useState("");
+  const [image_project_m, setImage] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -58,14 +58,26 @@ const CreateEvent = ({ isAuthenticated }) => {
     } else {
       e.preventDefault();
 
-      const newEvents = {
-        videos: videos.map((video) => video.url),
-        title_pastevent,
-        summery_pastevent,
-        content_pastevent,
-        image_project_m,
-        status,
-      };
+      // const newEvents = {
+      //   videos: videos.map((video) => video.url),
+      //   title_pastevent,
+      //   summery_pastevent,
+        // content_pastevent,
+      //   image_project_m,
+      //   status,
+      // };
+
+      const newEvents = new FormData();
+      newEvents.append("title_pastevent", title_pastevent);
+      newEvents.append("summery_pastevent", summery_pastevent);
+      newEvents.append("content_pastevent", content_pastevent);
+      newEvents.append("image_project_m", image_project_m);
+      newEvents.append("status", status);
+      videos.forEach((video, index) => {
+        newEvents.append(`videos[${index}]`, video.url);
+      });
+      setLoading(true);
+
       console.log(newEvents);
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
@@ -73,7 +85,7 @@ const CreateEvent = ({ isAuthenticated }) => {
         .post(`${API_URL}/event/create/`, newEvents, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((res) => {
@@ -84,14 +96,16 @@ const CreateEvent = ({ isAuthenticated }) => {
           alert("New Event Added");
           setTitle("");
           setSummery("");
-          setEditorState("");
-          setImage("");
+          setEditorState(EditorState.createEmpty());
+          setImage(null);
+          setVideos([{ url: "" }]);
           setStatus(true);
           setValidated(false);
         })
         .catch((err) => {
           alert(err);
         });
+        setLoading(false);
     }
   }
   const clearForm = () => {
@@ -99,7 +113,7 @@ const CreateEvent = ({ isAuthenticated }) => {
     setTitle("");
     setSummery("");
     setEditorState("");
-    setImage("");
+    setImage(null);
     setStatus(true);
     setValidated(false);
   };
@@ -178,17 +192,16 @@ const CreateEvent = ({ isAuthenticated }) => {
                   className="block text-gray-700 font-bold mb-2"
                   htmlFor="image"
                 >
-                  Image URL
+                  Image
                 </label>
                 <input
-                  type="text"
+                  type="file"
                   required
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
-                  value={image_project_m}
                   onChange={(e) => {
-                    setImage(e.target.value);
+                    setImage(e.target.files[0]);
                   }}
                 />
               </div>

@@ -20,10 +20,33 @@ const SingleEvent = ({ id }) => {
     getEvent();
   }, [id]);
 
+  // useEffect(() => {
+  //   if (event.content_pastevent) {
+  //     const contentState = convertFromRaw(JSON.parse(event.content_pastevent));
+  //     setEditorState(EditorState.createWithContent(contentState));
+  //   }
+  // }, [event]);
+
   useEffect(() => {
+    console.log("hello");
     if (event.content_pastevent) {
-      const contentState = convertFromRaw(JSON.parse(event.content_pastevent));
-      setEditorState(EditorState.createWithContent(contentState));
+      let contentState;
+      try {
+        contentState = JSON.parse(event.content_pastevent);
+        if (!contentState.blocks || !contentState.entityMap) {
+          throw new Error("Invalid content structure");
+        }
+      } catch (error) {
+        console.error("Error parsing news content:", error);
+        // Handle the case when news.content has an invalid structure
+        // For example, you can set contentState to an empty object or handle it in any other appropriate way
+        contentState = {
+          blocks: [],
+          entityMap: {},
+        };
+      }
+      const editorContentState = convertFromRaw(contentState);
+      setEditorState(EditorState.createWithContent(editorContentState));
     }
   }, [event]);
 
@@ -51,16 +74,14 @@ const SingleEvent = ({ id }) => {
   };
 
   return (
-    <div className="container mb-5 shadow-lg rounded-lg p-6">
-      <h1 className="text-center text-3xl py-4 mx-auto">
-        {event.title_pastevent}
-      </h1>
+    <div className="container mb-5">
+      <h1 className="text-center text-3xl">{event.title_pastevent}</h1>
       <img
         src={event.image_project_m}
-        className="card-img mt-3 h-86 w-auto mx-auto block"
+        className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       />
-      <p className="my-5 text-lg text-center">{event.summery_pastevent}</p>
+      <p className="my-5 text-lg">{event.summery_pastevent}</p>
       <div className="row">
         <div className="col-md-12">
           <Editor
@@ -71,12 +92,7 @@ const SingleEvent = ({ id }) => {
             }}
             toolbarHidden={true}
             stripPastedStyles={true}
-            editorStyle={{
-              border: "1px solid white",
-              minHeight: "300px",
-              width: "50%",
-              margin: "auto",
-            }}
+            editorStyle={{ border: "1px solid #ddd", minHeight: "300px" }}
           />
         </div>
       </div>
