@@ -107,8 +107,8 @@ const ProjectMakandura = () => {
   return (
     <>
       <div className="container m-0 p-0 bg-trasparent">
-        <h1 className="text-center font-bold pb-3 text-3xl">
-          Project Makandura
+        <h1 className="text-center font-bold font-serif py-3 text-3xl">
+          Past Event
         </h1>
         <Slider
           {...settings}
@@ -117,24 +117,48 @@ const ProjectMakandura = () => {
           {project.map((curElem) => {
             console.log(curElem, "test");
             return (
-              <div className="px-10 py-6 sm:w-1/2 lg:w-1/3" key={curElem.id}>
-                <div className="h-full rounded-lg overflow-hidden px-4">
-                  <img
-                    className="lg:auto md:h-48 w-full object-cover object-center rounded hover:scale-125 duration-300 ease-in-out"
-                    src={curElem.image_project_m}
-                    alt="blog"
-                  />
-                  <a href={"/event/" + curElem.id} className="no-underline">
-                    <div className="p-6 hover:bg-blue-700 hover:text-white transition duration-300 ease-in ">
-                      <h1 className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3">
-                        {curElem.title_project_m}
-                      </h1>
-                      <p className="leading-relaxed mb-3 line-clamp-3 hover:line-clamp-none duration-100 ease-in-out">
-                        {curElem.summery_project_m}
-                      </p>
-                      <div className="flex items-center flex-wrap "></div>
+              <div
+                className="p-4 sm:w-1/2 lg:w-1/3 !important"
+                key={curElem.id}
+              >
+                <div className="h-full rounded-lg overflow-hidden px-4 ">
+                  <a href={"/event/" + curElem.id}>
+                    <div className="relative w-xs h-72 overflow-hidden">
+                      <img
+                        className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
+                        src={curElem.image_project_m}
+                        alt="blog"
+                      />
                     </div>
                   </a>
+                  {/* <a href={"/event/" + curElem.id} > */}
+                  <div className="p-6 bg-gray-200 hover:text-black transition duration-300 ease-in">
+                    <a
+                      href={"/event/" + curElem.id}
+                      className="hover:underline hover:text-black"
+                    >
+                      <h1
+                        className="sm:text-lg md:text-xl lg:text-2xl font-normal mb-3"
+                        style={{ textDecoration: "none" }}
+                      >
+                        {curElem.title_project_m}
+                      </h1>
+                    </a>
+                    <p
+                      className=" mb-3 duration-100 ease-in-out "
+                      style={{
+                        textDecoration: "none",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 15,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {curElem.summery_project_m}
+                    </p>
+                    <div className="flex items-center flex-wrap"></div>
+                  </div>
+                  {/* </a> */}
                 </div>
               </div>
             );
