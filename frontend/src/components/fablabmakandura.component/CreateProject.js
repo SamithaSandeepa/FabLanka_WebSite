@@ -19,7 +19,7 @@ const CreatNews = ({ isAuthenticated }) => {
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
-  const [image_project_m, setImage] = useState("");
+  const [image_project_m, setImage] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -45,6 +45,7 @@ const CreatNews = ({ isAuthenticated }) => {
 
 
   const addProject = (e) => {
+    console.log("jghfd")
     // the raw state, stringified
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
@@ -65,14 +66,26 @@ const CreatNews = ({ isAuthenticated }) => {
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
-      const newProject = {
-        videos: videos.map((video) => video.url),
-        title_project_m,
-        summery_project_m,
-        content_project_m,
-        image_project_m,
-        status,
-      };
+      // const newProject = {
+      //   videos: videos.map((video) => video.url),
+      //   title_project_m,
+      //   summery_project_m,
+      //   content_project_m,
+      //   image_project_m,
+      //   status,
+      // };
+
+
+      const newProject = new FormData();
+      newProject.append("title_project_m", title_project_m);
+      newProject.append("summery_project_m", summery_project_m);
+      newProject.append("content_project_m", content_project_m);
+      newProject.append("image_project_m", image_project_m);
+      newProject.append("status", status);
+      videos.forEach((video, index) => {
+        newProject.append(`videos[${index}]`, video.url);
+      });
+      setLoading(true);
 
       console.log(newProject);
 
@@ -80,21 +93,23 @@ const CreatNews = ({ isAuthenticated }) => {
         .post(`${API_URL}/projectmakandura/create/`, newProject, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         })
         .then(() => {
           alert("New Project Added");
           setTitle("");
           setSummery("");
-          setEditorState("");
-          setImage("");
+          setEditorState(EditorState.createEmpty());
+          setImage(null);
+          setVideos([{ url: "" }]);
           setStatus(true);
           setValidated(false);
         })
         .catch((err) => {
           alert(err);
         });
+        setLoading(false); 
     }
   };
 
@@ -103,7 +118,7 @@ const CreatNews = ({ isAuthenticated }) => {
     setTitle("");
     setSummery("");
     setEditorState("");
-    setImage("");
+    setImage(null);
     setStatus(true);
     setValidated(false);
   };
@@ -179,23 +194,22 @@ const CreatNews = ({ isAuthenticated }) => {
                 }}
               />
             </div>
-            <div className="mb-4 flex flex-col md:flex-row">
-              <div className="w-full md:w-3/4 md:mr-4">
+            <div className="flex flex-wrap mb-4">
+              <div className="w-full md:w-2/3 mb-4 md:mb-0 pr-0 md:pr-4">
                 <label
                   className="block text-gray-700 font-bold mb-2"
                   htmlFor="image"
                 >
-                  Image URL
+                  Image
                 </label>
                 <input
-                  type="text"
+                  type="file"
                   required
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
-                  value={image_project_m}
                   onChange={(e) => {
-                    setImage(e.target.value);
+                    setImage(e.target.files[0]);
                   }}
                 />
               </div>
