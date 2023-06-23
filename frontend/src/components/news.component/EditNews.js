@@ -8,13 +8,12 @@ import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactPlayer from "react-player";
 
-
 const EditNews = ({ isAuthenticated, id }) => {
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
   const [summery, setSummery] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [status, setStatus] = useState("");
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -22,13 +21,14 @@ const EditNews = ({ isAuthenticated, id }) => {
     axios
       .get(`${API_URL}/news/${id}/`)
       .then((response) => {
-        console.log(response);
+        // console.log(response.data, "response");
         // set state with news data
         setTitle(response.data.title);
-        setSummery(response.data.summery);
-        // setEditorState(response.data.content);
-        const contentState = convertFromRaw(JSON.parse(response.data.content));
+        setSummery(response.data.summary);
+        const contentState = convertFromRaw(response.data.content);
         setEditorState(EditorState.createWithContent(contentState));
+        console.log(contentState);
+        console.log(response.data.image); // Check the value of response.data.image
         setImage(response.data.image);
         setStatus(response.data.status);
 
@@ -153,9 +153,9 @@ const EditNews = ({ isAuthenticated, id }) => {
                 style={{ marginBottom: "15px" }}
               >
                 <label className="form-label" style={{ marginBottom: "5px" }}>
-                  {" "}
-                  Image{" "}
+                  Image
                 </label>
+                <img src={image} alt="News Image" style={{ width: "100%" }} />
                 <input
                   type="text"
                   required
@@ -163,9 +163,7 @@ const EditNews = ({ isAuthenticated, id }) => {
                   placeholder="Enter Image Url"
                   id="image"
                   value={image}
-                  onChange={(e) => {
-                    setImage(e.target.value);
-                  }}
+                  onChange={(e) => setImage(e.target.value)}
                 />
               </div>
               <div

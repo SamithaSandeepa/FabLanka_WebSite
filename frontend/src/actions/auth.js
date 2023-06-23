@@ -26,7 +26,7 @@ export const load_user = () => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
         Accept: "application/json",
       },
     };
@@ -117,7 +117,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (err) {
     const errorMessage =
       err.response.data.detail || "Invalid username or password";
-      alert(errorMessage)
+    alert(errorMessage);
     dispatch({
       type: LOGIN_FAIL,
     });
@@ -160,7 +160,7 @@ export const verify = (uid, token) => async (dispatch) => {
   };
 
   const body = JSON.stringify({ uid, token });
-
+  console.log(body);
   try {
     await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/users/activation/`,
