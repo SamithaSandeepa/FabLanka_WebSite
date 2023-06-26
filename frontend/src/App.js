@@ -17,11 +17,11 @@ import Admin from "./containers/admin/admin";
 import Facebook from "./containers/client/Facebook";
 
 //fablab makandura
-import FablabMakandura from "./containers/client/fablab makandura/FablabMakandura";
-import Project from "./containers/client/fablab makandura/[id]";
-import CreateProject from "./containers/admin/project makandura/add";
+import FablabMakandura from "./containers/client/fablab_makandura/FablabMakandura";
+import Project from "./containers/client/fablab_makandura/[id]";
+import CreateProject from "./containers/admin/project_makandura/add";
 import ProjectTable from "./components/fablabmakandura.component/ProjectTable";
-import EditProject from "./containers/admin/project makandura/[id]";
+import EditProject from "./containers/admin/project_makandura/[id]";
 
 // news pages
 import CreateNews from "./containers/admin/news/add";

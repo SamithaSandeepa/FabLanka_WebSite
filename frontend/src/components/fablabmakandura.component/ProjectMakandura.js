@@ -122,7 +122,7 @@ const ProjectMakandura = () => {
                 key={curElem.id}
               >
                 <div className="h-full rounded-lg overflow-hidden px-4 ">
-                  <a href={"/event/" + curElem.id}>
+                  <a href={"/fablabmakandura/" + curElem.id}>
                     <div className="relative w-xs h-72 overflow-hidden">
                       <img
                         className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
@@ -134,7 +134,7 @@ const ProjectMakandura = () => {
                   {/* <a href={"/event/" + curElem.id} > */}
                   <div className="p-6 bg-gray-200 hover:text-black transition duration-300 ease-in">
                     <a
-                      href={"/event/" + curElem.id}
+                      href={"/fablabmakandura/" + curElem.id}
                       className="hover:underline hover:text-black"
                     >
                       <h1

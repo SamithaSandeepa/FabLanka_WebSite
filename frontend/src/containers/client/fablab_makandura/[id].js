@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 const Project = () => {
   const { id } = useParams();
-
+console.log("test")
   // const [news, setProject] = useState({});
   // console.log(setNews, "news");
 
