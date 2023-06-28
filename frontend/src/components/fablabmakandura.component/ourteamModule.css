@@ -126,6 +126,7 @@
   
   .team-member-image:hover {
     transform: scale(1.05);
+    text-decoration: none;
   }
   
   .team-member-name {
@@ -137,6 +138,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-decoration: none;
+  }
+
+  .team-member-name:hover {
+    text-decoration: none;
   }
   
   .team-member-role {
@@ -146,3 +152,19 @@
     text-align: center;
   }
   
+
+  /* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .team-member {
+    width: 30%;
+    padding: 5px 10px;
+  }
+  .team-member-card {
+    padding: 10px;
+    min-width: 100px;
+    min-height: 100px;
+  }
+  .team-member-name {
+    font-size: 10px;
+  }
+}

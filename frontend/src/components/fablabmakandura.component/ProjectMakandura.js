@@ -71,7 +71,7 @@ const ProjectMakandura = () => {
   var settings = {
     dots: false,
     infinite: false,
-    speed: 500,
+    speed: 100,
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 2,
@@ -108,7 +108,7 @@ const ProjectMakandura = () => {
     <>
       <div className="container m-0 p-0 bg-trasparent">
         <h1 className="text-center font-bold font-serif py-3 text-3xl">
-          Past Event
+          Project Makandura
         </h1>
         <Slider
           {...settings}
