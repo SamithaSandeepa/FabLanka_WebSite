@@ -465,7 +465,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
   return (
     <>
-      <div className="container mx-auto block relative pb-2">
+      <nav className="container mx-auto block relative pb-2">
         <div className="w-full fixed top-0 left-0 border-b-2 border-emerald-600">
           <div className="flex flex-wrap items-center justify-center px-1 md:px-10 py-2 md:py-0 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg transition duration-300 ease-in-out">
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
@@ -503,9 +503,14 @@ const Navbar = ({ logout, isAuthenticated }) => {
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>
+            <input
+              type="text"
+              placeholder="Search"
+              className="bg-white-700 text-black rounded-md px-3 outline-none"
+            />
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };

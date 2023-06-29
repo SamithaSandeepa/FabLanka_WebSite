@@ -3,6 +3,7 @@ import Navbar from "../components/main.component/Navbar";
 import { connect } from "react-redux";
 import { checkAuthenticated, load_user } from "../actions/auth";
 import Footer from "../components/main.component/Footer";
+import SecondNavbar from "../components/main.component/SecondNavbar";
 
 const Layout = ({ checkAuthenticated, load_user, children }) => {
   useEffect(() => {
@@ -28,16 +29,18 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
   }, [prevScrollPos]);
 
   return (
-    <div className="flex flex-col min-h-screen p-0 m-0">
-      <div className=""></div>
-      <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
-        <Navbar />
+    <>
+      <div className="flex flex-col min-h-screen p-0 m-0">
+        <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
+          {/* Main Navbar */}
+          <Navbar />
+        </div>
+        <div className="flex-grow mt-14 px-0">{children}</div>
+        <div className="">
+          <Footer />
+        </div>
       </div>
-      <div className="flex-grow mt-14 px-0">{children}</div>
-      <div className="">
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 };
 
