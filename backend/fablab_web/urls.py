@@ -5,7 +5,7 @@ from projectMakandura.views import projectMakanduraList, projectMakanduraCreate,
 from news.views import NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete
 from event.views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from sendmail.views import contact_form
 
 urlpatterns = [
     path('auth/', include('djoser.urls')),
@@ -33,7 +33,10 @@ urlpatterns = [
     path('event/<int:pk>/', EventDetail.as_view(), name='event_detail'),
     path('event/create/', EventCreate.as_view(), name='event_create'),
     path('event/<int:pk>/update/', EventUpdate.as_view(), name='event_update'),
-    path('event/<int:pk>/delete/', EventDelete.as_view(), name='event_delete')
+    path('event/<int:pk>/delete/', EventDelete.as_view(), name='event_delete'),
+
+    #contact-us
+    path('contact-us/', contact_form, name='contact_form'),
 
 ]
 

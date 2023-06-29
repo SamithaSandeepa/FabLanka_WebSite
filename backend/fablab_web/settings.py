@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'news',
     'event',
     'storages',
+    'sendmail',
 ]
 
 MIDDLEWARE = [
