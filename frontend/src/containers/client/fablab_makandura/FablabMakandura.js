@@ -1,7 +1,12 @@
+// import React from "react";
+// import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
+// import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
+// // import PastEvent from "../../../components/event.component/PastEvent";
+
 import React from "react";
 import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
-// import PastEvent from "../../../components/event.component/PastEvent";
+// import './fablabmakandura.css';
 
 const FablabMakandura = () => {
   return (
