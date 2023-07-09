@@ -5,12 +5,30 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { API_URL } from "../../config/index";
 import ReactPlayer from "react-player";
-
+import { Storage } from "aws-amplify";
+import Amplify from "@aws-amplify/core";
 
 const SingleProjectMakandura = ({ id }) => {
   console.log("test");
   const [Project, setProject] = useState({});
+  const [image, setImage] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  useEffect(() => {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
+        region: "ap-southeast-1",
+      },
+
+      Storage: {
+        AWSS3: {
+          bucket: "new-bucket13",
+          region: "ap-southeast-1",
+        },
+      },
+    });
+  }, []);
 
   useEffect(() => {
     console.log("test");
@@ -18,17 +36,29 @@ const SingleProjectMakandura = ({ id }) => {
     const getProject = async () => {
       const response = await axios.get(`${API_URL}/projectmakandura/${id}/`);
       setProject(response.data);
+      const url = response.data.image_project_m;
+      downloadFile(url);
     };
     getProject();
+
+    const downloadFile = async (fileName) => {
+      try {
+        const fileURL = await Storage.get(fileName);
+        console.log("get url", fileURL);
+        setImage(fileURL); // Set the value in the state variable
+      } catch (error) {
+        console.log("Error retrieving file:", error);
+        setImage(null); // Set null in case of an error
+      }
+    };
   }, [id]);
- 
+
   // useEffect(() => {
   //   if (Project.content_project_m) {
   //     const contentState = convertFromRaw(JSON.parse(Project.content_project_m));
   //     setEditorState(EditorState.createWithContent(contentState));
   //   }
   // }, [Project]);
-
 
   useEffect(() => {
     console.log("hello");
@@ -53,6 +83,16 @@ const SingleProjectMakandura = ({ id }) => {
     }
   }, [Project]);
 
+  const downloadFile = async (fileName) => {
+    try {
+      const fileURL = await Storage.get(fileName);
+      console.log("get image", fileName);
+      return fileURL;
+    } catch (error) {
+      console.log("Error retrieving file:", error);
+      return null;
+    }
+  };
 
   const renderVideos = () => {
     const videos = Project.videos;
@@ -77,12 +117,11 @@ const SingleProjectMakandura = ({ id }) => {
     return null; // Return null when videos is null or empty
   };
 
-
   return (
     <div className="container mb-5">
       <h1 className="text-center text-3xl">{Project.title_project_m}</h1>
       <img
-        src={Project.image_project_m}
+        src={image}
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       />

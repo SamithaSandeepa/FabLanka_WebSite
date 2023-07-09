@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -7,8 +7,16 @@ import { useStateContext } from "../../context/ContextProvider";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import ReactPlayer from "react-player";
+import Amplify from "@aws-amplify/core";
+import { Storage } from "aws-amplify";
 
 const CreatNews = ({ isAuthenticated }) => {
+  // image uploading
+  const ref = useRef(null);
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState();
+  // const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+
   const { setLoading } = useStateContext();
   const history = useHistory();
   const [loading, setLoadingState] = useState(true);
@@ -19,7 +27,7 @@ const CreatNews = ({ isAuthenticated }) => {
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
-  const [image_project_m, setImage] = useState(null);
+  const [image_project_m, setUploadedImageUrl] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -43,16 +51,61 @@ const CreatNews = ({ isAuthenticated }) => {
     renderVideos();
   }, [videos]);
 
+  useEffect(() => {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
+        region: "ap-southeast-1",
+      },
+
+      Storage: {
+        AWSS3: {
+          bucket: "new-bucket13",
+          region: "ap-southeast-1",
+        },
+      },
+    });
+  }, []);
+
+  const handleFile = () => {
+    const filename = ref.current.files[0].name;
+    console.log("ref", ref.current.files[0].name);
+    Storage.put(filename, ref.current.files[0], {
+      progressCallback: (progress) => {
+        setProgress(Math.round((progress.loaded / progress.total) * 100) + "%");
+        setTimeout(() => {
+          setProgress();
+        }, 1000);
+      },
+    })
+      .then((uploadResult) => {
+        const filename = ref.current.files[0].name;
+        console.log("img", filename);
+        Storage.get(filename)
+          .then((imageUrl) => {
+            console.log(imageUrl);
+            setUploadedImageUrl(filename);
+            setImage(imageUrl) // Set the image URL to the state variable
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const addProject = (e) => {
-    console.log("jghfd")
+    console.log("add project");
     // the raw state, stringified
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
     // convert the raw state back to a useable ContentState object
     // const content = convertFromRaw(JSON.parse(rawDraftContentState));
-    console.log(content_project_m);
+    // console.log(content_project_m);
+    console.log(image_project_m);
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -65,16 +118,6 @@ const CreatNews = ({ isAuthenticated }) => {
 
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
-      // const newProject = {
-      //   videos: videos.map((video) => video.url),
-      //   title_project_m,
-      //   summery_project_m,
-      //   content_project_m,
-      //   image_project_m,
-      //   status,
-      // };
-
 
       const newProject = new FormData();
       newProject.append("title_project_m", title_project_m);
@@ -101,7 +144,7 @@ const CreatNews = ({ isAuthenticated }) => {
           setTitle("");
           setSummery("");
           setEditorState(EditorState.createEmpty());
-          setImage(null);
+          // setImage(null);
           setVideos([{ url: "" }]);
           setStatus(true);
           setValidated(false);
@@ -109,8 +152,25 @@ const CreatNews = ({ isAuthenticated }) => {
         .catch((err) => {
           alert(err);
         });
-        setLoading(false); 
+      setLoading(false);
     }
+  };
+
+  const handleDelete = () => {
+    Storage.remove(ref.current.files[0].name)
+      .then((resp) => {
+        console.log("dlt", ref.current.files[0].name);
+        // loadImages();
+        console.log(ref.current);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleRemoveImage = () => {
+    handleDelete(); // Call your deleteImage function here
+    setUploadedImageUrl(""); // Call your setUploadedImageUrl function here
   };
 
   const clearForm = () => {
@@ -118,7 +178,7 @@ const CreatNews = ({ isAuthenticated }) => {
     setTitle("");
     setSummery("");
     setEditorState("");
-    setImage(null);
+    // setImage(null);
     setStatus(true);
     setValidated(false);
   };
@@ -146,8 +206,6 @@ const CreatNews = ({ isAuthenticated }) => {
     }
     return null;
   };
-
-
 
   return (
     <>
@@ -203,15 +261,32 @@ const CreatNews = ({ isAuthenticated }) => {
                   Image
                 </label>
                 <input
+                  ref={ref}
                   type="file"
+                  onChange={handleFile}
                   required
                   className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
-                  onChange={(e) => {
-                    setImage(e.target.files[0]);
-                  }}
                 />
+                {progress}
+                {image && (
+                  <div>
+                    <img
+                      src={image}
+                      width="200"
+                      height="200"
+                      alt="Selected"
+                      className="mt-2"
+                    />
+                    <button
+                      className="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded"
+                      onClick={handleRemoveImage}
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="w-full md:w-1/3 md:mt-0">
                 <label

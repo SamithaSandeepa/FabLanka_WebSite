@@ -1,12 +1,14 @@
 import React from "react";
+import ImageUpload from "../../../components/image/uploadImage";
 import ContactUs from "../../../components/contactus.compoents/ContactUs";
-import Fb from "../../../components/contactus.compoents/fb";
-import ContactForm from "../../../components/contactus.compoents/cont";
+import DownloadComponent from "../../../components/image/urlsimg";
 
 const contact = () => {
   return (
     <div className="container mt-10">
-      <ContactForm />
+      {/* <ImageUpload /> */}
+      {/* <ContactUs /> */}
+      <DownloadComponent/>
     </div>
   );
 };
