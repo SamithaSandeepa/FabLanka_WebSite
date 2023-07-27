@@ -172,7 +172,7 @@ const CreatNews = ({ isAuthenticated }) => {
           setTitle("");
           setSummery("");
           setEditorState(EditorState.createEmpty());
-          // setImage(null);
+          setImage(null);
           setVideos([{ url: "" }]);
           setStatus(true);
           setValidated(false);
@@ -206,7 +206,7 @@ const CreatNews = ({ isAuthenticated }) => {
     setTitle("");
     setSummery("");
     setEditorState("");
-    // setImage(null);
+    setImage(null);
     setStatus(true);
     setValidated(false);
   };
