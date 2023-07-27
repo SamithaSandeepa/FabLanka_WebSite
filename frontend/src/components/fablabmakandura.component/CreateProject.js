@@ -14,6 +14,7 @@ const CreatNews = ({ isAuthenticated }) => {
   // image uploading
   const ref = useRef(null);
   const [image, setImage] = useState(null);
+  console.log(image);
   const [progress, setProgress] = useState();
   // const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
 
@@ -30,6 +31,8 @@ const CreatNews = ({ isAuthenticated }) => {
   const [image_project_m, setUploadedImageUrl] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
+
+  console.log(videos);
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
@@ -67,6 +70,21 @@ const CreatNews = ({ isAuthenticated }) => {
     });
   }, []);
 
+  const handleVideoChange = (index, value) => {
+    const newVideos = [...videos];
+    newVideos[index] = { url: value };
+    setVideos(newVideos);
+  };
+
+  const handleAddVideo = () => {
+    setVideos([...videos, { url: "" }]);
+  };
+  const handleRemoveVideo = (index) => {
+    const newVideos = [...videos];
+    newVideos.splice(index, 1);
+    setVideos(newVideos);
+  };
+
   const handleFile = () => {
     const filename = ref.current.files[0].name;
     console.log("ref", ref.current.files[0].name);
@@ -85,7 +103,7 @@ const CreatNews = ({ isAuthenticated }) => {
           .then((imageUrl) => {
             console.log(imageUrl);
             setUploadedImageUrl(filename);
-            setImage(imageUrl) // Set the image URL to the state variable
+            setImage(imageUrl); // Set the image URL to the state variable
           })
           .catch((error) => {
             console.log(error);
@@ -99,14 +117,23 @@ const CreatNews = ({ isAuthenticated }) => {
   const addProject = (e) => {
     console.log("add project");
     // the raw state, stringified
+
+    console.log(videos);
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
-    // convert the raw state back to a useable ContentState object
-    // const content = convertFromRaw(JSON.parse(rawDraftContentState));
-    // console.log(content_project_m);
+
     console.log(image_project_m);
     const form = e.currentTarget;
+
+    // Function to extract URLs from the videos array
+    const extractUrls = (videoArray) => videoArray.map((video) => video.url);
+
+    // Call the function to get the URLs
+    const videoUrls = extractUrls(videos);
+
+    // Convert the array of URLs to a JSON string
+    const videosJsonString = JSON.stringify(videoUrls);
 
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -125,12 +152,13 @@ const CreatNews = ({ isAuthenticated }) => {
       newProject.append("content_project_m", content_project_m);
       newProject.append("image_project_m", image_project_m);
       newProject.append("status", status);
-      videos.forEach((video, index) => {
-        newProject.append(`videos[${index}]`, video.url);
-      });
+      newProject.append("videos", videosJsonString);
       setLoading(true);
 
-      console.log(newProject);
+      videos.forEach((video, index) => {
+        // newProject.append(`videos${index}`, video.url);
+        console.log(`videos${index}`, video.url);
+      });
 
       axios
         .post(`${API_URL}/projectmakandura/create/`, newProject, {
@@ -160,7 +188,7 @@ const CreatNews = ({ isAuthenticated }) => {
     Storage.remove(ref.current.files[0].name)
       .then((resp) => {
         console.log("dlt", ref.current.files[0].name);
-        // loadImages();
+        setImage(null);
         console.log(ref.current);
       })
       .catch((err) => {
@@ -310,57 +338,43 @@ const CreatNews = ({ isAuthenticated }) => {
                 </select>
               </div>
             </div>
-            {videos.map(
-              (video, index) => (
-                console.log(video, "videos"),
-                (
-                  <div className="mb-4" key={index}>
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor={`video-${index}`}
-                    >
-                      Video {index + 1}
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      placeholder="Enter Video Url"
-                      id={`video-${index}`}
-                      value={video.url}
-                      onChange={(e) => {
-                        const newVideos = [...videos];
-                        newVideos[index].url = e.target.value;
-                        setVideos(newVideos);
-                      }}
-                    />
-                    {index === videos.length - 1 && (
-                      <button
-                        className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setVideos([...videos, { url: "" }]);
-                        }}
-                      >
-                        Add another video
-                      </button>
-                    )}
-                    {index !== 0 && (
-                      <button
-                        className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => {
-                          const newVideos = [...videos];
-                          newVideos.splice(index, 1);
-                          setVideos(newVideos);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                )
-              )
-            )}
+            {videos.map((video, index) => (
+              <div className="mb-4" key={index}>
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor={`video-${index}`}
+                >
+                  Video {index + 1}
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter Video Url"
+                  id={`video-${index}`}
+                  value={video.url}
+                  onChange={(e) => handleVideoChange(index, e.target.value)}
+                />
+                {index === videos.length - 1 && (
+                  <button
+                    className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={handleAddVideo}
+                  >
+                    Add another video
+                  </button>
+                )}
+                {index !== 0 && (
+                  <button
+                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleRemoveVideo(index)}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+            <div className="row">{renderVideos()}</div>
+
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
