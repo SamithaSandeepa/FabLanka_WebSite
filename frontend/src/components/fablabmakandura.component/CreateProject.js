@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../config/index";
+import { API_URL, IDENTITY_POOL_ID, REGION, BUCKET } from "../../config/index";
 import { useStateContext } from "../../context/ContextProvider";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -14,7 +14,6 @@ const CreatNews = ({ isAuthenticated }) => {
   // image uploading
   const ref = useRef(null);
   const [image, setImage] = useState(null);
-  console.log(image);
   const [progress, setProgress] = useState();
   // const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
 
@@ -32,7 +31,7 @@ const CreatNews = ({ isAuthenticated }) => {
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
-  console.log(videos);
+  // console.log(videos);
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
@@ -57,18 +56,21 @@ const CreatNews = ({ isAuthenticated }) => {
   useEffect(() => {
     Amplify.configure({
       Auth: {
-        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
-        region: "ap-southeast-1",
+        identityPoolId: IDENTITY_POOL_ID,
+        region: REGION,
       },
 
       Storage: {
         AWSS3: {
-          bucket: "new-bucket13",
-          region: "ap-southeast-1",
+          bucket: BUCKET,
+          region: REGION,
         },
       },
     });
+    // listBucketFiles();
   }, []);
+
+  // Function to handle changes in video URLs
 
   const handleVideoChange = (index, value) => {
     const newVideos = [...videos];
@@ -85,10 +87,55 @@ const CreatNews = ({ isAuthenticated }) => {
     setVideos(newVideos);
   };
 
-  const handleFile = () => {
-    const filename = ref.current.files[0].name;
-    console.log("ref", ref.current.files[0].name);
-    Storage.put(filename, ref.current.files[0], {
+  // Function to handle image
+
+  const listBucketFiles = async () => {
+    try {
+      const files = await Storage.list("");
+      const filename = ref.current.files[0].name;
+      const keyValuesArray = files.results.map((item) => item.key);
+      console.log(keyValuesArray);
+      if (keyValuesArray.length === 0) {
+        console.log("The keyValuesArray is empty");
+        handleFile(filename);
+      } else {
+        const isNameExists = keyValuesArray.some((keyValue) => {
+          return filename.includes(keyValue);
+        });
+
+        if (isNameExists) {
+          console.log("This name already exists");
+          const [name, extension] = filename.split(".");
+          const regex = new RegExp(`^${name}_(\\d+)\\.${extension}$`);
+          let highestNumber = 0;
+
+          keyValuesArray.forEach((keyValue) => {
+            const match = keyValue.match(regex);
+            if (match && match[1]) {
+              const number = parseInt(match[1]);
+              if (!isNaN(number) && number > highestNumber) {
+                highestNumber = number;
+              }
+            }
+          });
+
+          const newNumber = highestNumber + 1;
+          const newName = `${name}_${newNumber}.${extension}`;
+          console.log("New name:", newName);
+          handleFile(newName);
+        } else {
+          console.log("This name does not exist");
+          handleFile(filename);
+        }
+      }
+    } catch (error) {
+      console.error("Error listing bucket files:", error);
+    }
+  };
+
+  const handleFile = (image) => {
+    console.log("Uplading ", image);
+    Storage.put(image, ref.current.files[0], {
       progressCallback: (progress) => {
         setProgress(Math.round((progress.loaded / progress.total) * 100) + "%");
         setTimeout(() => {
@@ -97,12 +144,9 @@ const CreatNews = ({ isAuthenticated }) => {
       },
     })
       .then((uploadResult) => {
-        const filename = ref.current.files[0].name;
-        console.log("img", filename);
-        Storage.get(filename)
+        Storage.get(image)
           .then((imageUrl) => {
-            console.log(imageUrl);
-            setUploadedImageUrl(filename);
+            setUploadedImageUrl(image);
             setImage(imageUrl); // Set the image URL to the state variable
           })
           .catch((error) => {
@@ -113,6 +157,25 @@ const CreatNews = ({ isAuthenticated }) => {
         console.log(error);
       });
   };
+
+  const handleDelete = () => {
+    Storage.remove(ref.current.files[0].name)
+      .then((resp) => {
+        console.log("dlt", ref.current.files[0].name);
+        setImage(null);
+        console.log(ref.current);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleRemoveImage = () => {
+    handleDelete(); // Call your deleteImage function here
+    setUploadedImageUrl(""); // Call your setUploadedImageUrl function here
+  };
+
+  //Function to handle adding a new project
 
   const addProject = (e) => {
     console.log("add project");
@@ -184,23 +247,6 @@ const CreatNews = ({ isAuthenticated }) => {
     }
   };
 
-  const handleDelete = () => {
-    Storage.remove(ref.current.files[0].name)
-      .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
-        setImage(null);
-        console.log(ref.current);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleRemoveImage = () => {
-    handleDelete(); // Call your deleteImage function here
-    setUploadedImageUrl(""); // Call your setUploadedImageUrl function here
-  };
-
   const clearForm = () => {
     setVideos([{ url: "" }]);
     setTitle("");
@@ -254,7 +300,7 @@ const CreatNews = ({ isAuthenticated }) => {
                 minLength="2"
                 value={title_project_m}
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter Event Title"
+                placeholder="Enter Project Title"
                 id="newsTitle"
                 onChange={(e) => {
                   setTitle(e.target.value);
@@ -272,7 +318,7 @@ const CreatNews = ({ isAuthenticated }) => {
                 type="text"
                 required
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Summarize your Event"
+                placeholder="Summarize your Project"
                 id="summery"
                 value={summery_project_m}
                 onChange={(e) => {
@@ -291,13 +337,22 @@ const CreatNews = ({ isAuthenticated }) => {
                 <input
                   ref={ref}
                   type="file"
-                  onChange={handleFile}
+                  // onChange={handleFile}
+                  onChange={listBucketFiles}
                   required
                   className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
                 />
-                {progress}
+                {/* Assuming 'progress' is a variable that holds the value */}
+                {progress && (
+                  <div className="fixed bottom-0 inset-0 flex items-center justify-center z-50">
+                    <div className="bg-green-500 text-white px-4 py-2 rounded-md">
+                      Image uploading {progress}
+                    </div>
+                  </div>
+                )}
+                {/* {progress} */}
                 {image && (
                   <div>
                     <img
@@ -324,7 +379,7 @@ const CreatNews = ({ isAuthenticated }) => {
                   Status
                 </label>
                 <select
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none border rounded w-full mx-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   value={status}
                   onChange={(e) => {
                     setStatus(e.target.value);

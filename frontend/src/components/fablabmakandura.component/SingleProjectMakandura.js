@@ -7,6 +7,7 @@ import { API_URL } from "../../config/index";
 import ReactPlayer from "react-player";
 import { Storage } from "aws-amplify";
 import Amplify from "@aws-amplify/core";
+import { ContentState } from "draft-js";
 
 const SingleProjectMakandura = ({ id }) => {
   console.log("test");
@@ -31,66 +32,27 @@ const SingleProjectMakandura = ({ id }) => {
   }, []);
 
   useEffect(() => {
-    console.log("test");
-
     const getProject = async () => {
       const response = await axios.get(`${API_URL}/projectmakandura/${id}/`);
       setProject(response.data);
+      const editorContentState = convertFromRaw(
+        response.data.content_project_m
+      );
+      setEditorState(EditorState.createWithContent(editorContentState));
       const url = response.data.image_project_m;
-      downloadFile(url);
+      downloadImage(url);
     };
     getProject();
-
-    const downloadFile = async (fileName) => {
-      try {
-        const fileURL = await Storage.get(fileName);
-        console.log("get url", fileURL);
-        setImage(fileURL); // Set the value in the state variable
-      } catch (error) {
-        console.log("Error retrieving file:", error);
-        setImage(null); // Set null in case of an error
-      }
-    };
   }, [id]);
 
-  // useEffect(() => {
-  //   if (Project.content_project_m) {
-  //     const contentState = convertFromRaw(JSON.parse(Project.content_project_m));
-  //     setEditorState(EditorState.createWithContent(contentState));
-  //   }
-  // }, [Project]);
-
-  useEffect(() => {
-    console.log("hello");
-    if (Project.content_project_m) {
-      let contentState;
-      try {
-        contentState = JSON.parse(Project.content_project_m);
-        if (!contentState.blocks || !contentState.entityMap) {
-          throw new Error("Invalid content structure");
-        }
-      } catch (error) {
-        console.error("Error parsing news content:", error);
-        // Handle the case when news.content has an invalid structure
-        // For example, you can set contentState to an empty object or handle it in any other appropriate way
-        contentState = {
-          blocks: [],
-          entityMap: {},
-        };
-      }
-      const editorContentState = convertFromRaw(contentState);
-      setEditorState(EditorState.createWithContent(editorContentState));
-    }
-  }, [Project]);
-
-  const downloadFile = async (fileName) => {
+  const downloadImage = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
-      return fileURL;
+      console.log("get url", fileURL);
+      setImage(fileURL); // Set the value in the state variable
     } catch (error) {
       console.log("Error retrieving file:", error);
-      return null;
+      setImage(null); // Set null in case of an error
     }
   };
 
@@ -105,8 +67,8 @@ const SingleProjectMakandura = ({ id }) => {
                 <ReactPlayer
                   url={video}
                   className="react-player pl-10 pt-10"
-                  width="100%"
-                  height="400px"
+                  width="500px"
+                  height="300px"
                 />
               </div>
             </div>
@@ -125,22 +87,36 @@ const SingleProjectMakandura = ({ id }) => {
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       />
-      <p className="my-5 text-lg">{Project.summery_project_m}</p>
+      <p className="my-5 text-p px-20">{Project.summery_project_m}</p>
       <div className="row">
         <div className="col-md-12">
           <Editor
             editorState={editorState}
             readOnly={true}
-            toolbar={{
-              options: [],
-            }}
             toolbarHidden={true}
             stripPastedStyles={true}
-            editorStyle={{ border: "1px solid #ddd", minHeight: "300px" }}
+            editorStyle={{
+              minHeight: "300px",
+              border: "none",
+              paddingLeft: "80px", // Adjust the left padding
+              paddingRight: "80px", // Adjust the right padding
+              paddingTop: "10px", // Adjust the top padding
+              paddingBottom: "10px",
+              fontSize: "16px",
+              lineHeight: "1.6",
+              fontFamily: "Arial, sans-serif", // Adjust the font family as needed
+            }}
           />
         </div>
       </div>
-      <div className="row">{renderVideos()}</div>
+      <div className="row">
+        <div
+          className="col-md-12"
+          style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        >
+          {renderVideos()}
+        </div>
+      </div>
     </div>
   );
 };
