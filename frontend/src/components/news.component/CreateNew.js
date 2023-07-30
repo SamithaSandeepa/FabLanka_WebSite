@@ -42,11 +42,6 @@ const CreatNews = ({ isAuthenticated }) => {
     renderVideos();
   }, [videos]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
-
   const addNews = (e) => {
     // the raw state, stringified
     const content = JSON.stringify(
@@ -108,7 +103,7 @@ const CreatNews = ({ isAuthenticated }) => {
     setTitle("");
     setSummary("");
     setEditorState("");
-    setImage("");
+    setImage(null);
     setStatus(true);
     setValidated(false);
   };

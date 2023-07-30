@@ -14,8 +14,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const [summery, setSummery] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [status, setStatus] = useState("");
-  const [videos, setVideos] = useState([{ url: "" }]);
+  const [videos, setVideos] = useState([{ url: null }]);
 
   useEffect(() => {
     axios
@@ -73,7 +74,7 @@ const EditNews = ({ isAuthenticated, id }) => {
           },
         })
         .then((res) => {
-          console.log(res);
+          console.log(res, "response");
           window.location.href = "/show-all-news";
         })
         .catch((err) => {
@@ -81,6 +82,29 @@ const EditNews = ({ isAuthenticated, id }) => {
         });
     }
     setValidated(true);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file, "file");
+    setImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImagePreview(null);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImagePreview(null);
+    // Clear the file input field by resetting its value
+    // if (fileInputRef.current) {
+    //   fileInputRef.current.value = "";
+    // }
   };
 
   const renderVideos = () => {
@@ -122,7 +146,7 @@ const EditNews = ({ isAuthenticated, id }) => {
                 required
                 minLength="2"
                 value={title}
-                className="form-control"
+                className="form-control text-black"
                 placeholder="Enter News Title"
                 id="newsTitle"
                 onChange={(e) => {
@@ -138,7 +162,7 @@ const EditNews = ({ isAuthenticated, id }) => {
               <input
                 type="text"
                 required
-                className="form-control"
+                className="form-control text-black"
                 placeholder="Summarize your news"
                 id="summery"
                 value={summery}
@@ -155,15 +179,24 @@ const EditNews = ({ isAuthenticated, id }) => {
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   Image
                 </label>
-                <img src={image} alt="News Image" style={{ width: "100%" }} />
+                {imagePreview && (
+                  <div>
+                    <img
+                      src={imagePreview}
+                      alt="News Image"
+                      style={{ width: "100%" }}
+                    />
+                    <button onClick={handleRemoveImage}>Remove Image</button>
+                  </div>
+                )}
                 <input
-                  type="text"
+                  type="file"
                   required
                   className="form-control"
                   placeholder="Enter Image Url"
                   id="image"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  onChange={handleImageChange}
+                  // ref={fileInputRef}
                 />
               </div>
               <div
