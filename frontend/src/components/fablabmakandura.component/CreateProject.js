@@ -31,8 +31,6 @@ const CreatNews = ({ isAuthenticated }) => {
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
-  // console.log(videos);
-
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
       console.log("undefined");
