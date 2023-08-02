@@ -1,20 +1,57 @@
 import React from "react";
 import Slider from "react-slick";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { API_URL } from "../../config/index";
+import { Amplify } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 const ProjectMakandura = () => {
   const [project, setProject] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
+        region: "ap-southeast-1",
+      },
+
+      Storage: {
+        AWSS3: {
+          bucket: "new-bucket13",
+          region: "ap-southeast-1",
+        },
+      },
+    });
+  }, []);
 
   const getProjects = async () => {
     try {
       const response = await axios.get(`${API_URL}/projectmakandura/`);
       //only status is true data will be shown
-      setProject(response.data.filter((item) => item.status === true)); //only status is true data will be shown
-      console.log(response.data);
+      const filteredData = response.data.filter((item) => item.status === true);
+      setProject(filteredData);
+
+      // Download image URLs for each project
+      const urls = await Promise.all(
+        filteredData.map((curElem) => downloadFile(curElem.image_project_m))
+      );
+       setImageUrls(urls);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const downloadFile = async (fileName) => {
+    try {
+      const fileURL = await Storage.get(fileName);
+      console.log("get image", fileName)
+      return fileURL;
+    } catch (error) {
+      console.log("Error retrieving file:", error);
+      return null;
     }
   };
 
@@ -114,8 +151,7 @@ const ProjectMakandura = () => {
           {...settings}
           className="sm:card_container md:pl-0 lg:pl-0 xl:pl-0"
         >
-          {project.map((curElem) => {
-            console.log(curElem, "test");
+          {project.map((curElem, index) => {
             return (
               <div
                 className="p-4 sm:w-1/2 lg:w-1/3 !important"
@@ -126,7 +162,7 @@ const ProjectMakandura = () => {
                     <div className="relative w-xs h-72 overflow-hidden">
                       <img
                         className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
-                        src={curElem.image_project_m}
+                        src={imageUrls[index]}
                         alt="blog"
                       />
                     </div>

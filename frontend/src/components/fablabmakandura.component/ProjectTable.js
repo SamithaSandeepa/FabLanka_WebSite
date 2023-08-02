@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
 import { useHistory } from "react-router-dom";
+import { Amplify } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 // import { data } from "../data";
 import { API_URL } from "../../config/index";
@@ -14,10 +16,27 @@ const ProjectTable = ({ isAuthenticated }) => {
   const { setLoading } = useStateContext();
   const [project, setProject] = useState([]);
   const history = useHistory();
+  const [imageUrls, setImageUrls] = useState([]);
 
   const filteredProject = project.filter((item) =>
     item.title_project_m.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
+        region: "ap-southeast-1",
+      },
+
+      Storage: {
+        AWSS3: {
+          bucket: "new-bucket13",
+          region: "ap-southeast-1",
+        },
+      },
+    });
+  }, []);
 
   useEffect(() => {
     console.log(history);
@@ -44,12 +63,65 @@ const ProjectTable = ({ isAuthenticated }) => {
       // console.log("access", token);
       const response = await axios.get(`${API_URL}/projectmakandura/`);
       //only status is true data will be shown
-      setProject(response.data); //only status is true data will be shown
-      console.log(response.data);
+      // setProject(response.data); //only status is true data will be shown
+      // console.log(response.data);
+
+      const filteredData = response.data.filter((item) => item.status === true);
+      setProject(filteredData);
+
+      console.log("test", filteredData);
+
+      const urls = await Promise.all(
+        filteredData.map((curElem) => downloadFile(curElem.image_project_m))
+      );
+      setImageUrls(urls);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const dltImge = async (id) => {
+  //   try {
+  //     // console.log("access", token);
+  //     // const response = await axios.get(`${API_URL}/projectmakandura/`);
+  //     //only status is true data will be shown
+  //     // setProject(response.data); //only status is true data will be shown
+  //     // console.log(response.data);
+
+  //     const filteredData = response.data.filter((item) => item.status === true);
+
+  //     console.log("test", filteredData);
+
+  //     const urls = await Promise.all(
+  //       filteredData.map((id) => handleDeleteImg(id.image_project_m))
+  //     );
+  //     setImageUrls(urls);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  function handleDeleteImg(fileName) {
+    Storage.remove(fileName)
+      .then((resp) => {
+        console.log("dlt", fileName);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const downloadFile = async (fileName) => {
+    try {
+      const fileURL = await Storage.get(fileName);
+      console.log("get image", fileName);
+      return fileURL;
+    } catch (error) {
+      console.log("Error retrieving file:", error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     getProject();
   }, []);
@@ -79,17 +151,25 @@ const ProjectTable = ({ isAuthenticated }) => {
       });
   };
 
-  const handleDelete = async (id) => {
-    console.log(id)
+  const handleDelete = async (id, fileName) => {
+    console.log(id);
     const csrftoken = getCookie("csrftoken");
     try {
-      const response = await axios.delete(`${API_URL}/projectmakandura/${id}/delete/`, {
-        headers: {
-          "X-CSRFToken": csrftoken,
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      // Delete the image from AWS S3
+      console.log("Delete img:", fileName);
+      await Storage.remove(fileName);
+
+      // Delete the data from the database
+      const response = await axios.delete(
+        `${API_URL}/projectmakandura/${id}/delete/`,
+        {
+          headers: {
+            "X-CSRFToken": csrftoken,
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(response.data);
       getProject();
     } catch (error) {
@@ -135,7 +215,7 @@ const ProjectTable = ({ isAuthenticated }) => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredProject.map((curElem) => {
+              {filteredProject.map((curElem, index) => {
                 console.log(curElem.status);
 
                 return (
@@ -143,7 +223,7 @@ const ProjectTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6">{curElem.id}</td>
                     <td className="py-3 px-6">
                       <img
-                        src={curElem.image_project_m}
+                        src={imageUrls[index]}
                         alt={curElem.title_project_m}
                         className="w-16 h-16 rounded-full border-2 border-gray-300"
                       />
@@ -196,7 +276,9 @@ const ProjectTable = ({ isAuthenticated }) => {
                           </svg>
                         </Link>
                         <button
-                          onClick={() => handleDelete(curElem.id)}
+                          onClick={() =>
+                            handleDelete(curElem.id, curElem.image_project_m)
+                          }
                           className="text-gray-400 hover:text-gray-600 mx-2"
                         >
                           <svg

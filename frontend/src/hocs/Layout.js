@@ -11,7 +11,8 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
     checkAuthenticated();
     load_user();
   }, []);
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
