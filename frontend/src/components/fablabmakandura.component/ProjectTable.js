@@ -7,8 +7,6 @@ import { useStateContext } from "../../context/ContextProvider";
 import { useHistory } from "react-router-dom";
 import { Amplify } from "aws-amplify";
 import { Storage } from "aws-amplify";
-
-// import { data } from "../data";
 import { API_URL } from "../../config/index";
 
 const ProjectTable = ({ isAuthenticated }) => {
@@ -60,19 +58,14 @@ const ProjectTable = ({ isAuthenticated }) => {
 
   const getProject = async () => {
     try {
-      // console.log("access", token);
       const response = await axios.get(`${API_URL}/projectmakandura/`);
-      //only status is true data will be shown
-      // setProject(response.data); //only status is true data will be shown
-      // console.log(response.data);
 
-      const filteredData = response.data.filter((item) => item.status === true);
-      setProject(filteredData);
+      setProject(response.data);
 
-      console.log("test", filteredData);
+      console.log("test", response.data);
 
       const urls = await Promise.all(
-        filteredData.map((curElem) => downloadFile(curElem.image_project_m))
+        response.data.map((curElem) => downloadFile(curElem.image_project_m))
       );
       setImageUrls(urls);
     } catch (error) {
@@ -80,36 +73,15 @@ const ProjectTable = ({ isAuthenticated }) => {
     }
   };
 
-  // const dltImge = async (id) => {
-  //   try {
-  //     // console.log("access", token);
-  //     // const response = await axios.get(`${API_URL}/projectmakandura/`);
-  //     //only status is true data will be shown
-  //     // setProject(response.data); //only status is true data will be shown
-  //     // console.log(response.data);
-
-  //     const filteredData = response.data.filter((item) => item.status === true);
-
-  //     console.log("test", filteredData);
-
-  //     const urls = await Promise.all(
-  //       filteredData.map((id) => handleDeleteImg(id.image_project_m))
-  //     );
-  //     setImageUrls(urls);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  function handleDeleteImg(fileName) {
-    Storage.remove(fileName)
-      .then((resp) => {
-        console.log("dlt", fileName);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // function handleDeleteImg(fileName) {
+  //   Storage.remove(fileName)
+  //     .then((resp) => {
+  //       console.log("dlt", fileName);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   const downloadFile = async (fileName) => {
     try {
@@ -152,7 +124,6 @@ const ProjectTable = ({ isAuthenticated }) => {
   };
 
   const handleDelete = async (id, fileName) => {
-    console.log(id);
     const csrftoken = getCookie("csrftoken");
     try {
       // Delete the image from AWS S3

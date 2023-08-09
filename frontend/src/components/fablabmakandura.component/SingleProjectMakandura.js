@@ -10,7 +10,6 @@ import Amplify from "@aws-amplify/core";
 import { ContentState } from "draft-js";
 
 const SingleProjectMakandura = ({ id }) => {
-  console.log("test");
   const [Project, setProject] = useState({});
   const [image, setImage] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());

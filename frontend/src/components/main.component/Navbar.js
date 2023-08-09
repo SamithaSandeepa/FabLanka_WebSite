@@ -522,11 +522,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>
-            <input
+            {/* <input
               type="text"
               placeholder="Search"
               className="bg-white-700 text-black rounded-md px-3 outline-none"
-            />
+            /> */}
           </div>
         </div>
       </nav>

@@ -6,12 +6,15 @@ import { connect } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
 import { useHistory } from "react-router-dom";
 import { API_URL } from "../../config/index";
+import { Amplify } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 const EventsTable = ({ isAuthenticated }) => {
   const [event, setEvent] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { setLoading } = useStateContext();
   const history = useHistory();
+  const [imageUrls, setImageUrls] = useState([]);
 
   const filteredEvent = event.filter((item) =>
     item.title_pastevent.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,6 +37,22 @@ const EventsTable = ({ isAuthenticated }) => {
     }
   }, [history, isAuthenticated]);
 
+  useEffect(() => {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
+        region: "ap-southeast-1",
+      },
+
+      Storage: {
+        AWSS3: {
+          bucket: "new-bucket13",
+          region: "ap-southeast-1",
+        },
+      },
+    });
+  }, []);
+
   const csrftoken = getCookie("csrftoken");
   axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
 
@@ -43,11 +62,27 @@ const EventsTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/event/`);
       //only status is true data will be shown
       setEvent(response.data); //only status is true data will be shown
-      console.log(response.data);
+
+      const urls = await Promise.all(
+        response.data.map((curElem) => downloadFile(curElem.image))
+      );
+      setImageUrls(urls);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const downloadFile = async (fileName) => {
+    try {
+      const fileURL = await Storage.get(fileName);
+      console.log("get image", fileName);
+      return fileURL;
+    } catch (error) {
+      console.log("Error retrieving file:", error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     getEvent();
     onChange();
@@ -77,9 +112,15 @@ const EventsTable = ({ isAuthenticated }) => {
       });
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, fileName) => {
+    console.log(id);
     const csrftoken = getCookie("csrftoken");
     try {
+      // Delete the image from AWS S3
+      console.log("Delete img:", fileName);
+      await Storage.remove(fileName);
+
+      // Delete the data from the database
       const response = await axios.delete(`${API_URL}/event/${id}/delete/`, {
         headers: {
           "X-CSRFToken": csrftoken,
@@ -132,7 +173,7 @@ const EventsTable = ({ isAuthenticated }) => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredEvent.map((curElem) => {
+              {filteredEvent.map((curElem, index) => {
                 console.log(curElem.status);
 
                 return (
@@ -140,7 +181,7 @@ const EventsTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6">{curElem.id}</td>
                     <td className="py-3 px-6">
                       <img
-                        src={curElem.image_project_m}
+                        src={imageUrls[index]}
                         alt={curElem.title_pastevent}
                         className="w-16 h-16 rounded-full border-2 border-gray-300"
                       />
@@ -184,7 +225,9 @@ const EventsTable = ({ isAuthenticated }) => {
                           </svg>
                         </Link>
                         <button
-                          onClick={() => handleDelete(curElem.id)}
+                          onClick={() =>
+                            handleDelete(curElem.id, curElem.image)
+                          }
                           className="text-gray-400 hover:text-gray-600 mx-2"
                         >
                           <svg
