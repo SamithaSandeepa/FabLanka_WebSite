@@ -9,6 +9,11 @@ class UserAccountManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, name=name)
 
+        # Check if there are any existing user accounts
+        existing_accounts = self.get_queryset().count()
+        if existing_accounts >= 1:
+            raise ValueError('Only one account can be created.')
+
         user.set_password(password)
         user.save()
 
