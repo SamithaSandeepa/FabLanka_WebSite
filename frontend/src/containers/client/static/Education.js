@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import ImageUploader from "react-images-upload";
 
-const Education = () => {
+const Education = ({ isAuthenticated }) => {
+  console.log("isAuthenticated", isAuthenticated);
+
+  const [pictures, setPictures] = useState([]);
+  const [captions, setCaptions] = useState("");
+
+  const onDrop = (pictureFiles) => {
+    setPictures(pictureFiles);
+    // Reset captions when new pictures are added
+    setCaptions(new Array(pictureFiles.length).fill(""));
+  };
+
+  const handleCaptionChange = (index, newCaption) => {
+    const updatedCaptions = [...captions];
+    updatedCaptions[index] = newCaption;
+    setCaptions(updatedCaptions);
+    console.log(captions, "captions");
+  };
+
+  useEffect(() => {
+    console.log(pictures, "pictures");
+    console.log(captions, "captions");
+  }, [pictures]);
+  console.log(pictures, "pictures");
+
   return (
     <div className="container-sm text-lg mt-10">
       <div className="flex flex-col items-center justify-center">
@@ -81,28 +107,46 @@ const Education = () => {
         These workshops will be conducted with the help of professionals locally
         and internationally.
       </p>
-      {/* <div
-        class="fb-page"
-        data-href="https://www.facebook.com/MakanduraFabLab"
-        data-tabs="timeline,events"
-        data-width="500"
-        data-height="700"
-        data-small-header="false"
-        data-adapt-container-width="true"
-        data-hide-cover="false"
-        data-show-facepile="false"
-      >
-        <blockquote
-          cite="https://www.facebook.com/MakanduraFabLab"
-          class="fb-xfbml-parse-ignore"
-        >
-          <a href="https://www.facebook.com/MakanduraFabLab">
-            FabLab Makandura
-          </a>
-        </blockquote>
-      </div> */}
+      {isAuthenticated && (
+        <div className="container">
+          <div className="top-0 left-0 width=100% z-1 font-medium">
+            <h1>Add Images and Videos</h1>
+          </div>
+          <ImageUploader
+            withIcon={true}
+            buttonText="Choose images"
+            onChange={onDrop}
+            imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
+            maxFileSize={5242880}
+            withLabel={true}
+            withPreview={true}
+          />
+          <div className="flex flex-wrap">
+            {pictures.map((picture, index) => (
+              <div key={index} className="w-1/4 p-4">
+                <img
+                  src={URL.createObjectURL(picture)}
+                  alt={`Preview ${index}`}
+                  className="max-w-full h-auto"
+                />
+                <input
+                  type="text"
+                  value={captions[index]}
+                  onChange={(e) => handleCaptionChange(index, e.target.value)}
+                  placeholder="Enter caption"
+                  className="mt-2 px-2 py-1 w-full border rounded"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Education;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Education);
