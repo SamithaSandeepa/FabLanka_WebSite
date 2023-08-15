@@ -1,8 +1,3 @@
-// import React from "react";
-// import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
-// import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
-// // import PastEvent from "../../../components/event.component/PastEvent";
-
 import React from "react";
 import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
@@ -12,9 +7,35 @@ const FablabMakandura = () => {
   return (
     <>
       <div className="container m-0 p-0">
-        <h1 className="text-[45px] text-center font-sans pt-10">
-          FabLab Makandura
-        </h1>
+        <header className="bg-gray-600 py-10 text-white text-center mb-4">
+          <h1 className="text-4xl font-bold">FabLab Makandura</h1>
+          <p className="mt-4 text-lg">
+            Fabrication Laboratory (FabLab) is an international concept where
+            advanced manufacturing tools and practices are housed in a single
+            place. More information about international FabLabs are available at{" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="https://www.fablabs.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.fablabs.io
+            </a>
+            .
+          </p>
+        </header>
+        <div className="grid grid-cols-12 grid-rows-3 bg-gradient-to-b from-white to-[#D4FAFC]">
+          <div className="col-span-12 row-span-3">
+            <div className="flex justify-center">
+              <img
+                src="https://i.ibb.co/0jX5QYJ/IMG-20210916-120751.jpg"
+                alt="FabLab Makandura"
+                className="w-25 rounded-lg shadow-md mx-auto"
+              />
+            </div>
+          </div>
+        </div>
+
         <h2 className="text-[30px] text-center font-normal pt-3">
           Fablabmakandura Team
         </h2>
@@ -28,11 +49,8 @@ const FablabMakandura = () => {
           <div className="justify-center pt-10 col-span-12 mx-5">
             {/* <h1 className="text-[50px] text-center text-[#163B64]">Location</h1> */}
             <p className="text-center pt-5">
-              FabLab Maknadura was started on May 27 th , 2017 and is the first
-              Fabrication Laboratory established by FabLanka and also the first
-              of its kind in Sri Lanka. FabLab Makandura is located at the
-              Makandura Public Library complex,<br></br>
-              in Makandura township of Kurunegala district.
+              FabLab Makandura is located about 50 Km from Colombo at the Public
+              Library Complex in Makandura town of Kurunegala district.
             </p>
             <div class="flex justify-center mt-4 mb-4">
               <div class="w-1/2 mr-5">
