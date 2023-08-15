@@ -11,6 +11,7 @@ import ReactPlayer from "react-player";
 import Amplify from "@aws-amplify/core";
 import { Storage } from "aws-amplify";
 
+
 const EditNews = ({ isAuthenticated, id }) => {
   const ref = useRef(null);
   const [validated, setValidated] = useState(false);
