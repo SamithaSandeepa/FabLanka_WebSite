@@ -511,7 +511,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
               onClick={() => setOpen(!open)}
               className="text-3xl absolute right-4 item-center cursor-pointer md:hidden "
             >
-              {/* <MDBIcon fas icon={open ? "close" : "bars"} /> */}X
+              {open ? "✕" : "☰"}
             </div>
             <ul
               className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in divide-x-[2px] divide-emerald-600 py-2 bg-white ${
