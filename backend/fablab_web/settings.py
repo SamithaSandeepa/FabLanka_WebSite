@@ -243,4 +243,4 @@ CORS_ALLOWED_ORIGINS = [
     'fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'https://fablab.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'fablab.onrender.com']
