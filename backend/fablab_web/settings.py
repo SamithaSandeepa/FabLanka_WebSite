@@ -232,15 +232,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://www.fablanka.lk',
-    'fab-lanka-web-site-git-main-samitha99.vercel.app',
-    'fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
+    'https://fab-lanka-web-site-git-main-samitha99.vercel.app',
+    'https://fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'http://www.fablanka.lk',
-    'fab-lanka-web-site-git-main-samitha99.vercel.app'
-    'fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
+    'https://fab-lanka-web-site-git-main-samitha99.vercel.app',
+    'https://fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'fablab.onrender.com']
