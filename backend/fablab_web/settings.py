@@ -17,6 +17,7 @@ from pathlib import Path
 import boto3
 from storages.backends.s3boto3 import S3Boto3Storage
 from dotenv import load_dotenv
+import dj_database_url
 # Load environment variables from .env file
 load_dotenv()
 
@@ -28,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9qlye*m#ojd#=wf%1uyd-_9j=quzl@yycrs*v3bk1f6-l-%1v7'
+SECRET_KEY = [os.getenv('SECRET_KEY')]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -99,14 +100,16 @@ DEBUG = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-    }    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': os.getenv('DB_NAME'),
+    #     'USER': os.getenv('DB_USER'),
+    #     'PASSWORD': os.getenv('DB_PASSWORD'),
+    #     'HOST': os.getenv('DB_HOST'),
+    #     'PORT': os.getenv('DB_PORT'),
+    # } 
+       
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
 
