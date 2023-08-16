@@ -10,8 +10,6 @@ from sendmail.views import contact_form
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('books/', BookList.as_view(), name='book_list'),
-    path('books/create/', BookCreate.as_view(), name='book_create'),
 
     #project makandura API 
     path('projectmakandura/', projectMakanduraList.as_view(), name='projectmakandura_list'),
