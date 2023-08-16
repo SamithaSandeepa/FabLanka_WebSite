@@ -1,6 +1,5 @@
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
-from book.views import BookList, BookCreate
 from projectMakandura.views import projectMakanduraList, projectMakanduraCreate, projectMakanduraDelete, projectMakanduraUpdate, projectMakanduraDetail
 from news.views import NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete
 from event.views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete

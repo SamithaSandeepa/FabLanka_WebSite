@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'book',
     'projectMakandura',
     'news',
     'event',
@@ -111,7 +110,7 @@ DEBUG = True
 # }
 
 DATABASES = {
-    'default': "postgres://fablab_db_fsec_user:knjFGcUIH4x9mLjPmdZXtgcfA2WcsRZu@dpg-cjedi20cfp5c73ehbbgg-a.singapore-postgres.render.com/fablab_db_fsec"
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
 }
 
 # AWS credentials
