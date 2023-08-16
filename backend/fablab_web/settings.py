@@ -76,8 +76,7 @@ ROOT_URLCONF = 'fablab_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': os.path.join(BASE_DIR, 'build'),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fablab_web.wsgi.application'
 
-DEBUG = True
+DEBUG = False
 
 
 # Database
@@ -109,9 +108,9 @@ DEBUG = True
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+# }
 
 # AWS credentials
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -170,8 +169,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'build/static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
