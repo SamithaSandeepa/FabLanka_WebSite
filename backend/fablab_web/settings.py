@@ -231,9 +231,10 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://fablab.onrender.com',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    # ... other allowed domains ...
+    "https://fablab.onrender.com",
 ]
