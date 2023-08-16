@@ -4,6 +4,7 @@ from book.views import BookList, BookCreate
 from projectMakandura.views import projectMakanduraList, projectMakanduraCreate, projectMakanduraDelete, projectMakanduraUpdate, projectMakanduraDetail
 from news.views import NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete
 from event.views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from sendmail.views import contact_form
 
