@@ -1,33 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { API_URL, IDENTITY_POOL_ID, REGION, BUCKET } from "../../config/index";
+import { API_URL } from "../../config/index";
 import { useStateContext } from "../../context/ContextProvider";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactPlayer from "react-player";
-import Amplify from "@aws-amplify/core";
-import { Storage } from "aws-amplify";
 
 const CreateEvent = ({ isAuthenticated }) => {
-  const ref = useRef(null);
-  const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const [dlimage, setDlimage] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-
+  const [validated, setValidated] = useState(false);
   const { setLoading } = useStateContext();
   const history = useHistory();
-  const [validated, setValidated] = useState(false);
-
   const [title_pastevent, setTitle] = useState("");
   const [summery_pastevent, setSummery] = useState("");
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
+  const [image_project_m, setImage] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -51,106 +42,13 @@ const CreateEvent = ({ isAuthenticated }) => {
     renderVideos();
   }, [videos]);
 
-  useEffect(() => {
-    Amplify.configure({
-      Auth: {
-        identityPoolId: IDENTITY_POOL_ID,
-        region: REGION,
-      },
-
-      Storage: {
-        AWSS3: {
-          bucket: BUCKET,
-          region: REGION,
-        },
-      },
-    });
-  }, []);
-
-  // Function to handle changes in video URLs
-
-  const handleVideoChange = (index, value) => {
-    const newVideos = [...videos];
-    newVideos[index] = { url: value };
-    setVideos(newVideos);
-  };
-
-  const handleAddVideo = () => {
-    setVideos([...videos, { url: "" }]);
-  };
-  const handleRemoveVideo = (index) => {
-    const newVideos = [...videos];
-    newVideos.splice(index, 1);
-    setVideos(newVideos);
-  };
-
-  const handleFileUpload = async () => {
-    console.log("handleFileUpload");
-    const file = ref.current.files[0];
-    const imageName = generateUniqueName(file.name);
-    setDlimage(imageName);
-    setIsUploading(true);
-    try {
-      await Storage.put(imageName, file, {
-        progressCallback: (progressEvent) => {
-          const progressPercentage = Math.round(
-            (progressEvent.loaded / progressEvent.total) * 100
-          );
-          setProgress(progressPercentage);
-        },
-      });
-
-      // Get the public URL of the uploaded image
-      const imageUrl = await Storage.get(imageName);
-      setPreview(imageUrl);
-      setImage(imageName);
-      setIsUploading(false);
-    } catch (error) {
-      console.log("Error uploading file:", error);
-      setIsUploading(false);
-    }
-  };
-
-  const generateUniqueName = (fileName) => {
-    const [name, extension] = fileName.split(".");
-    const uniqueString = Date.now().toString(36); // Using timestamp as a unique string
-    const uniqueName = `${name}_${uniqueString}.${extension}`;
-    return uniqueName;
-  };
-
-  const handleDelete = () => {
-    Storage.remove(dlimage)
-      .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
-        setImage(null);
-        console.log(ref.current);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleRemoveImage = () => {
-    handleDelete(); // Call your deleteImage function here
-    setImage(null);
-  };
-
-  //Function to handle adding a new Event
   function addEvents(e) {
+    // the raw state, stringified
     const content_pastevent = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
+    console.log(content_pastevent);
     const form = e.currentTarget;
-
-    // Function to extract URLs from the videos array
-    const extractUrls = (videoArray) => videoArray.map((video) => video.url);
-
-    // Call the function to get the URLs
-    const videoUrls = extractUrls(videos);
-
-    // Convert the array of URLs to a JSON string
-    const videosJsonString = JSON.stringify(videoUrls);
-    console.log(videosJsonString);
 
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -160,24 +58,39 @@ const CreateEvent = ({ isAuthenticated }) => {
     } else {
       e.preventDefault();
 
-      const csrftoken = getCookie("csrftoken");
-      axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
+      // const newEvents = {
+      //   videos: videos.map((video) => video.url),
+      //   title_pastevent,
+      //   summery_pastevent,
+        // content_pastevent,
+      //   image_project_m,
+      //   status,
+      // };
 
       const newEvents = new FormData();
       newEvents.append("title_pastevent", title_pastevent);
       newEvents.append("summery_pastevent", summery_pastevent);
       newEvents.append("content_pastevent", content_pastevent);
-      newEvents.append("image", image);
+      newEvents.append("image_project_m", image_project_m);
       newEvents.append("status", status);
-      newEvents.append("videos", videosJsonString);
+      videos.forEach((video, index) => {
+        newEvents.append(`videos[${index}]`, video.url);
+      });
       setLoading(true);
 
+      console.log(newEvents);
+      const csrftoken = getCookie("csrftoken");
+      axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
       axios
         .post(`${API_URL}/event/create/`, newEvents, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "multipart/form-data",
           },
+        })
+        .then((res) => {
+          console.log(res.data);
+          // history.push("/events");
         })
         .then(() => {
           alert("New Event Added");
@@ -190,18 +103,9 @@ const CreateEvent = ({ isAuthenticated }) => {
           setValidated(false);
         })
         .catch((err) => {
-          if (err.response.status === 401) {
-            //refresh page
-            alert("Your session has expired. Please login again");
-            //got to login page
-            window.location.href = "/login";
-            console.log(err.response);
-          } else {
-            alert("Something went wrong");
-            console.log(err.response);
-          }
+          alert(err);
         });
-      setLoading(false);
+        setLoading(false);
     }
   }
   const clearForm = () => {
@@ -291,39 +195,15 @@ const CreateEvent = ({ isAuthenticated }) => {
                   Image
                 </label>
                 <input
-                  ref={ref}
                   type="file"
-                  onChange={handleFileUpload}
                   required
                   className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                  }}
                 />
-                {/* Display the upload progress */}
-                {isUploading && (
-                  <div className="fixed bottom-0 inset-0 flex items-center justify-center z-50">
-                    <div className="bg-green-500 text-white px-4 py-2 rounded-md">
-                      Image uploading {progress}%
-                    </div>
-                  </div>
-                )}
-                {image && (
-                  <div>
-                    <img
-                      src={preview}
-                      width="200"
-                      height="200"
-                      alt="Selected"
-                      className="mt-2"
-                    />
-                    <button
-                      className="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded"
-                      onClick={handleRemoveImage}
-                    >
-                      Remove Image
-                    </button>
-                  </div>
-                )}
               </div>
               <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center">
                 <label
@@ -362,12 +242,20 @@ const CreateEvent = ({ isAuthenticated }) => {
                   placeholder="Enter Video Url"
                   id={`video-${index}`}
                   value={video.url}
-                  onChange={(e) => handleVideoChange(index, e.target.value)}
+                  onChange={(e) => {
+                    const newVideos = [...videos];
+                    newVideos[index].url = e.target.value;
+                    setVideos(newVideos);
+                  }}
                 />
+
                 {index === videos.length - 1 && (
                   <button
                     className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={handleAddVideo}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVideos([...videos, { url: "" }]);
+                    }}
                   >
                     Add another video
                   </button>
@@ -375,14 +263,18 @@ const CreateEvent = ({ isAuthenticated }) => {
                 {index !== 0 && (
                   <button
                     className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleRemoveVideo(index)}
+                    onClick={() => {
+                      const newVideos = [...videos];
+                      newVideos.splice(index, 1);
+                      setVideos(newVideos);
+                    }}
                   >
                     Remove
                   </button>
                 )}
               </div>
             ))}
-            <div className="row">{renderVideos()}</div>
+            <div>{renderVideos()}</div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"

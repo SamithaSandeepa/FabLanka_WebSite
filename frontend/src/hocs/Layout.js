@@ -32,12 +32,10 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
   return (
     <>
       <div className="flex flex-col min-h-screen p-0 m-0">
-        {/* <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}> */}
-        {/* Main Navbar */}
-        <div className="sticky top-0 z-50">
+        <div className={`sticky top-0 z-50 ${visible ? "" : "hidden"}`}>
+          {/* Main Navbar */}
           <Navbar />
         </div>
-        {/* </div> */}
         <div className="flex-grow mt-14 px-0">{children}</div>
         <div className="">
           <Footer />

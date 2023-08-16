@@ -1,46 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { API_URL } from "../../config/index";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertFromRaw, convertToRaw } from "draft-js";
-import { useStateContext } from "../../context/ContextProvider";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactPlayer from "react-player";
-import Amplify from "@aws-amplify/core";
-import { Storage } from "aws-amplify";
 
 
 const EditNews = ({ isAuthenticated, id }) => {
-  const ref = useRef(null);
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
   const [summery, setSummery] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [status, setStatus] = useState("");
-  const [videos, setVideos] = useState([{ url: "" }]);
-  const [dlimage, setDlimage] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [progress, setProgress] = useState();
-  // const [imageName, setImageName] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const { setLoading } = useStateContext();
+  const [videos, setVideos] = useState([{ url: null }]);
 
   useEffect(() => {
     axios
       .get(`${API_URL}/news/${id}/`)
       .then((response) => {
+        // console.log(response.data, "response");
         // set state with news data
-        downloadFile(response.data.image);
-        setDlimage(response.data.image);
-        setImage(response.data.image);
         setTitle(response.data.title);
         setSummery(response.data.summary);
         const contentState = convertFromRaw(response.data.content);
         setEditorState(EditorState.createWithContent(contentState));
+        console.log(contentState);
+        console.log(response.data.image); // Check the value of response.data.image
+        setImage(response.data.image);
         setStatus(response.data.status);
+
         setVideos(response.data.videos.map((video) => ({ url: video })));
         //...
       })
@@ -49,104 +42,9 @@ const EditNews = ({ isAuthenticated, id }) => {
       });
   }, [id]);
 
-  const downloadFile = async (fileName) => {
-    try {
-      const fileURL = await Storage.get(fileName);
-      setPreview(fileURL);
-      // setImage(fileURL);
-    } catch (error) {
-      console.log("Error retrieving file:", error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    Amplify.configure({
-      Auth: {
-        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
-        region: "ap-southeast-1",
-      },
-
-      Storage: {
-        AWSS3: {
-          bucket: "new-bucket13",
-          region: "ap-southeast-1",
-        },
-      },
-    });
-  }, []);
-
-  // Function to handle changes in video URLs
-
-  const handleVideoChange = (index, value) => {
-    const newVideos = [...videos];
-    newVideos[index] = { url: value };
-    setVideos(newVideos);
-  };
-
-  const handleAddVideo = () => {
-    setVideos([...videos, { url: "" }]);
-  };
-  const handleRemoveVideo = (index) => {
-    const newVideos = [...videos];
-    newVideos.splice(index, 1);
-    setVideos(newVideos);
-  };
-
-  const handleFile = async () => {
-    handleDelete();
-    const file = ref.current.files[0];
-    const imageName = generateUniqueName(file.name);
-
-    setIsUploading(true);
-    try {
-      await Storage.put(imageName, file, {
-        progressCallback: (progressEvent) => {
-          const progressPercentage = Math.round(
-            (progressEvent.loaded / progressEvent.total) * 100
-          );
-          setProgress(progressPercentage);
-        },
-      });
-
-      // Get the public URL of the uploaded image
-      const imageUrl = await Storage.get(imageName);
-      setPreview(imageUrl);
-      setDlimage(imageName);
-      setImage(imageName);
-      setIsUploading(false);
-    } catch (error) {
-      console.log("Error uploading file:", error);
-      setIsUploading(false);
-    }
-  };
-  const generateUniqueName = (fileName) => {
-    const [name, extension] = fileName.split(".");
-    const uniqueString = Date.now().toString(36); // Using timestamp as a unique string
-    const uniqueName = `${name}_${uniqueString}.${extension}`;
-    return uniqueName;
-  };
-
   useEffect(() => {
     renderVideos();
   }, [videos]);
-
-  const handleDelete = () => {
-    Storage.remove(dlimage)
-      .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
-        setImage(null);
-        console.log(ref.current);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleRemoveImage = () => {
-    handleDelete(); // Delete the image from S3 first
-    setImage(null);
-  };
 
   // updateupdateNews news data to the database
   const updateNews = (e) => {
@@ -154,39 +52,23 @@ const EditNews = ({ isAuthenticated, id }) => {
     const content = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
-
+    e.preventDefault();
     const form = e.currentTarget;
-
-    // Function to extract URLs from the videos array
-    const extractUrls = (videoArray) => videoArray.map((video) => video.url);
-
-    // Call the function to get the URLs
-    const videoUrlsArray = extractUrls(videos);
-
-    if (form.checkValidity() === true) {
-      e.preventDefault();
-      console.log("videos");
-
-      setValidated(true);
+    if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      e.preventDefault();
-
+      const news = {
+        videos: videos.map((video) => video.url),
+        title: title,
+        summery: summery,
+        content: content,
+        image: image,
+        status: status,
+      };
       const csrftoken = getCookie("csrftoken");
       axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
-      const news = {
-        title,
-        summery,
-        content: JSON.parse(content),
-        image,
-        status,
-        videos: videos.map((video) => video.url), // Extract video URLs
-      };
-      setLoading(false);
-
       axios
-        .patch(`${API_URL}/news/${id}/update/`, news, {
+        .put(`${API_URL}/news/${id}/update/`, news, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
             "Content-Type": "application/json",
@@ -200,6 +82,30 @@ const EditNews = ({ isAuthenticated, id }) => {
           console.log(err);
         });
     }
+    setValidated(true);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file, "file");
+    setImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImagePreview(null);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImagePreview(null);
+    // Clear the file input field by resetting its value
+    // if (fileInputRef.current) {
+    //   fileInputRef.current.value = "";
+    // }
   };
 
   const renderVideos = () => {
@@ -274,38 +180,25 @@ const EditNews = ({ isAuthenticated, id }) => {
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   Image
                 </label>
-                <input
-                  type="file"
-                  ref={ref}
-                  required
-                  placeholder="Enter Image Url"
-                  id="image"
-                  onChange={handleFile}
-                />
-                {isUploading && (
-                  <div className="fixed bottom-0 inset-0 flex items-center justify-center z-50">
-                    <div className="bg-green-500 text-white px-4 py-2 rounded-md">
-                      Image uploading {progress}%
-                    </div>
-                  </div>
-                )}
-                {image && (
+                {imagePreview && (
                   <div>
                     <img
-                      src={preview}
-                      width="200"
-                      height="200"
-                      alt="Selected"
-                      className="mt-2"
+                      src={imagePreview}
+                      alt="News Image"
+                      style={{ width: "100%" }}
                     />
-                    <button
-                      className="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded"
-                      onClick={handleRemoveImage}
-                    >
-                      Remove Image
-                    </button>
+                    <button onClick={handleRemoveImage}>Remove Image</button>
                   </div>
                 )}
+                <input
+                  type="file"
+                  required
+                  className="form-control"
+                  placeholder="Enter Image Url"
+                  id="image"
+                  onChange={handleImageChange}
+                  // ref={fileInputRef}
+                />
               </div>
               <div
                 className="form-group col-md-4 text-center m-auto"
@@ -341,12 +234,19 @@ const EditNews = ({ isAuthenticated, id }) => {
                   placeholder="Enter Video Url"
                   id={`video-${index}`}
                   value={video.url}
-                  onChange={(e) => handleVideoChange(index, e.target.value)}
+                  onChange={(e) => {
+                    const newVideos = [...videos];
+                    newVideos[index].url = e.target.value;
+                    setVideos(newVideos);
+                  }}
                 />
                 {index === videos.length - 1 && (
                   <button
                     className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={handleAddVideo}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVideos([...videos, { url: "" }]);
+                    }}
                   >
                     Add another video
                   </button>
@@ -354,7 +254,11 @@ const EditNews = ({ isAuthenticated, id }) => {
                 {index !== 0 && (
                   <button
                     className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleRemoveVideo(index)}
+                    onClick={() => {
+                      const newVideos = [...videos];
+                      newVideos.splice(index, 1);
+                      setVideos(newVideos);
+                    }}
                   >
                     Remove
                   </button>
@@ -363,11 +267,9 @@ const EditNews = ({ isAuthenticated, id }) => {
             ))}
             <div className="row">{renderVideos()}</div>
             <div className="form-group" style={{ marginBottom: "15px" }}>
-              <label
-                className="block text-gray-700 font-bold mb-2"
-                htmlFor="eventContent"
-              >
-                Add News Content
+              <label className="form-label" style={{ marginBottom: "5px" }}>
+                {" "}
+                Add News Content{" "}
               </label>
               <div className="editor">
                 <Editor

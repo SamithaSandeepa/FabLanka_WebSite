@@ -6,35 +6,16 @@ import { connect } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
 import { useHistory } from "react-router-dom";
 import { API_URL } from "../../config/index";
-import { Amplify } from "aws-amplify";
-import { Storage } from "aws-amplify";
 
 const NewsTable = ({ isAuthenticated }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { setLoading } = useStateContext();
   const [news, setNews] = useState([]);
   const history = useHistory();
-  const [imageUrls, setImageUrls] = useState([]);
 
   const filteredNews = news.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  useEffect(() => {
-    Amplify.configure({
-      Auth: {
-        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
-        region: "ap-southeast-1",
-      },
-
-      Storage: {
-        AWSS3: {
-          bucket: "new-bucket13",
-          region: "ap-southeast-1",
-        },
-      },
-    });
-  }, []);
 
   useEffect(() => {
     console.log(history);
@@ -63,26 +44,10 @@ const NewsTable = ({ isAuthenticated }) => {
       //only status is true data will be shown
       setNews(response.data); //only status is true data will be shown
       console.log(response.data);
-      const urls = await Promise.all(
-        response.data.map((curElem) => downloadFile(curElem.image))
-      );
-      setImageUrls(urls);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const downloadFile = async (fileName) => {
-    try {
-      const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
-      return fileURL;
-    } catch (error) {
-      console.log("Error retrieving file:", error);
-      return null;
-    }
-  };
-
   useEffect(() => {
     getNews();
   }, []);
@@ -112,14 +77,9 @@ const NewsTable = ({ isAuthenticated }) => {
       });
   };
 
-  const handleDelete = async (id, fileName) => {
+  const handleDelete = async (id) => {
     const csrftoken = getCookie("csrftoken");
     try {
-      // Delete the image from AWS S3
-      console.log("Delete img:", fileName);
-      await Storage.remove(fileName);
-
-      // Delete the data from the database
       const response = await axios.delete(`${API_URL}/news/${id}/delete/`, {
         headers: {
           "X-CSRFToken": csrftoken,
@@ -172,7 +132,7 @@ const NewsTable = ({ isAuthenticated }) => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredNews.map((curElem, index) => {
+              {filteredNews.map((curElem) => {
                 console.log(curElem.status);
 
                 return (
@@ -180,7 +140,7 @@ const NewsTable = ({ isAuthenticated }) => {
                     <td className="py-3 px-6">{curElem.id}</td>
                     <td className="py-3 px-6">
                       <img
-                        src={imageUrls[index]}
+                        src={curElem.image}
                         alt={curElem.title}
                         className="w-16 h-16 rounded-full border-2 border-gray-300"
                       />

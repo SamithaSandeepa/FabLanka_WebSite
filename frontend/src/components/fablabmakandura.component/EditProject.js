@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { API_URL } from "../../config/index";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import { useStateContext } from "../../context/ContextProvider";
 import { convertFromRaw, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ReactPlayer from "react-player";
@@ -12,6 +11,7 @@ import Amplify from "@aws-amplify/core";
 import { Storage } from "aws-amplify";
 
 const EditProject = ({ isAuthenticated, id }) => {
+  console.log(isAuthenticated, id);
   const ref = useRef(null);
   const [validated, setValidated] = useState(false);
   const [title_project_m, setTitle] = useState("");
@@ -20,30 +20,31 @@ const EditProject = ({ isAuthenticated, id }) => {
   const [image_project_m, setImage] = useState("");
   const [status, setStatus] = useState("");
   const [videos, setVideos] = useState([{ url: "" }]);
-  const [dlimage, setDlimage] = useState(null);
-  const [preview, setPreview] = useState(null);
   const [progress, setProgress] = useState();
-  const [imageName, setImageName] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const { setLoading } = useStateContext();
+  const [updatedImage, setUpdatedImage] = useState(null);
+
+  console.log(localStorage.getItem("access"));
 
   useEffect(() => {
     axios
       .get(`${API_URL}/projectmakandura/${id}/`)
       .then((response) => {
-        console.log(response.data, "response.data");
+        console.log("res", response);
+        console.log("image", response.data.image_project_m);
         downloadFile(response.data.image_project_m);
-        setImageName(response.data.image_project_m);
-        setDlimage(response.data.image_project_m);
-        setImage(response.data.image_project_m);
+
+        // set state with news data
         setTitle(response.data.title_project_m);
         setSummery(response.data.summery_project_m);
-        const editorContentState = convertFromRaw(
-          response.data.content_project_m
+        // setEditorState(response.data.content);
+        const contentState = convertFromRaw(
+          JSON.parse(response.data.content_project_m)
         );
-        setEditorState(EditorState.createWithContent(editorContentState));
+        setEditorState(EditorState.createWithContent(contentState));
         setStatus(response.data.status);
+
         setVideos(response.data.videos.map((video) => ({ url: video })));
+        //...
       })
       .catch((err) => {
         console.log(err);
@@ -52,9 +53,10 @@ const EditProject = ({ isAuthenticated, id }) => {
 
   const downloadFile = async (fileName) => {
     try {
+      console.log("heee");
       const fileURL = await Storage.get(fileName);
-      setPreview(fileURL);
-      // setImage(fileURL);
+      console.log("get image", fileName);
+      setImage(fileURL);
     } catch (error) {
       console.log("Error retrieving file:", error);
       return null;
@@ -77,131 +79,77 @@ const EditProject = ({ isAuthenticated, id }) => {
     });
   }, []);
 
-  // Function to handle changes in video URLs
-
-  const handleVideoChange = (index, value) => {
-    const newVideos = [...videos];
-    newVideos[index] = { url: value };
-    setVideos(newVideos);
-  };
-
-  const handleAddVideo = () => {
-    setVideos([...videos, { url: "" }]);
-  };
-  const handleRemoveVideo = (index) => {
-    const newVideos = [...videos];
-    newVideos.splice(index, 1);
-    setVideos(newVideos);
-  };
-
-  const handleFile = async () => {
-    handleDelete();
-    const file = ref.current.files[0];
-    const imageName = generateUniqueName(file.name);
-
-    setIsUploading(true);
-    try {
-      await Storage.put(imageName, file, {
-        progressCallback: (progressEvent) => {
-          const progressPercentage = Math.round(
-            (progressEvent.loaded / progressEvent.total) * 100
-          );
-          setProgress(progressPercentage);
-        },
+  const handleFile = () => {
+    const filename = ref.current.files[0].name;
+    Storage.put(filename, ref.current.files[0], {
+      progressCallback: (progress) => {
+        setProgress(Math.round((progress.loaded / progress.total) * 100) + "%");
+        setTimeout(() => {
+          setProgress();
+        }, 1000);
+      },
+    })
+      .then((uploadResult) => {
+        const filename = ref.current.files[0].name;
+        console.log("img", filename);
+        Storage.get(filename)
+          .then((imageUrl) => {
+            console.log(imageUrl);
+            setUpdatedImage(imageUrl);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-
-      // Get the public URL of the uploaded image
-      const imageUrl = await Storage.get(imageName);
-      setPreview(imageUrl);
-      setDlimage(imageName);
-      setImage(imageName);
-      setIsUploading(false);
-    } catch (error) {
-      console.log("Error uploading file:", error);
-      setIsUploading(false);
-    }
-  };
-  const generateUniqueName = (fileName) => {
-    const [name, extension] = fileName.split(".");
-    const uniqueString = Date.now().toString(36); // Using timestamp as a unique string
-    const uniqueName = `${name}_${uniqueString}.${extension}`;
-    return uniqueName;
   };
 
   useEffect(() => {
     renderVideos();
   }, [videos]);
 
-  const handleDelete = () => {
-    Storage.remove(dlimage)
-      .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
-        setImage(null);
-        console.log(ref.current);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleRemoveImage = () => {
-    handleDelete(); // Delete the image from S3 first
-    setImage(null);
+    setUpdatedImage(null);
   };
 
   // updateupdateNews news data to the database
   const updateProject = (e) => {
+    e.preventDefault();
+
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
 
-    const form = e.currentTarget;
+    const project = {
+      videos: videos.map((video) => video.url),
+      title: title_project_m,
+      summery: summery_project_m,
+      content: content_project_m,
+      image: updatedImage ? updatedImage : image_project_m,
+      status: status,
+    };
 
-    // Function to extract URLs from the videos array
-    const extractUrls = (videoArray) => videoArray.map((video) => video.url);
-
-    // Call the function to get the URLs
-    const videoUrlsArray = extractUrls(videos);
-
-    console.log(videoUrlsArray, "videoUrlsArray");
-
-    if (form.checkValidity() === true) {
-      e.preventDefault();
-      console.log("videos");
-
-      setValidated(true);
-      e.stopPropagation();
-    } else {
-      e.preventDefault();
-
-      const csrftoken = getCookie("csrftoken");
-      axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
-
-      const updateProject = {
-        title_project_m,
-        summery_project_m,
-        content_project_m: JSON.parse(content_project_m),
-        image_project_m,
-        status,
-        videos: videos.map((video) => video.url), // Extract video URLs
-      };
-      setLoading(false);
-
-      axios
-        .patch(`${API_URL}/projectmakandura/${id}/update/`, updateProject, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          window.location.href = "/show-all-projects";
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    const csrftoken = getCookie("csrftoken");
+    axios.defaults.headers.common["X-CSRFToken"] = csrftoken;
+    console.log(project);
+    axios
+      .put(`${API_URL}/projectmakandura/${id}/update/`, project, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/show-all-projects";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
+    setValidated(true);
   };
 
   const renderVideos = () => {
@@ -246,7 +194,7 @@ const EditProject = ({ isAuthenticated, id }) => {
                   required
                   minLength="2"
                   value={title_project_m}
-                  className="form-control text-black"
+                  className="form-control"
                   placeholder="Enter News Project"
                   id="newsTitle"
                   onChange={(e) => {
@@ -262,7 +210,7 @@ const EditProject = ({ isAuthenticated, id }) => {
                 <input
                   type="text"
                   required
-                  className="form-control text-black"
+                  className="form-control"
                   placeholder="Summarize your news"
                   id="summery"
                   value={summery_project_m}
@@ -287,17 +235,11 @@ const EditProject = ({ isAuthenticated, id }) => {
                     id="image"
                     onChange={handleFile}
                   />
-                  {isUploading && (
-                    <div className="fixed bottom-0 inset-0 flex items-center justify-center z-50">
-                      <div className="bg-green-500 text-white px-4 py-2 rounded-md">
-                        Image uploading {progress}%
-                      </div>
-                    </div>
-                  )}
-                  {image_project_m && (
+                  {progress}
+                  {updatedImage ? (
                     <div>
                       <img
-                        src={preview}
+                        src={updatedImage}
                         width="200"
                         height="200"
                         alt="Selected"
@@ -305,11 +247,31 @@ const EditProject = ({ isAuthenticated, id }) => {
                       />
                       <button
                         className="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded"
-                        onClick={handleRemoveImage}
+                        onClick={() => {
+                          setUpdatedImage(null);
+                        }}
                       >
                         Remove Image
                       </button>
                     </div>
+                  ) : (
+                    image_project_m && (
+                      <div>
+                        <img
+                          src={image_project_m}
+                          width="200"
+                          height="200"
+                          alt="Selected"
+                          className="mt-2"
+                        />
+                        <button
+                          className="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-5 rounded"
+                          onClick={handleRemoveImage}
+                        >
+                          Remove Image
+                        </button>
+                      </div>
+                    )
                   )}
                 </div>
 
@@ -348,12 +310,19 @@ const EditProject = ({ isAuthenticated, id }) => {
                     placeholder="Enter Video Url"
                     id={`video-${index}`}
                     value={video.url}
-                    onChange={(e) => handleVideoChange(index, e.target.value)}
+                    onChange={(e) => {
+                      const newVideos = [...videos];
+                      newVideos[index].url = e.target.value;
+                      setVideos(newVideos);
+                    }}
                   />
                   {index === videos.length - 1 && (
                     <button
                       className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={handleAddVideo}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setVideos([...videos, { url: "" }]);
+                      }}
                     >
                       Add another video
                     </button>
@@ -361,7 +330,11 @@ const EditProject = ({ isAuthenticated, id }) => {
                   {index !== 0 && (
                     <button
                       className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={() => handleRemoveVideo(index)}
+                      onClick={() => {
+                        const newVideos = [...videos];
+                        newVideos.splice(index, 1);
+                        setVideos(newVideos);
+                      }}
                     >
                       Remove
                     </button>
@@ -369,12 +342,11 @@ const EditProject = ({ isAuthenticated, id }) => {
                 </div>
               ))}
               <div className="row">{renderVideos()}</div>
+
               <div className="form-group" style={{ marginBottom: "15px" }}>
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="eventContent"
-                >
-                  Add News Content
+                <label className="form-label" style={{ marginBottom: "5px" }}>
+                  {" "}
+                  Add News Content{" "}
                 </label>
                 <div className="editor">
                   <Editor

@@ -4,7 +4,7 @@ class Event(models.Model):
     title_pastevent = models.CharField(max_length=200)
     summery_pastevent = models.TextField()
     content_pastevent = models.JSONField()
-    image = models.TextField()
+    image_project_m = models.FileField(upload_to='media/event/')
     status = models.BooleanField(default=True)
     videos = models.JSONField(null=True, blank=True)
 

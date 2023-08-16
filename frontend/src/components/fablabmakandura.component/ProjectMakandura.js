@@ -38,7 +38,7 @@ const ProjectMakandura = () => {
       const urls = await Promise.all(
         filteredData.map((curElem) => downloadFile(curElem.image_project_m))
       );
-      setImageUrls(urls);
+       setImageUrls(urls);
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ const ProjectMakandura = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      console.log("get image", fileName)
       return fileURL;
     } catch (error) {
       console.log("Error retrieving file:", error);
@@ -194,6 +194,7 @@ const ProjectMakandura = () => {
                     </p>
                     <div className="flex items-center flex-wrap"></div>
                   </div>
+                  {/* </a> */}
                 </div>
               </div>
             );

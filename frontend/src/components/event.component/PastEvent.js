@@ -1,57 +1,21 @@
 import React from "react";
 import Slider from "react-slick";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+// import styles from "./PastEvent.module.css";
 import { API_URL } from "../../config/index";
-import { Amplify } from "aws-amplify";
-import { Storage } from "aws-amplify";
 
 const PastEvent = () => {
-  const ref = useRef(null);
   const [events, setEvents] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
-
-  useEffect(() => {
-    Amplify.configure({
-      Auth: {
-        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
-        region: "ap-southeast-1",
-      },
-
-      Storage: {
-        AWSS3: {
-          bucket: "new-bucket13",
-          region: "ap-southeast-1",
-        },
-      },
-    });
-  }, []);
 
   const getEvents = async () => {
     try {
       const response = await axios.get(`${API_URL}/event/`);
       //only status is true data will be shown
-      const filteredData = response.data.filter((item) => item.status === true); //only status is true data will be shown
-      // Download image URLs for each project
-      setEvents(filteredData);
-
-      const urls = await Promise.all(
-        filteredData.map((curElem) => downloadFile(curElem.image))
-      );
-      setImageUrls(urls);
+      setEvents(response.data.filter((item) => item.status === true)); //only status is true data will be shown
+      console.log(response.data);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const downloadFile = async (fileName) => {
-    try {
-      const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
-      return fileURL;
-    } catch (error) {
-      console.log("Error retrieving file:", error);
-      return null;
     }
   };
 
@@ -151,7 +115,7 @@ const PastEvent = () => {
           {...settings}
           className="sm:card_container md:pl-0 lg:pl-0 xl:pl-0"
         >
-          {events.map((curElem, index) => {
+          {events.map((curElem) => {
             console.log(curElem, "test");
             return (
               <div
@@ -163,7 +127,7 @@ const PastEvent = () => {
                     <div className="relative w-xs h-72 overflow-hidden">
                       <img
                         className="absolute inset-0 w-full h-full object-cover object-center duration-300 transform hover:scale-125 transition-transform ease-in-out"
-                        src={imageUrls[index]}
+                        src={curElem.image_project_m}
                         alt="blog"
                       />
                     </div>

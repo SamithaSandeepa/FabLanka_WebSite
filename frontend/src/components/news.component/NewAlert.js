@@ -1,57 +1,25 @@
 import React from "react";
 import Slider from "react-slick";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "../../config/index";
-import { Amplify } from "aws-amplify";
-import { Storage } from "aws-amplify";
 
 const NewAlert = () => {
   const [news, setNews] = useState([]);
-  const ref = useRef(null);
-  const [imageUrls, setImageUrls] = useState([]);
+  // const [status, setStatus] = useState(isChacked);
 
-  useEffect(() => {
-    Amplify.configure({
-      Auth: {
-        identityPoolId: "ap-southeast-1:1bab1487-9e1b-494f-8758-ac6afed9cff4",
-        region: "ap-southeast-1",
-      },
-
-      Storage: {
-        AWSS3: {
-          bucket: "new-bucket13",
-          region: "ap-southeast-1",
-        },
-      },
-    });
-  }, []);
+  //get access token Bearer
+  const token = localStorage.getItem("access");
 
   const getNews = async () => {
     try {
+      console.log("access", token);
       const response = await axios.get(`${API_URL}/news/`);
       //only status is true data will be shown
-      const filteredData = response.data.filter((item) => item.status === true); //only status is true data will be shown
-      setNews(filteredData);
-
-      // Download image URLs for each project
-      const urls = await Promise.all(
-        filteredData.map((curElem) => downloadFile(curElem.image))
-      );
-      setImageUrls(urls);
+      setNews(response.data.filter((item) => item.status === true)); //only status is true data will be shown
+      console.log(response.data);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const downloadFile = async (fileName) => {
-    try {
-      const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
-      return fileURL;
-    } catch (error) {
-      console.log("Error retrieving file:", error);
-      return null;
     }
   };
 
@@ -135,7 +103,7 @@ const NewAlert = () => {
                   <div className="col-4 pl-3 m-0 pr-2">
                     <div class="bg-gray-300 w-full h-24 overflow-hidden rounded">
                       <img
-                        src={imageUrls[index]}
+                        src={curElem.image}
                         class="w-full h-full object-cover"
                         alt="..."
                       />

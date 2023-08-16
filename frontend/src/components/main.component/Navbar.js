@@ -523,6 +523,14 @@ const Navbar = ({ logout, isAuthenticated }) => {
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>
+<<<<<<< HEAD
+=======
+            <input
+              type="text"
+              placeholder="Search"
+              className="bg-white-700 text-black rounded-md px-3 outline-none"
+            />
+>>>>>>> parent of 7c96c4d (all image update part)
           </div>
         </div>
       </nav>

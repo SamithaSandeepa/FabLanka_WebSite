@@ -25,7 +25,6 @@ const Signup = ({ signup, isAuthenticated }) => {
     if (password === re_password) {
       signup(name, email, password, re_password);
       setAccountCreated(true);
-      alert("Check Email for varification");
     }
   };
 
@@ -93,10 +92,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                     required
                   />
                 </div>
-                <button
-                  className="btn btn-primary bg-blue-500 text-white w-full"
-                  type="submit"
-                >
+                <button className="btn btn-primary bg-blue-500 text-white w-full" type="submit">
                   Register
                 </button>
               </form>

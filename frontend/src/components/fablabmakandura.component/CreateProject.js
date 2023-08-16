@@ -14,18 +14,20 @@ const CreatNews = ({ isAuthenticated }) => {
   // image uploading
   const ref = useRef(null);
   const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
-  const [dlimage, setDlimage] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [progress, setProgress] = useState();
+  // const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+
   const { setLoading } = useStateContext();
   const history = useHistory();
+  const [loading, setLoadingState] = useState(true);
   const [validated, setValidated] = useState(false);
+
   const [title_project_m, setTitle] = useState("");
   const [summery_project_m, setSummery] = useState("");
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
+  const [image_project_m, setUploadedImageUrl] = useState(null);
   const [status, setStatus] = useState(true);
   const [videos, setVideos] = useState([{ url: "" }]);
 
@@ -63,6 +65,7 @@ const CreatNews = ({ isAuthenticated }) => {
         },
       },
     });
+    // listBucketFiles();
   }, []);
 
   // Function to handle changes in video URLs
@@ -82,42 +85,79 @@ const CreatNews = ({ isAuthenticated }) => {
     setVideos(newVideos);
   };
 
-  const handleFileUpload = async () => {
-    console.log("handleFileUpload");
-    const file = ref.current.files[0];
-    const imageName = generateUniqueName(file.name);
-    setDlimage(imageName);
-    setIsUploading(true);
-    try {
-      await Storage.put(imageName, file, {
-        progressCallback: (progressEvent) => {
-          const progressPercentage = Math.round(
-            (progressEvent.loaded / progressEvent.total) * 100
-          );
-          setProgress(progressPercentage);
-        },
-      });
+  // Function to handle image
 
-      // Get the public URL of the uploaded image
-      const imageUrl = await Storage.get(imageName);
-      setPreview(imageUrl);
-      setImage(imageName);
-      setIsUploading(false);
+  const listBucketFiles = async () => {
+    try {
+      const files = await Storage.list("");
+      const filename = ref.current.files[0].name;
+      const keyValuesArray = files.results.map((item) => item.key);
+      console.log(keyValuesArray);
+      if (keyValuesArray.length === 0) {
+        console.log("The keyValuesArray is empty");
+        handleFile(filename);
+      } else {
+        const isNameExists = keyValuesArray.some((keyValue) => {
+          return filename.includes(keyValue);
+        });
+
+        if (isNameExists) {
+          console.log("This name already exists");
+          const [name, extension] = filename.split(".");
+          const regex = new RegExp(`^${name}_(\\d+)\\.${extension}$`);
+          let highestNumber = 0;
+
+          keyValuesArray.forEach((keyValue) => {
+            const match = keyValue.match(regex);
+            if (match && match[1]) {
+              const number = parseInt(match[1]);
+              if (!isNaN(number) && number > highestNumber) {
+                highestNumber = number;
+              }
+            }
+          });
+
+          const newNumber = highestNumber + 1;
+          const newName = `${name}_${newNumber}.${extension}`;
+          console.log("New name:", newName);
+          handleFile(newName);
+        } else {
+          console.log("This name does not exist");
+          handleFile(filename);
+        }
+      }
     } catch (error) {
-      console.log("Error uploading file:", error);
-      setIsUploading(false);
+      console.error("Error listing bucket files:", error);
     }
   };
 
-  const generateUniqueName = (fileName) => {
-    const [name, extension] = fileName.split(".");
-    const uniqueString = Date.now().toString(36); // Using timestamp as a unique string
-    const uniqueName = `${name}_${uniqueString}.${extension}`;
-    return uniqueName;
+  const handleFile = (image) => {
+    console.log("Uplading ", image);
+    Storage.put(image, ref.current.files[0], {
+      progressCallback: (progress) => {
+        setProgress(Math.round((progress.loaded / progress.total) * 100) + "%");
+        setTimeout(() => {
+          setProgress();
+        }, 1000);
+      },
+    })
+      .then((uploadResult) => {
+        Storage.get(image)
+          .then((imageUrl) => {
+            setUploadedImageUrl(image);
+            setImage(imageUrl); // Set the image URL to the state variable
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleDelete = () => {
-    Storage.remove(dlimage)
+    Storage.remove(ref.current.files[0].name)
       .then((resp) => {
         console.log("dlt", ref.current.files[0].name);
         setImage(null);
@@ -130,16 +170,21 @@ const CreatNews = ({ isAuthenticated }) => {
 
   const handleRemoveImage = () => {
     handleDelete(); // Call your deleteImage function here
-    setImage(null);
+    setUploadedImageUrl(""); // Call your setUploadedImageUrl function here
   };
 
   //Function to handle adding a new project
 
   const addProject = (e) => {
+    console.log("add project");
+    // the raw state, stringified
+
+    console.log(videos);
     const content_project_m = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
 
+    console.log(image_project_m);
     const form = e.currentTarget;
 
     // Function to extract URLs from the videos array
@@ -150,7 +195,6 @@ const CreatNews = ({ isAuthenticated }) => {
 
     // Convert the array of URLs to a JSON string
     const videosJsonString = JSON.stringify(videoUrls);
-    console.log(videosJsonString);
 
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -167,10 +211,16 @@ const CreatNews = ({ isAuthenticated }) => {
       newProject.append("title_project_m", title_project_m);
       newProject.append("summery_project_m", summery_project_m);
       newProject.append("content_project_m", content_project_m);
-      newProject.append("image_project_m", image);
+      newProject.append("image_project_m", image_project_m);
       newProject.append("status", status);
       newProject.append("videos", videosJsonString);
       setLoading(true);
+
+      videos.forEach((video, index) => {
+        // newProject.append(`videos${index}`, video.url);
+        console.log(`videos${index}`, video.url);
+      });
+
       axios
         .post(`${API_URL}/projectmakandura/create/`, newProject, {
           headers: {
@@ -189,15 +239,7 @@ const CreatNews = ({ isAuthenticated }) => {
           setValidated(false);
         })
         .catch((err) => {
-          if (err.response.status === 401) {
-            //refresh page
-            alert("Your session has expired. Please login again");
-            window.location.reload();
-            console.log(err.response);
-          } else {
-            alert("Something went wrong");
-            console.log(err.response);
-          }
+          alert(err);
         });
       setLoading(false);
     }
@@ -248,7 +290,7 @@ const CreatNews = ({ isAuthenticated }) => {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="newsTitle"
               >
-                Project Title
+                Event Project
               </label>
               <input
                 type="text"
@@ -294,24 +336,25 @@ const CreatNews = ({ isAuthenticated }) => {
                   ref={ref}
                   type="file"
                   // onChange={handleFile}
-                  onChange={handleFileUpload} // Use the 'handleFileUpload' function here
+                  onChange={listBucketFiles}
                   required
                   className="appearance-none border rounded w-full  px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Image Url"
                   id="image"
                 />
-                {/* Display the upload progress */}
-                {isUploading && (
+                {/* Assuming 'progress' is a variable that holds the value */}
+                {progress && (
                   <div className="fixed bottom-0 inset-0 flex items-center justify-center z-50">
                     <div className="bg-green-500 text-white px-4 py-2 rounded-md">
-                      Image uploading {progress}%
+                      Image uploading {progress}
                     </div>
                   </div>
                 )}
+                {/* {progress} */}
                 {image && (
                   <div>
                     <img
-                      src={preview}
+                      src={image}
                       width="200"
                       height="200"
                       alt="Selected"
