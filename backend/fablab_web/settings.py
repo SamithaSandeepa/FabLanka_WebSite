@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = [os.getenv('SECRET_KEY')]
+SECRET_KEY = "django-insecure-9qlye*m#ojd#=wf%1uyd-_9j=quzl@yycrs*v3bk1f6-l-%1v7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,7 +76,8 @@ ROOT_URLCONF = 'fablab_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': os.path.join(BASE_DIR, 'build'),
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,7 +92,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fablab_web.wsgi.application'
 
-DEBUG = False
+DEBUG = True
 
 
 # Database
@@ -108,9 +109,9 @@ DEBUG = False
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-# }
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+}
 
 # AWS credentials
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -169,11 +170,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'build/static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
