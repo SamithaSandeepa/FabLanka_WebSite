@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const ConsultancyandAdvisory = () => {
-  console.log("isAuthenticated");
   return (
     <div className="container-sm text-lg mt-10">
       <div className="flex flex-col items-center justify-center">
