@@ -1,15 +1,20 @@
-FROM python:3.11.2
+# Use an official Python runtime as a parent image
+FROM python:3.9
 
-ENV PYTHONUNBUFFERED=1
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
 
+# Set the working directory in the container
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy the requirements file into the container at /app
+COPY requirements.txt /app/
 
+# Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-COPY . .
+# Copy the current directory contents into the container at /app
+COPY . /app/
 
-EXPOSE 8000
-
-CMD ["python", "manage.py", "runserver"]
+# Specify the command to run on container start
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
