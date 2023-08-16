@@ -95,7 +95,7 @@ const Footer = () => {
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Constact Us
+                  Contact Us
                 </a>
               </p>
               <p>
@@ -127,7 +127,7 @@ const Footer = () => {
                     <path d="M11 7a2 2 0 1 0 0 -4a2 2 0 1 0 0 4" />
                   </svg>
                 </span>
-                NO.19 Public Library complex, Makadura, Gonavila.
+                No.19 Public Library complex, Makandura, Gonavila.
               </p>
               <p>
                 <span className="inline-block align-middle mr-2">
@@ -148,7 +148,7 @@ const Footer = () => {
                     <polyline points="3 7 12 13 21 7" />
                   </svg>
                 </span>
-                fablabmakandura@gmail.com
+                info@fablanka.lk
               </p>
               <p>
                 <span className="inline-block align-middle mr-2">
@@ -170,7 +170,7 @@ const Footer = () => {
                     <path d="M21 10h-4l-2 -2" />
                   </svg>
                 </span>
-                +94 31 2297029
+                +94 31 2299275
               </p>
               <p>
                 <span className="inline-block align-middle mr-2">
@@ -194,7 +194,7 @@ const Footer = () => {
                     <line x1={16} y1={4} x2={16} y2={8} />
                   </svg>
                 </span>
-                +94 31 2297029
+                +94 11 2545970
               </p>
             </div>
           </div>

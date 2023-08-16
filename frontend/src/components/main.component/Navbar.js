@@ -509,7 +509,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
             <div
               onClick={() => setOpen(!open)}
-              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden "
+              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden"
             >
               {open ? "✕" : "☰"}
             </div>
