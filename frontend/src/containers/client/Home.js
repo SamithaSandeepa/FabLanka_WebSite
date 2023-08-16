@@ -33,7 +33,7 @@ const Home = () => {
           <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden hidden sm:block rounded">
             <NewAlert />
           </div>
-          <div className="col-span-12 sm:col-span-12 row-span-5 px-5 sm:px-2 pt-2">
+          <div className="col-span-12 sm:col-span-12 row-span-2 px-5 sm:px-2 pt-2">
             <p className="text-justify mt-3">
               Fab Lanka is a group of highly motivated individuals coming
               together to set up fabrication labs (fab labs) throughout Sri

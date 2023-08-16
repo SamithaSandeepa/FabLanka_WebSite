@@ -61,7 +61,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           className={
             location.pathname === "/about"
               ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
-              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium "
+              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium my-4 sm:my-0"
           }
           to="/about"
           // style={{ textDecoration: "none" }}
@@ -69,6 +69,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           WHO WE ARE
         </Link>
       </li>
+
       <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4">
         <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium ">
           WHAT WE DO
@@ -94,24 +95,24 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab"
+                  location.pathname === "/innovation-social-development"
                     ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
                     : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab"
+                to="/innovation-social-development"
                 // style={{ textDecoration: "none" }}
               >
-                FabLabs for Innovation and Social Development
+                Innovation and Social Development
               </Link>
             </div>
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/education"
+                  location.pathname === "/product-development"
                     ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
                     : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/education"
+                to="/product-development"
                 // style={{ textDecoration: "none" }}
               >
                 Product Development
@@ -120,11 +121,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fabla2"
+                  location.pathname === "/project-program"
                     ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
                     : "block w-full h-full text-gray-700  hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab2"
+                to="/project-program"
                 // style={{ textDecoration: "none" }}
               >
                 Project and Program Management
@@ -133,11 +134,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab3"
+                  location.pathname === "/consultancy"
                     ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
                     : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab3"
+                to="/consultancy"
                 // style={{ textDecoration: "none" }}
               >
                 Consultancy and Advisory
@@ -146,11 +147,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab4"
+                  location.pathname === "/technology-transfer"
                     ? "block w-full h-full text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                     : "block w-full h-full text-gray-700  hover:blue-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab4"
+                to="/technology-transfer"
                 // style={{ textDecoration: "none" }}
               >
                 International Technology Transfer
@@ -180,51 +181,51 @@ const Navbar = ({ logout, isAuthenticated }) => {
           className="hidden absolute top-full mt-3 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
           style={{ width: "max-content" }}
         >
-          <div class="grid grid-row-3 divide-y hover:underline underline-offset-4">
-            <div className="py-4">
+          <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
                   location.pathname === "/fablabmakandura"
-                    ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
-                    : "text-gray-700 hover:bg-[#F1F6F9] hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
                 to="/fablabmakandura"
               >
                 FabLab Makandura
               </Link>
             </div>
-            <div className="py-4 hover:underline underline-offset-4">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab"
-                    ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
-                    : "text-gray-700 hover:bg-[#F1F6F9] hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+                  location.pathname === "/universal-energy"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab"
+                to="/universal-energy"
               >
                 Universal Energy
               </Link>
             </div>
-            <div className="py-4 hover:underline underline-offset-4">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab"
-                    ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
-                    : "text-gray-700 hover:bg-[#F1F6F9] hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+                  location.pathname === "/model-farm"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab"
+                to="/model-farm"
               >
                 Makandura Model Farm
               </Link>
             </div>
-            <div className="py-4 hover:underline underline-offset-4">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
-                  location.pathname === "/fablab"
-                    ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
-                    : "text-gray-700 hover:bg-[#F1F6F9] hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+                  location.pathname === "/biotechnology"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
-                to="/fablab"
+                to="/biotechnology"
               >
                 Center for Bio-Technology
               </Link>
@@ -508,25 +509,20 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
             <div
               onClick={() => setOpen(!open)}
-              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden"
+              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden "
             >
               {/* <MDBIcon fas icon={open ? "close" : "bars"} /> */}X
             </div>
             <ul
-              className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in divide-x-[2px] divide-emerald-600 py-2 ${
-                open ? "top-20" : "top-[-490px]"
-              } md:p-0 md:m-0
-  `}
-              //
-              style={{ zIndex: 9999 }} // add this line to set the z-index value
+              className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in divide-x-[2px] divide-emerald-600 py-2 bg-white ${
+                open
+                  ? "top-20"
+                  : "-top-96" /* Change this value to push content down */
+              } md:p-0 md:m-0`}
+              style={{ zIndex: 9999 }}
             >
               {isAuthenticated ? authLinks() : guestLinks()}
             </ul>
-            {/* <input
-              type="text"
-              placeholder="Search"
-              className="bg-white-700 text-black rounded-md px-3 outline-none"
-            /> */}
           </div>
         </div>
       </nav>
@@ -534,6 +530,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
 };
 
+{
+  /* <input
+              type="text"
+              placeholder="Search"
+              className="bg-white-700 text-black rounded-md px-3 outline-none"
+            /> */
+}
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });

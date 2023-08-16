@@ -7,14 +7,11 @@ import Signup from "./containers/loginpages/Signup";
 import Activate from "./containers/loginpages/Activate";
 import ResetPassword from "./containers/loginpages/ResetPassword";
 import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
-import FirstPage from "./containers/client/FirstPage";
 import second from "./containers/client/second";
 import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
-import Education from "./containers/client/static/Education";
 import ContactUs from "./containers/client/static/Contact";
 import Admin from "./containers/admin/admin";
-import Facebook from "./containers/client/Facebook";
 
 //fablab makandura
 import FablabMakandura from "./containers/client/fablab_makandura/FablabMakandura";
@@ -34,6 +31,19 @@ import CreateEvent from "./containers/admin/event/add";
 import PastEventTable from "./components/event.component/PastEventTable";
 import EventUpdate from "./containers/admin/event/[id]";
 import Event from "./containers/client/event/[id]";
+
+//what we do pages
+import Education from "./containers/client/what_we_do/Education";
+import InnovationandSocialDevelopment from "./containers/client/what_we_do/InnovationandSocialDevelopment";
+import ProductDevelopment from "./containers/client/what_we_do/ProductDevelopment";
+import ProjectandProgramManagement from "./containers/client/what_we_do/ProjectandProgramManagement";
+import ConsultancyandAdvisory from "./containers/client/what_we_do/ConsultancyandAdvisory";
+import InternationalTechnologyTransfer from "./containers/client/what_we_do/InternationalTechnologyTransfer";
+
+// Our Ventures pages
+import MakanduraModelFarm from "./containers/client/our_ventures/MakanduraModelFarm";
+import UniversalEnergy from "./containers/client/our_ventures/UniversalEnergy";
+import CenterforBioTechnology from "./containers/client/our_ventures/CenterforBioTechnology";
 
 // import Footer from "./components/Footer";
 
@@ -63,34 +73,62 @@ const App = () => (
               component={ResetPasswordConfirm}
             />
             <Route exact path="/activate/:uid/:token" component={Activate} />
-            <Route exact path="/firstpage" component={FirstPage} />
             <Route exact path="/second" component={second} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/facebook" component={Facebook} />
-
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
             <Route exact path="/news/:id" component={News} />
             <Route exact path="/show-all-news" component={NewsTable} />
             <Route exact path="/edit-news/:id" component={NewsUpdate} />
-
             {/* Event Route */}
             <Route exact path="/create-event" component={CreateEvent} />
             <Route exact path="/event/:id" component={Event} />
             <Route exact path="/show-all-event" component={PastEventTable} />
             <Route exact path="/edit-event/:id" component={EventUpdate} />
-
             {/* Fablab Makandura Route */}
             <Route exact path="/fablabmakandura" component={FablabMakandura} />
             <Route exact path="/fablabmakandura/:id" component={Project} />
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/show-all-projects" component={ProjectTable} />
             <Route exact path="/edit-project/:id" component={EditProject} />
-
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />
-            <Route exact path="/education" component={Education} />
             <Route exact path="/contactus" component={ContactUs} />
+            {/* What we do Route */}
+            <Route exact path="/education" component={Education} />
+            <Route
+              exact
+              path="/innovation-social-development"
+              component={InnovationandSocialDevelopment}
+            />
+            <Route
+              exact
+              path="/product-development"
+              component={ProductDevelopment}
+            />
+            <Route
+              exact
+              path="/project-program"
+              component={ProjectandProgramManagement}
+            />
+            <Route
+              exact
+              path="/consultancy"
+              component={ConsultancyandAdvisory}
+            />
+            <Route
+              exact
+              path="/technology-transfer"
+              component={InternationalTechnologyTransfer}
+            />
+            {/* Our Ventures Route */}
+            <Route exact path="/model-farm" component={MakanduraModelFarm} />
+            <Route exact path="/universal-energy" component={UniversalEnergy} />
+            <Route
+              exact
+              path="/biotechnology"
+              component={CenterforBioTechnology}
+            />
           </Switch>
         </ContextProvider>
       </Layout>
