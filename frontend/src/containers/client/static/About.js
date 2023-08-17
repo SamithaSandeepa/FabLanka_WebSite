@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <>
-      <div className="container-lg shadow-sm bg-white rounded">
+      <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
         <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
           About Us
         </h1>
