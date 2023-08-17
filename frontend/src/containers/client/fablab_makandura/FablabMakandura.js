@@ -61,6 +61,7 @@ const FablabMakandura = () => {
                   referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
+              {/* <div class="w-1/2 flex items-center"> */}
               <div class="w-1/2 flex items-center justify-center ">
                 <div
                   class="fb-page"
