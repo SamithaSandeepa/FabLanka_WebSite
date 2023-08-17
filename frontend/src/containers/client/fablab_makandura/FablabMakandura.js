@@ -6,8 +6,8 @@ import ProjectMakandura from "../../../components/fablabmakandura.component/Proj
 const FablabMakandura = () => {
   return (
     <>
-      <div className="container m-0 p-0">
-        <header className="bg-gray-600 py-10 text-white text-center mb-4">
+      <div className="m-0 p-0">
+        <header className="bg-gray-600 py-10 text-white text-center mb-4 ">
           <h1 className="text-4xl font-bold">FabLab Makandura</h1>
           <p className="mt-4 text-lg">
             Fabrication Laboratory (FabLab) is an international concept where
@@ -25,14 +25,12 @@ const FablabMakandura = () => {
           </p>
         </header>
         <div className="grid grid-cols-12 grid-rows-3 bg-gradient-to-b from-white to-[#D4FAFC]">
-          <div className="col-span-12 row-span-3">
-            <div className="flex justify-center">
-              <img
-                src="https://i.ibb.co/0jX5QYJ/IMG-20210916-120751.jpg"
-                alt="FabLab Makandura"
-                className="w-25 rounded-lg shadow-md mx-auto"
-              />
-            </div>
+          <div className="col-span-12 row-span-3 flex items-center justify-center">
+            <img
+              src="https://i.ibb.co/0jX5QYJ/IMG-20210916-120751.jpg"
+              alt="FabLab Makandura"
+              className="w-25 rounded-lg shadow-md mx-auto"
+            />
           </div>
         </div>
 
