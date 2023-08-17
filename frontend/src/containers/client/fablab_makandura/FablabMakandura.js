@@ -62,7 +62,7 @@ const FablabMakandura = () => {
                 ></iframe>
               </div>
               {/* <div class="w-1/2 flex items-center"> */}
-              <div class="w-1/2 flex items-center justify-center ">
+              <div class="w-1/2 items-center">
                 <div
                   class="fb-page"
                   data-href="https://www.facebook.com/MakanduraFabLab"
