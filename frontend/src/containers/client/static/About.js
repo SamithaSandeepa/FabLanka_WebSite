@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <>
-      <div className="container-lg shadow-sm bg-white rounded p-10">
-        <h1 className="text-center text-3xl font-semibold font-serif text-[#394867]">
+      <div className="container-lg shadow-sm bg-white rounded">
+        <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
           About Us
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
@@ -93,7 +93,7 @@ const About = () => {
         </div>
         <div className="grid">
           <div className="col-span-2 sm:col-span-1">
-            <p className="text-left font-medium mt-5 mb-3 text-lg">
+            <p className="text-center font-medium mt-5 mb-3 text-lg">
               FabLanka is a Future-Ready Organization in alliance with{" "}
               <a
                 className="text-blue-500 hover:text-blue-700 transition duration-300"
@@ -128,67 +128,8 @@ const About = () => {
             </p>
           </div>
         </div>
-        {/* <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <p className="text-left font-bold mt-5 mb-3">
-              Towards a Makers’ society through Community Outreach
-            </p>
-            <p className="text-justify">
-              Developed as a community outreach project, FabLanka allows local
-              communities at any socio-economic background to channel their
-              creative energy towards technological innovation. Fabrication labs
-              will serve as an educational apparatus by providing the knowledge
-              and tools through which communities can innovate according to
-              their needs. This will empower the youth and intern the community
-              towards local economic development.
-            </p>
-            <p className="text-justify">
-              Communities have unique identities and needs. For digital
-              fabrication methods such as additive manufacturing, unique
-              necessities of each community become an advantage as opposed to
-              the mass assembly line manufacturing methods of the past. In Sri
-              Lanka, most cities and towns thrive on small businesses that are
-              stifled by lack of technical innovation and financial burdens.
-              Fabrication labs will serve small and medium scale enterprises
-              (SME) by providing them with the necessary technology and
-              infrastructure in the form of education, training, and product
-              development capabilities that neither local governments nor
-              businesses have the capacity to invest in. Innovative fabrication
-              methods developed locally for local markets can help overcome the
-              stagnation caused by global economic pressures and local economic
-              underdevelopment.
-            </p>
-          </div>
-        </div> */}
-        {/* <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <p className="text-left font-bold mt-5 mb-3">
-              Towards a Greener Economy that protects the environment
-            </p>
-            <p className="text-justify">
-              The environmental degradation caused by modern economies is
-              severe. Much of the raw materials and energy used for production
-              is wasted in the manufacturing and transportation processes. Local
-              manufacturing methods are needed to pave the way for a greener
-              economy. Developing countries have the advantage of not having to
-              change the foundations of their economic structure to exploit the
-              changes necessary for a sustainable economy. The needs of a
-              sustainable economy can be met on a local level with innovative
-              manufacturing methods. Fabrication labs can lead the way in
-              identifying sustainable manufacturing practices for local
-              economies to prosper.
-            </p>
-            <p className="text-justify">
-              FabLanka aims to bridge the gap between advancements in
-              information technology and lack of advancement in manufacturing
-              techniques in Sri Lanka. In doing so, the goal is to solve
-              multifaceted problems through education, innovation and building
-              sustainable local communities that are globally connected.
-            </p>
-          </div>
-        </div> */}
       </div>
-      <div className="row">
+      <div className="row m-0 p-0">
         <OurTeam />
       </div>
     </>
