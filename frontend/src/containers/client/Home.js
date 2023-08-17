@@ -35,18 +35,23 @@ const Home = () => {
           </div>
           <div className="col-span-12 sm:col-span-12 row-span-2 px-5 sm:px-2 pt-2">
             <p className="text-justify mt-3">
-              Fab Lanka is a group of highly motivated individuals coming
-              together to set up fabrication labs (fab labs) throughout Sri
-              Lanka as a community outreach project. The abundance of an
-              educated work force, high degree of IT usage, and existence of a
-              large number of small and medium size manufactures (SMEs) makes
-              Sri Lanka an ideal home for fab labs. The benefits of bringing in
-              new technology is the ability to transform the manufacturing
-              sector of local economies in environmentally friendly ways. In
-              addition, it will also strengthen employment for youth in the 21st
-              century manufacturing job sector.
+              FabLanka Foundation is the pioneering organization which
+              introduced and popularized Industry 4.0 in Sri Lanka. FabLanka
+              Foundation was incorporated as a not-for-profit social enterprise
+              in 2016 to introduce Industry 4.0 technologies for socio- economic
+              development in Sri Lanka by marching towards a “Makers Society”.
+              Our team of co-founders is composed of professionally achieved
+              individuals working in Sri Lanka & internationally. Over the
+              years, FabLanka Foundation has built a large community of like
+              minded people who believe in the ability of digital technologies
+              in social transformation. The Foundation has conducted many public
+              outreach programs to educate Sri Lankans across the country on the
+              impact of Industry 4.0 and how the nation can gain the benefits of
+              this digital revolution by following an inclusive approach.
+              FabLanka has worked in collaboration with schools, Universities,
+              government agencies and professional bodies.
             </p>
-            <div className="text-justify mt-3 mb-3">
+            {/* <div className="text-justify mt-3 mb-3">
               <p>
                 Inspired by the technologically based social movements such as
                 Open Source Ecology, FabLab, and RepRap who’s aim is to spread
@@ -65,7 +70,7 @@ const Home = () => {
                   <small>{linkName}</small>
                 </p>
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
             <NewAlert />
