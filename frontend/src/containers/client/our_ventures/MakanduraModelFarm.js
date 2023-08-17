@@ -11,9 +11,9 @@ const MakanduraModelFarm = () => {
         </p>
       </header>
       <main className="flex items-center justify-center py-16">
-        <div className="w-1/2 mr-10">
+        <div className="w-1/2 mr-10 ml-5">
           <img
-            src="https://www.farmersjournal.ie/WEBFILES/000/240/465/587235-240465.jpg"
+            src="https://www.researchdive.com/blogImages/IgkfBzr81a.jpeg"
             alt="Makandura Model Farm"
             className="max-w-full rounded-lg"
           />
