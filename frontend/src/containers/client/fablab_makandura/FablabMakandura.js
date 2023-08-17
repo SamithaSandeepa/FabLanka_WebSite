@@ -1,9 +1,36 @@
 import React from "react";
 import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
+import { Gallery } from "react-grid-gallery";
+import { fablabMakanduraImages } from "./fablabMakanduraImages";
 // import './fablabmakandura.css';
 
 const FablabMakandura = () => {
+  // const fablabMakanduraImages = [
+  //   {
+  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg",
+  //     width: 320,
+  //     height: 174,
+  //   },
+  //   {
+  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9720-1.jpg",
+  //     width: 320,
+  //     height: 212,
+  //   },
+  //   {
+  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9615-1.jpg",
+  //     width: 320,
+  //     height: 212,
+  //   },
+  // ];
+  const image = fablabMakanduraImages.map((image) => ({
+    src: image.src,
+    width: image.width,
+    height: image.height,
+  }));
+
+  // console.log(fablabMakanduraImages);
+
   return (
     <>
       <div className="m-0 p-0">
@@ -24,15 +51,29 @@ const FablabMakandura = () => {
             .
           </p>
         </header>
-        <div className="grid grid-cols-12 grid-rows-3 bg-gradient-to-b from-white to-[#D4FAFC]">
-          <div className="col-span-12 row-span-3 flex items-center justify-center">
-            <img
-              src="https://i.ibb.co/0jX5QYJ/IMG-20210916-120751.jpg"
-              alt="FabLab Makandura"
-              className="w-25 rounded-lg shadow-md mx-auto"
-            />
-          </div>
-        </div>
+
+        <section className="flex justify-center items-center">
+          <Gallery images={image} />
+        </section>
+        <section className="mb-8">
+          <p className="text-gray-700 mb-4">
+            FabLab Makandura was started on May 27th, 2017 and is the first
+            Fabrication Laboratory established by FabLanka, and also the first
+            of its kind in Sri Lanka. FabLab Makandura is equipped with various
+            advanced manufacturing equipment, tools, and processes.
+          </p>
+          {/* Add pictures and videos of tools and people working together */}
+        </section>
+        <section className="mb-8">
+          <p className="text-gray-700 mb-4">
+            At FabLab Makandura, we utilize Industry 4.0 Technologies to develop
+            new products that provide efficient and affordable solutions to
+            community needs. It also serves as a community center where anyone
+            in the region has free access for education and information on
+            advanced technologies.
+          </p>
+          {/* Add a video or photos here */}
+        </section>
 
         <h2 className="text-[30px] text-center font-normal pt-3">
           Fablabmakandura Team
