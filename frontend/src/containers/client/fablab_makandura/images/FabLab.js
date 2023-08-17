@@ -1,4 +1,4 @@
-export const photos = [
+export const fablab = [
   {
     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg",
     width: 700,

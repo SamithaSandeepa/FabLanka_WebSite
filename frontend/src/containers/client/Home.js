@@ -38,19 +38,45 @@ const Home = () => {
       <div className="col-span-12 sm:col-span-12 row-span-3 mx-2 sm:px-5 sm:px-2 py-10">
         <p className="text-justify text-base">
           FabLanka Foundation is the pioneering organization which introduced
-          and popularized Industry 4.0 in Sri Lanka. FabLanka Foundation was
-          incorporated as a not-for-profit social enterprise in 2016 to
-          introduce Industry 4.0 technologies for socio- economic development in
-          Sri Lanka by marching towards a “Makers Society”. Our team of
-          co-founders is composed of professionally achieved individuals working
-          in Sri Lanka & internationally. Over the years, FabLanka Foundation
-          has built a large community of like minded people who believe in the
-          ability of digital technologies in social transformation. The
-          Foundation has conducted many public outreach programs to educate Sri
-          Lankans across the country on the impact of Industry 4.0 and how the
-          nation can gain the benefits of this digital revolution by following
-          an inclusive approach. FabLanka has worked in collaboration with
-          schools, Universities, government agencies and professional bodies.
+          and popularized{" "}
+          <a
+            className="text-blue-500 hover:text-blue-700 transition duration-300"
+            href="/industry"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Industry 4.0
+          </a>{" "}
+          in Sri Lanka. FabLanka Foundation was incorporated as a not-for-profit
+          social enterprise in 2016 to introduce{" "}
+          <a
+            className="text-blue-500 hover:text-blue-700 transition duration-300"
+            href="/industry"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Industry 4.0
+          </a>{" "}
+          Technologies for socio- economic development in Sri Lanka by marching
+          towards a “Makers Society”. Our team of co-founders is composed of
+          professionally achieved individuals working in Sri Lanka &
+          internationally. Over the years, FabLanka Foundation has built a large
+          community of like minded people who believe in the ability of digital
+          technologies in social transformation. The Foundation has conducted
+          many public outreach programs to educate Sri Lankans across the
+          country on the impact of{" "}
+          <a
+            className="text-blue-500 hover:text-blue-700 transition duration-300"
+            href="/industry"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Industry 4.0
+          </a>{" "}
+          and how the nation can gain the benefits of this digital revolution by
+          following an inclusive approach. FabLanka has worked in collaboration
+          with schools, Universities, government agencies and professional
+          bodies.
         </p>
       </div>
       <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">

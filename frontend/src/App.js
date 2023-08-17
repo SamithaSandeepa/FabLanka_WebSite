@@ -44,6 +44,7 @@ import InternationalTechnologyTransfer from "./containers/client/what_we_do/Inte
 import MakanduraModelFarm from "./containers/client/our_ventures/MakanduraModelFarm";
 import UniversalEnergy from "./containers/client/our_ventures/UniversalEnergy";
 import CenterforBioTechnology from "./containers/client/our_ventures/CenterforBioTechnology";
+import CenterforIndustry4 from "./containers/client/our_ventures/CenterforIndustry4";
 
 // import Footer from "./components/Footer";
 
@@ -129,6 +130,7 @@ const App = () => (
               path="/biotechnology"
               component={CenterforBioTechnology}
             />
+            <Route exact path="/industry4" component={CenterforIndustry4} />
           </Switch>
         </ContextProvider>
       </Layout>

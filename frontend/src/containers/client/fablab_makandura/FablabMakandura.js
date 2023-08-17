@@ -2,7 +2,7 @@ import React from "react";
 import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
 import { Gallery } from "react-grid-gallery";
-import { photos } from "./images/FabLab";
+import { fablab } from "./images/FabLab";
 import "./fablabmakandura.css";
 
 const FablabMakandura = () => {
@@ -11,7 +11,7 @@ const FablabMakandura = () => {
       <div className="m-0 p-0">
         <header className="bg-gray-600 py-10 text-white text-center ">
           <h1 className="text-4xl font-bold">FabLab Makandura</h1>
-          <p className="mt-4 text-lg">
+          <p className="mt-4 text-lg px-4">
             Fabrication Laboratory (FabLab) is an international concept where
             advanced manufacturing tools and practices are housed in a single
             place. More information about international FabLabs are available at{" "}
@@ -26,10 +26,12 @@ const FablabMakandura = () => {
             .
           </p>
         </header>
-        <div className="my-10">
-          <Gallery images={photos} />
-        </div>
-        <section className="mb-8">
+        <section className="">
+          <div className="my-10 mx-10">
+            <Gallery images={fablab} />
+          </div>
+        </section>
+        <section className="mb-8 px-5">
           <p className="text-gray-700 mb-4">
             FabLab Makandura was started on May 27th, 2017 and is the first
             Fabrication Laboratory established by FabLanka, and also the first
@@ -38,7 +40,7 @@ const FablabMakandura = () => {
           </p>
           {/* Add pictures and videos of tools and people working together */}
         </section>
-        <section className="mb-8">
+        <section className="mb-8 px-5">
           <p className="text-gray-700 mb-4">
             At FabLab Makandura, we utilize Industry 4.0 Technologies to develop
             new products that provide efficient and affordable solutions to

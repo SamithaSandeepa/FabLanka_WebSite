@@ -230,6 +230,18 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Center for Bio-Technology
               </Link>
             </div>
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+              <Link
+                className={
+                  location.pathname === "/industry4"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/industry4"
+              >
+                Center for Industry 4.0
+              </Link>
+            </div>
           </div>
         </div>
       </li>
