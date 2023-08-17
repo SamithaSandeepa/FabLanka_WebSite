@@ -153,7 +153,8 @@ const Footer = () => {
                       <path d="M11 7a2 2 0 1 0 0 -4a2 2 0 1 0 0 4" />
                     </svg>
                   </span>
-                  No.19 Public Library complex, Makandura, Gonavila.
+                  Public Library Complex, Kurunegala Road, Makandura, Gonawila,
+                  60170, Sri Lanka.
                 </p>
                 <p>
                   <span className="inline-block align-middle mr-2">

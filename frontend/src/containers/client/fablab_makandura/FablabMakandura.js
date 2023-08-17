@@ -2,39 +2,14 @@ import React from "react";
 import MakanduraTeam from "../../../components/fablabmakandura.component/MakanduraTeam";
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
 import { Gallery } from "react-grid-gallery";
-import { fablabMakanduraImages } from "./fablabMakanduraImages";
-// import './fablabmakandura.css';
+import { photos } from "./images/FabLab";
+import "./fablabmakandura.css";
 
 const FablabMakandura = () => {
-  // const fablabMakanduraImages = [
-  //   {
-  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg",
-  //     width: 320,
-  //     height: 174,
-  //   },
-  //   {
-  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9720-1.jpg",
-  //     width: 320,
-  //     height: 212,
-  //   },
-  //   {
-  //     src: "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9615-1.jpg",
-  //     width: 320,
-  //     height: 212,
-  //   },
-  // ];
-  const image = fablabMakanduraImages.map((image) => ({
-    src: image.src,
-    width: image.width,
-    height: image.height,
-  }));
-
-  // console.log(fablabMakanduraImages);
-
   return (
     <>
       <div className="m-0 p-0">
-        <header className="bg-gray-600 py-10 text-white text-center mb-4 ">
+        <header className="bg-gray-600 py-10 text-white text-center ">
           <h1 className="text-4xl font-bold">FabLab Makandura</h1>
           <p className="mt-4 text-lg">
             Fabrication Laboratory (FabLab) is an international concept where
@@ -51,10 +26,9 @@ const FablabMakandura = () => {
             .
           </p>
         </header>
-
-        <section className="flex justify-center items-center">
-          <Gallery images={image} />
-        </section>
+        <div className="my-10">
+          <Gallery images={photos} />
+        </div>
         <section className="mb-8">
           <p className="text-gray-700 mb-4">
             FabLab Makandura was started on May 27th, 2017 and is the first
@@ -76,7 +50,7 @@ const FablabMakandura = () => {
         </section>
 
         <h2 className="text-[30px] text-center font-normal pt-3">
-          Fablabmakandura Team
+          FabLab Makandura Team
         </h2>
         <div className="grid grid-col-12 grid-row-3 bg-gradient-to-b from-white to-[#D4FAFC]">
           <div className="justify-center col-span-12">

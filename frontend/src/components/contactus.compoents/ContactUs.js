@@ -71,8 +71,8 @@ function ContactUs() {
             </p>
             <p className="mb-4">
               <i className="fas fa-map-marker-alt mr-2"></i>
-              <strong>Physical Address:</strong>Makandura Public Library
-              Complex, Kurunegala Road, Makandura, Gonawila, 60170, Sri Lanka.
+              <strong>Physical Address: </strong>Public Library Complex,
+              Kurunegala Road, Makandura, Gonawila, 60170, Sri Lanka.
             </p>
             <p className="mb-4">
               <i className="fas fa-phone mr-2"></i>
