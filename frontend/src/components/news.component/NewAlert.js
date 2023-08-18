@@ -123,7 +123,7 @@ const NewAlert = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="">
         <h1 className="text-center text-2xl font-semibold font-serif p-0 my-2 text-[#394867]">
           NEWS
         </h1>
@@ -148,7 +148,7 @@ const NewAlert = () => {
                       style={{ textDecoration: "none" }}
                     >
                       <div className="card-body py-0 pl-0">
-                        <p className="card-title text-lg font-normal text-black hover:text-[#2c185a] m-0 pb-3">
+                        <p className="card-title text-lg font-semibold text-black hover:text-[#2c185a] m-0 pb-3">
                           {curElem.title}
                         </p>
                         <p className="text-[10] card-text lh-1  text-black hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">
