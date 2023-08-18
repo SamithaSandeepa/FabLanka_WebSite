@@ -79,13 +79,15 @@ const SingleProjectMakandura = ({ id }) => {
   };
 
   return (
-    <div className="container mb-5">
-      <h1 className="text-center text-3xl">{Project.title_project_m}</h1>
-      <img
+    <div className="container-sm text-lg mt-10 shadow-sm py-2 mb-4">
+      <h1 className="text-center text-3xl font-semibold font-serif mt-5">
+        {Project.title_project_m}
+      </h1>
+      {/* <img
         src={image}
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
-      />
+      /> */}
       <p className="my-5 text-p px-20">{Project.summery_project_m}</p>
       <div className="row">
         <div className="col-md-12">

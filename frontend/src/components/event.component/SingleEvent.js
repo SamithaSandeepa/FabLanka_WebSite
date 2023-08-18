@@ -74,13 +74,15 @@ const SingleEvent = ({ id }) => {
   };
 
   return (
-    <div className="container mb-5">
-      <h1 className="text-center text-3xl">{event.title_pastevent}</h1>
-      <img
+    <div className="container-sm text-lg mt-10 shadow-sm py-2 mb-4">
+      <h1 className="text-center text-3xl font-semibold font-serif mt-5">
+        {event.title_pastevent}
+      </h1>
+      {/* <img
         src={event.image_project_m}
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
-      />
+      /> */}
       <p className="my-5 text-lg">{event.summery_pastevent}</p>
       <div className="row">
         <div className="col-md-12">
