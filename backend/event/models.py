@@ -2,8 +2,8 @@ from django.db import models
 
 class Event(models.Model):
     title_pastevent = models.CharField(max_length=200)
-    summery_pastevent = models.TextField()
-    content_pastevent = models.JSONField()
+    summery_pastevent = models.TextField(null=True, blank=True)
+    content_pastevent = models.JSONField(null=True, blank=True)
     image = models.TextField()
     status = models.BooleanField(default=True)
     videos = models.JSONField(null=True, blank=True)

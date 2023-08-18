@@ -52,7 +52,6 @@ const SingleNews = ({ id }) => {
     }
   };
 
-
   const renderVideos = () => {
     const videos = news.videos;
     if (videos && videos.length > 0) {

@@ -79,12 +79,16 @@ const FablabMakandura = () => {
         <main className="px-4">
           <section className="">
             <div className="my-5 mx-5">
-              <Gallery images={fablab} className="mx-auto" />
+              <Gallery
+                images={fablab}
+                // className="mx-auto"
+                enableImageSelection={false}
+              />
             </div>
             {/* <div className="my-5 w-2/5">{renderVideos()}</div> */}
           </section>
           <section className="flex mb-8 px-5 text-justify">
-            <div className="md:w-3/5 pr-5">
+            <div className="md:w-3/5 pr-2 ">
               <p className="text-gray-700 mb-4">
                 At FabLab Makandura, we utilize{" "}
                 <a
@@ -106,6 +110,15 @@ const FablabMakandura = () => {
                   url="https://www.youtube.com/watch?v=H1k3TwiZ5EE&t=1s"
                   className="react-player mx-auto"
                   width="100%"
+                  controls={false} // Hide default controls
+                  config={{
+                    youtube: {
+                      playerVars: {
+                        showinfo: 0, // Hide video details
+                        modestbranding: 1, // Hide YouTube logo
+                      },
+                    },
+                  }}
                 />
               </div>
             </div>
