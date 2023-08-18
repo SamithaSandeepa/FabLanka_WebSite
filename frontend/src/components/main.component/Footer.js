@@ -84,26 +84,31 @@ const Footer = () => {
             </div>
 
             <div className="mb-4 text-left">
-              <h6 className="text-uppercase font-bold mb-4">Products</h6>
+              <h6 className="text-uppercase font-bold mb-4">PROJECTS</h6>
               <div className="text-gray-300">
                 <p>
-                  <a href="/" className="text-reset">
-                    Home
+                  <a href="/fablabmakandura" className="text-reset">
+                    FabLab Makandura
                   </a>
                 </p>
                 <p>
-                  <a href="/about" className="text-reset">
-                    About Us
+                  <a href="/universal-energy" className="text-reset">
+                    Universal Energy
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Our Plan
+                  <a href="/model-farm#!" className="text-reset">
+                    Makandura Model Farm
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Technology
+                  <a href="/biotechnology" className="text-reset">
+                  Center for Bio-Technology
+                  </a>
+                </p>
+                <p>
+                  <a href="/industry4" className="text-reset">
+                  Center for Industry 4.0
                   </a>
                 </p>
               </div>
