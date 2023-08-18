@@ -79,19 +79,13 @@ const Home = () => {
           bodies.
         </p>
       </div>
-      <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
+      <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-2 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
         <NewAlert />
       </div>
+      {/* screen view */}
       <div className="flex p-0 mb-0 sm:mb-4">
-        {/* <div className="grid grid-rows-1 rounded-md">
-          <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
-            <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
-              <PastEvent />
-            </div>
-          </div>
-        </div> */}
-        <div className="w-3/5 rounded-md bg-[#D6E4E5]">
-          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
+        <div className="w-3/5 rounded-md bg-[#D6E4E5] ml-2">
+          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4 hidden sm:block">
             <PastEvent />
           </div>
         </div>
@@ -105,10 +99,45 @@ const Home = () => {
             frameborder="0"
             allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            className="hidden sm:block mx-auto"
+            className="mx-auto hidden sm:block"
           ></iframe>
         </div>
       </div>
+      <div className="flex justify-center items-center md:mb-4 sm:mb-4 block sm:hidden rounded-md bg-[#D6E4E5] mb-2">
+        <PastEvent />
+      </div>
+
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+        width="350"
+        height="500"
+        style={{ border: "none", overflow: "hidden" }}
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        className="mx-auto block sm:hidden"
+      ></iframe>
+
+      {/* // mobile view */}
+      {/* <div className="flex p-0 mb-0 sm:mb-4 block sm:hidden">
+        <div className="rounded-md bg-[#D6E4E5] ml-2">
+          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
+            <PastEvent />
+          </div>
+        </div>
+      </div>
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+        width="500"
+        height="500"
+        style={{ border: "none", overflow: "hidden" }}
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        className="block sm:hidden mx-auto"
+      ></iframe> */}
     </>
   );
 };
