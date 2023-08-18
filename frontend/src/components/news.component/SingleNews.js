@@ -85,15 +85,11 @@ const SingleNews = ({ id }) => {
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       /> */}
-      <p className="my-5 text-lg mx-10">
-        <p className="text-left text-xl font-semibold font-serif">Summary:</p>{" "}
-        <p className="ml-10">{news.summary}</p>
+      <p className="my-5 text-lg mx-10 bg-gray-200">
+        <p className="p-10">{news.summary}</p>
       </p>
       <div className="row">
         <div className="col-md-12">
-          <p className="text-left text-xl font-semibold font-serif mx-10">
-            Content:
-          </p>{" "}
           <Editor
             editorState={editorState}
             readOnly={true}

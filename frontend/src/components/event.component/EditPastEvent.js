@@ -252,14 +252,14 @@ const EditNews = ({ isAuthenticated, id }) => {
             </div>
             <div className="form-group" style={{ marginBottom: "15px" }}>
               <label className="form-label" style={{ marginBottom: "5px" }}>
-                Summery
+                Summary
               </label>
               <input
                 type="text"
                 required
                 className="form-control"
                 placeholder="Summarize your news"
-                id="summery"
+                id="summary"
                 value={summery_pastevent}
                 onChange={(e) => {
                   setSummery(e.target.value);
