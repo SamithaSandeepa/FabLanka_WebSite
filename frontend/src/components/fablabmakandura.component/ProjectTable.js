@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Amplify } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import { API_URL } from "../../config/index";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ProjectTable = ({ isAuthenticated }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -229,43 +230,17 @@ const ProjectTable = ({ isAuthenticated }) => {
                       <div className="flex item-center justify-center">
                         <Link
                           to={`/edit-project/${curElem.id}`}
-                          className="text-gray-400 hover:text-gray-600 mx-2"
+                          className="text-amber-200 hover:text-amber-400 mx-2"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM19 21a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h5M14 2h6a2 2 0 012 2v6M3 14v6a2 2 0 002 2h6"
-                            />
-                          </svg>
+                          <FaEdit className="text-2xl" />
                         </Link>
                         <button
                           onClick={() =>
                             handleDelete(curElem.id, curElem.image_project_m)
                           }
-                          className="text-gray-400 hover:text-gray-600 mx-2"
+                          className="text-red-400 hover:text-red-600 mx-2"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
+                          <FaTrash className="text-2xl" />
                         </button>
                       </div>
                     </td>

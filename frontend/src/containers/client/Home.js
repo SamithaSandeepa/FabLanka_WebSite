@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="container px-0">
+      <div className="px-0">
         <div className="grid grid-cols-12 grid-rows-1 rounded-md">
           {/* bg-gradient-to-b from-green-600 to-blue */}
           <div className="col-span-12 row-span-3 sm:col-span-8 sm:row-span-1 sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden rounded">
@@ -82,8 +82,8 @@ const Home = () => {
       <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
         <NewAlert />
       </div>
-      <div className="container p-0 mb-0 sm:mb-4">
-        <div className="grid grid-cols-12 grid-rows-1 rounded-md">
+      <div className="p-0 mb-0 sm:mb-4">
+        <div className="grid grid-rows-1 rounded-md">
           <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
             <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
               <PastEvent />
