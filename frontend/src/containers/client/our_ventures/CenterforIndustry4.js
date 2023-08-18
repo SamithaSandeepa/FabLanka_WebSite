@@ -9,14 +9,30 @@ const CenterforIndustry4 = () => {
       <main className="px-6 py-16">
         <div className="mb-12 bg-white p-6 rounded-lg shadow-md">
           <p>
-            Center for Industry 4.0 (C4I4) is a think thank specialized on
+            Center for  {" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="/industry4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+             Industry 4.0  
+            </a>  (C4I4) is a think thank specialized on
             research work on Industry 4.0 Technologies and Digital
             Transformation Management. This unique platform will carry out
             policy research, advise government on Industry 4.0 adaptation,
             consult industrial organizations on digitalization and act as a
             networking platform for all stakeholders including similar centers
             around the world. C4I4 will act as an independent research institute
-            associated to FabLanka Foundation.
+            associated to   {" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="/#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+             FabLanka Foundation.
+            </a> 
           </p>
           <div className="mt-4">
             {/* Replace with actual images */}
