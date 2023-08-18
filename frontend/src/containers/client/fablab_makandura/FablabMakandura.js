@@ -3,9 +3,35 @@ import MakanduraTeam from "../../../components/fablabmakandura.component/Makandu
 import ProjectMakandura from "../../../components/fablabmakandura.component/ProjectMakandura";
 import { Gallery } from "react-grid-gallery";
 import { fablab } from "./images/FabLab";
+import { FabLabMaknadura } from "./images/FabLabMaknadura";
+import ReactPlayer from "react-player";
 import "./fablabmakandura.css";
+import { makandura_videos } from "./videos/makandura_videos";
 
 const FablabMakandura = () => {
+  const renderVideos = () => {
+    const videos = makandura_videos;
+    if (videos && videos.length > 0) {
+      return (
+        <div className="row">
+          {videos.map((video, index) => (
+            <div key={index} className="col-6">
+              <div className="player-wrapper">
+                <ReactPlayer
+                  url={video}
+                  className="react-player"
+                  width="500px"
+                  height="300px"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null; // Return null when videos is null or empty
+  };
+
   return (
     <>
       <div className="m-0 p-0">
@@ -52,19 +78,13 @@ const FablabMakandura = () => {
         </header>
         <main className="px-4">
           <section className="">
-            <div className="my-10 mx-10">
+            <div className="my-5 mx-5">
               <Gallery images={fablab} className="mx-auto" />
             </div>
+            {/* <div className="my-5 w-2/5">{renderVideos()}</div> */}
           </section>
-          {/* <section className="mb-8">
-            <p className="text-gray-700 mb-4 text-justify"></p>
-            <div className="my-10 mx-10">
-              <Gallery images={fablab} className="mx-auto" />
-            </div>
-          </section> */}
           <section className="flex mb-8 px-5 text-justify">
-            {/* Left Side: Text Content */}
-            <div className="md:w-2/4 pr-5">
+            <div className="md:w-3/5 pr-5">
               <p className="text-gray-700 mb-4">
                 At FabLab Makandura, we utilize{" "}
                 <a
@@ -80,14 +100,21 @@ const FablabMakandura = () => {
                 community center where anyone in the region has free access for
                 education and information on advanced technologies.
               </p>
-              <Gallery images={fablab} className="mx-auto" />
+              <Gallery images={FabLabMaknadura} className="mx-auto" />
+              <div className="flex flex-col md:flex-row justify-center items-center mt-2">
+                <ReactPlayer
+                  url="https://www.youtube.com/watch?v=H1k3TwiZ5EE&t=1s"
+                  className="react-player mx-auto"
+                  width="100%"
+                />
+              </div>
             </div>
 
             {/* Right Side: Facebook Content */}
             <iframe
-              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
               width="500"
-              height="500"
+              height="700"
               style={{ border: "none", overflow: "hidden" }}
               scrolling="no"
               frameborder="0"
@@ -114,7 +141,7 @@ const FablabMakandura = () => {
             <ProjectMakandura />
           </div>
           <div className="justify-center pt-10 col-span-12 mx-2">
-            <h1 className="text-left text-2xl font-semibold font-serif p-0 mt-4 text-[#394867]">
+            <h1 className="text-left text-3xl font-semibold font-serif p-0 mt-4 text-[#394867]">
               Location
             </h1>
             <p className="text-center">
@@ -134,7 +161,7 @@ const FablabMakandura = () => {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.2716748138037!2d79.97793141525179!3d7.323351115378345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e7622d600a83%3A0xaa493fc1c1d13b3e!2sFabLab%20Makandura!5e0!3m2!1sen!2slk!4v1661173585215!5m2!1sen!2slk"
                 width="100%"
-                height="400"
+                height="500"
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
