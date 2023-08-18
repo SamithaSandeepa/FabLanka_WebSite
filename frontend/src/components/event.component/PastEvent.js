@@ -145,7 +145,7 @@ const PastEvent = () => {
     <>
       <div className="container m-0 p-0 bg-trasparent">
         <h1 className="text-center font-bold font-serif py-3 text-3xl">
-          Past Event
+          Past Events
         </h1>
         <Slider
           {...settings}
