@@ -82,13 +82,31 @@ const Home = () => {
       <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-5 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
         <NewAlert />
       </div>
-      <div className="p-0 mb-0 sm:mb-4">
-        <div className="grid grid-rows-1 rounded-md">
+      <div className="flex p-0 mb-0 sm:mb-4">
+        {/* <div className="grid grid-rows-1 rounded-md">
           <div className="col-span-12 row-span-1 bg-[#D6E4E5]">
             <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
               <PastEvent />
             </div>
           </div>
+        </div> */}
+        <div className="w-3/5 rounded-md bg-[#D6E4E5]">
+          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
+            <PastEvent />
+          </div>
+        </div>
+        <div className="w-2/5">
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="500"
+            height="500"
+            style={{ border: "none", overflow: "hidden" }}
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            className="hidden sm:block mx-auto"
+          ></iframe>
         </div>
       </div>
     </>

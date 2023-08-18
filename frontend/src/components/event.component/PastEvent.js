@@ -109,7 +109,7 @@ const PastEvent = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 2,
     nextArrow: <SampleNextArrow />,
