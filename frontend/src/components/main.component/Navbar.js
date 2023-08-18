@@ -55,28 +55,29 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
   const guestLinks = () => (
     <>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
-        {/* py-1 border-l-2 border-x-emerald-600 */}
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2 md:py-0">
         <Link
           className={
             location.pathname === "/about"
-              ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
-              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium my-4 sm:my-0"
+              ? "text-blue-600 px-4 rounded-md text-sm font-medium underline underline-offset-4"
+              : "text-gray-700 hover:text-blue-600 px-4 rounded-md text-sm font-medium my-4 sm:my-0"
           }
           to="/about"
-          // style={{ textDecoration: "none" }}
         >
           WHO WE ARE
         </Link>
       </li>
 
-      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4">
-        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium ">
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a
+          className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium "
+          // style={{ display: "flex", alignItems: "center" }}
+        >
           WHAT WE DO
         </a>
         <div
-          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block"
-          style={{ width: "max-content" }}
+          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block z-99"
+          style={{ width: "max-content", zIndex: 9999 }}
         >
           <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
@@ -87,7 +88,6 @@ const Navbar = ({ logout, isAuthenticated }) => {
                     : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
                 to="/education"
-                // style={{ textDecoration: "none" }}
               >
                 Education & Training
               </Link>
@@ -160,7 +160,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </li>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
         <Link
           className={
             location.pathname === "/industry"
@@ -173,13 +173,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
           INDUSTRY 4.0
         </Link>
       </li>
-      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4">
-        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium">
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium">
           OUR VENTURES
         </a>
         <div
           className="hidden absolute top-full mt-3 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
-          style={{ width: "max-content" }}
+          style={{ width: "max-content", zIndex: 9999 }}
         >
           <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
@@ -245,7 +245,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </li>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
         <Link
           className={
             location.pathname === "/contactus"
