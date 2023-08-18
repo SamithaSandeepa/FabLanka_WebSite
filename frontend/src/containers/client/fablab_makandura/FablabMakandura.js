@@ -33,20 +33,46 @@ const FablabMakandura = () => {
         </section>
         <section className="mb-8 px-5">
           <p className="text-gray-700 mb-4">
-            FabLab Makandura was started on May 27th, 2017 and is the first
-            Fabrication Laboratory established by FabLanka, and also the first
-            of its kind in Sri Lanka. FabLab Makandura is equipped with various
-            advanced manufacturing equipment, tools, and processes.
+            {" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="/fablabmakandura"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FabLab Makandura
+            </a>{" "}
+            was started on May 27th, 2017 and is the first Fabrication
+            Laboratory established by FabLanka, and also the first of its kind
+            in Sri Lanka.{" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="/fablabmakandura"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FabLab Makandura
+            </a>{" "}
+            is equipped with various advanced manufacturing equipment, tools,
+            and processes.
           </p>
           {/* Add pictures and videos of tools and people working together */}
         </section>
         <section className="mb-8 px-5">
           <p className="text-gray-700 mb-4">
-            At FabLab Makandura, we utilize Industry 4.0 Technologies to develop
-            new products that provide efficient and affordable solutions to
-            community needs. It also serves as a community center where anyone
-            in the region has free access for education and information on
-            advanced technologies.
+            At FabLab Makandura, we utilize{" "}
+            <a
+              className="text-blue-500 hover:text-blue-700 transition duration-300"
+              href="/industry"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Industry 4.0
+            </a>{" "}
+            Technologies to develop new products that provide efficient and
+            affordable solutions to community needs. It also serves as a
+            community center where anyone in the region has free access for
+            education and information on advanced technologies.
           </p>
           {/* Add a video or photos here */}
         </section>
@@ -64,8 +90,17 @@ const FablabMakandura = () => {
           <div className="justify-center pt-10 col-span-12 mx-5">
             {/* <h1 className="text-[50px] text-center text-[#163B64]">Location</h1> */}
             <p className="text-center pt-5">
-              FabLab Makandura is located about 50 Km from Colombo at the Public
-              Library Complex in Makandura town of Kurunegala district.
+              {" "}
+              <a
+                className="text-blue-500 hover:text-blue-700 transition duration-300"
+                href="/fablabmakandura"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                FabLab Makandura
+              </a>{" "}
+              is located about 50 Km from Colombo at the Public Library Complex
+              in Makandura town of Kurunegala district.
             </p>
             <div class="flex justify-center mt-4 mb-4">
               <div class="w-1/2 mr-5">

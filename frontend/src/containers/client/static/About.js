@@ -132,6 +132,27 @@ const About = () => {
       <div className="row m-0 p-0">
         <OurTeam />
       </div>
+      {/* section for show our contributers logo supporters all logos */}
+      <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
+        <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
+          Our Partners
+        </h1>
+        <div className="bg-gray-100 p-4 rounded-md mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="col-span-1">
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                <img className="m-auto" src="#" alt="Logo" />
+              </a>
+
+              <p className="text-center font-medium mt-3"></p>
+
+              <p className="text-center font-medium mt-3">
+                {/* United Nations Development Programme */}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
