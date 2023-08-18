@@ -76,16 +76,24 @@ const SingleNews = ({ id }) => {
   };
 
   return (
-    <div className="container mb-5">
-      <h1 className="text-center text-3xl">{news.title}</h1>
-      <img
+    <div className="container-sm text-lg mt-10 shadow-sm py-2 mb-4">
+      <h1 className="text-center text-3xl font-semibold font-serif mt-5">
+        {news.title}
+      </h1>
+      {/* <img
         src={image}
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
-      />
-      <p className="my-5 text-lg">{news.summary}</p>
+      /> */}
+      <p className="my-5 text-lg mx-10">
+        <p className="text-left text-xl font-semibold font-serif">Summary:</p>{" "}
+        <p className="ml-10">{news.summary}</p>
+      </p>
       <div className="row">
         <div className="col-md-12">
+          <p className="text-left text-xl font-semibold font-serif mx-10">
+            Content:
+          </p>{" "}
           <Editor
             editorState={editorState}
             readOnly={true}
@@ -109,12 +117,14 @@ const SingleNews = ({ id }) => {
         </div>
       </div>
       <div className="row">
-        <div
-          className="col-md-12"
-          style={{ paddingLeft: "80px", paddingRight: "80px" }}
-        >
-          {renderVideos()}
-        </div>
+        {renderVideos > 0 && (
+          <div
+            className="col-md-12"
+            style={{ paddingLeft: "80px", paddingRight: "80px" }}
+          >
+            {renderVideos()}
+          </div>
+        )}
       </div>
     </div>
   );
