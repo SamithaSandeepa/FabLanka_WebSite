@@ -88,7 +88,9 @@ const SingleProjectMakandura = ({ id }) => {
         className="card-img mt-3 h-48 w-auto mx-auto block"
         alt="..."
       /> */}
-      <p className="my-5 text-p px-20">{Project.summery_project_m}</p>
+      <p className="my-5 text-lg mx-10 bg-gray-200">
+        <p className="p-10">{Project.summery_project_m}</p>
+      </p>
       <div className="row">
         <div className="col-md-12">
           <Editor
