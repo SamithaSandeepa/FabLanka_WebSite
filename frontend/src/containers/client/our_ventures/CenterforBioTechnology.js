@@ -5,9 +5,9 @@ const CenterforBioTechnology = () => {
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-gray-600 py-10 text-white text-center">
         <h1 className="text-4xl font-bold">Center for Bio-Technology</h1>
-        <p>
+        {/* <p>
           Sample text
-        </p>
+        </p> */}
       </header>
       <main className="px-6 py-16">
         <div className="mb-12 bg-white p-6 rounded-lg shadow-md">
