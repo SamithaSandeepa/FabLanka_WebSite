@@ -34,7 +34,7 @@ SECRET_KEY = "django-insecure-9qlye*m#ojd#=wf%1uyd-_9j=quzl@yycrs*v3bk1f6-l-%1v7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'fablab.onrender.com', 'http://0.0.0.0:8000/', '0.0.0.0:8000']
 
 
 # Application definition
@@ -109,9 +109,9 @@ DEBUG = True
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
 
 # AWS credentials
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -244,4 +244,3 @@ CORS_ALLOWED_ORIGINS = [
     'https://fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'fablab.onrender.com']
