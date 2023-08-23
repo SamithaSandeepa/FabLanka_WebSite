@@ -24,7 +24,7 @@ const UniversalEnergy = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-2">
-                Grid Tied Solar Systems
+                Off Grid Solar Systems
               </h3>
               <p>For residential and commercial buildings.</p>
               <div className="mt-4">
@@ -46,6 +46,20 @@ const UniversalEnergy = () => {
                 <img
                   src="https://ecodeshpowersolutions.co.ke/wp-content/uploads/2021/03/Abdul-Majeed-0.jpg"
                   alt="Solar Water Pumping Systems"
+                  className="max-w-full rounded-lg"
+                />
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-2">
+                Grid Tied Solar Systems
+              </h3>
+              <p>For residential and commercial buildings.</p>
+              <div className="mt-4">
+                {/* Replace with actual images */}
+                <img
+                  src="https://solaren-power.com/wp-content/uploads/2020/05/Annotation-2020-05-06-150252-1-1.jpg"
+                  alt="Grid Tied Solar Systems"
                   className="max-w-full rounded-lg"
                 />
               </div>

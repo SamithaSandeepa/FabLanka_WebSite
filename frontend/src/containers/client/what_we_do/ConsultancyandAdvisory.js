@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const ConsultancyandAdvisory = () => {
   return (
-    <div className="container-sm text-lg mt-10">
+    <div className="container-sm text-lg mt-10 shadow-sm py-2 mb-4">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-center text-2xl font-semibold font-serif p-0 mb-4 text-[#394867]">
           Consultancy and Advisory Services

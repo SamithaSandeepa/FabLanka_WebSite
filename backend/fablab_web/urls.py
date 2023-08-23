@@ -1,17 +1,15 @@
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
-from book.views import BookList, BookCreate
 from projectMakandura.views import projectMakanduraList, projectMakanduraCreate, projectMakanduraDelete, projectMakanduraUpdate, projectMakanduraDetail
 from news.views import NewsList, NewsDetail, NewsCreate, NewsUpdate, NewsDelete
 from event.views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from sendmail.views import contact_form
 
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('books/', BookList.as_view(), name='book_list'),
-    path('books/create/', BookCreate.as_view(), name='book_create'),
 
     #project makandura API 
     path('projectmakandura/', projectMakanduraList.as_view(), name='projectmakandura_list'),
@@ -42,3 +40,4 @@ urlpatterns = [
 
 
 urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
+urlpatterns += staticfiles_urlpatterns()

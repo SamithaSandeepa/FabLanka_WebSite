@@ -257,14 +257,14 @@ const EditProject = ({ isAuthenticated, id }) => {
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   {" "}
-                  Summery{" "}
+                  Summary{" "}
                 </label>
                 <input
                   type="text"
                   required
                   className="form-control text-black"
                   placeholder="Summarize your news"
-                  id="summery"
+                  id="summary"
                   value={summery_project_m}
                   onChange={(e) => {
                     setSummery(e.target.value);

@@ -11,12 +11,11 @@ import ReactPlayer from "react-player";
 import Amplify from "@aws-amplify/core";
 import { Storage } from "aws-amplify";
 
-
 const EditNews = ({ isAuthenticated, id }) => {
   const ref = useRef(null);
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
-  const [summery, setSummery] = useState("");
+  const [summary, setSummary] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState(null);
   const [status, setStatus] = useState("");
@@ -37,7 +36,7 @@ const EditNews = ({ isAuthenticated, id }) => {
         setDlimage(response.data.image);
         setImage(response.data.image);
         setTitle(response.data.title);
-        setSummery(response.data.summary);
+        setSummary(response.data.summary);
         const contentState = convertFromRaw(response.data.content);
         setEditorState(EditorState.createWithContent(contentState));
         setStatus(response.data.status);
@@ -177,7 +176,7 @@ const EditNews = ({ isAuthenticated, id }) => {
 
       const news = {
         title,
-        summery,
+        summary,
         content: JSON.parse(content),
         image,
         status,
@@ -252,17 +251,17 @@ const EditNews = ({ isAuthenticated, id }) => {
             <div className="form-group" style={{ marginBottom: "15px" }}>
               <label className="form-label" style={{ marginBottom: "5px" }}>
                 {" "}
-                Summery{" "}
+                Summary{" "}
               </label>
               <input
                 type="text"
                 required
                 className="form-control text-black"
                 placeholder="Summarize your news"
-                id="summery"
-                value={summery}
+                id="summary"
+                value={summary}
                 onChange={(e) => {
-                  setSummery(e.target.value);
+                  setSummary(e.target.value);
                 }}
               />
             </div>
