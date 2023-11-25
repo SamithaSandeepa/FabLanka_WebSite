@@ -129,11 +129,11 @@ const About = () => {
           </div>
         </div>
       </div>
-      <div className="row m-0 p-0">
+      <div id="our-team" className="row m-0 p-0">
         <OurTeam />
       </div>
       {/* section for show our contributers logo supporters all logos */}
-      <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
+      {/* <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
         <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
           Our Partners
         </h1>
@@ -147,12 +147,11 @@ const About = () => {
               <p className="text-center font-medium mt-3"></p>
 
               <p className="text-center font-medium mt-3">
-                {/* United Nations Development Programme */}
               </p>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

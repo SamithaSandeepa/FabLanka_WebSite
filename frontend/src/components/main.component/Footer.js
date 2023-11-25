@@ -6,6 +6,7 @@ import {
   FaLinkedin,
   FaGithub,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -103,12 +104,12 @@ const Footer = () => {
                 </p>
                 <p>
                   <a href="/biotechnology" className="text-reset">
-                  Center for Bio-Technology
+                    Center for Bio-Technology
                   </a>
                 </p>
                 <p>
                   <a href="/industry4" className="text-reset">
-                  Center for Industry 4.0
+                    Center for Industry 4.0
                   </a>
                 </p>
               </div>
@@ -118,10 +119,31 @@ const Footer = () => {
               <h6 className="text-uppercase font-bold mb-4">Useful links</h6>
               <div className="text-gray-300">
                 <p>
-                  <a href="/about" className="text-reset">
+                  <Link to="/about#our-team" className="text-reset">
                     Our Team
+                  </Link>
+                </p>
+                <p>
+                  <a
+                    href="https://fablanka.org"
+                    className="text-reset"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    FabLanka Foundation
                   </a>
                 </p>
+                <p>
+                  <a
+                    href="https://hitinnovations.lk"
+                    className="text-reset"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    HIT Innovations
+                  </a>
+                </p>
+
                 <p>
                   <a href="#!" className="text-reset">
                     Contact Us

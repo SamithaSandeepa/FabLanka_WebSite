@@ -7,7 +7,6 @@ import { TbArrowBigUpLines } from "react-icons/tb";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const location = useLocation();
-  console.log(location.pathname);
   const [redirect, setRedirect] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [open, setOpen] = useState(false);
