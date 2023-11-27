@@ -33,7 +33,6 @@ const EditNews = ({ isAuthenticated, id }) => {
     axios
       .get(`${API_URL}/event/${id}/`)
       .then((response) => {
-        console.log(response.data, "response");
         // console.log(response.data.content_pastevent, "image");
         downloadFile(response.data.image);
         setImageName(response.data.image);
@@ -139,9 +138,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -169,7 +168,6 @@ const EditNews = ({ isAuthenticated, id }) => {
 
     if (form.checkValidity() === true) {
       e.preventDefault();
-      console.log("videos");
 
       setValidated(true);
     } else {

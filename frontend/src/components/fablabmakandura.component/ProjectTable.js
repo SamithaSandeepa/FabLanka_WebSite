@@ -38,9 +38,7 @@ const ProjectTable = ({ isAuthenticated }) => {
   }, []);
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -62,8 +60,6 @@ const ProjectTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/projectmakandura/`);
 
       setProject(response.data);
-
-      console.log("test", response.data);
 
       const urls = await Promise.all(
         response.data.map((curElem) => downloadFile(curElem.image_project_m))
@@ -87,10 +83,10 @@ const ProjectTable = ({ isAuthenticated }) => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      // console.log("get image", fileName);
       return fileURL;
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       return null;
     }
   };
@@ -115,7 +111,6 @@ const ProjectTable = ({ isAuthenticated }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         alert("Status updated successfully");
         window.location.reload(); // optional - refreshes the page after the update
       })
@@ -128,7 +123,6 @@ const ProjectTable = ({ isAuthenticated }) => {
     const csrftoken = getCookie("csrftoken");
     try {
       // Delete the image from AWS S3
-      console.log("Delete img:", fileName);
       await Storage.remove(fileName);
 
       // Delete the data from the database
@@ -142,7 +136,7 @@ const ProjectTable = ({ isAuthenticated }) => {
           },
         }
       );
-      console.log(response.data);
+
       getProject();
     } catch (error) {
       console.log(error);
@@ -188,8 +182,6 @@ const ProjectTable = ({ isAuthenticated }) => {
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
               {filteredProject.map((curElem, index) => {
-                console.log(curElem.status);
-
                 return (
                   <tr key={curElem.id}>
                     <td className="py-3 px-6">{curElem.id}</td>

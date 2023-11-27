@@ -10,7 +10,6 @@ const CreateNews = ({ isAuthenticated }) => {
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page

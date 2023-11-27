@@ -33,7 +33,7 @@ const CreateEvent = ({ isAuthenticated }) => {
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
+      //
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -85,7 +85,7 @@ const CreateEvent = ({ isAuthenticated }) => {
   };
 
   const handleFileUpload = async () => {
-    console.log("handleFileUpload");
+    // console.log("handleFileUpload");
     const file = ref.current.files[0];
     const imageName = generateUniqueName(file.name);
     setDlimage(imageName);
@@ -121,9 +121,9 @@ const CreateEvent = ({ isAuthenticated }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -150,7 +150,6 @@ const CreateEvent = ({ isAuthenticated }) => {
 
     // Convert the array of URLs to a JSON string
     const videosJsonString = JSON.stringify(videoUrls);
-    console.log(videosJsonString);
 
     if (form.checkValidity() === false) {
       e.preventDefault();

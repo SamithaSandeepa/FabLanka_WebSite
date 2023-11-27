@@ -115,7 +115,6 @@ const EditNews = ({ isAuthenticated, id }) => {
       setImage(imageName);
       setIsUploading(false);
     } catch (error) {
-      console.log("Error uploading file:", error);
       setIsUploading(false);
     }
   };
@@ -133,9 +132,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -164,7 +163,6 @@ const EditNews = ({ isAuthenticated, id }) => {
 
     if (form.checkValidity() === true) {
       e.preventDefault();
-      console.log("videos");
 
       setValidated(true);
       e.stopPropagation();
@@ -192,7 +190,6 @@ const EditNews = ({ isAuthenticated, id }) => {
           },
         })
         .then((res) => {
-          console.log(res, "response");
           window.location.href = "/show-all-news";
         })
         .catch((err) => {

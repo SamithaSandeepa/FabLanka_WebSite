@@ -47,10 +47,9 @@ const SingleProjectMakandura = ({ id }) => {
   const downloadImage = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get url", fileURL);
       setImage(fileURL); // Set the value in the state variable
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       setImage(null); // Set null in case of an error
     }
   };

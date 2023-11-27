@@ -5,7 +5,6 @@ import { login } from "../../actions/auth";
 import axios from "axios";
 
 const Login = ({ login, isAuthenticated }) => {
-  console.log("aaa");
   const [formData, setFormData] = useState({
     email: "",
     password: "",

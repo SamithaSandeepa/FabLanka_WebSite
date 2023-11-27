@@ -34,7 +34,6 @@ const Education = ({ isAuthenticated }) => {
           await Storage.put(pictureKey, picture, {
             contentType: picture.type,
           });
-          console.log(`File ${picture.name} uploaded successfully`);
         })
       );
 

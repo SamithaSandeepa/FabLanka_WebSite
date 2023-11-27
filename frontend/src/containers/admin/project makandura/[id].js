@@ -6,15 +6,12 @@ import { useParams } from "react-router-dom";
 import EditProject from "../../../components/fablabmakandura.component/EditProject";
 
 const ProjectUpdate = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
   const [loading, setLoadingState] = useState(true);
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page

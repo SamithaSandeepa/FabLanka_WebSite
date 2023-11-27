@@ -7,7 +7,6 @@ import { API_URL } from "../../config";
 import { useStateContext } from "../../context/ContextProvider";
 
 const Admin = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
   const [loading, setLoadingState] = useState(true);
@@ -22,7 +21,6 @@ const Admin = ({ isAuthenticated }) => {
       //only status is true data will be shown
       const numberOfEvents = response.data.length;
       setEvents(numberOfEvents); //only status is true data will be shown
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +32,6 @@ const Admin = ({ isAuthenticated }) => {
       //only status is true data will be shown
       const numberOfNews = response.data.length;
       setNews(numberOfNews); //only status is true data will be shown
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -46,16 +43,13 @@ const Admin = ({ isAuthenticated }) => {
       //only status is true data will be shown
       const numberOfProjects = response.data.length;
       setProjects(numberOfProjects); //only status is true data will be shown
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page

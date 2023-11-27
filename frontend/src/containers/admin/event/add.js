@@ -5,13 +5,11 @@ import { useStateContext } from "../../../context/ContextProvider";
 import CreateEvent from "../../../components/event.component/CreateEvent";
 
 const CreateEvents = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page

@@ -22,9 +22,8 @@ const EventsTable = ({ isAuthenticated }) => {
   );
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
+      //
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -76,7 +75,6 @@ const EventsTable = ({ isAuthenticated }) => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
       return fileURL;
     } catch (error) {
       console.log("Error retrieving file:", error);
@@ -104,7 +102,6 @@ const EventsTable = ({ isAuthenticated }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         alert("Status updated successfully");
         window.location.reload(); // optional - refreshes the page after the update
       })
@@ -114,11 +111,10 @@ const EventsTable = ({ isAuthenticated }) => {
   };
 
   const handleDelete = async (id, fileName) => {
-    console.log(id);
     const csrftoken = getCookie("csrftoken");
     try {
       // Delete the image from AWS S3
-      console.log("Delete img:", fileName);
+      // console.log("Delete img:", fileName);
       await Storage.remove(fileName);
 
       // Delete the data from the database
@@ -129,7 +125,7 @@ const EventsTable = ({ isAuthenticated }) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      //
       getEvent();
     } catch (error) {
       console.log(error);
@@ -175,8 +171,6 @@ const EventsTable = ({ isAuthenticated }) => {
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
               {filteredEvent.map((curElem, index) => {
-                console.log(curElem.status);
-
                 return (
                   <tr key={curElem.id}>
                     <td className="py-3 px-6">{curElem.id}</td>

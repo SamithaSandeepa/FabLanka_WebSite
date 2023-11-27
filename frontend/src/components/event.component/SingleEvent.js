@@ -7,14 +7,12 @@ import { API_URL } from "../../config/index";
 import ReactPlayer from "react-player";
 
 const SingleEvent = ({ id }) => {
-  console.log(id);
   const [event, setEvent] = useState({});
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
     const getEvent = async () => {
       const response = await axios.get(`${API_URL}/event/${id}/`);
-      console.log(response.data);
       setEvent(response.data);
     };
     getEvent();
@@ -28,7 +26,6 @@ const SingleEvent = ({ id }) => {
   // }, [event]);
 
   useEffect(() => {
-    console.log("hello");
     if (event.content_pastevent) {
       let contentState;
       try {

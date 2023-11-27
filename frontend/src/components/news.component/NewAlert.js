@@ -47,10 +47,10 @@ const NewAlert = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      // console.log("get image", fileName);
       return fileURL;
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       return null;
     }
   };

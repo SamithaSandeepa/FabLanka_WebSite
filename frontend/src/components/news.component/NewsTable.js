@@ -38,9 +38,7 @@ const NewsTable = ({ isAuthenticated }) => {
   }, []);
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -63,7 +61,6 @@ const NewsTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/news/`);
       //only status is true data will be shown
       setNews(response.data); //only status is true data will be shown
-      console.log(response.data);
       const urls = await Promise.all(
         response.data.map((curElem) => downloadFile(curElem.image))
       );
@@ -76,7 +73,6 @@ const NewsTable = ({ isAuthenticated }) => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
       return fileURL;
     } catch (error) {
       console.log("Error retrieving file:", error);
@@ -104,7 +100,6 @@ const NewsTable = ({ isAuthenticated }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         alert("Status updated successfully");
         window.location.reload(); // optional - refreshes the page after the update
       })
@@ -117,7 +112,6 @@ const NewsTable = ({ isAuthenticated }) => {
     const csrftoken = getCookie("csrftoken");
     try {
       // Delete the image from AWS S3
-      console.log("Delete img:", fileName);
       await Storage.remove(fileName);
 
       // Delete the data from the database
@@ -128,7 +122,6 @@ const NewsTable = ({ isAuthenticated }) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       getNews();
     } catch (error) {
       console.log(error);
@@ -174,7 +167,6 @@ const NewsTable = ({ isAuthenticated }) => {
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
               {filteredNews.map((curElem, index) => {
-                console.log(curElem.status);
 
                 return (
                   <tr key={curElem.id}>

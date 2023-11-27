@@ -5,15 +5,12 @@ import { useStateContext } from "../../../context/ContextProvider";
 import EditPastEvent from "../../../components/event.component/EditPastEvent";
 import { useParams } from "react-router-dom";
 
-
-const EventUpdate = ({isAuthenticated}) => {
+const EventUpdate = ({ isAuthenticated }) => {
   const { setLoading } = useStateContext();
   const history = useHistory();
 
   useEffect(() => {
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -31,9 +28,9 @@ const EventUpdate = ({isAuthenticated}) => {
 
   return (
     <>
-        <div className="container m-0 p-0">
-          <EditPastEvent id={id}/>
-        </div>
+      <div className="container m-0 p-0">
+        <EditPastEvent id={id} />
+      </div>
     </>
   );
 };

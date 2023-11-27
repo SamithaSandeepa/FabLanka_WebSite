@@ -14,7 +14,7 @@ function generateSitemap() {
   const xml = sitemap.generate(alphabeticallySortedPaths).toString();
 
   // Save the sitemap XML to a file or use it as needed
-  console.log(xml);
+  // console.log(xml);
 }
 
 // Call the function to generate the sitemap
