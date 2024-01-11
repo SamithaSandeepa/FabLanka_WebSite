@@ -60,6 +60,7 @@ const ProjectTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/projectmakandura/`);
 
       setProject(response.data);
+      
 
       const urls = await Promise.all(
         response.data.map((curElem) => downloadFile(curElem.image_project_m))

@@ -27,13 +27,11 @@ const EditNews = ({ isAuthenticated, id }) => {
   const [isUploading, setIsUploading] = useState(false);
   const { setLoading } = useStateContext();
 
-  // console.log(videos);
-
   useEffect(() => {
     axios
       .get(`${API_URL}/event/${id}/`)
       .then((response) => {
-        // console.log(response.data.content_pastevent, "image");
+        console.log(response.data);
         downloadFile(response.data.image);
         setImageName(response.data.image);
         setDlimage(response.data.image);
@@ -57,7 +55,6 @@ const EditNews = ({ isAuthenticated, id }) => {
     try {
       const fileURL = await Storage.get(fileName);
       setPreview(fileURL);
-      // setImage(fileURL);
     } catch (error) {
       console.log("Error retrieving file:", error);
       return null;

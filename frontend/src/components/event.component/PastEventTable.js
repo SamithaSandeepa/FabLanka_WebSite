@@ -62,7 +62,7 @@ const EventsTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/event/`);
       //only status is true data will be shown
       setEvent(response.data); //only status is true data will be shown
-
+      console.log(response.data);
       const urls = await Promise.all(
         response.data.map((curElem) => downloadFile(curElem.image))
       );
