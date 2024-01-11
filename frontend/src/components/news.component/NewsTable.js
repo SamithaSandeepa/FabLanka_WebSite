@@ -167,7 +167,6 @@ const NewsTable = ({ isAuthenticated }) => {
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
               {filteredNews.map((curElem, index) => {
-
                 return (
                   <tr key={curElem.id}>
                     <td className="py-3 px-6">{curElem.id}</td>
@@ -190,7 +189,7 @@ const NewsTable = ({ isAuthenticated }) => {
                           }-700 text-black font-bold py-2 px-4 rounded-full text-sm`}
                           onClick={() => onChange(curElem.id, !curElem.status)}
                         >
-                          {curElem.status ? "False" : "True"}
+                          {curElem.status ? "HIDE" : "SHOW"}
                         </button>
                       </div>
                     </td>

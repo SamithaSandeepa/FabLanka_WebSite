@@ -193,7 +193,7 @@ const EventsTable = ({ isAuthenticated }) => {
                           }-700 text-black font-bold py-2 px-4 rounded-full text-sm`}
                           onClick={() => onChange(curElem.id, !curElem.status)}
                         >
-                          {curElem.status ? "False" : "True"}
+                          {curElem.status ? "HIDE" : "SHOW"}
                         </button>
                       </div>
                     </td>

@@ -60,7 +60,6 @@ const ProjectTable = ({ isAuthenticated }) => {
       const response = await axios.get(`${API_URL}/projectmakandura/`);
 
       setProject(response.data);
-      
 
       const urls = await Promise.all(
         response.data.map((curElem) => downloadFile(curElem.image_project_m))
@@ -214,7 +213,7 @@ const ProjectTable = ({ isAuthenticated }) => {
                           }-700 text-black font-bold py-2 px-4 rounded-full text-sm`}
                           onClick={() => onChange(curElem.id, !curElem.status)}
                         >
-                          {curElem.status ? "False" : "True"}
+                          {curElem.status ? "HIDE" : "SHOW"}
                         </button>
                       </div>
                     </td>
