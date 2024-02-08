@@ -513,7 +513,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                   className="navbar-brand pl-2"
                   style={{ fontFamily: "BoxTypeLetter, sans-serif" }}
                 >
-                  Fablanka Foundation
+                  FabLanka Foundation
                 </a>
               </Link>
             </div>
