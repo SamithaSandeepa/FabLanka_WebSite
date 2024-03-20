@@ -1,10 +1,10 @@
 import React from "react";
-import ContactUs from "../../../components/contactus.compoents/ContactUs";
+import ContactForm from "../../../components/contactus.compoents/cont";
 
 const contact = () => {
   return (
     <div className="container mt-10">
-      <ContactUs />
+      <ContactForm />
     </div>
   );
 };
