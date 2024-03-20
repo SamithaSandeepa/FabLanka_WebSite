@@ -76,7 +76,7 @@ function ContactUs() {
             </p>
             <p className="mb-4">
               <i className="fas fa-phone mr-2"></i>
-              <strong>Phone:</strong> +94 31 2299275, +94 11 2545970
+              <strong>Phone:</strong> +94 31 2299275, +94 11 2545790
             </p>
           </div>
           {/* <div className="col-span-4 item-center py-5 pl-48">
