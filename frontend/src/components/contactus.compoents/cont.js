@@ -149,38 +149,6 @@ const ContactForm = () => {
         </div>
       </div>
     </div>
-
-    // <form onSubmit={handleSubmit}>
-    //   <input
-    //     type="text"
-    //     placeholder="Name"
-    //     value={name}
-    //     onChange={(e) => setName(e.target.value)}
-    //     required
-    //   />
-    //   <input
-    //     type="email"
-    //     placeholder="Email"
-    //     value={email}
-    //     onChange={(e) => setEmail(e.target.value)}
-    //     required
-    //   />
-    //   <input
-    //     type="text"
-    //     placeholder="Subject"
-    //     value={subject}
-    //     onChange={(e) => setSubject(e.target.value)}
-    //     required
-    //   />
-    //   <textarea
-    //     placeholder="Message"
-    //     value={message}
-    //     onChange={(e) => setMessage(e.target.value)}
-    //     required
-    //   />
-    //   <button type="submit">Submit</button>
-    //   {successMessage && <p>{successMessage}</p>}
-    // </form>
   );
 };
 
