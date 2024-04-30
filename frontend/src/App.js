@@ -45,6 +45,7 @@ import MakanduraModelFarm from "./containers/client/our_ventures/MakanduraModelF
 import UniversalEnergy from "./containers/client/our_ventures/UniversalEnergy";
 import CenterforBioTechnology from "./containers/client/our_ventures/CenterforBioTechnology";
 import CenterforIndustry4 from "./containers/client/our_ventures/CenterforIndustry4";
+import HITInnovations from "./containers/client/our_ventures/HITInnovations";
 
 // import Footer from "./components/Footer";
 
@@ -123,13 +124,14 @@ const App = () => (
               component={InternationalTechnologyTransfer}
             />
             {/* Our Ventures Route */}
-            <Route exact path="/model-farm" component={MakanduraModelFarm} />
+            {/* <Route exact path="/model-farm" component={MakanduraModelFarm} />
             <Route exact path="/universal-energy" component={UniversalEnergy} />
             <Route
               exact
               path="/biotechnology"
               component={CenterforBioTechnology}
-            />
+            /> */}
+            <Route exact path="/HITInnovations" component={HITInnovations} />
             <Route exact path="/industry4" component={CenterforIndustry4} />
           </Switch>
         </ContextProvider>

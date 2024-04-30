@@ -193,7 +193,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 FabLab Makandura
               </Link>
             </div>
-            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+            {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
                   location.pathname === "/universal-energy"
@@ -227,6 +227,18 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 to="/biotechnology"
               >
                 Center for Bio-Technology
+              </Link>
+            </div> */}
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+              <Link
+                className={
+                  location.pathname === "/HITInnovations"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/HITInnovations"
+              >
+                HIT Innovations
               </Link>
             </div>
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
