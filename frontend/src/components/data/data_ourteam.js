@@ -23,14 +23,14 @@ export const dataourteam = [
     position: "Director of Fablanka Foundation",
     link: "https://www.linkedin.com/in/priyantha-palapathwala-08a5352?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAABvMSoB1Tl_fdr0ARGOW9D0F6RUwU_3124&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BEe3DyUPeQ6S5OHeIRlQVug%3D%3D",
   },
-  {
-    id: 4,
-    name: "Buddhika Jayasena",
-    image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/BuddhikaJayasena.jpg",
-    position: "Director of Fablanka Foundation",
-    link: "https://www.linkedin.com/in/buddhika-jayasena-b3b1956b/",
-  },
+  // {
+  //   id: 4,
+  //   name: "Buddhika Jayasena",
+  //   image:
+  //     "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/BuddhikaJayasena.jpg",
+  //   position: "Director of Fablanka Foundation",
+  //   link: "https://www.linkedin.com/in/buddhika-jayasena-b3b1956b/",
+  // },
   {
     id: 5,
     name: "Pubudu Senaratne",
@@ -47,14 +47,14 @@ export const dataourteam = [
     position: "Founding Member",
     link: "https://www.linkedin.com/in/sandunr/",
   },
-  {
-    id: 7,
-    name: "Roshan Perera",
-    image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/roshan.jpeg",
-    position: "International Consultant",
-    link: "#",
-  },
+  // {
+  //   id: 7,
+  //   name: "Roshan Perera",
+  //   image:
+  //     "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/roshan.jpeg",
+  //   position: "International Consultant",
+  //   link: "#",
+  // },
   {
     id: 8,
     name: "Susantha pathirana",
