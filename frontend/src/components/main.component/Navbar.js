@@ -259,6 +259,19 @@ const Navbar = ({ logout, isAuthenticated }) => {
       <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
         <Link
           className={
+            location.pathname === "/our-partners"
+              ? "text-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
+              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/our-partners"
+          // style={{ textDecoration: "none" }}
+        >
+          OUR PARTNERS
+        </Link>
+      </li>
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
+        <Link
+          className={
             location.pathname === "/contactus"
               ? "text-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
               : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"

@@ -46,6 +46,7 @@ import UniversalEnergy from "./containers/client/our_ventures/UniversalEnergy";
 import CenterforBioTechnology from "./containers/client/our_ventures/CenterforBioTechnology";
 import CenterforIndustry4 from "./containers/client/our_ventures/CenterforIndustry4";
 import HITInnovations from "./containers/client/our_ventures/HITInnovations";
+import OurPartners from "./containers/client/static/OurPartners";
 
 // import Footer from "./components/Footer";
 
@@ -95,6 +96,7 @@ const App = () => (
             <Route exact path="/edit-project/:id" component={EditProject} />
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />
+            <Route exact path="/our-partners" component={OurPartners} />
             <Route exact path="/contactus" component={ContactUs} />
             {/* What we do Route */}
             <Route exact path="/education" component={Education} />
