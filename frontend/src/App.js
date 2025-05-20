@@ -8,7 +8,6 @@ import Activate from "./containers/loginpages/Activate";
 import ResetPassword from "./containers/loginpages/ResetPassword";
 import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
 import second from "./containers/client/second";
-import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
 import ContactUs from "./containers/client/static/Contact";
 import Admin from "./containers/admin/admin";
@@ -48,6 +47,11 @@ import CenterforIndustry4 from "./containers/client/our_ventures/CenterforIndust
 import HITInnovations from "./containers/client/our_ventures/HITInnovations";
 import OurPartners from "./containers/client/static/OurPartners";
 
+// who we are pages
+import OurTeam from "./containers/client/who_we_are/OurTeam";
+import About from "./containers/client/who_we_are/About";
+import OurJourney from "./containers/client/who_we_are/OurJurney";
+
 // import Footer from "./components/Footer";
 
 import { Provider } from "react-redux";
@@ -77,7 +81,6 @@ const App = () => (
             />
             <Route exact path="/activate/:uid/:token" component={Activate} />
             <Route exact path="/second" component={second} />
-            <Route exact path="/about" component={About} />
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
             <Route exact path="/news/:id" component={News} />
@@ -98,6 +101,10 @@ const App = () => (
             <Route exact path="/industry" component={Industrytec} />
             <Route exact path="/our-partners" component={OurPartners} />
             <Route exact path="/contactus" component={ContactUs} />
+            {/* who we are Route */}
+            <Route exact path="/about" component={About} />
+            <Route exact path="/our-team" component={OurTeam} />
+            <Route exact path="/our-journey" component={OurJourney} />
             {/* What we do Route */}
             <Route exact path="/education" component={Education} />
             <Route

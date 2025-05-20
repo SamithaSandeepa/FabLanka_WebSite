@@ -36,17 +36,17 @@ export const dataourteam = [
     name: "Pubudu Senaratne",
     image:
       "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/PubuduSenaratne.jpg",
-    position: "Founding Member",
+    position: "Advisor of FabLanka Foundation",
     link: "#",
   },
-  {
-    id: 6,
-    name: "Sandun Ranaweera",
-    image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/SandunRanaweera.png",
-    position: "Founding Member",
-    link: "https://www.linkedin.com/in/sandunr/",
-  },
+  // {
+  //   id: 6,
+  //   name: "Sandun Ranaweera",
+  //   image:
+  //     "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/SandunRanaweera.png",
+  //   position: "Founding Member",
+  //   link: "https://www.linkedin.com/in/sandunr/",
+  // },
   // {
   //   id: 7,
   //   name: "Roshan Perera",
@@ -60,7 +60,23 @@ export const dataourteam = [
     name: "Susantha pathirana",
     image:
       "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/susantha+pathirana.jpeg",
-    position: "Academic Consultant",
+    position: "Advisor of FabLanka Foundation",
     link: "#",
+  },
+  {
+    id: 9,
+    name: "Sisira Ranatunga",
+    image:
+      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/SisiraRanatunga.jpg",
+    position: "Advisor of FabLanka Foundation",
+    link: "https://www.linkedin.com/in/sisira-ranatunga-205b3845/",
+  },
+  {
+    id: 10,
+    name: "Darshana Samaraweera",
+    image:
+      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/darshana.jpg",
+    position: "Advisor of FabLanka Foundation",
+    link: "https://www.linkedin.com/in/darshana-samaraweera-71472327/",
   },
 ];

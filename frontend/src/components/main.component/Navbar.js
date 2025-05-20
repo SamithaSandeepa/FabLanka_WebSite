@@ -54,7 +54,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
   const guestLinks = () => (
     <>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2 md:py-0">
+      {/* <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2 md:py-0">
         <Link
           className={
             location.pathname === "/about"
@@ -65,6 +65,60 @@ const Navbar = ({ logout, isAuthenticated }) => {
         >
           WHO WE ARE
         </Link>
+      </li> */}
+
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a
+          className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium "
+          // style={{ display: "flex", alignItems: "center" }}
+        >
+          WHO WE ARE
+        </a>
+        <div
+          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block z-99 "
+          style={{ width: "max-content", zIndex: 9999 }}
+        >
+          <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/about"
+                    ? "block w-full h-full text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/about"
+              >
+                About Us
+              </Link>
+            </div>
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/our-journey"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/our-journey"
+                // style={{ textDecoration: "none" }}
+              >
+                Our Journey
+              </Link>
+            </div>
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/our-team"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/our-team"
+                // style={{ textDecoration: "none" }}
+              >
+                Our Team
+              </Link>
+            </div>
+          </div>
+        </div>
       </li>
 
       <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
@@ -229,30 +283,30 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Center for Bio-Technology
               </Link>
             </div> */}
-            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
-              <Link
-                className={
-                  location.pathname === "/HITInnovations"
-                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
-                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
-                }
-                to="/HITInnovations"
-              >
-                HIT Innovations
-              </Link>
-            </div>
-            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
-              <Link
-                className={
-                  location.pathname === "/industry4"
-                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
-                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
-                }
-                to="/industry4"
-              >
-                Center for Industry 4.0
-              </Link>
-            </div>
+              {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+                <Link
+                  className={
+                    location.pathname === "/HITInnovations"
+                      ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                      : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                  }
+                  to="/HITInnovations"
+                >
+                  HIT Innovations
+                </Link>
+              </div>
+              <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+                <Link
+                  className={
+                    location.pathname === "/industry4"
+                      ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                      : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                  }
+                  to="/industry4"
+                >
+                  Center for Industry 4.0
+                </Link>
+              </div> */}
           </div>
         </div>
       </li>

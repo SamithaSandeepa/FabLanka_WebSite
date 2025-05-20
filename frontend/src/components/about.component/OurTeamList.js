@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Styles from "../../styles/ourteam.module.css";
 import { dataourteam } from "../data/data_ourteam";
 
-const OurTeam = () => {
+const OurTeamList = () => {
   return (
     <div>
       <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
@@ -36,4 +36,4 @@ const OurTeam = () => {
     </div>
   );
 };
-export default OurTeam;
+export default OurTeamList;

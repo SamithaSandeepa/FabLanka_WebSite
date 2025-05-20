@@ -1,6 +1,6 @@
 // import Styles from "../../styles/about.module.css";
 // import Styles from "../../../styles/about.module.css";
-import OurTeam from "../../../components/about.component/OurTeam";
+import OurTeam from "../../../components/about.component/OurTeamList";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import Aos from "aos";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <>
-      <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
+      <div className="container-sm shadow-sm bg-white rounded py-2 px-4 my-4">
         <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
           About Us
         </h1>
@@ -129,9 +129,9 @@ const About = () => {
           </div> */}
         </div>
       </div>
-      <div id="our-team" className="row m-0 p-0">
+      {/* <div id="our-team" className="row m-0 p-0">
         <OurTeam />
-      </div>
+      </div> */}
       {/* section for show our contributers logo supporters all logos */}
       {/* <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
         <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
@@ -152,7 +152,7 @@ const About = () => {
           </div>
         </div>
       </div> */}
-      <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
+      {/* <div className="container-sm shadow-sm bg-white rounded py-2 px-4">
         <h1 className="text-center text-3xl font-semibold font-serif text-[#394867] mt-8">
           Our Journey
         </h1>
@@ -171,7 +171,7 @@ const About = () => {
           </a>{" "}
           , the first ever FabLab in Sri Lanka was started in 2017.
         </p>
-      </div>
+      </div> */}
     </>
   );
 };
