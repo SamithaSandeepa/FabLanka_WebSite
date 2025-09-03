@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaLinkedin } from "react-icons/fa";
 import Styles from "../../styles/ourteam.module.css";
 import { dataourteam } from "../data/data_ourteam";
 
@@ -12,23 +13,38 @@ const OurTeamList = () => {
         {dataourteam.map((curElem) => {
           return (
             <div className={Styles.card_item} key={curElem.id}>
-              <a
+              {/* <a
                 className="no-underline"
                 href={curElem.link}
                 target="_blank"
                 rel="noreferrer"
-              >
-                <div className={Styles.card_inner}>
-                  <img src={curElem.image} />
-                  <div className={Styles.userName}>
-                    <p className="text-xl mb-1">{curElem.name}</p>
-                    <p className="text-slate-400">{curElem.position}</p>
-                    <p className="">
-                      {/* <FontAwesomeIcon icon={faLinkedin} size="lg" /> */}
-                    </p>
-                  </div>
+              > */}
+              <div className={Styles.card_inner}>
+                <img src={curElem.image} />
+                <div className={Styles.userName}>
+                  <p className="text-xl mb-1">{curElem.name}</p>
+                  <p className="text-slate-400">{curElem.position}</p>
+                  <p className="text-center mt-2">
+                    <span
+                      style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                    >
+                      <FaLinkedin
+                        size={24}
+                        style={{ cursor: "pointer", color: "#0A66C2" }}
+                        onClick={() => {
+                          window.open(
+                            curElem.link,
+                            "_blank",
+                            "noopener,noreferrer"
+                          );
+                        }}
+                        title="LinkedIn Profile"
+                      />
+                    </span>
+                  </p>
                 </div>
-              </a>
+              </div>
+              {/* </a> */}
             </div>
           );
         })}
