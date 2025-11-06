@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9qlye*m#ojd#=wf%1uyd-_9j=quzl@yycrs*v3bk1f6-l-%1v7'
+SECRET_KEY = "django-insecure-9qlye*m#ojd#=wf%1uyd-_9j=quzl@yycrs*v3bk1f6-l-%1v7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'book',
     'projectMakandura',
     'news',
     'event',
@@ -106,14 +105,21 @@ DEBUG = True
 #         'PASSWORD': os.getenv('DB_PASSWORD'),
 #         'HOST': os.getenv('DB_HOST'),
 #         'PORT': os.getenv('DB_PORT'),
+<<<<<<< HEAD
 #     }    
 # }
 
 # DATABASES = {
 #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 # }
+=======
+#     }
+# }
 
-
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+}
+>>>>>>> deploy_render
 
 # AWS credentials
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -172,8 +178,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -233,9 +240,16 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://www.fablanka.lk',
+    'https://fab-lanka-web-site-git-main-samitha99.vercel.app',
+    'https://fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    # ... other allowed domains ...
+    'http://www.fablanka.lk',
+    'https://fab-lanka-web-site-git-main-samitha99.vercel.app',
+    'https://fab-lanka-web-site-hia5g8ti1-samitha99.vercel.app'
 ]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.214.171.27', 'fablab.onrender.com']

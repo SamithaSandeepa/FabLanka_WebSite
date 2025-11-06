@@ -47,10 +47,10 @@ const ProjectMakandura = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      // console.log("get image", fileName);
       return fileURL;
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       return null;
     }
   };
@@ -145,7 +145,7 @@ const ProjectMakandura = () => {
     <>
       <div className="container m-0 p-0 bg-trasparent">
         <h1 className="text-center font-bold font-serif py-3 text-3xl">
-          Project Makandura
+          Projects at FabLab Makandura
         </h1>
         <Slider
           {...settings}

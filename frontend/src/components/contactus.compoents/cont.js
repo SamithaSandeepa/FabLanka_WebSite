@@ -43,10 +43,17 @@ const ContactForm = () => {
     <div className="  mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="md:flex md:justify-center mt-8">
         <div className="md:w-1/2">
-          {/* <h1 className="text-3xl font-bold mb-6">Contact Us</h1> */}
           <div className="bg-white rounded-lg shadow-lg p-6 mb-3">
-            <h2 className="text-lg font-bold mb-4">Get in Touch</h2>
-            <p className="mb-4">
+            {/* <h2 className="text-lg font-bold mb-4">Get in Touch</h2> */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.2716748138037!2d79.97793141525179!3d7.323351115378345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e7622d600a83%3A0xaa493fc1c1d13b3e!2sFabLab%20Makandura!5e0!3m2!1sen!2slk!4v1661173585215!5m2!1sen!2slk"
+              width="100%"
+              height="500"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            {/* <p className="mb-4">
               Feel free to send us a message if you have any questions or
               comments.
             </p>
@@ -109,24 +116,29 @@ const ContactForm = () => {
               >
                 Send
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
         <div className="md:w-1/2 mt-6 md:mt-0 md:ml-6">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-lg font-bold mb-4">Contact Information</h2>
-            <p className="mb-2">
+            <p className="mb-4">
               <i className="fas fa-envelope mr-2"></i>
-              <strong>Email:</strong> fablabmakandura@gmail.com
+              <strong>Email:</strong> info@fablanka.org, info@fablanka.lk
             </p>
-            <p className="mb-2">
+            <p className="mb-4">
               <i className="fas fa-map-marker-alt mr-2"></i>
-              <strong>Address:</strong> NO.19 Public Library complex, Makadura,
-              Gonavila.
+              <strong>Postal Address:</strong> No.28, Makandura, Gonawila,
+              60170, Sri Lanka.
             </p>
-            <p className="mb-2">
+            <p className="mb-4">
+              <i className="fas fa-map-marker-alt mr-2"></i>
+              <strong>Physical Address: </strong>Public Library Complex,
+              Kurunegala Road, Makandura, Gonawila, 60170, Sri Lanka.
+            </p>
+            <p className="mb-4">
               <i className="fas fa-phone mr-2"></i>
-              <strong>Phone:</strong> +94 31 229 7029
+              <strong>Phone:</strong> +94 31 2299275, +94 11 2545790
             </p>
           </div>
           {/* <div className="col-span-4 item-center py-5 pl-48">
@@ -144,38 +156,6 @@ const ContactForm = () => {
         </div>
       </div>
     </div>
-
-    // <form onSubmit={handleSubmit}>
-    //   <input
-    //     type="text"
-    //     placeholder="Name"
-    //     value={name}
-    //     onChange={(e) => setName(e.target.value)}
-    //     required
-    //   />
-    //   <input
-    //     type="email"
-    //     placeholder="Email"
-    //     value={email}
-    //     onChange={(e) => setEmail(e.target.value)}
-    //     required
-    //   />
-    //   <input
-    //     type="text"
-    //     placeholder="Subject"
-    //     value={subject}
-    //     onChange={(e) => setSubject(e.target.value)}
-    //     required
-    //   />
-    //   <textarea
-    //     placeholder="Message"
-    //     value={message}
-    //     onChange={(e) => setMessage(e.target.value)}
-    //     required
-    //   />
-    //   <button type="submit">Submit</button>
-    //   {successMessage && <p>{successMessage}</p>}
-    // </form>
   );
 };
 

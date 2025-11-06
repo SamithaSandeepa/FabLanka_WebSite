@@ -38,7 +38,6 @@ const MediaCard = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        console.log("URL copied to clipboard:", url);
         setShowNotification(true);
         // Show the notification message
         setTimeout(() => {

@@ -27,14 +27,11 @@ const EditNews = ({ isAuthenticated, id }) => {
   const [isUploading, setIsUploading] = useState(false);
   const { setLoading } = useStateContext();
 
-  // console.log(videos);
-
   useEffect(() => {
     axios
       .get(`${API_URL}/event/${id}/`)
       .then((response) => {
-        console.log(response.data, "response");
-        // console.log(response.data.content_pastevent, "image");
+        console.log(response.data);
         downloadFile(response.data.image);
         setImageName(response.data.image);
         setDlimage(response.data.image);
@@ -58,7 +55,6 @@ const EditNews = ({ isAuthenticated, id }) => {
     try {
       const fileURL = await Storage.get(fileName);
       setPreview(fileURL);
-      // setImage(fileURL);
     } catch (error) {
       console.log("Error retrieving file:", error);
       return null;
@@ -139,9 +135,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -169,7 +165,6 @@ const EditNews = ({ isAuthenticated, id }) => {
 
     if (form.checkValidity() === true) {
       e.preventDefault();
-      console.log("videos");
 
       setValidated(true);
     } else {
@@ -252,14 +247,14 @@ const EditNews = ({ isAuthenticated, id }) => {
             </div>
             <div className="form-group" style={{ marginBottom: "15px" }}>
               <label className="form-label" style={{ marginBottom: "5px" }}>
-                Summery
+                Summary
               </label>
               <input
                 type="text"
                 required
                 className="form-control"
                 placeholder="Summarize your news"
-                id="summery"
+                id="summary"
                 value={summery_pastevent}
                 onChange={(e) => {
                   setSummery(e.target.value);

@@ -47,7 +47,7 @@ const PastEvent = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      // console.log("get image", fileName);
       return fileURL;
     } catch (error) {
       console.log("Error retrieving file:", error);
@@ -109,7 +109,7 @@ const PastEvent = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 2,
     nextArrow: <SampleNextArrow />,
@@ -145,14 +145,13 @@ const PastEvent = () => {
     <>
       <div className="container m-0 p-0 bg-trasparent">
         <h1 className="text-center font-bold font-serif py-3 text-3xl">
-          Past Event
+          Past Events
         </h1>
         <Slider
           {...settings}
           className="sm:card_container md:pl-0 lg:pl-0 xl:pl-0"
         >
           {events.map((curElem, index) => {
-            console.log(curElem, "test");
             return (
               <div
                 className="p-4 sm:w-1/2 lg:w-1/3 border border-gray-300 !important"

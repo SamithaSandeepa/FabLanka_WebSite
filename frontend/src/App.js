@@ -8,7 +8,6 @@ import Activate from "./containers/loginpages/Activate";
 import ResetPassword from "./containers/loginpages/ResetPassword";
 import ResetPasswordConfirm from "./containers/loginpages/ResetPasswordConfirm";
 import second from "./containers/client/second";
-import About from "./containers/client/static/About";
 import Industrytec from "./containers/client/static/Industrytec";
 import ContactUs from "./containers/client/static/Contact";
 import Admin from "./containers/admin/admin";
@@ -44,6 +43,14 @@ import InternationalTechnologyTransfer from "./containers/client/what_we_do/Inte
 import MakanduraModelFarm from "./containers/client/our_ventures/MakanduraModelFarm";
 import UniversalEnergy from "./containers/client/our_ventures/UniversalEnergy";
 import CenterforBioTechnology from "./containers/client/our_ventures/CenterforBioTechnology";
+import CenterforIndustry4 from "./containers/client/our_ventures/CenterforIndustry4";
+import HITInnovations from "./containers/client/our_ventures/HITInnovations";
+import OurPartners from "./containers/client/static/OurPartners";
+
+// who we are pages
+import OurTeam from "./containers/client/who_we_are/OurTeam";
+import About from "./containers/client/who_we_are/About";
+import OurJourney from "./containers/client/who_we_are/OurJurney";
 
 // import Footer from "./components/Footer";
 
@@ -74,7 +81,6 @@ const App = () => (
             />
             <Route exact path="/activate/:uid/:token" component={Activate} />
             <Route exact path="/second" component={second} />
-            <Route exact path="/about" component={About} />
             {/* News Route */}
             <Route exact path="/create-news" component={CreateNews} />
             <Route exact path="/news/:id" component={News} />
@@ -93,7 +99,12 @@ const App = () => (
             <Route exact path="/edit-project/:id" component={EditProject} />
             {/* Static pages Route */}
             <Route exact path="/industry" component={Industrytec} />
+            <Route exact path="/our-partners" component={OurPartners} />
             <Route exact path="/contactus" component={ContactUs} />
+            {/* who we are Route */}
+            <Route exact path="/about" component={About} />
+            <Route exact path="/our-team" component={OurTeam} />
+            <Route exact path="/our-journey" component={OurJourney} />
             {/* What we do Route */}
             <Route exact path="/education" component={Education} />
             <Route
@@ -122,13 +133,15 @@ const App = () => (
               component={InternationalTechnologyTransfer}
             />
             {/* Our Ventures Route */}
-            <Route exact path="/model-farm" component={MakanduraModelFarm} />
+            {/* <Route exact path="/model-farm" component={MakanduraModelFarm} />
             <Route exact path="/universal-energy" component={UniversalEnergy} />
             <Route
               exact
               path="/biotechnology"
               component={CenterforBioTechnology}
-            />
+            /> */}
+            <Route exact path="/HITInnovations" component={HITInnovations} />
+            <Route exact path="/industry4" component={CenterforIndustry4} />
           </Switch>
         </ContextProvider>
       </Layout>

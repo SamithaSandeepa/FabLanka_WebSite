@@ -7,7 +7,6 @@ const DownloadComponent = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName); // Replace `fileName` with the actual file name
-      console.log("File URL:", fileURL);
       setImageUrl(fileURL);
     } catch (error) {
       console.log("Error retrieving file:", error);

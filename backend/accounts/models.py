@@ -14,6 +14,11 @@ class UserAccountManager(BaseUserManager):
         if existing_accounts >= 1:
             raise ValueError('Only one account can be created.')
 
+        # Check if there are any existing user accounts
+        existing_accounts = self.get_queryset().count()
+        if existing_accounts >= 2:
+            raise ValueError('Only one account can be created.')
+
         user.set_password(password)
         user.save()
 

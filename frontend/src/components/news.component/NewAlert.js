@@ -47,10 +47,10 @@ const NewAlert = () => {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName);
-      console.log("get image", fileName);
+      // console.log("get image", fileName);
       return fileURL;
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       return null;
     }
   };
@@ -148,7 +148,7 @@ const NewAlert = () => {
                       style={{ textDecoration: "none" }}
                     >
                       <div className="card-body py-0 pl-0">
-                        <p className="card-title text-lg font-normal text-black hover:text-[#2c185a] m-0 pb-3">
+                        <p className="card-title text-lg font-semibold text-black hover:text-[#2c185a] m-0 pb-3">
                           {curElem.title}
                         </p>
                         <p className="text-[10] card-text lh-1  text-black hover:text-[#2a6d99] line-clamp-2 hover:line-clamp-none duration-100 ease-in-out">

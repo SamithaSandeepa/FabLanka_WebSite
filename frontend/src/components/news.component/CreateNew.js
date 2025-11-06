@@ -30,7 +30,6 @@ const CreatNews = ({ isAuthenticated }) => {
 
   useEffect(() => {
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page
@@ -82,7 +81,6 @@ const CreatNews = ({ isAuthenticated }) => {
   };
 
   const handleFileUpload = async () => {
-    console.log("handleFileUpload");
     const file = ref.current.files[0];
     const imageName = generateUniqueName(file.name);
     setDlimage(imageName);
@@ -118,9 +116,9 @@ const CreatNews = ({ isAuthenticated }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -148,7 +146,6 @@ const CreatNews = ({ isAuthenticated }) => {
 
     // Convert the array of URLs to a JSON string
     const videosJsonString = JSON.stringify(videoUrls);
-    console.log(videosJsonString);
 
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -192,10 +189,8 @@ const CreatNews = ({ isAuthenticated }) => {
             //refresh page
             alert("Your session has expired. Please login again");
             window.location.reload();
-            console.log(err.response);
           } else {
             alert("Something went wrong");
-            console.log(err.response);
           }
         });
       setLoading(false);
@@ -357,7 +352,6 @@ const CreatNews = ({ isAuthenticated }) => {
                 </label>
                 <input
                   type="text"
-                  required
                   className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter Video Url"
                   id={`video-${index}`}

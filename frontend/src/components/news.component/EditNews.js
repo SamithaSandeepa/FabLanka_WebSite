@@ -11,12 +11,11 @@ import ReactPlayer from "react-player";
 import Amplify from "@aws-amplify/core";
 import { Storage } from "aws-amplify";
 
-
 const EditNews = ({ isAuthenticated, id }) => {
   const ref = useRef(null);
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
-  const [summery, setSummery] = useState("");
+  const [summary, setSummary] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [image, setImage] = useState(null);
   const [status, setStatus] = useState("");
@@ -37,7 +36,7 @@ const EditNews = ({ isAuthenticated, id }) => {
         setDlimage(response.data.image);
         setImage(response.data.image);
         setTitle(response.data.title);
-        setSummery(response.data.summary);
+        setSummary(response.data.summary);
         const contentState = convertFromRaw(response.data.content);
         setEditorState(EditorState.createWithContent(contentState));
         setStatus(response.data.status);
@@ -116,7 +115,6 @@ const EditNews = ({ isAuthenticated, id }) => {
       setImage(imageName);
       setIsUploading(false);
     } catch (error) {
-      console.log("Error uploading file:", error);
       setIsUploading(false);
     }
   };
@@ -134,9 +132,9 @@ const EditNews = ({ isAuthenticated, id }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -165,7 +163,6 @@ const EditNews = ({ isAuthenticated, id }) => {
 
     if (form.checkValidity() === true) {
       e.preventDefault();
-      console.log("videos");
 
       setValidated(true);
       e.stopPropagation();
@@ -177,7 +174,7 @@ const EditNews = ({ isAuthenticated, id }) => {
 
       const news = {
         title,
-        summery,
+        summary,
         content: JSON.parse(content),
         image,
         status,
@@ -193,7 +190,6 @@ const EditNews = ({ isAuthenticated, id }) => {
           },
         })
         .then((res) => {
-          console.log(res, "response");
           window.location.href = "/show-all-news";
         })
         .catch((err) => {
@@ -252,17 +248,17 @@ const EditNews = ({ isAuthenticated, id }) => {
             <div className="form-group" style={{ marginBottom: "15px" }}>
               <label className="form-label" style={{ marginBottom: "5px" }}>
                 {" "}
-                Summery{" "}
+                Summary{" "}
               </label>
               <input
                 type="text"
                 required
                 className="form-control text-black"
                 placeholder="Summarize your news"
-                id="summery"
-                value={summery}
+                id="summary"
+                value={summary}
                 onChange={(e) => {
-                  setSummery(e.target.value);
+                  setSummary(e.target.value);
                 }}
               />
             </div>

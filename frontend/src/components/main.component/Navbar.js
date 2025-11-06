@@ -7,7 +7,6 @@ import { TbArrowBigUpLines } from "react-icons/tb";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const location = useLocation();
-  console.log(location.pathname);
   const [redirect, setRedirect] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,28 +54,83 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
   const guestLinks = () => (
     <>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
-        {/* py-1 border-l-2 border-x-emerald-600 */}
+      {/* <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2 md:py-0">
         <Link
           className={
             location.pathname === "/about"
-              ? "text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
-              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium my-4 sm:my-0"
+              ? "text-blue-600 px-4 rounded-md text-sm font-medium underline underline-offset-4"
+              : "text-gray-700 hover:text-blue-600 px-4 rounded-md text-sm font-medium my-4 sm:my-0"
           }
           to="/about"
-          // style={{ textDecoration: "none" }}
         >
           WHO WE ARE
         </Link>
+      </li> */}
+
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a
+          className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium "
+          // style={{ display: "flex", alignItems: "center" }}
+        >
+          WHO WE ARE
+        </a>
+        <div
+          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block z-99 "
+          style={{ width: "max-content", zIndex: 9999 }}
+        >
+          <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/about"
+                    ? "block w-full h-full text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/about"
+              >
+                About Us
+              </Link>
+            </div>
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/our-journey"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/our-journey"
+                // style={{ textDecoration: "none" }}
+              >
+                Our Journey
+              </Link>
+            </div>
+            <div className="hover:bg-gray-200 hover:underline underline-offset-4 px-5">
+              <Link
+                className={
+                  location.pathname === "/our-team"
+                    ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                    : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                }
+                to="/our-team"
+                // style={{ textDecoration: "none" }}
+              >
+                Our Team
+              </Link>
+            </div>
+          </div>
+        </div>
       </li>
 
-      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4">
-        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium ">
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a
+          className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium "
+          // style={{ display: "flex", alignItems: "center" }}
+        >
           WHAT WE DO
         </a>
         <div
-          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block"
-          style={{ width: "max-content" }}
+          className="hidden absolute top-full mt-3 bg-white border border-gray-300 shadow-lg rounded-lg group-hover:block z-99"
+          style={{ width: "max-content", zIndex: 9999 }}
         >
           <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
@@ -87,7 +141,6 @@ const Navbar = ({ logout, isAuthenticated }) => {
                     : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
                 }
                 to="/education"
-                // style={{ textDecoration: "none" }}
               >
                 Education & Training
               </Link>
@@ -160,7 +213,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           </div>
         </div>
       </li>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
         <Link
           className={
             location.pathname === "/industry"
@@ -173,13 +226,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
           INDUSTRY 4.0
         </Link>
       </li>
-      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4">
-        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-3 rounded-md text-sm font-medium">
+      <li className="nav-item text-sm px-1 relative group hover:underline underline-offset-4 py-2">
+        <a className="text-gray-700 hover:text-gray-900 hover:underline px-4 py-4 rounded-md text-sm font-medium">
           OUR VENTURES
         </a>
         <div
           className="hidden absolute top-full mt-3 bg-white  border border-gray-300 shadow-lg rounded-lg group-hover:block"
-          style={{ width: "max-content" }}
+          style={{ width: "max-content", zIndex: 9999 }}
         >
           <div class="grid grid-row-3 divide-y-[2px] divide-green-600 ">
             <div className="hover:bg-gray-200 hover:underline underline-offset-4">
@@ -194,7 +247,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 FabLab Makandura
               </Link>
             </div>
-            <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+            {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
               <Link
                 className={
                   location.pathname === "/universal-energy"
@@ -229,11 +282,48 @@ const Navbar = ({ logout, isAuthenticated }) => {
               >
                 Center for Bio-Technology
               </Link>
-            </div>
+            </div> */}
+              {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+                <Link
+                  className={
+                    location.pathname === "/HITInnovations"
+                      ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                      : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                  }
+                  to="/HITInnovations"
+                >
+                  HIT Innovations
+                </Link>
+              </div>
+              <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+                <Link
+                  className={
+                    location.pathname === "/industry4"
+                      ? "block w-full h-full text-[#0A4D68] px-4 py-4 rounded-md text-sm font-medium"
+                      : "block w-full h-full text-gray-700 hover:text-blue-600 px-4 py-4 rounded-md text-sm font-medium"
+                  }
+                  to="/industry4"
+                >
+                  Center for Industry 4.0
+                </Link>
+              </div> */}
           </div>
         </div>
       </li>
-      <li className="nav-item text-sm px-1 hover:underline underline-offset-4">
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
+        <Link
+          className={
+            location.pathname === "/our-partners"
+              ? "text-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-medium underline underline-offset-4"
+              : "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md text-sm font-medium"
+          }
+          to="/our-partners"
+          // style={{ textDecoration: "none" }}
+        >
+          OUR PARTNERS
+        </Link>
+      </li>
+      <li className="nav-item text-sm px-1 hover:underline underline-offset-4 py-2">
         <Link
           className={
             location.pathname === "/contactus"
@@ -502,16 +592,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
                   className="navbar-brand pl-2"
                   style={{ fontFamily: "BoxTypeLetter, sans-serif" }}
                 >
-                  Fablanka Foundation
+                  FabLanka Foundation
                 </a>
               </Link>
             </div>
 
             <div
               onClick={() => setOpen(!open)}
-              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden "
+              className="text-3xl absolute right-4 item-center cursor-pointer md:hidden"
             >
-              {/* <MDBIcon fas icon={open ? "close" : "bars"} /> */}X
+              {open ? "✕" : "☰"}
             </div>
             <ul
               className={`md:flex md:items-center justify-center md:pb-0 pb-12 absolute md:static md:z-auto z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in divide-x-[2px] divide-emerald-600 py-2 bg-white ${

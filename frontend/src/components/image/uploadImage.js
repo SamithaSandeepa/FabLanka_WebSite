@@ -29,13 +29,12 @@ function App() {
   const loadImages = () => {
     Storage.list("")
       .then((files) => {
-        console.log("arry", files.results);
         setFiles(files);
         const len = files.results.length;
-        console.log(len);
+        // console.log(len);
         const last = files.results[len].key;
 
-        console.log("Last uploaded image key:", last);
+        // console.log("Last uploaded image key:", last);
       })
 
       .catch((err) => {
@@ -50,7 +49,7 @@ function App() {
 
   const handleFileLoad = () => {
     const filename = ref.current.files[0].name;
-    console.log("ref", ref.current.files[0].name);
+    // console.log("ref", ref.current.files[0].name);
     Storage.put(filename, ref.current.files[0], {
       progressCallback: (progress) => {
         setProgress(Math.round((progress.loaded / progress.total) * 100) + "%");
@@ -63,7 +62,7 @@ function App() {
         const filename = ref.current.files[0].name;
         Storage.get(filename)
           .then((imageUrl) => {
-            console.log(imageUrl, "sdufakjsdfk");
+            // console.log(imageUrl, "sdufakjsdfk");
             setUploadedImageUrl(imageUrl); // Set the image URL to the state variable
             loadImages();
           })
@@ -77,10 +76,10 @@ function App() {
   };
 
   const handleShow = (file) => {
-    console.log("show");
+    // console.log("show");
     Storage.get(file)
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         setImage(resp);
       })
       .catch((err) => {
@@ -91,9 +90,9 @@ function App() {
   const handleDelete = () => {
     Storage.remove(ref.current.files[0].name)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         loadImages();
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -103,11 +102,9 @@ function App() {
   const downloadFile = async (fileName) => {
     try {
       const fileURL = await Storage.get(fileName); // Replace `fileName` with the actual file name
-      console.log("File URL:", fileURL);
 
       // Create an <a> tag and set its href attribute to the fileURL
       const link = document.createElement("text");
-      console.log("img url", link);
       link.href = fileURL;
 
       // console.log("img url", link);

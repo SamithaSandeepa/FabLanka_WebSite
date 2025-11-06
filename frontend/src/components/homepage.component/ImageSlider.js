@@ -58,7 +58,7 @@ export default class SimpleSlider extends Component {
     return (
       <div className="container pl-2 mt-2">
         <Slider {...settings}>
-          <div className="bg-gray-200">
+          <div className="bg-gray-200 w-full h-auto">
             <a href="#">
               <img
                 className="m-0 rounded"
@@ -71,7 +71,7 @@ export default class SimpleSlider extends Component {
           <div>
             <a href="#">
               <img
-                className="m-0 rounded"
+                className="m-0 rounded w-full h-auto"
                 src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9720-1.jpg"
                 alt="slide2"
               />
@@ -80,8 +80,26 @@ export default class SimpleSlider extends Component {
           <div>
             <a href="#">
               <img
-                className="m-0 rounded"
+                className="m-0 rounded w-full h-auto"
                 src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9615-1.jpg"
+                alt="slide3"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="#">
+              <img
+                className="m-0 rounded w-full h-auto"
+                src="https://new-bucket13.s3.ap-southeast-1.amazonaws.com/images_for_slides/329586204_1279223199645798_8818403373741526354_n+(1).jpg"
+                alt="slide3"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="#">
+              <img
+                className="m-0 rounded w-full h-auto"
+                src="https://new-bucket13.s3.ap-southeast-1.amazonaws.com/images_for_slides/302069285_190582280103309_3220980484686533445_n.jpg"
                 alt="slide3"
               />
             </a>

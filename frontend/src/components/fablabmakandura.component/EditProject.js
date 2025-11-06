@@ -31,7 +31,6 @@ const EditProject = ({ isAuthenticated, id }) => {
     axios
       .get(`${API_URL}/projectmakandura/${id}/`)
       .then((response) => {
-        console.log(response.data, "response.data");
         downloadFile(response.data.image_project_m);
         setImageName(response.data.image_project_m);
         setDlimage(response.data.image_project_m);
@@ -56,7 +55,7 @@ const EditProject = ({ isAuthenticated, id }) => {
       setPreview(fileURL);
       // setImage(fileURL);
     } catch (error) {
-      console.log("Error retrieving file:", error);
+      // console.log("Error retrieving file:", error);
       return null;
     }
   };
@@ -117,7 +116,7 @@ const EditProject = ({ isAuthenticated, id }) => {
       setImage(imageName);
       setIsUploading(false);
     } catch (error) {
-      console.log("Error uploading file:", error);
+      // console.log("Error uploading file:", error);
       setIsUploading(false);
     }
   };
@@ -135,9 +134,9 @@ const EditProject = ({ isAuthenticated, id }) => {
   const handleDelete = () => {
     Storage.remove(dlimage)
       .then((resp) => {
-        console.log("dlt", ref.current.files[0].name);
+        // console.log("dlt", ref.current.files[0].name);
         setImage(null);
-        console.log(ref.current);
+        // console.log(ref.current);
       })
       .catch((err) => {
         console.log(err);
@@ -163,11 +162,9 @@ const EditProject = ({ isAuthenticated, id }) => {
     // Call the function to get the URLs
     const videoUrlsArray = extractUrls(videos);
 
-    console.log(videoUrlsArray, "videoUrlsArray");
 
     if (form.checkValidity() === true) {
       e.preventDefault();
-      console.log("videos");
 
       setValidated(true);
       e.stopPropagation();
@@ -257,14 +254,14 @@ const EditProject = ({ isAuthenticated, id }) => {
               <div className="form-group" style={{ marginBottom: "15px" }}>
                 <label className="form-label" style={{ marginBottom: "5px" }}>
                   {" "}
-                  Summery{" "}
+                  Summary{" "}
                 </label>
                 <input
                   type="text"
                   required
                   className="form-control text-black"
                   placeholder="Summarize your news"
-                  id="summery"
+                  id="summary"
                   value={summery_project_m}
                   onChange={(e) => {
                     setSummery(e.target.value);

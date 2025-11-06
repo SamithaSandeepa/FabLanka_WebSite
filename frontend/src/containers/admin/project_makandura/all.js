@@ -5,16 +5,12 @@ import { useStateContext } from "../../../context/ContextProvider";
 import NewsTable from "../../../components/fablabmakandura.component/ProjectTable";
 
 const AllProject = ({ isAuthenticated }) => {
-  console.log("isAuthenticated", isAuthenticated);
   const { setLoading } = useStateContext();
   const history = useHistory();
   const [loading, setLoadingState] = useState(true);
 
   useEffect(() => {
-    console.log("news table");
-    console.log(history);
     if (typeof isAuthenticated === "undefined") {
-      console.log("undefined");
       // Authentication status not yet determined, do nothing
     } else if (!isAuthenticated) {
       // User is not authenticated, redirect to login page

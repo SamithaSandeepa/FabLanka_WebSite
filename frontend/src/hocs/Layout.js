@@ -7,7 +7,6 @@ import SecondNavbar from "../components/main.component/SecondNavbar";
 
 const Layout = ({ checkAuthenticated, load_user, children }) => {
   useEffect(() => {
-    console.log(checkAuthenticated(), load_user);
     checkAuthenticated();
     load_user();
   }, []);
