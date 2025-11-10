@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import ImageSlider from "../../components/homepage.component/ImageSlider";
-import NewAlert from "../../components/news.component/NewAlert";
-import PastEvent from "../../components/event.component/PastEvent";
+import ReactPlayer from "react-player";
 
 const Home = () => {
   const [readMore, setReadMore] = useState(false);
@@ -25,13 +24,10 @@ const Home = () => {
   return (
     <>
       <div className="px-0">
-        <div className="grid grid-cols-12 grid-rows-1 rounded-md">
+        <div className="rounded-md">
           {/* bg-gradient-to-b from-green-600 to-blue */}
-          <div className="col-span-12 row-span-3 sm:col-span-8 sm:row-span-1 sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden rounded">
+          <div className="sm:bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden rounded">
             <ImageSlider />
-          </div>
-          <div className="col-span-4 row-span-1 bg-[#F1F6F9] py-0 px-0 flex items-center overflow-hidden hidden sm:block rounded">
-            <NewAlert />
           </div>
         </div>
       </div>
@@ -79,64 +75,58 @@ const Home = () => {
           bodies.
         </p>
       </div>
-      <div className="col-span-12 sm:col-span-4 row-span-1 bg-blue-100 my-2 py-0 px-0 flex items-center relative overflow-hidden block sm:hidden">
-        <NewAlert />
-      </div>
-      {/* screen view */}
-      <div className="flex p-0 mb-0 sm:mb-4">
-        <div className="w-3/5 rounded-md bg-[#D6E4E5] ml-2">
-          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4 hidden sm:block">
-            <PastEvent />
+      
+      {/* YouTube Video and Facebook Feed Section */}
+      <div className="flex flex-col md:flex-row px-2 md:px-10 py-4 gap-4 mb-4">
+        {/* YouTube Video */}
+        <div className="w-full md:w-3/5">
+          <div className="rounded-md overflow-hidden" style={{ aspectRatio: '16/9' }}>
+            <ReactPlayer
+              url="https://www.youtube.com/watch?v=H1k3TwiZ5EE&t=1s"
+              className="react-player"
+              width="100%"
+              height="100%"
+              controls={true}
+              config={{
+                youtube: {
+                  playerVars: {
+                    showinfo: 0,
+                    modestbranding: 1,
+                  },
+                },
+              }}
+            />
           </div>
         </div>
-        <div className="w-2/5">
+
+        {/* Facebook Feed - Desktop */}
+        <div className="w-full md:w-2/5 hidden md:flex justify-center items-start">
           <iframe
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FFabLankaFoundation%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-            width="500"
+            width="100%"
             height="500"
-            style={{ border: "none", overflow: "hidden" }}
+            style={{ border: "none", overflow: "hidden", maxWidth: "500px" }}
             scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
+            frameBorder="0"
+            allowFullScreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            className="mx-auto hidden sm:block"
           ></iframe>
         </div>
       </div>
-      <div className="flex justify-center items-center md:mb-4 sm:mb-4 block sm:hidden rounded-md bg-[#D6E4E5] mb-2">
-        <PastEvent />
-      </div>
-      <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FFabLankaFoundation%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-        width="310"
-        height="500"
-        style={{ border: "none", overflow: "hidden" }}
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        className="mx-auto block sm:hidden"
-      ></iframe>
 
-      {/* // mobile view */}
-      {/* <div className="flex p-0 mb-0 sm:mb-4 block sm:hidden">
-        <div className="rounded-md bg-[#D6E4E5] ml-2">
-          <div className="flex justify-center items-center mt-4 md:mb-4 sm:mb-4">
-            <PastEvent />
-          </div>
-        </div>
+      {/* Facebook Feed - Mobile */}
+      <div className="flex justify-center px-2 mb-4 md:hidden">
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FFabLankaFoundation%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+          width="100%"
+          height="500"
+          style={{ border: "none", overflow: "hidden", maxWidth: "340px" }}
+          scrolling="no"
+          frameBorder="0"
+          allowFullScreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
       </div>
-      <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMakanduraFabLab&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-        width="500"
-        height="500"
-        style={{ border: "none", overflow: "hidden" }}
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        className="block sm:hidden mx-auto"
-      ></iframe> */}
     </>
   );
 };
