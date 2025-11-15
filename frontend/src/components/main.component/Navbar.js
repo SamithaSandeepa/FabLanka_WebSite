@@ -283,7 +283,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                 Center for Bio-Technology
               </Link>
             </div> */}
-              {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
+            {/* <div className="hover:bg-gray-200 hover:underline underline-offset-4">
                 <Link
                   className={
                     location.pathname === "/HITInnovations"
@@ -581,7 +581,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
             <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
               <span className="text-3xl text-indigo-600 mr-1 flex-shrink-0">
                 <img
-                  src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/24x24.png"
+                  src="../../../fablanka.png"
                   width={32}
                   height={32}
                   className="rounded-full"

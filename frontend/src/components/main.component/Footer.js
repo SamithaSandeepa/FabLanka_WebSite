@@ -77,7 +77,7 @@ const Footer = () => {
               </h6>
               <img
                 className="m-auto"
-                src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/24x24.png"
+                src="../../../fablanka.png"
                 width={100}
                 height={100}
                 alt="Fablanka logo"

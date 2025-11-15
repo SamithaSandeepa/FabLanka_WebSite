@@ -3,7 +3,7 @@ export const dataourteam = [
     id: 1,
     name: "Greshan Fernando",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/GreshanFernando.png",
+      "../../../FabLanka_Team/Dr.GreshanFernando.jpg",
     position: "Director",
     link: "https://www.linkedin.com/in/christopher-greshan-fernando-9645a322?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAS235wBNOVyMOyPq_MGX3xC-3Xn806McFk&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BWWTF4ZyIRSaQTGEZEXTJPg%3D%3D",
   },
@@ -11,7 +11,7 @@ export const dataourteam = [
     id: 2,
     name: "Chaminda Hettiarachchi",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/ChamindaHettiarachchi.png",
+      "../../../FabLanka_Team/Mr.Chaminda_Hettiarachchi.jpeg",
     position: "Director",
     link: "https://www.linkedin.com/in/ACoAAAFxD0MBWxlheJCdSvTVoiyUgThP_rK1aos?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAFxD0MBWxlheJCdSvTVoiyUgThP_rK1aos&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BWWTF4ZyIRSaQTGEZEXTJPg%3D%3D",
   },
@@ -19,7 +19,7 @@ export const dataourteam = [
     id: 3,
     name: "Priyantha Palapathwala",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/PriyanthaPalapathwala.png",
+      "../../../FabLanka_Team/Mr. Priyantha palapthwala.jpg",
     position: "Director",
     link: "https://www.linkedin.com/in/priyantha-palapathwala-08a5352?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAABvMSoB1Tl_fdr0ARGOW9D0F6RUwU_3124&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BEe3DyUPeQ6S5OHeIRlQVug%3D%3D",
   },
@@ -35,7 +35,7 @@ export const dataourteam = [
     id: 5,
     name: "Pubudu Senaratne",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/PubuduSenaratne.jpg",
+      "../../../FabLanka_Team/Dr_ Pubudu_Senaratne.jpg",
     position: "Advisor",
     link: "#",
   },
@@ -59,7 +59,7 @@ export const dataourteam = [
     id: 8,
     name: "Susantha pathirana",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/susantha+pathirana.jpeg",
+      "../../../FabLanka_Team/prof.Susantha Pathirana.jpg",
     position: "Advisor",
     link: "#",
   },
@@ -67,7 +67,7 @@ export const dataourteam = [
     id: 9,
     name: "Sisira Ranatunga",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/SisiraRanatunga.jpg",
+      "../../../FabLanka_Team/Dr.Sisira_Ranatunga.jpg",
     position: "Advisor",
     link: "https://www.linkedin.com/in/sisira-ranatunga-205b3845/",
   },
@@ -75,7 +75,7 @@ export const dataourteam = [
     id: 10,
     name: "Darshana Samaraweera",
     image:
-      "https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/our-team/darshana.jpg",
+      "../../../FabLanka_Team/Dr.darshana.samaraweera.jpg",
     position: "Advisor",
     link: "https://www.linkedin.com/in/darshana-samaraweera-71472327/",
   },
