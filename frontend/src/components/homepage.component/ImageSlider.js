@@ -84,7 +84,7 @@ export default class SimpleSlider extends Component {
               <img
                 className="slider-image"
                 style={imageStyle}
-                src="../../../hero/heroimg1.jpg"
+                src="../../../Hero/heroimg1.jpg"
                 alt="slide1"
               />
             </a>
@@ -95,7 +95,7 @@ export default class SimpleSlider extends Component {
               <img
                 className="slider-image"
                 style={imageStyle}
-                src="../../../hero/heroimg2.jpg"
+                src="../../../Hero/heroimg2.jpg"
                 alt="slide2"
               />
             </a>
