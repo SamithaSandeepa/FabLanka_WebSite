@@ -55,14 +55,36 @@ export default class SimpleSlider extends Component {
       nextArrow: <SampleNextArrow />,
     };
 
+    const imageStyle = {
+      width: "100%",
+      height: "300px",
+      objectFit: "cover",
+      display: "block",
+    };
+
     return (
-      <div className="container pl-2 mt-2">
+      <div className="w-full">
+        <style>
+          {`
+            @media (min-width: 640px) {
+              .slider-image {
+                height: 400px !important;
+              }
+            }
+            @media (min-width: 1024px) {
+              .slider-image {
+                height: 600px !important;
+              }
+            }
+          `}
+        </style>
         <Slider {...settings}>
-          <div className="bg-gray-200 w-full h-auto">
+          <div>
             <a href="#">
               <img
-                className="m-0 rounded"
-                src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9796-1.jpg"
+                className="slider-image"
+                style={imageStyle}
+                src="/hero/heroimg1.jpg"
                 alt="slide1"
               />
             </a>
@@ -71,16 +93,18 @@ export default class SimpleSlider extends Component {
           <div>
             <a href="#">
               <img
-                className="m-0 rounded w-full h-auto"
-                src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9720-1.jpg"
+                className="slider-image"
+                style={imageStyle}
+                src="/hero/heroimg2.jpg"
                 alt="slide2"
               />
             </a>
           </div>
-          <div>
+          {/* <div>
             <a href="#">
               <img
-                className="m-0 rounded w-full h-auto"
+                className="m-0 rounded w-full"
+                style={{ height: "500px", objectFit: "cover" }}
                 src="https://fablanka-website.s3.ap-southeast-1.amazonaws.com/images/image-slider/IMG_9615-1.jpg"
                 alt="slide3"
               />
@@ -89,21 +113,23 @@ export default class SimpleSlider extends Component {
           <div>
             <a href="#">
               <img
-                className="m-0 rounded w-full h-auto"
+                className="m-0 rounded w-full"
+                style={{ height: "500px", objectFit: "cover" }}
                 src="https://new-bucket13.s3.ap-southeast-1.amazonaws.com/images_for_slides/329586204_1279223199645798_8818403373741526354_n+(1).jpg"
-                alt="slide3"
+                alt="slide4"
               />
             </a>
           </div>
           <div>
             <a href="#">
               <img
-                className="m-0 rounded w-full h-auto"
+                className="m-0 rounded w-full"
+                style={{ height: "500px", objectFit: "cover" }}
                 src="https://new-bucket13.s3.ap-southeast-1.amazonaws.com/images_for_slides/302069285_190582280103309_3220980484686533445_n.jpg"
-                alt="slide3"
+                alt="slide5"
               />
             </a>
-          </div>
+          </div> */}
         </Slider>
       </div>
     );
