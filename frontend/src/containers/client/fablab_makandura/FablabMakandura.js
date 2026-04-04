@@ -77,7 +77,7 @@ const FablabMakandura = () => {
           </p>
         </header>
         <main className="px-4">
-          <section className="">
+          {/* <section className="">
             <div className="my-5 mx-5">
               <Gallery
                 images={fablab}
@@ -85,9 +85,8 @@ const FablabMakandura = () => {
                 enableImageSelection={false}
               />
             </div>
-            {/* <div className="my-5 w-2/5">{renderVideos()}</div> */}
-          </section>
-          <section className="flex mb-8 px-5 text-justify">
+          </section> */}
+          <section className="flex mb-8 px-5 mt-5 text-justify">
             <div className="md:w-3/5 pr-2 ">
               <p className="text-gray-700 mb-4">
                 At FabLab Makandura, we utilize{" "}
