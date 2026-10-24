@@ -1,9 +1,9 @@
 import React from "react";
 
 const partners = [
-  { name: "Partner 1", logo: "logo1.png", website: "https://partner1.com" },
-  { name: "Partner 2", logo: "logo2.png", website: "https://partner2.com" },
-  { name: "Partner 3", logo: "logo3.png", website: "https://partner3.com" },
+  // { name: "Partner 1", logo: "logo1.png", website: "https://partner1.com" },
+  // { name: "Partner 2", logo: "logo2.png", website: "https://partner2.com" },
+  // { name: "Partner 3", logo: "logo3.png", website: "https://partner3.com" },
 ];
 
 const OurPartners = () => {
